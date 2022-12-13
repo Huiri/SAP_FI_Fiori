@@ -33,13 +33,14 @@
 
 ### 함수, 변수 이름 규칙
 함수명 camelCase : 띄어쓰기 없이 단어는 대문자로 시작
-  ex) onBack(){}, createOrder(){}, navToCustomerList(){}
+
+ex) onBack(){}, createOrder(){}, navToCustomerList(){}
   
-  - 이동함수 : To[Manifest 명]
-  - 이벤트함수 : On으로 시작
+  - 이동함수 : to[Manifest 명]
+  - 이벤트함수 : on으로 시작
   - 테이블 컬럼명 : 언더바 빼고 단어붙이기 , 대문자대문자
     ex) bp_name -> BpName
-  - 상수를 제외한 변수 : 띄어쓰기 없이단어 첫글자 대문자로 시작
+  - 상수를 제외한 변수 : 띄어쓰기 없이 첫글자 소문자, 두번째 단어는 대문자로 시작
     ex) indexedNum, countNum 등
   - 상수 : 대문자
     ex) CONSTNUM
