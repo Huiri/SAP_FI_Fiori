@@ -1,0 +1,165 @@
+<mvc:View
+	controllerName="project2.controller.GLAccountList"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+    xmlns:t="sap.ui.table"
+	xmlns:c="sap.ui.core"
+    xmlns:core="sap.ui.core"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:layout="sap.ui.layout"
+    xmlns:f="sap.f"
+	displayBlock="true"
+	height="100%"
+	busyIndicatorDelay="0"
+>
+<f:DynamicPage  id="RequestPage">
+        <f:title>
+            <f:DynamicPageTitle id="_IDGenDynamicPageTitle1">
+                <f:heading>
+                    <HBox id="_IDGenHBox1">
+                        <Button id="_IDGenButton9"
+                            icon="sap-icon://nav-back"
+                            press=".onRequestHome"
+                            type="Transparent"/>
+
+                        <Title id="_IDGenTitle1" text="G/L 계정 마스터 데이터 관리"/>
+                    </HBox>
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+
+        <f:header>
+            <f:DynamicPageHeader id="_IDGenDynamicPageHeader1" pinnable="true">
+                <form:SimpleForm id="_IDGenSimpleForm1" layout="ResponsiveGridLayout">
+                    <form:content>
+
+                        <VBox id="_IDGenVBox2">
+                            <Label id="_IDGenLabel8" text="계정과목표 :" required="true"/>
+                            <Input id="GlCoa" showValueHelp="true" valueHelpRequest=".onValueHelpCoA"/>
+                            <layoutData>
+                                <layout:GridData id="_IDGenGridData2" span="XL3 L3 M6 S12"/>
+                            </layoutData>
+                        </VBox>
+                        <VBox id="_IDGenVBox3">
+                            <Label id="_IDGenLabel9" text="G/L 계정 :"/>
+                            <Input id="GlAcct" showValueHelp="true" valueHelpRequest=".onValueHelpGLAcc"/>
+                            <layoutData>
+                                <layout:GridData id="_IDGenGridData3" span="XL3 L3 M6 S12"/>
+                            </layoutData>
+                        </VBox>
+                        <VBox id="_IDGenVBox4">
+                            <Label id="_IDGenLabel10" text="G/L 계정 유형 :"/>
+                            <Select id="GlAcctType" width="100%"
+                                items="{SelectOption>/AccountTypeList}">
+                                <core:Item id="_IDGenItem1" key="{SelectOption>AccountType}" text="{SelectOption>Value}" />
+                    
+                            </Select>
+                            <layoutData>
+                                <layout:GridData id="_IDGenGridData4" span="XL3 L3 M6 S12"/>
+                            </layoutData>
+                        </VBox>
+                        <VBox id="_IDGenVBox5">
+                            <Label id="_IDGenLabel11" text="계정 그룹 :"/>
+                            <Input id="GlAcctGroup" showSuggestion="true"/>
+                            <layoutData>
+                                <layout:GridData id="_IDGenGridData5" span="XL3 L3 M6 S12"/>
+                            </layoutData>
+                        </VBox>
+                        <FlexBox id="_IDGenHBox2" justifyContent="End">
+                            <Button id="_IDGenButton5" text="실행" type="Emphasized" press=".onSearch"/>
+                            <Button id="_IDGenButton4" text="초기화" type="Transparent" press=".onReset" class="sapUiTinyMarginBegin"/>
+                            <layoutData>
+                                <layout:GridData id="_IDGenGridData7"  span="XL12 L12 M12 S12"/>
+                            </layoutData>
+                        </FlexBox>                       
+                    </form:content>
+                </form:SimpleForm>
+
+            </f:DynamicPageHeader>
+        </f:header>
+
+        <!-- 실제 content 부분 -->
+        <f:content>
+            <t:Table
+                cellClick=".getRowData"
+                rowActionCount="1" 
+                id="GlAccountTable"
+                selectionMode="None"
+                rows="{GlDataModel>/}" 
+                width="auto">
+                <t:extension> 
+                    <OverflowToolbar id="_IDGenOverflowToolbar1" >
+                        <Title id="TableName" text="G/L 계정"/>
+                        <ToolbarSpacer id="_IDGenToolbarSpacer1"/>
+                        <Button 
+                            id="_IDGenButton7"
+                            text="생성"
+                            press=".onCreateAccount"
+                            type="Transparent"/>
+                        <Button id="_IDGenButton19"
+                            icon="sap-icon://excel-attachment"
+                            tooltip="Excel Download"
+                            press=".onDataExport" 
+                            type="Transparent"/>
+                    </OverflowToolbar>
+                </t:extension>
+
+                <t:columns>
+                    <t:Column id="_IDGenColumn0" width="4rem">
+                        <CheckBox id="checkAll" select=".onCheckExecute" />
+                        <!-- <t:template>
+                            <CheckBox 
+                            visible="{=${GlDataModel>request_state} === 'B' ? true : false}"
+                            selected="{GlDataModel>CHK}" 
+                            id="toBeDeleted"/>
+                        </t:template>   -->
+                    </t:Column>
+
+                    <t:Column id="_IDGenColumn1" hAlign="Center">
+                        <Label id="_IDGenLabel1" text="G/L 계정"/>
+                        <t:template>
+                            <Text id="_IDGenText1" text="{GlDataModel>gl_acct}"/>
+                        </t:template>  
+                    </t:Column>
+
+                    <t:Column id="_IDGenColumn2" hAlign="Center">
+                        <Label id="_IDGenLabel2" text="G/L 계정 내역"/>
+                        <t:template>
+                            <Text id="_IDGenText2" text="{GlDataModel>gl_acct_content}"/>
+
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column id="_IDGenColumn3" hAlign="Center">
+                        <Label id="_IDGenLabel3" text="계정과목표"/>
+                        <t:template>
+                            <Text id="_IDGenText3" text="{GlDataModel>gl_coa}"/>
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column id="_IDGenColumn4" hAlign="Center">
+                        <Label id="_IDGenLabel4" text="G/L 계정 유형"/>
+                        <t:template>
+                            <Text id="_IDGenText4" text="{GlDataModel>gl_acct_type}"/>
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column id="_IDGenColumn5" hAlign="Center">
+                        <Label id="_IDGenLabel5" text="계정 그룹"/>
+                        <t:template>
+                            <Text id="_IDGenText5" text="{GlDataModel>gl_acct_group}"/>
+                        </t:template>
+                    </t:Column>
+                </t:columns>
+                <t:rowActionTemplate>
+                    <t:RowAction id="_IDGenRowAction1" >
+                        <t:items>
+                            <t:RowActionItem id="_IDGenRowActionItem1"  type="Navigation" press=".toGLAcctDetail"></t:RowActionItem>
+                        </t:items>
+                    </t:RowAction>
+                </t:rowActionTemplate>
+
+            </t:Table>
+    </f:content>
+    </f:DynamicPage>
+</mvc:View>

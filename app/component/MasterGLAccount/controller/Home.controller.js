@@ -6,5 +6,8 @@ sap.ui.define([
 	"use strict";
 
 	return Controller.extend("project2.controller.Home", {
+		toGLMasterList : function(){
+			this.getOwnerComponent().getRouter().navTo("GLAccountList");
+		}
 	});
 });
