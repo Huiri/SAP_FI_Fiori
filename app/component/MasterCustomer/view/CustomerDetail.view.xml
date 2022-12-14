@@ -1,0 +1,296 @@
+<mvc:View 
+    xmlns="sap.uxap"
+    xmlns:f="sap.f"
+	controllerName="project3.controller.CustomerDetail"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:layout="sap.ui.layout"
+	xmlns:m="sap.m"
+	xmlns:c="sap.ui.core"
+	displayBlock="true"
+	height="100%"
+	busyIndicatorDelay="0"
+>
+    <ObjectPageLayout 
+        showTitleInHeaderContent="true"
+        showEditHeaderButton="true"
+        editHeaderButtonPress="editBtnPress"
+        upperCaseAnchorBar="false"
+    >
+    <headerTitle>
+        <ObjectPageDynamicHeaderTitle>
+            <expandedHeading>
+                <m:HBox>
+                    <m:Title text="NAME" wrapping="true"/>
+                </m:HBox>
+            </expandedHeading>    
+            <snappedHeading>
+                <m:FlexBox fitContainer="true" alignItems="Center">
+                    <m:Avatar src="sap-icon://customer" class="sapUiTinyMarginEnd"/>
+                    <m:Title id="bpName" text="NAME2" wrapping="true"/>
+                </m:FlexBox>
+            </snappedHeading>
+
+             <actions>
+                <m:OverflowToolbarButton icon="sap-icon://edit" text="편집" type="Emphasized" tooltip="edit">
+                    <m:layoutData>
+                        <m:OverflowToolbarLayoutData priority="NeverOverflow"/>
+                    </m:layoutData>
+                </m:OverflowToolbarButton>
+                <m:Button text="편집" press="editDetail"/>
+            </actions>
+        </ObjectPageDynamicHeaderTitle>
+    </headerTitle>
+
+    <headerContent>
+        <m:FlexBox wrap="Wrap">
+            <m:Avatar class="sapUiSmallMarginEnd" src="sap-icon://customer"  displaySize="L" />
+
+                <layout:HorizontalLayout class="sapUiSmallMarginBeginEnd">
+                    <m:VBox class="sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom">
+                        <m:Label text="BP" class="propertyColumn"/>
+                        <m:Label text="BP 범주" class="propertyColumn"/>
+                    </m:VBox>
+
+                    <m:VBox class="sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom">
+                    
+                        <m:Text text="{bpModel>/bp_number}" />
+                        <m:Text id="bpCategory" text="{bpModel>/bp_category}"/>
+                    </m:VBox>
+                </layout:HorizontalLayout>
+
+                <layout:VerticalLayout class="sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom">
+                    <m:VBox>
+                        <m:Label text="표준 주소" class="propertyColumn"/>
+                        <m:Text id="bpAddress" text="표준주소--------------"/>
+                    </m:VBox>
+                </layout:VerticalLayout>
+                <layout:VerticalLayout class="sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom">
+                    <m:VBox>
+                        <m:Label text="서류 제출 여부" class="propertyColumn"/>
+                        <m:Text id="bpReportSubmission" text="{bpModel>/bp_report_submission}"/>
+                    </m:VBox>
+                </layout:VerticalLayout>
+                <layout:VerticalLayout class="sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom">
+                    <m:VBox class="sapUiSmallMarginBeginEnd">
+                        <m:Label text="신용상태" class="propertyColumn"/>
+                        <m:Text id="bpCreditStatus" text="{bpModel>/bp_credit_status}"/>
+                    </m:VBox>
+                </layout:VerticalLayout>
+        </m:FlexBox>
+    </headerContent>
+    <sections>
+        <ObjectPageSection titleUppercase="false" title="기본 데이터">
+        
+            <subSections>
+                <ObjectPageSubSection title="일반 정보" titleUppercase="false">
+                    <blocks>
+                        <layout:VerticalLayout class="sapUiSmallMarginBeginEnd">
+                            <m:VBox class="sapUiSmallMarginTopBottom">
+                                <m:Label text="개인 칭호" class="propertyColumn"/>
+                                <m:Text id="bpPersonTitle" text="{bpModel>/bp_person_title}"/>
+                            </m:VBox>
+                            <m:VBox class="sapUiSmallMarginTopBottom">
+                                <m:Label text="이름" class="propertyColumn" />
+                                <m:Text id="bpLastName" text="{bpModel>/bp_name}"/>
+                            </m:VBox>
+                            <m:VBox class="sapUiSmallMarginTopBottom">
+                                <m:Label text="성" class="propertyColumn"/>
+                                <m:Text id="bpFirsstName" text="{bpModel>/bp_first_name}"/>
+                            </m:VBox>
+                            <layout:layoutData>
+                                <layout:GridData span="XL3 L3 M6 S12"/>
+                            </layout:layoutData>
+                        </layout:VerticalLayout>
+
+                        <layout:VerticalLayout class="sapUiSmallMarginBeginEnd">
+                            <m:VBox class="sapUiSmallMarginTopBottom">
+                                <m:Label text="성별" class="propertyColumn"/>
+                                <m:Text id="bpGender" text="{bpModel>/bp_gender}"/>
+                            </m:VBox>
+                            <m:VBox class="sapUiSmallMarginTopBottom">
+                                <m:Label text="학위" class="propertyColumn"/>
+                                <m:Text id="bpDegree" text="{bpModel>/bp_degree}"/>
+                            </m:VBox>
+                            <layout:layoutData>
+                                <layout:GridData span="XL3 L3 M6 S12"/>
+                            </layout:layoutData>
+                        </layout:VerticalLayout>
+
+                        <layout:VerticalLayout class="sapUiSmallMarginBeginEnd">
+                        
+                            <m:VBox class="sapUiSmallMarginTopBottom">
+                                <m:Label text="외부 BP 번호" class="propertyColumn"/>
+                                <m:Text id="bpExternalNumber" text="{bpModel>/bp_external_number}"/>
+                            </m:VBox>
+                            <m:VBox class="sapUiSmallMarginTopBottom">
+                                <m:Label text="생년월일" class="propertyColumn"/>
+                                <m:Text id="bpBirthday" text="{bpModel>/bp_birthday}"/>
+                            </m:VBox>
+                            <m:VBox class="sapUiSmallMarginTopBottom">
+                                <m:Label text="출생지" class="propertyColumn"/>
+                                <m:Text id="bpBirthplace" text="{bpModel>/bp_birthplace}"/>
+                            </m:VBox>
+                            <layout:layoutData>
+                                <layout:GridData span="XL3 L3 M6 S6"/>
+                            </layout:layoutData>
+                        </layout:VerticalLayout>
+
+                        <layout:VerticalLayout class="sapUiSmallMarginBeginEnd">
+                            <m:VBox class="sapUiSmallMarginTopBottom">
+                                <m:Label text="생성자" class="propertyColumn"/>
+                                <m:Text id="bpConstructor" text="{bpModel>/bp_constructor}"/>
+                            </m:VBox>
+                            <m:VBox class="sapUiSmallMarginTopBottom">
+                                <m:Label text="생성일" class="propertyColumn"/>
+                                <m:Text id="bpCreatedDate" text="{bpModel>/bp_created_date}"/>
+                            </m:VBox>
+                            <m:VBox class="sapUiSmallMarginTopBottom">
+                                <m:Label text="최종 변경자" class="propertyColumn"/>
+                                <m:Text id="bpChanger" text="{bpModel>/bp_changer}"/>
+                            </m:VBox>
+                            <m:VBox class="sapUiSmallMarginTopBottom">
+                                <m:Label text="최종 변경일" class="propertyColumn"/>
+                                <m:Text id="bpChangedDate" text="{bpModel>/bp_changed_date}"/>
+                            </m:VBox>
+                            <layout:layoutData>
+                                <layout:GridData span="XL3 L3 M6 S6"/>
+                            </layout:layoutData>
+                        </layout:VerticalLayout>
+
+                        <layout:VerticalLayout class="sapUiSmallMarginBeginEnd">
+                            <m:VBox class="sapUiSmallMarginTopBottom">
+                                <m:Label text="검색어1" class="propertyColumn"/>
+                                <m:Text id="bpSearch1" text="{bpModel>/bp_search1}"/>
+                            </m:VBox>
+                            <m:VBox class="sapUiSmallMarginTopBottom">
+                                <m:Label text="검색어2" class="propertyColumn"/>
+                                <m:Text id="bpSearch2" text="{bpModel>/bp_search2}"/>
+                            </m:VBox>
+                            <layout:layoutData>
+                                <layout:GridData span="XL3 L3 M6 S6"/>
+                            </layout:layoutData>
+                        </layout:VerticalLayout>
+                    </blocks>
+
+                </ObjectPageSubSection>
+
+                <ObjectPageSubSection title="고객 정보" titleUppercase="false">
+                    <blocks>
+                        <layout:VerticalLayout class="sapUiSmallMarginBeginEnd">
+                            <m:VBox class="sapUiSmallMarginTopBottom">
+                                <m:Label text="고객" class="propertyColumn"/>
+                                <m:Text text="{bpModel>/bp_number}" />
+                            </m:VBox>
+                            <m:VBox class="sapUiSmallMarginTopBottom">
+                                <m:Label text="고객 계정 그룹" class="propertyColumn"/>
+                                <m:Text id="bpCutomerAcctGroup" text="{bpModel>/bp_cutomer_acct_group}"/>
+                            </m:VBox>
+                            <m:VBox class="sapUiSmallMarginTopBottom">
+                                <m:Label text="납품일 규칙" class="propertyColumn"/>
+                                <m:Text id="bpDeliveryRule" text="{bpModel>/bp_delivery_rule}"/>
+                            </m:VBox>
+                            <layout:layoutData>
+                                <layout:GridData span="XL3 L3 M6 S12"/>
+                            </layout:layoutData>
+                        </layout:VerticalLayout>
+
+                        <layout:VerticalLayout class="sapUiSmallMarginBeginEnd">
+                            <m:VBox class="sapUiSmallMarginTopBottom">
+                                <m:Label text="공급업체" class="propertyColumn"/>
+                                <m:Text id="bpVendor" text="{bpModel>/bp_vendor}"/>
+                            </m:VBox>
+                            <m:VBox class="sapUiSmallMarginTopBottom">
+                                <m:Label text="지급 사유" class="propertyColumn"/>
+                                <m:Text id="bpProvisionReason" text="{bpModel>/bp_provision_reason}"/>
+                            </m:VBox>
+                            <layout:layoutData>
+                                <layout:GridData span="XL3 L3 M6 S12"/>
+                            </layout:layoutData>
+                        </layout:VerticalLayout>
+
+                        <layout:VerticalLayout class="sapUiSmallMarginBeginEnd">
+                            <m:VBox class="sapUiSmallMarginTopBottom">
+                                <m:Label text="청구 보류" class="propertyColumn"/>
+                                <m:Text id="bpBillingHold"
+                                 text="{=${bpModel>/bp_billing_hold}==='true'?'예':
+                                      ${bpModel>/bp_billing_hold}==='false'?'아니오':
+                                      '-'}"/>
+                            </m:VBox>
+                            <m:VBox class="sapUiSmallMarginTopBottom">
+                                <m:Label text="납품 보류" class="propertyColumn"/>
+                                <m:Text id="bpDeliveryHold"
+                                        text="{=${bpModel>/bp_delivery_hold}==='true'?'예':
+                                      ${bpModel>/bp_delivery_hold}==='false'?'아니오':
+                                      '-'}"/>
+                            </m:VBox>
+                            <m:VBox class="sapUiSmallMarginTopBottom">
+                                <m:Label text="전기 보류" class="propertyColumn"/>
+                                <m:Text id="bpPostingHold"
+                                        text="{=${bpModel>/bp_posting_hold}==='true'?'예':
+                                      ${bpModel>/bp_posting_hold}==='false'?'아니오':
+                                      '-'}"/>
+                            </m:VBox>
+                            <layout:layoutData>
+                                <layout:GridData span="XL3 L3 M6 S6"/>
+                            </layout:layoutData>
+                        </layout:VerticalLayout>
+
+                        <layout:VerticalLayout class="sapUiSmallMarginBeginEnd">
+                            <m:VBox class="sapUiSmallMarginTopBottom">
+                                <m:Label text="고객 분류" class="propertyColumn"/>
+                                <m:Text id="bpCustomerClassification" text="{bpModel>/bp_customer_classification}"/>
+                            </m:VBox>
+                            <m:VBox class="sapUiSmallMarginTopBottom">
+                                <m:Label text="VAT 납세 의무" class="propertyColumn"/>
+                                <m:Text id="bpVatPayDuty"
+                                    text="{=${bpModel>/bp_vat_pay_duty}==='true'?'예':
+                                      ${bpModel>/bp_vat_pay_duty}==='false'?'아니오':
+                                      '-'}"/>
+                            </m:VBox>
+                            <layout:layoutData>
+                                <layout:GridData span="XL3 L3 M6 S6"/>
+                            </layout:layoutData>
+                        </layout:VerticalLayout>
+                    </blocks>
+
+                </ObjectPageSubSection>
+            </subSections>
+        </ObjectPageSection>
+
+        <ObjectPageSection titleUppercase="false" title="주소" importance="Medium">
+        
+            <subSections>
+                <ObjectPageSubSection title="주소" titleUppercase="false" importance="Medium">
+                    <blocks>
+                        <m:VBox class="sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom">
+                            <m:Label text="도로 주소" class="propertyColumn"/>
+                            <m:Text id="bpRoadAddress" text="{bpModel>/bp_road_address}"/>
+                        </m:VBox>
+                        <m:VBox class="sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom">
+                            <m:Label text="우편 번호" class="propertyColumn"/>
+                            <m:Text id="bpPostalCode" text="{bpModel>/bp_postal_code}"/>
+                        </m:VBox>
+                        <m:VBox class="sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom">
+                            <m:Label text="국가 지역" class="propertyColumn"/>
+                            <m:Text id="bpNation" text="{bpModel>/bp_nation}"/>
+                        </m:VBox>
+
+                        <m:VBox class="sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom">
+                            <m:Label text="번지" class="propertyColumn" />
+                            <m:Text id="bpStreetAddress" text="{bpModel>/bp_street_address}"/>
+                        </m:VBox>
+                        <m:VBox class="sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom">
+                            <m:Label text="도시" class="propertyColumn" />
+                            <m:Text id="bpCity" text="{bpModel>/bp_city}"/>
+                        </m:VBox>
+                        <m:VBox class="sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom">
+                            <m:Label text="지역" class="propertyColumn"/>
+                            <m:Text id="bpRegion" text="{bpModel>/bp_region}"/>
+                        </m:VBox>
+                    </blocks>
+                </ObjectPageSubSection>
+            </subSections>
+        </ObjectPageSection>
+    </sections>
+    </ObjectPageLayout>
+</mvc:View>

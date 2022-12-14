@@ -139,19 +139,19 @@
           ]
         },
         {
-          "name": "GLAccount",
-          "pattern": "GLAccount",
-          "target": {
-            "name" : "GLAccount",
-            "prefix": "GLAccount"
-          }
-        },
-        {
           "name": "Customer",
-          "pattern": "Customer",
+          "pattern": "",
           "target": {
             "name" : "Customer",
             "prefix": "Customer"
+          }
+        },
+        {
+          "name": "CustomerDetail",
+          "pattern": "CustomerDetail/{num}",
+          "target": {
+            "name" : "CustomerDetail",
+            "prefix": "CustomerDetail"
           }
         },
         {
@@ -179,19 +179,12 @@
           "viewId": "Home",
           "viewName": "Home"
         },
-        "GLAccount": {
-          "type" : "Component",
+        "CustomerDetail": {
+          "viewType": "XML",
           "transition": "slide",
-          "usage" : "glaccountComponent",
           "clearControlAggregation": true,
-          "title" : "GLAccount"
-        }, 
-        "Customer": {
-          "type" : "Component",
-          "transition": "slide",
-          "usage" : "customerComponent",
-          "clearControlAggregation": true,
-          "title" : "Customer"
+          "viewId": "CustomerDetail",
+          "viewName": "CustomerDetail"
         },
         "CustomerList" : {
           "viewType": "XML",

@@ -10,7 +10,9 @@ html[dir="rtl"] .myAppDemoWT .myCustomButton.sapMBtn {
     font-weight : bold;
     color : yellow;
 }
-
+.propertyColumn {
+    font-weight: bold;
+  }
 /*
 #start{
     color : rgb(137, 137, 137);
