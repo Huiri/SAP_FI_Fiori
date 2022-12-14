@@ -101,16 +101,6 @@
           "bundleName": "project1.i18n.i18n"
         }
       },
-      "Request" : {
-        "dataSource": "requestService",
-        "preload": true,
-        "settings": {
-          "operationMode" : "Server",
-          "earlyRequests" : true,
-          "synchronizationMode" : "None",
-          "autoExpandSelect" : true
-        }
-      },
       "Vendor" : {
         "dataSource": "companyService",
         "preload": true,

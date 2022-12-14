@@ -47,3 +47,7 @@ entity BP {
         bp_credit_status			   :   String    @title : '신용상태';
         bp_report_submission           :   Boolean	 @title : '서류 제출';
 };
+entity BP_Nation_Region {
+    key bp_nation_code	               :   String	 @title : '국가 코드';
+        bp_nation	                   :   String	 @title : '국가/지역';
+};
