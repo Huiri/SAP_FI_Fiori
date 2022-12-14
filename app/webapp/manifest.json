@@ -43,7 +43,6 @@
           "odataVersion": "4.0"
         }
       }
-      
     }
   },
   "sap.ui": {
@@ -112,7 +111,7 @@
           "autoExpandSelect" : true
         }
       },
-      "GL" : {
+     "GL" : {
         "dataSource": "glService",
         "preload": true,
         "settings": {

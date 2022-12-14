@@ -1,8 +1,8 @@
 namespace FI_Project.bp;
 
 entity BP {
-    key bp_name                        :   String	 @title : 'BP명';
-        bp_number                      :   String	 @title : 'BP번호==고객정보의 고객';
+    key bp_number                      :   String	 @title : 'BP번호==고객정보의 고객';
+        bp_name                        :   String	 @title : 'BP명';
         bp_grouping                    :   String	 @title : '그룹화';
         bp_category                    :   String	 @title : 'BP범주';
         bp_person_title                :   String	 @title : '개인칭호';
@@ -46,4 +46,8 @@ entity BP {
         bp_company_code		           :   String	 @title : '회사 코드';
         bp_credit_status			   :   String    @title : '신용상태';
         bp_report_submission           :   Boolean	 @title : '서류 제출';
+};
+entity BP_Nation_Region {
+    key bp_nation_code	               :   String	 @title : '국가 코드';
+        bp_nation	                   :   String	 @title : '국가/지역';
 };

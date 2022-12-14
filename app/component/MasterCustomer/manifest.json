@@ -43,7 +43,7 @@
           "odataVersion": "4.0"
         }
       }
-      
+
     }
   },
   "sap.ui": {
@@ -63,7 +63,7 @@
     }
   },
   "sap.ui5": {
-    "flexEnabled": true,
+    "flexEnabled": false,
     "dependencies": {
       "minUI5Version": "1.102.1",
       "libs": {
@@ -121,7 +121,12 @@
           "synchronizationMode" : "None",
           "autoExpandSelect" : true
         }
+      },
+      "SelectOption" : {
+        "type" : "sap.ui.model.json.JSONModel",
+        "uri" : "model/SelectOption.json"
       }
+
     },
     "resources": {
       "css": [
@@ -149,23 +154,37 @@
           ]
         },
         {
-          "name": "GLAccount",
-          "pattern": "GLAccount",
-          "target": {
-            "name" : "GLAccount",
-            "prefix": "GLAccount"
-          }
-        },
-        {
           "name": "Customer",
-          "pattern": "Customer",
+          "pattern": "",
           "target": {
             "name" : "Customer",
             "prefix": "Customer"
           }
+        },
+        {
+          "name": "CustomerDetail",
+          "pattern": "CustomerDetail/{num}",
+          "target": {
+            "name" : "CustomerDetail",
+            "prefix": "CustomerDetail"
+          }
+        },
+        {
+          "name": "CustomerList",
+          "pattern": "CustomerList",
+          "target": {
+            "name" : "CustomerList",
+            "prefix": "CustomerList"
+          }
+        },
+        {
+          "name": "CreatePersonCustomer",
+          "pattern": "CreatePersonCustomer",
+          "target": {
+            "name" : "CreatePersonCustomer",
+            "prefix": "CreatePersonCustomer"
+          }
         }
-        
-        
       ],
       "targets": {
         "Home" : {
@@ -175,19 +194,26 @@
           "viewId": "Home",
           "viewName": "Home"
         },
-        "GLAccount": {
-          "type" : "Component",
+        "CustomerDetail": {
+          "viewType": "XML",
           "transition": "slide",
-          "usage" : "glaccountComponent",
           "clearControlAggregation": true,
-          "title" : "GLAccount"
-        }, 
-        "Customer": {
-          "type" : "Component",
+          "viewId": "CustomerDetail",
+          "viewName": "CustomerDetail"
+        },
+        "CustomerList" : {
+          "viewType": "XML",
           "transition": "slide",
-          "usage" : "customerComponent",
           "clearControlAggregation": true,
-          "title" : "Customer"
+          "viewId": "CustomerList",
+          "viewName": "CustomerList"
+        },
+        "CreatePersonCustomer" : {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": true,
+          "viewId": "CreatePersonCustomer",
+          "viewName": "CreatePersonCustomer"
         }
       }
     },
