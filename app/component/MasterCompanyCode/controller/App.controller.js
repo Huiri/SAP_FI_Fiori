@@ -5,7 +5,7 @@ sap.ui.define(
     function(BaseController) {
       "use strict";
   
-      return BaseController.extend("project1.controller.App", {
+      return BaseController.extend("project4.controller.App", {
         onInit() {
         },
         toCustomer : function (){
@@ -14,11 +14,9 @@ sap.ui.define(
         toGLAccount : function (){
           this.getOwnerComponent().getRouter().navTo("GLAccount");
         },
-        toCompanyCode: function(){
-          this.getOwnerComponent().getRouter().navTo("CompanyCode");
-        },
         toHome : function(){
           this.getOwnerComponent().getRouter().navTo("Home");
+
         }
       });
     }
