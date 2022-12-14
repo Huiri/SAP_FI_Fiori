@@ -12,7 +12,7 @@
             </HBox>
             <GenericTile id="_IDGenGenericTile1" class="sapUiTinyMarginBegin sapUiTinyMarginTop"
                 header="고객 마스터 조회"
-                press=".onCompany_list">
+                press=".toCustomerList">
                 <TileContent id="_IDGenTileContent1" >
                     <ImageContent id="_IDGenImageContent1" src="sap-icon://crm-sales"/>
                 </TileContent>
