@@ -16,8 +16,8 @@
       "toolsId": "d1a40033-ed7a-4cb8-b161-66f0a52632fc"
     },
     "dataSources": {
-      "requestService": {
-        "uri": "/request/",
+      "bpService": {
+        "uri": "/bp/",
         "type": "OData",
         "settings": {
           "annotations": [],
@@ -25,8 +25,17 @@
           "odataVersion": "4.0"
         }
       },
-      "companyService": {
-        "uri": "/company/",
+      "glService": {
+        "uri": "/gl",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/metadata.xml",
+          "odataVersion": "4.0"
+        }
+      },
+      "cocdService": {
+        "uri": "/cocd",
         "type": "OData",
         "settings": {
           "annotations": [],
@@ -140,19 +149,19 @@
           ]
         },
         {
-          "name": "GLAccount",
-          "pattern": "GLAccount",
-          "target": {
-            "name" : "GLAccount",
-            "prefix": "GLAccount"
-          }
-        },
-        {
           "name": "Customer",
-          "pattern": "Customer",
+          "pattern": "",
           "target": {
             "name" : "Customer",
             "prefix": "Customer"
+          }
+        },
+        {
+          "name": "CustomerDetail",
+          "pattern": "CustomerDetail/{num}",
+          "target": {
+            "name" : "CustomerDetail",
+            "prefix": "CustomerDetail"
           }
         }
         
@@ -166,19 +175,12 @@
           "viewId": "Home",
           "viewName": "Home"
         },
-        "GLAccount": {
-          "type" : "Component",
+        "CustomerDetail": {
+          "viewType": "XML",
           "transition": "slide",
-          "usage" : "glaccountComponent",
           "clearControlAggregation": true,
-          "title" : "GLAccount"
-        }, 
-        "Customer": {
-          "type" : "Component",
-          "transition": "slide",
-          "usage" : "customerComponent",
-          "clearControlAggregation": true,
-          "title" : "Customer"
+          "viewId": "CustomerDetail",
+          "viewName": "CustomerDetail"
         }
       }
     },

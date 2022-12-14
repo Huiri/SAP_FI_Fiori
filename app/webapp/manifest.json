@@ -16,8 +16,8 @@
       "toolsId": "d1a40033-ed7a-4cb8-b161-66f0a52632fc"
     },
     "dataSources": {
-      "requestService": {
-        "uri": "/request/",
+      "bpService": {
+        "uri": "/bp/",
         "type": "OData",
         "settings": {
           "annotations": [],
@@ -25,8 +25,17 @@
           "odataVersion": "4.0"
         }
       },
-      "companyService": {
-        "uri": "/company/",
+      "glService": {
+        "uri": "/gl/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/metadata.xml",
+          "odataVersion": "4.0"
+        }
+      },
+      "cocdService": {
+        "uri": "/cocd/",
         "type": "OData",
         "settings": {
           "annotations": [],
@@ -34,7 +43,6 @@
           "odataVersion": "4.0"
         }
       }
-      
     }
   },
   "sap.ui": {
