@@ -14,7 +14,7 @@
       "env": {
         "PORT": "6004",
         "MOCK_LOOKUP_DIRS": "[\"./\"]",
-        "run.config": "{\"handlerId\":\"ui5_run_config_handler_id\",\"runnabledId\":\"/home/user/projects/FI_Project/app\"}"
+        "run.config": "{\"handlerId\":\"ui5_run_config_handler_id\",\"runnabledId\":\"/home/user/projects/SAP_FI_Fiori/app\"}"
       },
       "envFile": "${workspaceFolder}/app/default-env.json"
     }
