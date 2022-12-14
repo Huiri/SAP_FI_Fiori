@@ -1,8 +1,8 @@
 namespace FI_Project.bp;
 
 entity BP {
-    key bp_name                        :   String	 @title : 'BP명';
-        bp_number                      :   String	 @title : 'BP번호==고객정보의 고객';
+    key bp_number                      :   String	 @title : 'BP번호==고객정보의 고객';
+        bp_name                        :   String	 @title : 'BP명';
         bp_grouping                    :   String	 @title : '그룹화';
         bp_category                    :   String	 @title : 'BP범주';
         bp_person_title                :   String	 @title : '개인칭호';
