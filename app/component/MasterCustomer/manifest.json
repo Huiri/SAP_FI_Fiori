@@ -102,8 +102,8 @@
           "bundleName": "project3.i18n.i18n"
         }
       },
-      "Vendor" : {
-        "dataSource": "companyService",
+      "BP" : {
+        "dataSource": "bpService",
         "preload": true,
         "settings": {
           "operationMode" : "Server",
@@ -111,7 +111,22 @@
           "synchronizationMode" : "None",
           "autoExpandSelect" : true
         }
+      },
+      "GL" : {
+        "dataSource": "glService",
+        "preload": true,
+        "settings": {
+          "operationMode" : "Server",
+          "earlyRequests" : true,
+          "synchronizationMode" : "None",
+          "autoExpandSelect" : true
+        }
+      },
+      "SelectOption" : {
+        "type" : "sap.ui.model.json.JSONModel",
+        "uri" : "model/SelectOption.json"
       }
+
     },
     "resources": {
       "css": [

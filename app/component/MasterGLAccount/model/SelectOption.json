@@ -1,0 +1,26 @@
+{
+    "SelectedStatus" : "",
+    "AccountTypeList": [
+        {
+            "AccountType": "P",
+            "Value": "P (1차 원가 또는 수익)"
+        },
+        {
+            "AccountType": "S",
+            "Value": "S (2차 원가)"
+        },
+        {
+            "AccountType": "X",
+            "Value": "X (대차대조표 계정)"
+        },
+        {
+            "AccountType": "N",
+            "Value": "N (영업외 비용 또는 수익)"
+        },
+        {
+            "AccountType": "C",
+            "Value": "C (현금 계정)"
+        }
+        
+    ]
+}

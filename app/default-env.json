@@ -1,9 +1,9 @@
 {
-  "destinations": [
-    {
-      "name": "srv-api",
-      "url": "http://localhost:4004",
-      "forwardAuthToken": true
-    }
-  ]
-}
+    "destinations": [
+      {
+        "name": "srv-api",
+        "url": "http://localhost:4004",
+        "forwardAuthToken": true
+      }
+    ]
+  }
