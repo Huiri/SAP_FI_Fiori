@@ -88,6 +88,12 @@
         "settings" : {},
         "componentData" : {},
         "lazy" : true
+      },
+      "companyCodeComponent" : {
+        "name" : "project4",
+        "settings" : {},
+        "componentData" : {},
+        "lazy" : true
       }
     },
     "contentDensities": {

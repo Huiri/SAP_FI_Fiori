@@ -89,6 +89,12 @@
         "settings" : {},
         "componentData" : {},
         "lazy" : true
+      },
+      "companyCodeComponent" : {
+        "name" : "project4",
+        "settings" : {},
+        "componentData" : {},
+        "lazy" : true
       }
     },
     "contentDensities": {
@@ -122,6 +128,15 @@
           "autoExpandSelect" : true
         }
       },
+      "CoCd" : {
+        "dataSource": "cocdService",
+        "preload": true,
+        "settings": {
+          "operationMode" : "Server",
+          "earlyRequests" : true,
+          "synchronizationMode" : "None",
+          "autoExpandSelect" : true
+        },
       "SelectOption" : {
         "type" : "sap.ui.model.json.JSONModel",
         "uri" : "model/SelectOption.json"
