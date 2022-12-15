@@ -18,5 +18,21 @@ entity GL {
         gl_acct_currency	        :	String	 @title : '계정 통화';
         gl_recon_account		    :   String   @title : '조정 계정';
         gl_blocked                  :   Boolean	 @title : 'G/L 활성화';
+        gl_created                  :   String	 @title : '계정 생성 날짜';
 
+}
+entity SelectCoA {
+    key gl_coa	                    :	String	 @title : '계정과목표';
+        gl_coa_content	            :	String	 @title : 'G/L 계정 내역';
+}
+
+entity SelectGL {
+    key gl_acct	                    :	String	 @title : 'GL 계정';
+        gl_coa	                    :	String	 @title : '계정과목표';
+        gl_acct_content	        :	String	 @title : 'G/L 계정 설명';
+}
+entity SelectGLAcctGrp {
+    key gl_acct_group	            :	String	 @title : '계정 그룹 ';
+    key gl_coa	                    :	String	 @title : '계정과목표';
+        gl_acct_group_mean	        :	String	 @title : '계정 그룹 의미';
 }
