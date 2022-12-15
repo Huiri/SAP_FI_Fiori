@@ -6,22 +6,33 @@ sap.ui.define([
 ) {
 	"use strict";
 	let selectedNum;
+	const BPCATEGORY_ORG="조직(2)";
+	const BPCATEGORY_BP="개인(1)";
 
 	return Controller.extend("project3.controller.CustomerDetail", {
 		
 		//-----------초기화----------//
 		onInit: async function(){
-			await this.getOwnerComponent().getRouter().getRoute("CustomerDetail").attachPatternMatched(this.initView,this);
+			await this.getOwnerComponent().getRouter().getRoute("CustomerDetail").attachPatternMatched(this.initView, this);
 		},
 		initView: async function(e){
 			selectedNum = e.getParameter("arguments").num;
-			this.initBpDetailDataView(this.getBpModelData());
+			await( this.initBpDetailDataView( this.getBpModelData() ) );
+
+			if(this.getView().getModel("bpModel").getData().bp_category == BPCATEGORY_ORG){
+				//bpName 라벨 텍스트 변경 
+				this.getView().byId("bpNumber").setText("회사코드");
+				this.setBpOrgVisibleModel(true);
+			}else{
+				this.getView().byId("bpNumber").setText("BP");
+				this.setBpOrgVisibleModel(false);
+			}
 		},
 		//뷰 데이터 초기화 함수 - 초기 로드 및 편집 완료 시 실행. 
 		initBpDetailDataView:async function (mfunction){
 			let bpData = await mfunction;
-			let rpData = this.replaceNullData(bpData);
-			this.setModel(rpData,"bpModel");
+			//let rpData = this.replaceNullData(bpData);
+			this.setModel(bpData,"bpModel");
 			this.setBpAddress("bpModel");
 			this.setVisibleModel();
 		},
@@ -43,16 +54,28 @@ sap.ui.define([
 			console.log(v.byId("bpBillingHold"));
 			now =`${now.getFullYear()}-${now.getMonth()+1}-${String(now.getDate()).padStart(2,0)}`;
 			let temp = {
-				"bp_report_submission": $.parseJSON(v.byId("bpReportSubmission").getSelectedKey()),
+				//개인
 				"bp_person_title": v.byId("bpPersonTitle").getSelectedKey(),
 				"bp_last_name": v.byId("bpLastName").getValue(),
 				"bp_first_name" : v.byId("bpFirstName").getValue(),
 				"bp_gender" : v.byId("bpGender").getSelectedKey(),
 				"bp_degree": v.byId("bpDegree").getValue(),
-				"bp_external_number": v.byId("bpExternalNumber").getValue(),
 				"bp_birthday" : v.byId("bpBirthday").getValue(),
 				"bp_birthplace" : v.byId("bpBirthplace").getValue(),
 				"bp_changer": v.byId("bpChanger").getText(),
+				
+				//조직
+				"bp_organization_title" : v.byId("bpOrganizationTitle").getValue(),
+				"bp_corp_name1": v.byId("bpName1Org").getValue(),
+				"bp_corp_name2": v.byId("bpName2Org").getValue(),
+				"bp_corp_type": v.byId("bpCorpTypeOrg").getSelectedKey(),
+				"bp_corp_est_date": v.byId("bpCorpEstDateOrg").getValue(),
+				"bp_cal_date": v.byId("bpCalDateOrg").getValue(),
+
+
+				//공통
+				"bp_report_submission": $.parseJSON(v.byId("bpReportSubmission").getSelectedKey()),
+				"bp_external_number": v.byId("bpExternalNumber").getValue(),
 				"bp_changed_date": now,
 				"bp_search1": v.byId("bpSearch1").getValue(),
 				"bp_search2": v.byId("bpSearch2").getValue(),
@@ -86,7 +109,8 @@ sap.ui.define([
 		replaceNullData: function(model){
 			for (var data in model) {
 				var prop = model[data];
-				if(prop===null){
+				console.log(prop);
+				if(prop === null || prop === ""){
 					model[data]='-';
 				}
 			}
@@ -96,8 +120,10 @@ sap.ui.define([
 		revertModelData: function(model){
 			for (var data in model) {
 				var prop = model[data];
-				if(prop==='-'){
-					model[data]=null;
+				console.log(prop);
+				if(prop =="-"){
+					console.log("변환");
+					model[data]="";
 				}
 			}
 			return model;
@@ -119,10 +145,15 @@ sap.ui.define([
 				"visible": true
 			}
 			this.setModel(visibleMode,"visibleMode");
-			this.getView().getModel("visibleMode");
+		},
+		setBpOrgVisibleModel: function(v){
+			let orgVisibleMode={
+				"orgVisible": v
+			}
+			this.setModel(orgVisibleMode,"orgVisibleMode");
 		},
 
-        onEditBtnPress : function(){
+        onEditBtnPress : async function(){
 			this.changeVisibleMode(false);
 		},
 		//태그 가시성 제어
@@ -147,6 +178,9 @@ sap.ui.define([
 			
 			let eleBpGender = this.getView().byId('bpGender');
 			eleBpGender.setSelectedKey(sData.bp_gender);
+			//--조직--//	
+			let eleBpCorpType = this.getView().byId("bpCorpTypeOrg");
+			eleBpCorpType.setSelectedKey(sData.bp_corp_type)
 
 			//-------------보류-----------//
 			let eleBpBillingHold = this.getView().byId('bpBillingHold');
