@@ -178,11 +178,11 @@
           }
         },
         {
-          "name": "CreatePersonCustomer",
-          "pattern": "CreatePersonCustomer",
+          "name": "CreateCustomer",
+          "pattern": "CreateCustomer/{bpCategory}",
           "target": {
-            "name" : "CreatePersonCustomer",
-            "prefix": "CreatePersonCustomer"
+            "name" : "CreateCustomer",
+            "prefix": "CreateCustomer"
           }
         }
       ],
@@ -208,12 +208,12 @@
           "viewId": "CustomerList",
           "viewName": "CustomerList"
         },
-        "CreatePersonCustomer" : {
+        "CreateCustomer" : {
           "viewType": "XML",
           "transition": "slide",
           "clearControlAggregation": true,
-          "viewId": "CreatePersonCustomer",
-          "viewName": "CreatePersonCustomer"
+          "viewId": "CreateCustomer",
+          "viewName": "CreateCustomer"
         }
       }
     },
