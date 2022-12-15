@@ -136,7 +136,8 @@
           "earlyRequests" : true,
           "synchronizationMode" : "None",
           "autoExpandSelect" : true
-        },
+        }
+      },
       "SelectOption" : {
         "type" : "sap.ui.model.json.JSONModel",
         "uri" : "model/SelectOption.json"
