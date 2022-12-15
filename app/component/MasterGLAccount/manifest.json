@@ -176,6 +176,14 @@
             "name" : "Customer",
             "prefix": "Customer"
           }
+        },
+        {
+          "name": "CreateGLAccount",
+          "pattern": "CreateGLAccount",
+          "target": {
+            "name" : "CreateGLAccount",
+            "prefix": "CreateGLAccount"
+          }
         }
         
         
@@ -208,6 +216,13 @@
           "usage" : "customerComponent",
           "clearControlAggregation": true,
           "title" : "Customer"
+        },
+        "CreateGLAccount" : {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": true,
+          "viewId": "CreateGLAccount",
+          "viewName": "CreateGLAccount"
         }
       }
     },
