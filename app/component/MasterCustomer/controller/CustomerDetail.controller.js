@@ -21,10 +21,8 @@ sap.ui.define([
 
 			if(this.getView().getModel("bpModel").getData().bp_category == BPCATEGORY_ORG){
 				//bpName 라벨 텍스트 변경 
-				this.getView().byId("bpNumber").setText("회사코드");
 				this.setBpOrgVisibleModel(true);
 			}else{
-				this.getView().byId("bpNumber").setText("BP");
 				this.setBpOrgVisibleModel(false);
 			}
 		},

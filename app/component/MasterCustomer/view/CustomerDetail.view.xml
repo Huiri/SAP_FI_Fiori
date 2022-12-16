@@ -118,12 +118,6 @@
                                 <m:Text visible="{=${visibleMode>/visible}}" text="{bpModel>/bp_first_name}"/>
                                 <m:Input id="bpFirstName" value="{bpModel>/bp_first_name}" visible="{=!${visibleMode>/visible}}"/>
                             </m:VBox>
-                            <layout:layoutData>
-                                <layout:GridData span="XL3 L3 M6 S12"/>
-                            </layout:layoutData>
-                        </layout:VerticalLayout>
-
-                        <layout:VerticalLayout class="sapUiSmallMarginBeginEnd">
                             <m:VBox class="sapUiSmallMarginTopBottom">
                                 <m:Label text="성별" class="propertyColumn"/>
                                 <m:Text  text="{bpModel>/bp_gender}" visible="{=${visibleMode>/visible}}" />
@@ -144,6 +138,25 @@
                                 <layout:GridData span="XL3 L3 M6 S12"/>
                             </layout:layoutData>
                         </layout:VerticalLayout>
+
+                        <layout:VerticalLayout class="sapUiSmallMarginBeginEnd">
+                            <m:VBox class="sapUiSmallMarginTopBottom">
+                                <m:Label text="검색어1" class="propertyColumn"/>
+                                <m:Text text="{bpModel>/bp_search1}" visible="{=${visibleMode>/visible}}" />
+                                <m:Input id="bpSearch1" value="{bpModel>/bp_search1}" visible="{=!${visibleMode>/visible}}"/>
+                            </m:VBox>
+                            <m:VBox class="sapUiSmallMarginTopBottom">
+                                <m:Label text="검색어2" class="propertyColumn"/>
+                                <m:Text text="{bpModel>/bp_search2}" visible="{=${visibleMode>/visible}}" />
+                                <m:Input id="bpSearch2" value="{bpModel>/bp_search2}" visible="{=!${visibleMode>/visible}}"/>
+
+                            </m:VBox>
+                            <layout:layoutData>
+                                <layout:GridData span="XL3 L3 M6 S6"/>
+                            </layout:layoutData>
+                        </layout:VerticalLayout>
+
+                        
 
                         <layout:VerticalLayout class="sapUiSmallMarginBeginEnd">
                         
@@ -194,22 +207,8 @@
                             </layout:layoutData>
                         </layout:VerticalLayout>
 
-                        <layout:VerticalLayout class="sapUiSmallMarginBeginEnd">
-                            <m:VBox class="sapUiSmallMarginTopBottom">
-                                <m:Label text="검색어1" class="propertyColumn"/>
-                                <m:Text text="{bpModel>/bp_search1}" visible="{=${visibleMode>/visible}}" />
-                                <m:Input id="bpSearch1" value="{bpModel>/bp_search1}" visible="{=!${visibleMode>/visible}}"/>
-                            </m:VBox>
-                            <m:VBox class="sapUiSmallMarginTopBottom">
-                                <m:Label text="검색어2" class="propertyColumn"/>
-                                <m:Text text="{bpModel>/bp_search2}" visible="{=${visibleMode>/visible}}" />
-                                <m:Input id="bpSearch2" value="{bpModel>/bp_search2}" visible="{=!${visibleMode>/visible}}"/>
-
-                            </m:VBox>
-                            <layout:layoutData>
-                                <layout:GridData span="XL3 L3 M6 S6"/>
-                            </layout:layoutData>
-                        </layout:VerticalLayout>
+                        
+                        
                     </blocks>
 
                 </ObjectPageSubSection>
@@ -437,7 +436,7 @@
         <ObjectPageSection titleUppercase="false" title="주소">
         
             <subSections>
-                <ObjectPageSubSection title="주소" titleUppercase="false" >
+                <ObjectPageSubSection title="주소">
                     <blocks>
                         <layout:Grid>
                              <layout:HorizontalLayout class="sapUiSmallMarginBeginEnd">
