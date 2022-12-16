@@ -11,7 +11,9 @@
 		showEditHeaderButton="true"
 		upperCaseAnchorBar="false"
 		toggleHeaderOnTitleClick="false"
-		headerContentPinnable="false">
+		headerContentPinnable="false"
+		selectedSection="_IDGenObjectPageSection1"
+		>
 		<uxap:headerTitle>
 			<uxap:ObjectPageDynamicHeaderTitle id="_IDGenObjectPageDynamicHeaderTitle1">
 				<!-- <uxap:breadcrumbs>
@@ -95,7 +97,7 @@
 		</uxap:headerContent>
 
 		<uxap:sections>
-			<uxap:ObjectPageSection id="_IDGenObjectPageSection0" title="헤더" >
+			<uxap:ObjectPageSection id="_IDGenObjectPageSection0" title="헤더">
 				<!-- <uxap:heading>
 					<MessageStrip id="_IDGenMessageStrip1" text="Lorem Ipsum is simply dummy text of the printing and typesetting industry." type="Error" />
 				</uxap:heading> -->
@@ -106,14 +108,13 @@
 								<Label id="_IDGenLabel0" text="G/L 계정"/>
 								<Text id="GLAcct" class="sapUiTinyMarginBegin"/>  
 							</VBox>
-
 						</uxap:blocks>
 					</uxap:ObjectPageSubSection>
 				</uxap:subSections>
 			</uxap:ObjectPageSection>
 			<uxap:ObjectPageSection id="_IDGenObjectPageSection1" title="일반" >
 				<uxap:subSections >
-					<uxap:ObjectPageSubSection id="_IDGenObjectPageSubSection1"  title="기본정보">
+					<uxap:ObjectPageSubSection id="defaultSubSection"  title="기본정보" >
 						<uxap:blocks>
                             <layout:VerticalLayout id="_IDGenVerticalLayout1" class="sapUiSmallMarginBeginEnd" >
 								<Title text="관리"/>
