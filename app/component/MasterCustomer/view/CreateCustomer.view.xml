@@ -30,15 +30,15 @@
 
                                 <Label text="비즈니스 파트너명 " class="sapUiTinyMarginBottom" required="true"/>
                                 <Input id="BpName" class="sapUiSmallMarginBottom"/>
-
-                                <Label text="비즈니스 파트너 번호 " class="sapUiTinyMarginBottom" required="true"/>
-                                <Input id="BpNumber" class="sapUiSmallMarginBottom" valueHelpRequest="" showValueHelp="true"/>  
+                        
+                                <Label text="비즈니스 파트너 " class="sapUiTinyMarginBottom"/>
+                                <Text id="BpNumber" class="sapUiSmallMarginBottom"/>
 
                                 <Label text="비즈니스 파트너 범주 " class="sapUiTinyMarginBottom"/>
                                 <Text id="BpCategory" class="sapUiSmallMarginBottom" text=""/>
                     
                                 <Label text="회사 코드 " class="sapUiTinyMarginBottom"/>
-                                <Input id="BpCompanyCode" class="sapUiSmallMarginBottom"/>
+                                <Input id="BpCompanyCode" class="sapUiSmallMarginBottom" valueHelpRequest="" showValueHelp="true"/>
 
                                 <Label text="개인 칭호 " visible="{=!${bpCategoryModel>/category}}" class="sapUiTinyMarginBottom"/>
                                 <Label text="조직 명칭 " visible="{=${bpCategoryModel>/category}}" class="sapUiTinyMarginBottom" required="true"/>

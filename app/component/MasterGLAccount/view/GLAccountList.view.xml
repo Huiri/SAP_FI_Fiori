@@ -84,7 +84,7 @@
                 cellClick=".getRowData"
                 rowActionCount="1" 
                 id="GlAccountTable"
-                selectionMode="None"
+                selectionMode="MultiToggle"
                 rows="{GlDataModel>/}" 
                 width="auto">
                 <t:extension> 
