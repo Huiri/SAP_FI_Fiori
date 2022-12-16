@@ -5,6 +5,7 @@
 	xmlns:layout="sap.ui.layout"
 	xmlns="sap.m"
     xmlns:t="sap.ui.table"
+	xmlns:core="sap.ui.core"
 	height="100%">
 	<uxap:ObjectPageLayout id="ObjectPageLayout"
 		showTitleInHeaderContent="true"
@@ -107,25 +108,40 @@
                             <layout:VerticalLayout id="_IDGenVerticalLayout1" class="sapUiSmallMarginBeginEnd" >
                                 <VBox id="_IDGenVBox3" class="sapUiSmallMarginBottom">
                                     <Label id="_IDGenLabel6" text="계정과목표" />
-                                    <Text id="TextCoA" text="{GLDataModel>/gl_coa}" class="sapUiTinyMarginBegin"/>  
+                                    <Text id="TextCoA" text="{GLDataModel>/gl_coa} ({GLDataModel>/gl_acct_content})" class="sapUiTinyMarginBegin"/>  
                                 </VBox>
                                 <VBox id="_IDGenVBox4" class="sapUiSmallMarginBottom">
                                     <Label id="_IDGenLabel7" text="G/L 계정 유형" required="true" />
                                     <Text id="TextGLAccType" text="{GLDataModel>/gl_acct_type}" visible="{=!${editModel>/editable}}" class="sapUiTinyMarginBegin"/>
-                                    <Input id="InputGLAccType" visible="{=${editModel>/editable}}" class="sapUiTinyMarginBegin"/>  
+                                    <!-- <Input id="InputGLAccType" visible="{=${editModel>/editable}}" class="sapUiTinyMarginBegin"/>   -->
+									<Select id="InputGLAccType" width="100%" required="true" forceSelection="false" visible="{=${editModel>/editable}}"
+                                		items="{
+											path: 'SelectOption>/AccountTypeList',
+											sorter: { path: 'AccountTypeList' }
+										}">
+										<core:Item key="{SelectOption>AccountType}" text="{SelectOption>Value}"/>
+                            		</Select>
 
                                 </VBox>
                                 <VBox id="_IDGenVBox5" class="sapUiSmallMarginBottom">
                                     <Label id="_IDGenLabel8" text="계정 그룹" required="true" />
-                                    <Text id="TextGLGroup" text="{GLDataModel>/gl_acct_group}" visible="{=!${editModel>/editable}}" class="sapUiTinyMarginBegin"/>
-                                    <Input id="InputGLGroup" visible="{=${editModel>/editable}}" class="sapUiTinyMarginBegin"/>  
-                                </VBox>
+                                    <Text id="TextGLGroup" text="{GLDataModel>/gl_acct_group} ({GLDataModel>/gl_acct_group_mean})" visible="{=!${editModel>/editable}}" class="sapUiTinyMarginBegin"/>
+                                    
+									<!-- <Input id="InputGLGroup" visible="{=${editModel>/editable}}" class="sapUiTinyMarginBegin"/>   -->
+									<Select id="InputGLGroup" width="100%" required="true" forceSelection="false" visible="{=${editModel>/editable}}"
+                                		items="{
+											path: 'SelectOption>/GLAcctGroupList',
+											sorter: { path: 'GLAcctGroupList' }
+										}">
+										<core:Item key="{SelectOption>GLAcctGrp}" text="{SelectOption>GLAcctGrpContent}"/>
+                            		</Select>
+								</VBox>
                                 <VBox id="_IDGenVBox6" class="sapUiSmallMarginBottom">
                                     <Label id="_IDGenLabel9" text="손익계산서 계정 유형" />
                                     <Text id="TextPLAccType" text="{GLDataModel>/gl_ps_acct_type}" class="sapUiTinyMarginBegin"/>
                                 </VBox>
                                 <VBox id="_IDGenVBox7">
-                                    <Label id="_IDGenLabel10" text="기능 영역" required="true" />
+                                    <Label id="_IDGenLabel10" text="기능 영역"/>
                                     <Text id="TextFuncArea" text="{GLDataModel>/gl_func_area}" visible="{=!${editModel>/editable}}" class="sapUiTinyMarginBegin" />
                                     <Input id="InputFuncArea" visible="{=${editModel>/editable}}" class="sapUiTinyMarginBegin"/>  
                                 </VBox>
@@ -137,8 +153,7 @@
                             <layout:VerticalLayout id="_IDGenVerticalLayout2" class="sapUiSmallMarginBeginEnd">
                                 <VBox id="_IDGenVBox8" class="sapUiSmallMarginBottom">
                                     <Label id="_IDGenLabel13" text="계정과목표 내역" required="true"/>
-                                    <Text id="TextCoAContent" text="{GLDataModel>/gl_coa_content}" visible="{=!${editModel>/editable}}" class="sapUiTinyMarginBegin"/>
-                                    <Input id="InputCoAContent" visible="{=${editModel>/editable}}" class="sapUiTinyMarginBegin"/>  
+                                    <Text id="TextCoAContent" text="{GLDataModel>/gl_coa_content}" class="sapUiTinyMarginBegin"/>
 
                                 </VBox>
                                 <VBox id="_IDGenVBox9">

@@ -22,5 +22,75 @@
             "Value": "C (현금 계정)"
         }
         
+    ],
+    "FunctionAreaList" : [
+        {
+            "FuncArea" : "M",
+            "Value" : "제조"
+        },
+        {
+            "FuncArea" : "S",
+            "Value" : "영업 및 유통"
+        },
+        {
+            "FuncArea" : "P",
+            "Value" : "생산"
+        },
+        {
+            "FuncArea" : "A",
+            "Value" : "관리"
+        }
+    ],
+    "GLPLAcctTypeList" : [
+        {
+            "PLType" : "S",
+            "Value" : "매출원가"
+        },
+        {
+            "PLType" : "E",
+            "Value" : "영업외비용"
+        },
+        {
+            "PLType" : "L",
+            "Value" : "비정상손실"
+        },
+        {
+            "PLType" : "R",
+            "Value" : "매출"
+        },
+        {
+            "PLType" : "I",
+            "Value" : "영업외수익"
+        },
+        {
+            "PLType" : "A",
+            "Value" : "판매 및 일반 관리비"
+        },
+        {
+            "PLType" : "T",
+            "Value" : "세금"
+        }
+    ],
+    "GLAcctGroupList" : [
+        {
+            "GLAcctGrp" : "ANL",
+            "GLAcctGrpContent" : "자산 계정"
+        },
+        {
+            "GLAcctGrp" : "FIN",
+            "GLAcctGrpContent" : "대차대조표 계정"
+        },
+        {
+            "GLAcctGrp" : "GUV",
+            "GLAcctGrpContent" : "손익계정"
+        },
+        {
+            "GLAcctGrp" : "MAT",
+            "GLAcctGrpContent" : "자재"
+        },
+        {
+            "GLAcctGrp" : "SAKO",
+            "GLAcctGrpContent" : "G/L 계정"
+        }
     ]
 }
