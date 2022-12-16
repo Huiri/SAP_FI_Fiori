@@ -163,6 +163,13 @@
           "target": [
             "Home"
           ]
+        },
+        {
+          "name": "CreateCoCd",
+          "pattern": "CreateCoCd",
+          "target": [
+            "CreateCoCd"
+          ]
         }
       
       ],
@@ -173,6 +180,13 @@
           "clearControlAggregation": true,
           "viewId": "Home",
           "viewName": "Home"
+        },
+        "CreateCoCd" : {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": true,
+          "viewId": "CreateCoCd",
+          "viewName": "CreateCoCd"
         }
       }
     },
