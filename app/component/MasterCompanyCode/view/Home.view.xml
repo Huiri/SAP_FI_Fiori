@@ -14,7 +14,7 @@
                 header="회사코드 조회"
                 press=".toCompanyCodeList">
                 <TileContent id="_IDGenTileContent1" >
-                    <ImageContent id="_IDGenImageContent1" src="sap-icon://crm-sales"/>
+                    <ImageContent id="_IDGenImageContent1" src="sap-icon://company-view"/>
                 </TileContent>
             </GenericTile>
             <!-- <GenericTile id="_IDGenGenericTile2" class="sapUiTinyMarginBegin sapUiTinyMarginTop">
