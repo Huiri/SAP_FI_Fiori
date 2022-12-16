@@ -10,33 +10,29 @@
 	height="100%"
 	busyIndicatorDelay="0"
 >
-    <ObjectPageLayout 
-        showTitleInHeaderContent="true"
-        showEditHeaderButton="true"
-        editHeaderButtonPress="editBtnPress"
-        upperCaseAnchorBar="false"
-    >
+<ObjectPageLayout 
+    showFooter="true"
+    showTitleInHeaderContent="true"
+    showEditHeaderButton="true"
+    upperCaseAnchorBar="false"
+    toggleHeaderOnTitleClick="false"
+    headerContentPinnable="false"
+    alwaysShowContentHeader="true"
+    preserveHeaderStateOnScroll="true"
+>
     <headerTitle>
-        <ObjectPageDynamicHeaderTitle>
-            <expandedHeading>
-                <m:HBox>
-                    <m:Title text="NAME" wrapping="true"/>
+        <ObjectPageDynamicHeaderTitle>  
+            <heading>
+                <m:HBox fitContainer="true" alignItems="Center">
+                    <m:Title id="bpName" text="{bpModel>/bp_name}" wrapping="true"/>
                 </m:HBox>
-            </expandedHeading>    
-            <snappedHeading>
-                <m:FlexBox fitContainer="true" alignItems="Center">
-                    <m:Avatar src="sap-icon://customer" class="sapUiTinyMarginEnd"/>
-                    <m:Title id="bpName" text="NAME2" wrapping="true"/>
-                </m:FlexBox>
-            </snappedHeading>
-
+            </heading>
              <actions>
-                <m:OverflowToolbarButton icon="sap-icon://edit" text="편집" type="Emphasized" tooltip="edit">
+                <m:Button text="편집" type="Emphasized" tooltip="edit" press="onEditBtnPress" visible="{visibleMode>/visible}" >
                     <m:layoutData>
                         <m:OverflowToolbarLayoutData priority="NeverOverflow"/>
                     </m:layoutData>
-                </m:OverflowToolbarButton>
-                <m:Button text="편집" press="editDetail"/>
+                </m:Button>
             </actions>
         </ObjectPageDynamicHeaderTitle>
     </headerTitle>
@@ -47,7 +43,7 @@
 
                 <layout:HorizontalLayout class="sapUiSmallMarginBeginEnd">
                     <m:VBox class="sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom">
-                        <m:Label text="BP" class="propertyColumn"/>
+                        <m:Label id="bpNumber" text="BP" class="propertyColumn"/>
                         <m:Label text="BP 범주" class="propertyColumn"/>
                     </m:VBox>
 
@@ -61,19 +57,35 @@
                 <layout:VerticalLayout class="sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom">
                     <m:VBox>
                         <m:Label text="표준 주소" class="propertyColumn"/>
-                        <m:Text id="bpAddress" text="표준주소--------------"/>
+                        <m:Text id="bpAddress"/>
                     </m:VBox>
                 </layout:VerticalLayout>
+
                 <layout:VerticalLayout class="sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom">
                     <m:VBox>
                         <m:Label text="서류 제출 여부" class="propertyColumn"/>
-                        <m:Text id="bpReportSubmission" text="{bpModel>/bp_report_submission}"/>
+                        <m:Text visible="{visibleMode>/visible}" text="{=${bpModel>/bp_report_submission}===true?'제출':'미제출'}"/>
+                        <m:Select
+                            id="bpReportSubmission" 
+                            visible="{=!${visibleMode>/visible}}"
+                            forceSelection="false">
+                                <c:Item key="true" text="제출" />
+                                <c:Item key="false" text="미제출" />
+                        </m:Select>
                     </m:VBox>
                 </layout:VerticalLayout>
+               
                 <layout:VerticalLayout class="sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom">
-                    <m:VBox class="sapUiSmallMarginBeginEnd">
+                    <m:VBox>
                         <m:Label text="신용상태" class="propertyColumn"/>
-                        <m:Text id="bpCreditStatus" text="{bpModel>/bp_credit_status}"/>
+                        <m:Text  visible="{=${visibleMode>/visible}}" text="{bpModel>/bp_credit_status}" />
+                        <m:Select
+                            id="bpCreditStatus" 
+                            visible="{=!${visibleMode>/visible}}"
+                            forceSelection="false"
+                            items="{BpCreditStatus>/bpCreditStatus}">
+                                <c:Item key="{BpCreditStatus>key}" text="{BpCreditStatus>value}" />
+                        </m:Select>
                     </m:VBox>
                 </layout:VerticalLayout>
         </m:FlexBox>
@@ -82,20 +94,45 @@
         <ObjectPageSection titleUppercase="false" title="기본 데이터">
         
             <subSections>
-                <ObjectPageSubSection title="일반 정보" titleUppercase="false">
+                <ObjectPageSubSection id="bpGeneral" title="일반 정보" visible="{=!${orgVisibleMode>/orgVisible}}">
                     <blocks>
                         <layout:VerticalLayout class="sapUiSmallMarginBeginEnd">
                             <m:VBox class="sapUiSmallMarginTopBottom">
                                 <m:Label text="개인 칭호" class="propertyColumn"/>
-                                <m:Text id="bpPersonTitle" text="{bpModel>/bp_person_title}"/>
+                                <m:Text visible="{=${visibleMode>/visible}}" text="{bpModel>/bp_person_title}"/>
+                                <m:Select
+                                    id="bpPersonTitle"
+                                    visible="{=!${visibleMode>/visible}}"
+                                    forceSelection="false">
+                                <c:Item key="mr" text="Mr."/>
+                                <c:Item key="ms" text="Ms."/>
+                                </m:Select>
                             </m:VBox>
                             <m:VBox class="sapUiSmallMarginTopBottom">
                                 <m:Label text="이름" class="propertyColumn" />
-                                <m:Text id="bpLastName" text="{bpModel>/bp_name}"/>
+                                <m:Text visible="{=${visibleMode>/visible}}" text="{bpModel>/bp_last_name}"/>
+                                <m:Input id="bpLastName" value="{bpModel>/bp_last_name}" visible="{=!${visibleMode>/visible}}"/>
                             </m:VBox>
                             <m:VBox class="sapUiSmallMarginTopBottom">
                                 <m:Label text="성" class="propertyColumn"/>
-                                <m:Text id="bpFirsstName" text="{bpModel>/bp_first_name}"/>
+                                <m:Text visible="{=${visibleMode>/visible}}" text="{bpModel>/bp_first_name}"/>
+                                <m:Input id="bpFirstName" value="{bpModel>/bp_first_name}" visible="{=!${visibleMode>/visible}}"/>
+                            </m:VBox>
+                            <m:VBox class="sapUiSmallMarginTopBottom">
+                                <m:Label text="성별" class="propertyColumn"/>
+                                <m:Text  text="{bpModel>/bp_gender}" visible="{=${visibleMode>/visible}}" />
+                                <m:Select
+                                    id="bpGender"
+                                    visible="{=!${visibleMode>/visible}}"
+                                    forceSelection="false">
+                                <c:Item key="남" text="남" />
+                                <c:Item key="여" text="여" />
+                                </m:Select>                                
+                            </m:VBox>
+                            <m:VBox class="sapUiSmallMarginTopBottom">
+                                <m:Label text="학위" class="propertyColumn"/>
+                                <m:Text text="{bpModel>/bp_degree}"  visible="{=${visibleMode>/visible}}" />
+                                <m:Input id="bpDegree" value="{bpModel>/bp_degree}" visible="{=!${visibleMode>/visible}}"/>
                             </m:VBox>
                             <layout:layoutData>
                                 <layout:GridData span="XL3 L3 M6 S12"/>
@@ -104,31 +141,44 @@
 
                         <layout:VerticalLayout class="sapUiSmallMarginBeginEnd">
                             <m:VBox class="sapUiSmallMarginTopBottom">
-                                <m:Label text="성별" class="propertyColumn"/>
-                                <m:Text id="bpGender" text="{bpModel>/bp_gender}"/>
+                                <m:Label text="검색어1" class="propertyColumn"/>
+                                <m:Text text="{bpModel>/bp_search1}" visible="{=${visibleMode>/visible}}" />
+                                <m:Input id="bpSearch1" value="{bpModel>/bp_search1}" visible="{=!${visibleMode>/visible}}"/>
                             </m:VBox>
                             <m:VBox class="sapUiSmallMarginTopBottom">
-                                <m:Label text="학위" class="propertyColumn"/>
-                                <m:Text id="bpDegree" text="{bpModel>/bp_degree}"/>
+                                <m:Label text="검색어2" class="propertyColumn"/>
+                                <m:Text text="{bpModel>/bp_search2}" visible="{=${visibleMode>/visible}}" />
+                                <m:Input id="bpSearch2" value="{bpModel>/bp_search2}" visible="{=!${visibleMode>/visible}}"/>
+
                             </m:VBox>
                             <layout:layoutData>
-                                <layout:GridData span="XL3 L3 M6 S12"/>
+                                <layout:GridData span="XL3 L3 M6 S6"/>
                             </layout:layoutData>
                         </layout:VerticalLayout>
+
+                        
 
                         <layout:VerticalLayout class="sapUiSmallMarginBeginEnd">
                         
                             <m:VBox class="sapUiSmallMarginTopBottom">
                                 <m:Label text="외부 BP 번호" class="propertyColumn"/>
-                                <m:Text id="bpExternalNumber" text="{bpModel>/bp_external_number}"/>
+                                <m:Text text="{bpModel>/bp_external_number}" visible="{=${visibleMode>/visible}}" />
+                                <m:Input id="bpExternalNumber" value="{bpModel>/bp_external_number}" visible="{=!${visibleMode>/visible}}"/>
                             </m:VBox>
                             <m:VBox class="sapUiSmallMarginTopBottom">
-                                <m:Label text="생년월일" class="propertyColumn"/>
-                                <m:Text id="bpBirthday" text="{bpModel>/bp_birthday}"/>
+                                <m:Label text="생년월일" class="propertyColumn" />
+                                <m:Text text="{bpModel>/bp_birthday}" visible="{=${visibleMode>/visible}}" />
+                                <m:DatePicker 
+                                    id="bpBirthday"
+                                    placeholder="{=${bpModel>/bp_birthday}==='-'?'날짜 입력':${bpModel>/bp_birthday}}" 
+                                    visible="{=!${visibleMode>/visible}}"
+                                    valueFormat="yyyy.MM.dd"
+                                    displayFormat="yyyy.MM.dd" />
                             </m:VBox>
                             <m:VBox class="sapUiSmallMarginTopBottom">
                                 <m:Label text="출생지" class="propertyColumn"/>
-                                <m:Text id="bpBirthplace" text="{bpModel>/bp_birthplace}"/>
+                                <m:Text text="{bpModel>/bp_birthplace}" visible="{=${visibleMode>/visible}}" />
+                                <m:Input id="bpBirthplace" value="{bpModel>/bp_birthplace}" visible="{=!${visibleMode>/visible}}"/>
                             </m:VBox>
                             <layout:layoutData>
                                 <layout:GridData span="XL3 L3 M6 S6"/>
@@ -157,24 +207,119 @@
                             </layout:layoutData>
                         </layout:VerticalLayout>
 
+                        
+                        
+                    </blocks>
+
+                </ObjectPageSubSection>
+
+                <ObjectPageSubSection id="orgGeneral" title="일반 정보" visible="{=${orgVisibleMode>/orgVisible}}">
+                    <blocks>
+                        <layout:VerticalLayout class="sapUiSmallMarginBeginEnd">
+                            <m:VBox class="sapUiSmallMarginTopBottom">
+                                <m:Label text="조직 명칭" class="propertyColumn"/>
+                                <m:Text visible="{=${visibleMode>/visible}}" text="{bpModel>/bp_organization_title}"/>
+                                <m:Input id="bpOrganizationTitle" value="{bpModel>/bp_organization_title}" visible="{=!${visibleMode>/visible}}"/>
+                            </m:VBox>
+                            <m:VBox class="sapUiSmallMarginTopBottom">
+                                <m:Label text="이름1" class="propertyColumn" />
+                                <m:Text visible="{=${visibleMode>/visible}}" text="{bpModel>/bp_corp_name1}"/>
+                                <m:Input id="bpName1Org" value="{bpModel>/bp_corp_name1}" visible="{=!${visibleMode>/visible}}"/>
+                            </m:VBox>
+                            <m:VBox class="sapUiSmallMarginTopBottom">
+                                <m:Label text="이름2" class="propertyColumn"/>
+                                <m:Text visible="{=${visibleMode>/visible}}" text="{bpModel>/bp_corp_name2}"/>
+                                <m:Input id="bpName2Org" value="{bpModel>/bp_corp_name2}" visible="{=!${visibleMode>/visible}}"/>
+                            </m:VBox>
+                            <layout:layoutData>
+                                <layout:GridData span="XL3 L3 M6 S12"/>
+                            </layout:layoutData>
+                        </layout:VerticalLayout>
+
                         <layout:VerticalLayout class="sapUiSmallMarginBeginEnd">
                             <m:VBox class="sapUiSmallMarginTopBottom">
                                 <m:Label text="검색어1" class="propertyColumn"/>
-                                <m:Text id="bpSearch1" text="{bpModel>/bp_search1}"/>
+                                <m:Text text="{bpModel>/bp_search1}" visible="{=${visibleMode>/visible}}" />
+                                <m:Input id="bpSearch1Org" value="{bpModel>/bp_search1}" visible="{=!${visibleMode>/visible}}"/>
                             </m:VBox>
                             <m:VBox class="sapUiSmallMarginTopBottom">
                                 <m:Label text="검색어2" class="propertyColumn"/>
-                                <m:Text id="bpSearch2" text="{bpModel>/bp_search2}"/>
+                                <m:Text text="{bpModel>/bp_search2}" visible="{=${visibleMode>/visible}}" />
+                                <m:Input id="bpSearch2Org" value="{bpModel>/bp_search2}" visible="{=!${visibleMode>/visible}}"/>
+
                             </m:VBox>
                             <layout:layoutData>
                                 <layout:GridData span="XL3 L3 M6 S6"/>
                             </layout:layoutData>
                         </layout:VerticalLayout>
+
+                        <layout:VerticalLayout class="sapUiSmallMarginBeginEnd">
+                            <m:VBox class="sapUiSmallMarginTopBottom">
+                                <m:Label text="법적 형태" class="propertyColumn"/>
+                                <m:Text text="{bpModel>/bp_corp_type}" visible="{=${visibleMode>/visible}}" />
+                                <m:Select
+                                    id="bpCorpTypeOrg" 
+                                    visible="{=!${visibleMode>/visible}}"
+                                    forceSelection="false">
+                                    <c:Item key="법인(01)" text="법인(01)" />
+                                    <c:Item key="개인(02)" text="개인(02)" />
+                                </m:Select>    
+                            </m:VBox>
+                            <m:VBox class="sapUiSmallMarginTopBottom">
+                                <m:Label text="설립일" class="propertyColumn" />
+                                <m:Text text="{bpModel>/bp_corp_est_date}" visible="{=${visibleMode>/visible}}" />
+                                <m:DatePicker 
+                                    id="bpCorpEstDateOrg"
+                                    placeholder="{=${bpModel>/bp_corp_est_date}==='-'?'날짜 입력':${bpModel>/bp_corp_est_date}}" 
+                                    visible="{=!${visibleMode>/visible}}"
+                                    valueFormat="yyyy.MM.dd"
+                                    displayFormat="yyyy.MM.dd" />
+                            </m:VBox>
+                            <m:VBox class="sapUiSmallMarginTopBottom">
+                                <m:Label text="정산일" class="propertyColumn" />
+                                <m:Text text="{bpModel>/bp_cal_date}" visible="{=${visibleMode>/visible}}" />
+                                <m:DatePicker 
+                                    id="bpCalDateOrg"
+                                    placeholder="{=${bpModel>/bp_cal_date}==='-'?'날짜 입력':${bpModel>/bp_cal_date}}" 
+                                    visible="{=!${visibleMode>/visible}}"
+                                    valueFormat="yyyy.MM.dd"
+                                    displayFormat="yyyy.MM.dd" />
+                            </m:VBox>
+                             <m:VBox class="sapUiSmallMarginTopBottom">
+                                <m:Label text="외부 BP 번호" class="propertyColumn"/>
+                                <m:Text text="{bpModel>/bp_external_number}" visible="{=${visibleMode>/visible}}" />
+                                <m:Input id="bpExternalNumberOrg" value="{bpModel>/bp_external_number}" visible="{=!${visibleMode>/visible}}"/>
+                            </m:VBox>
+                            <layout:layoutData>
+                                <layout:GridData span="XL3 L3 M6 S6"/>
+                            </layout:layoutData>
+                        </layout:VerticalLayout>
+
+                        <layout:VerticalLayout class="sapUiSmallMarginBeginEnd">
+                            <m:VBox class="sapUiSmallMarginTopBottom">
+                                <m:Label text="생성일" class="propertyColumn"/>
+                                <m:Text id="bpCreatedDateOrg" text="{bpModel>/bp_created_date}"/>
+                            </m:VBox>
+                            <m:VBox class="sapUiSmallMarginTopBottom">
+                                <m:Label text="최종 변경자" class="propertyColumn"/>
+                                <m:Text id="bpChangerOrg" text="{bpModel>/bp_changer}"/>
+                            </m:VBox>
+                            <m:VBox class="sapUiSmallMarginTopBottom">
+                                <m:Label text="최종 변경일" class="propertyColumn"/>
+                                <m:Text id="bpChangedDateOrg" text="{bpModel>/bp_changed_date}"/>
+                            </m:VBox>
+                            <layout:layoutData>
+                                <layout:GridData span="XL3 L3 M6 S6"/>
+                            </layout:layoutData>
+                        </layout:VerticalLayout>
+
+                        
                     </blocks>
 
                 </ObjectPageSubSection>
 
-                <ObjectPageSubSection title="고객 정보" titleUppercase="false">
+
+                <ObjectPageSubSection title="고객 정보" >
                     <blocks>
                         <layout:VerticalLayout class="sapUiSmallMarginBeginEnd">
                             <m:VBox class="sapUiSmallMarginTopBottom">
@@ -187,7 +332,9 @@
                             </m:VBox>
                             <m:VBox class="sapUiSmallMarginTopBottom">
                                 <m:Label text="납품일 규칙" class="propertyColumn"/>
-                                <m:Text id="bpDeliveryRule" text="{bpModel>/bp_delivery_rule}"/>
+                                <m:Text text="{bpModel>/bp_delivery_rule}" visible="{=${visibleMode>/visible}}" />
+                                <m:Input id="bpDeliveryRule" value="{bpModel>/bp_delivery_rule}" visible="{=!${visibleMode>/visible}}"/>
+                                
                             </m:VBox>
                             <layout:layoutData>
                                 <layout:GridData span="XL3 L3 M6 S12"/>
@@ -197,11 +344,15 @@
                         <layout:VerticalLayout class="sapUiSmallMarginBeginEnd">
                             <m:VBox class="sapUiSmallMarginTopBottom">
                                 <m:Label text="공급업체" class="propertyColumn"/>
-                                <m:Text id="bpVendor" text="{bpModel>/bp_vendor}"/>
+                                <m:Text text="{bpModel>/bp_vendor}" visible="{=${visibleMode>/visible}}" />
+                                <m:Input id="bpVendor" value="{bpModel>/bp_vendor}" visible="{=!${visibleMode>/visible}}"/>
+
                             </m:VBox>
                             <m:VBox class="sapUiSmallMarginTopBottom">
                                 <m:Label text="지급 사유" class="propertyColumn"/>
-                                <m:Text id="bpProvisionReason" text="{bpModel>/bp_provision_reason}"/>
+                                <m:Text text="{bpModel>/bp_provision_reason}" visible="{=${visibleMode>/visible}}" />
+                                <m:Input id="bpProvisionReason" value="{bpModel>/bp_provision_reason}" visible="{=!${visibleMode>/visible}}"/>
+
                             </m:VBox>
                             <layout:layoutData>
                                 <layout:GridData span="XL3 L3 M6 S12"/>
@@ -211,24 +362,48 @@
                         <layout:VerticalLayout class="sapUiSmallMarginBeginEnd">
                             <m:VBox class="sapUiSmallMarginTopBottom">
                                 <m:Label text="청구 보류" class="propertyColumn"/>
-                                <m:Text id="bpBillingHold"
-                                 text="{=${bpModel>/bp_billing_hold}==='true'?'예':
-                                      ${bpModel>/bp_billing_hold}==='false'?'아니오':
+                                <m:Text
+                                    visible="{=${visibleMode>/visible}}"
+                                    text="{=${bpModel>/bp_billing_hold}===true?'예':
+                                      ${bpModel>/bp_billing_hold}===false?'아니오':
                                       '-'}"/>
+                                <m:Select
+                                    id="bpBillingHold" 
+                                    visible="{=!${visibleMode>/visible}}"
+                                    forceSelection="false">
+                                    <c:Item key="true" text="예" />
+                                    <c:Item key="false" text="아니오" />
+                                </m:Select>
                             </m:VBox>
                             <m:VBox class="sapUiSmallMarginTopBottom">
                                 <m:Label text="납품 보류" class="propertyColumn"/>
-                                <m:Text id="bpDeliveryHold"
-                                        text="{=${bpModel>/bp_delivery_hold}==='true'?'예':
-                                      ${bpModel>/bp_delivery_hold}==='false'?'아니오':
+                                <m:Text 
+                                    visible="{=${visibleMode>/visible}}"
+                                    text="{=${bpModel>/bp_delivery_hold}===true?'예':
+                                      ${bpModel>/bp_delivery_hold}===false?'아니오':
                                       '-'}"/>
+                                <m:Select
+                                    id="bpDeliveryHold" 
+                                    visible="{=!${visibleMode>/visible}}"
+                                    forceSelection="false">
+                                    <c:Item key="true" text="예" />
+                                    <c:Item key="false" text="아니오" />
+                                </m:Select>
                             </m:VBox>
                             <m:VBox class="sapUiSmallMarginTopBottom">
                                 <m:Label text="전기 보류" class="propertyColumn"/>
-                                <m:Text id="bpPostingHold"
-                                        text="{=${bpModel>/bp_posting_hold}==='true'?'예':
-                                      ${bpModel>/bp_posting_hold}==='false'?'아니오':
+                                <m:Text 
+                                    visible="{=${visibleMode>/visible}}"
+                                    text="{=${bpModel>/bp_posting_hold}===true?'예':
+                                      ${bpModel>/bp_posting_hold}===false?'아니오':
                                       '-'}"/>
+                                <m:Select
+                                    id="bpPostingHold" 
+                                    visible="{=!${visibleMode>/visible}}"
+                                    forceSelection="false">
+                                    <c:Item key="true" text="예" />
+                                    <c:Item key="false" text="아니오" />
+                                </m:Select>
                             </m:VBox>
                             <layout:layoutData>
                                 <layout:GridData span="XL3 L3 M6 S6"/>
@@ -238,13 +413,14 @@
                         <layout:VerticalLayout class="sapUiSmallMarginBeginEnd">
                             <m:VBox class="sapUiSmallMarginTopBottom">
                                 <m:Label text="고객 분류" class="propertyColumn"/>
-                                <m:Text id="bpCustomerClassification" text="{bpModel>/bp_customer_classification}"/>
+                                <m:Text text="{bpModel>/bp_customer_classification}" visible="{=${visibleMode>/visible}}" />
+                                <m:Input id="bpCustomerClassification" value="{bpModel>/bp_customer_classification}" visible="{=!${visibleMode>/visible}}"/>
                             </m:VBox>
                             <m:VBox class="sapUiSmallMarginTopBottom">
                                 <m:Label text="VAT 납세 의무" class="propertyColumn"/>
                                 <m:Text id="bpVatPayDuty"
-                                    text="{=${bpModel>/bp_vat_pay_duty}==='true'?'예':
-                                      ${bpModel>/bp_vat_pay_duty}==='false'?'아니오':
+                                    text="{=${bpModel>/bp_vat_pay_duty}===true?'예':
+                                      ${bpModel>/bp_vat_pay_duty}===false?'아니오':
                                       '-'}"/>
                             </m:VBox>
                             <layout:layoutData>
@@ -257,40 +433,72 @@
             </subSections>
         </ObjectPageSection>
 
-        <ObjectPageSection titleUppercase="false" title="주소" importance="Medium">
+        <ObjectPageSection titleUppercase="false" title="주소">
         
             <subSections>
-                <ObjectPageSubSection title="주소" titleUppercase="false" importance="Medium">
+                <ObjectPageSubSection title="주소">
                     <blocks>
-                        <m:VBox class="sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom">
-                            <m:Label text="도로 주소" class="propertyColumn"/>
-                            <m:Text id="bpRoadAddress" text="{bpModel>/bp_road_address}"/>
-                        </m:VBox>
-                        <m:VBox class="sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom">
-                            <m:Label text="우편 번호" class="propertyColumn"/>
-                            <m:Text id="bpPostalCode" text="{bpModel>/bp_postal_code}"/>
-                        </m:VBox>
-                        <m:VBox class="sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom">
-                            <m:Label text="국가 지역" class="propertyColumn"/>
-                            <m:Text id="bpNation" text="{bpModel>/bp_nation}"/>
-                        </m:VBox>
+                        <layout:Grid>
+                             <layout:HorizontalLayout class="sapUiSmallMarginBeginEnd">
+                                <m:VBox class="sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom">
+                                    <m:Label text="도로 주소" class="propertyColumn"/>
+                                    <m:Text text="{bpModel>/bp_road_address}" visible="{=${visibleMode>/visible}}" />
+                                    <m:Input id="bpRoadAddress" value="{bpModel>/bp_road_address}" visible="{=!${visibleMode>/visible}}"/>
 
-                        <m:VBox class="sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom">
-                            <m:Label text="번지" class="propertyColumn" />
-                            <m:Text id="bpStreetAddress" text="{bpModel>/bp_street_address}"/>
-                        </m:VBox>
-                        <m:VBox class="sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom">
-                            <m:Label text="도시" class="propertyColumn" />
-                            <m:Text id="bpCity" text="{bpModel>/bp_city}"/>
-                        </m:VBox>
-                        <m:VBox class="sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom">
-                            <m:Label text="지역" class="propertyColumn"/>
-                            <m:Text id="bpRegion" text="{bpModel>/bp_region}"/>
-                        </m:VBox>
+                                </m:VBox>
+                                <m:VBox class="sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom">
+                                    <m:Label text="우편 번호" class="propertyColumn" />
+                                    <m:Text text="{bpModel>/bp_postal_code}" visible="{=${visibleMode>/visible}}"/>
+                                    <m:Input id="bpPostalCode" value="{bpModel>/bp_postal_code}" visible="{=!${visibleMode>/visible}}"/>
+
+                                </m:VBox>
+                                <m:VBox class="sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom">
+                                    <m:Label text="국가 지역" class="propertyColumn"/>
+                                    <m:Text text="{bpModel>/bp_nation}" visible="{=${visibleMode>/visible}}" />
+                                    <m:Input id="bpNation" value="{bpModel>/bp_nation}"  visible="{=!${visibleMode>/visible}}" showValueHelp="true"/>
+                                </m:VBox>
+                                <layout:layoutData>
+                                    <layout:GridData span="XL12 L12 M12 S12"/>
+                                </layout:layoutData>
+                            </layout:HorizontalLayout>
+
+                            <layout:HorizontalLayout class="sapUiSmallMarginBeginEnd">
+                                <m:VBox class="sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom">
+                                    <m:Label text="번지" class="propertyColumn" />
+                                    <m:Text text="{bpModel>/bp_street_address}" visible="{=${visibleMode>/visible}}" />
+                                    <m:Input id="bpStreetAddress" value="{bpModel>/bp_street_address}" visible="{=!${visibleMode>/visible}}"/>
+
+                                </m:VBox>
+                                <m:VBox class="sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom">
+                                    <m:Label text="도시" class="propertyColumn" />
+                                    <m:Text text="{bpModel>/bp_city}" visible="{=${visibleMode>/visible}}" />
+                                    <m:Input id="bpCity" value ="{bpModel>/bp_city}" visible="{=!${visibleMode>/visible}}"/>
+
+                                </m:VBox>
+                                <m:VBox class="sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom">
+                                    <m:Label text="지역" class="propertyColumn"/>
+                                    <m:Text text="{bpModel>/bp_region}" visible="{=${visibleMode>/visible}}" />
+                                    <m:Input id="bpRegion" value="{bpModel>/bp_region}" visible="{=!${visibleMode>/visible}}"/>
+                                </m:VBox>
+                                <layout:layoutData>
+                                    <layout:GridData span="XL12 L12 M12 S12"/>
+                                </layout:layoutData>
+                            </layout:HorizontalLayout>
+                        </layout:Grid>
+                       
+                        
                     </blocks>
                 </ObjectPageSubSection>
             </subSections>
         </ObjectPageSection>
     </sections>
-    </ObjectPageLayout>
+    <footer>
+			<m:OverflowToolbar visible="{=!${visibleMode>/visible}}">
+				<m:ToolbarSpacer/>
+				<m:Button type="Emphasized" text="확인" press="onAccept" />
+				<m:Button type="Reject" text="취소" press="onCancel"/>
+			</m:OverflowToolbar>
+    </footer>
+
+</ObjectPageLayout>
 </mvc:View>

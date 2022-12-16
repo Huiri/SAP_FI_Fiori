@@ -141,8 +141,11 @@
       "SelectOption" : {
         "type" : "sap.ui.model.json.JSONModel",
         "uri" : "model/SelectOption.json"
+      },
+      "BpCreditStatus" :{
+        "type" : "sap.ui.model.json.JSONModel",
+        "uri" : "model/BpCreditStatus.json" 
       }
-
     },
     "resources": {
       "css": [
