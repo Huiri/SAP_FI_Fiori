@@ -1,11 +1,17 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
 	"sap/ui/model/json/JSONModel",
+	"sap/ui/core/URI",
+	"sap/ui/model/BindingMode"
 ], function(
-	Controller,JSONModel
+	Controller,
+	JSONModel,
+	URI,
+	BindingMode
 ) {
 	"use strict";
 	let selectedNum;
+	let originModel;
 	const BPCATEGORY_ORG="조직(2)";
 	const BPCATEGORY_BP="개인(1)";
 
@@ -13,16 +19,34 @@ sap.ui.define([
 		
 		//-----------초기화----------//
 		onInit: async function(){
+			console.log("onInit");
 			await this.getOwnerComponent().getRouter().getRoute("CustomerDetail").attachPatternMatched(this.initView, this);
+			console.log("onInit End");
+		},
+		onAfterRendering: function() {
+			console.log("after Rendering");
+		},
+		onBeforeRendering: function() {
+			console.log("before Rendering");
+			this.setVisibleModel();
 		},
 		initView: async function(e){
 			selectedNum = e.getParameter("arguments").num;
 			await( this.initBpDetailDataView( this.getBpModelData() ) );
 
+			this.controlVisiblebyCategory();
+		},
+		controlVisiblebyCategory(){
+			let org = "sap-icon://building";
+			let cus = "sap-icon://customer";
+
 			if(this.getView().getModel("bpModel").getData().bp_category == BPCATEGORY_ORG){
 				//bpName 라벨 텍스트 변경 
+				this.getView().byId("mAvatar").setSrc(new sap.ui.core.Icon({src:org}).getSrc());
 				this.setBpOrgVisibleModel(true);
 			}else{
+				this.getView().byId("mAvatar").setSrc(new sap.ui.core.Icon({src:cus}).getSrc());
+				this.setBpOrgVisibleModel(true);
 				this.setBpOrgVisibleModel(false);
 			}
 		},
@@ -39,7 +63,10 @@ sap.ui.define([
 			let bpData= await $.ajax({
 				type:'get',
 				url:url
-			})
+			});
+			originModel = bpData;
+			console.log("GET DATA");
+			console.log(originModel);
 			return bpData;
 		},
 		//편집 후 데이터 petch
@@ -99,8 +126,10 @@ sap.ui.define([
 			});
 			return bpData;
 		},
+		//편집 시 데이터 바인딩 방지 위해 oneway로 지정. 
 		setModel: async function(data, modelName){
 			let bpModel = new JSONModel(data);
+			bpModel.setDefaultBindingMode(BindingMode.OneWay);
 			this.getView().setModel(bpModel, modelName);
 		},
 		//데이터 널값인 경우 '-'로 변경. ++ 태그상에서 default 값 가능한지 확인 필요
@@ -191,11 +220,17 @@ sap.ui.define([
 			eleBpPostingHold.setSelectedKey(sData.bp_posting_hold);
 		},
 
+		//-----------back----------//
+		onCustomerList: function(){
+			this.getOwnerComponent().getRouter().navTo("CustomerList");
+		},
 		//-----------footer----------//
 		onAccept: async function(){
 			this.initBpDetailDataView(this.setBpModelData());
 		},
 		onCancel:function(){
+			console.log("GET CANCEL");
+			console.log(originModel);
 			this.changeVisibleMode(true);
 		}
 		
