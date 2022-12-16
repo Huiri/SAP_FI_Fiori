@@ -25,7 +25,7 @@
                     <form:content class="sapUiLargeMarginBeginEnd">
                         <VBox>
                             <Label text="비즈니스 파트너 : "/>
-                            <Input id="BpName" valueHelpRequest="" showValueHelp="true"/>
+                            <MultiInput id="BpName" showSuggestion="true" valueHelpRequest=".onValueHelpBpList"/>
                             <layoutData>
                                 <layout:GridData span="XL2 L2 M6 S12"/>
                             </layoutData>
@@ -68,7 +68,7 @@
                             </layoutData>
                         </VBox>
                         <VBox>
-                            <Label text="시 : "/>
+                            <Label text="도시 : "/>
                             <Input id="BpCity"/>
                             <layoutData>
                                 <layout:GridData span="XL2 L2 M6 S12"/>
