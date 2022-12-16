@@ -1,7 +1,7 @@
 {
   "_version": "1.42.0",
   "sap.app": {
-    "id": "project1",
+    "id": "project4",
     "type": "application",
     "i18n": "i18n/i18n.properties",
     "applicationVersion": {
@@ -62,7 +62,7 @@
     }
   },
   "sap.ui5": {
-    "flexEnabled": true,
+    "flexEnabled": false,
     "dependencies": {
       "minUI5Version": "1.102.1",
       "libs": {
@@ -89,7 +89,7 @@
         "componentData" : {},
         "lazy" : true
       },
-      "companycodeComponent" : {
+      "companyCodeComponent" : {
         "name" : "project4",
         "settings" : {},
         "componentData" : {},
@@ -104,7 +104,7 @@
       "i18n": {
         "type": "sap.ui.model.resource.ResourceModel",
         "settings": {
-          "bundleName": "project1.i18n.i18n"
+          "bundleName": "project4.i18n.i18n"
         }
       },
       "BP" : {
@@ -151,7 +151,7 @@
         "routerClass": "sap.m.routing.Router",
         "viewType": "XML",
         "async": true,
-        "viewPath": "project1.view",
+        "viewPath": "project4.view",
         "controlAggregation": "pages",
         "controlId": "app",
         "clearControlAggregation": false
@@ -165,31 +165,13 @@
           ]
         },
         {
-          "name": "GLAccount",
-          "pattern": "GLAccount",
-          "target": {
-            "name" : "GLAccount",
-            "prefix": "GLAccount"
-          }
-        },
-        {
-          "name": "Customer",
-          "pattern": "Customer",
-          "target": {
-            "name" : "Customer",
-            "prefix": "Customer"
-          }
-        },
-        {
-          "name": "CompanyCode",
-          "pattern": "CompanyCode",
-          "target": {
-            "name" : "CompanyCode",
-            "prefix": "CompanyCode"
-          }
+          "name": "CompanyCodeList",
+          "pattern": "CompanyCodeList",
+          "target": [
+            "CompanyCodeList"
+          ]
         }
-        
-        
+      
       ],
       "targets": {
         "Home" : {
@@ -199,31 +181,18 @@
           "viewId": "Home",
           "viewName": "Home"
         },
-        "GLAccount": {
-          "type" : "Component",
+        "CompanyCodeList" : {
+          "viewType": "XML",
           "transition": "slide",
-          "usage" : "glaccountComponent",
           "clearControlAggregation": true,
-          "title" : "GLAccount"
-        }, 
-        "Customer": {
-          "type" : "Component",
-          "transition": "slide",
-          "usage" : "customerComponent",
-          "clearControlAggregation": true,
-          "title" : "Customer"
-        }, 
-        "CompanyCode": {
-          "type" : "Component",
-          "transition": "slide",
-          "usage" : "companycodeComponent",
-          "clearControlAggregation": true,
-          "title" : "ComapnyCode"
+          "viewId": "CompanyCodeList",
+          "viewName": "CompanyCodeList"
         }
       }
+       
     },
     "rootView": {
-      "viewName": "project1.view.App",
+      "viewName": "project4.view.App",
       "type": "XML",
       "async": true,
       "id": "App"

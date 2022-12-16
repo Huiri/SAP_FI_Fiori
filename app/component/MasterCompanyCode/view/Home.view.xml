@@ -1,0 +1,41 @@
+<mvc:View 
+  controllerName="project4.controller.Home"
+  xmlns:mvc="sap.ui.core.mvc" 
+  xmlns="sap.m" 
+  displayBlock="true">
+<ScrollContainer id="_IDGenScrollContainer1" height="100%" width="100%" vertical="true" focusable="true">
+    <Panel id="_IDGenPanel1" width="auto" class="sapUiResponsiveMargin" accessibleRole="Region">
+        <content class="panelbottomline">
+            <HBox id="_IDGenHBox1" width="100%" height="3rem">
+                <Title id="_IDGenTitle1"  text="회사코드"/>
+                 
+            </HBox>
+            <GenericTile id="_IDGenGenericTile1" class="sapUiTinyMarginBegin sapUiTinyMarginTop"
+                header="회사코드 조회"
+                press=".toCompanyCodeList">
+                <TileContent id="_IDGenTileContent1" >
+                    <ImageContent id="_IDGenImageContent1" src="sap-icon://company-view"/>
+                </TileContent>
+            </GenericTile>
+            <!-- <GenericTile id="_IDGenGenericTile2" class="sapUiTinyMarginBegin sapUiTinyMarginTop">
+                <TileContent id="_IDGenTileContent2" >
+                    <ImageContent id="_IDGenImageContent2" src="sap-icon://bar-chart"/>
+                </TileContent>
+            </GenericTile>
+              <SlideTile id="_IDGenSlideTile1" class="sapUiTinyMarginBegin sapUiTinyMarginTop" transitionTime="250" displayTime="2500">
+                <GenericTile id="_IDGenGenericTile3"
+                        backgroundImage="https://cdn.discordapp.com/attachments/1049602250919657475/1050259976360304650/IMG_4523.jpg"
+                        frameType="TwoByOne" press="onPress">
+                </GenericTile>
+                <GenericTile id="_IDGenGenericTile4"
+                        backgroundImage="https://cdn.discordapp.com/attachments/1049602250919657475/1050260203645440090/KakaoTalk_20221208_114645795.jpg"
+                        frameType="TwoByOne">
+                </GenericTile>
+            </SlideTile> -->
+        </content>
+    </Panel>
+
+</ScrollContainer>
+
+
+</mvc:View>

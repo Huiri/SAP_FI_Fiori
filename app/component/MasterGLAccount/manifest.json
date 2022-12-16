@@ -89,6 +89,12 @@
         "settings" : {},
         "componentData" : {},
         "lazy" : true
+      },
+      "companyCodeComponent" : {
+        "name" : "project4",
+        "settings" : {},
+        "componentData" : {},
+        "lazy" : true
       }
     },
     "contentDensities": {
@@ -114,6 +120,16 @@
       },
       "GL" : {
         "dataSource": "glService",
+        "preload": true,
+        "settings": {
+          "operationMode" : "Server",
+          "earlyRequests" : true,
+          "synchronizationMode" : "None",
+          "autoExpandSelect" : true
+        }
+      },
+      "CoCd" : {
+        "dataSource": "cocdService",
         "preload": true,
         "settings": {
           "operationMode" : "Server",
