@@ -263,8 +263,8 @@
                                     id="bpCorpTypeOrg" 
                                     visible="{=!${visibleMode>/visible}}"
                                     forceSelection="false">
-                                    <c:Item key="법인(01)" text="법인(01)" />
-                                    <c:Item key="개인(02)" text="개인(02)" />
+                                    <c:Item key="법인" text="법인" />
+                                    <c:Item key="개인" text="개인" />
                                 </m:Select>    
                             </m:VBox>
                             <m:VBox class="sapUiSmallMarginTopBottom">
