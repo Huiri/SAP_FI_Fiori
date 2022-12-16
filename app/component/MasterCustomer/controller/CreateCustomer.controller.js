@@ -4,7 +4,7 @@ sap.ui.define([
     "sap/m/MessageBox",
 ], function (Controller,JSONModel,MessageBox) {
     "use strict";
-    let SelectedBpCategory, Today;
+    let selectedBpCategory, Today;
     return Controller.extend("project3.controller.CreateCustomer", {
         onInit: async function () {
             var bpCategorymode={
@@ -19,23 +19,37 @@ sap.ui.define([
 
         onMyRoutePatternMatched : async function (oEvent) {
             this.onClearField();
-            SelectedBpCategory = oEvent.getParameter("arguments").bpCategory;
-            //console.log(SelectedBpCategory);
+            selectedBpCategory = oEvent.getParameter("arguments").bpCategory;
+            //console.log(selectedBpCategory);
             
-            if (SelectedBpCategory == 1){
+            if (selectedBpCategory == 1){
                 this.getView().getModel("bpCategoryModel").setProperty("/category",false);
-                this.byId("BpCategory").setText("개인(1)");
+                this.byId("BpCategory").setText("개인");
             }else{
                 this.getView().getModel("bpCategoryModel").setProperty("/category",true);
-                this.byId("BpCategory").setText("조직(2)");
+                this.byId("BpCategory").setText("조직");
             }
-
-            
 
             let now = new Date();
             Today = now.getFullYear() + "." +(now.getMonth() + 1).toString().padStart(2,'0') + "." +now.getDate().toString().padStart(2,'0');
-        
+
+            const bpNum = await $.ajax({
+                type:"GET",
+                url: "/bp/BP" 
+            }); 
+            let bpNumModel = new JSONModel(bpNum);
+            this.getView().setModel(bpNumModel,"bpNumModel");
+            let oModel = this.getView().getModel("bpNumModel");
+            let oData = oModel.oData;
+            let totalNumber = parseInt(oModel.oData.value.length) -1 
+            let bpNumber = parseInt(oData.value[totalNumber].bp_number) + 1 
+            
+            // console.log(oData);
+            console.log(totalNumber);
+            console.log(bpNumber);
+
             this.getView().byId("BpCreatedDate").setText(Today);
+            this.getView().byId("BpNumber").setText(bpNumber);
         },
         toCustomerList :function () {
 			this.getOwnerComponent().getRouter().navTo("CustomerList");
@@ -54,7 +68,6 @@ sap.ui.define([
 
         onClearField: function() {
             this.byId("BpName").setValue(""),
-            this.byId("BpNumber").setValue(""),
             this.byId("BpCategory").setText(""),        
             this.byId("BpCompanyCode").setValue(""),
             this.byId("BpPersonTitle").setSelectedKey(""),
@@ -75,7 +88,7 @@ sap.ui.define([
            var temp={
                 bp_name : this.byId("BpName").getValue(),
                 bp_created_date : Today,
-                bp_number : this.byId("BpNumber").getValue(),
+                bp_number : this.byId("BpNumber").getText(),
                 bp_category : this.byId("BpCategory").getText(),        
                 bp_company_code : this.byId("BpCompanyCode").getValue(),
                 bp_person_title : this.byId("BpPersonTitle").getSelectedKey(),
@@ -91,7 +104,7 @@ sap.ui.define([
                 bp_report_submission : this.byId("BpReportSubmission").getSelected()
             }
 
-            if( SelectedBpCategory == 1) {
+            if( selectedBpCategory == 1) {
                 if( temp.bp_name === "" || 
                     temp.bp_number === "" || 
                     temp.bp_first_name === "" || 
@@ -109,7 +122,7 @@ sap.ui.define([
                     this.toCustomerList();
                 }
             }    
-            else if(SelectedBpCategory == 2){
+            else if(selectedBpCategory == 2){
                 if( temp.bp_name === "" || 
                     temp.bp_number === "" || 
                     temp.bp_organization_title === "")

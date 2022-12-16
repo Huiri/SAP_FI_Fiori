@@ -41,8 +41,8 @@
                             <Label text="비즈니스 파트너 범주 : "/>
                             <Select width="100rem" id="BpCategory">
                                 <core:Item key="" text="전체" />
-                                <core:Item key="개인(1)" text="개인(1)" />
-                                <core:Item key="조직(2)" text="조직(2)" />
+                                <core:Item key="개인" text="개인" />
+                                <core:Item key="조직" text="조직" />
                             </Select>                        
                             <layoutData>
                                 <layout:GridData span="XL2 L2 M6 S12"/>
