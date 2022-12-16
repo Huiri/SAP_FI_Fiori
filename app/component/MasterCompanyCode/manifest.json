@@ -62,7 +62,7 @@
     }
   },
   "sap.ui5": {
-    "flexEnabled": true,
+    "flexEnabled": false,
     "dependencies": {
       "minUI5Version": "1.102.1",
       "libs": {
@@ -163,6 +163,13 @@
           "target": [
             "Home"
           ]
+        },
+        {
+          "name": "CompanyCodeList",
+          "pattern": "CompanyCodeList",
+          "target": [
+            "CompanyCodeList"
+          ]
         }
       
       ],
@@ -173,8 +180,16 @@
           "clearControlAggregation": true,
           "viewId": "Home",
           "viewName": "Home"
+        },
+        "CompanyCodeList" : {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": true,
+          "viewId": "CompanyCodeList",
+          "viewName": "CompanyCodeList"
         }
       }
+       
     },
     "rootView": {
       "viewName": "project4.view.App",

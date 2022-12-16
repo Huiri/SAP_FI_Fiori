@@ -6,5 +6,9 @@ sap.ui.define([
 	"use strict";
 
 	return Controller.extend("project4.controller.Home", {
+
+		toCompanyCodeList :function (){
+			this.getOwnerComponent().getRouter().navTo("CompanyCodeList");
+		}
 	});
 });
