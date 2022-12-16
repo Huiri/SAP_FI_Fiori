@@ -4,6 +4,8 @@
 	xmlns:uxap="sap.uxap"
 	xmlns:layout="sap.ui.layout"
 	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+
     xmlns:t="sap.ui.table"
 	height="100%">
 	<uxap:ObjectPageLayout id="ObjectPageLayout"
@@ -41,28 +43,10 @@
                         <Text id="_IDGenText6" text="{GLDataModel>/gl_acct_content}" class="sapUiMediumMarginBegin"/>
                     </VBox>
 				</uxap:snappedHeading>
+				<uxap:actions>
+					<Button id="_IDGenButton2" text="저장" type="Emphasized" press=".onCreate" tooltip="저장"/>
+				</uxap:actions>
 
-				<!-- <uxap:expandedContent>
-					<Text id="_IDGenText1" text="Senior UI Developer"/>
-				</uxap:expandedContent>
-
-				<uxap:snappedContent>
-					<Text id="_IDGenText2" text="Senior UI Developer"/>
-				</uxap:snappedContent>
-
-				<uxap:snappedTitleOnMobile>
-					<Title id="_IDGenTitle3" text="Senior UI Developer"/>
-				</uxap:snappedTitleOnMobile> -->
-
-				<!-- <uxap:actions>
-                    <OverflowToolbarButton id="_IDGenOverflowToolbarButton3" icon="sap-icon://locked" text="사용 중지" tooltip="show">
-						<layoutData>
-							<OverflowToolbarLayoutData id="_IDGenOverflowToolbarLayoutData1" priority="NeverOverflow"/>
-						</layoutData>
-					</OverflowToolbarButton>
-					<Button id="_IDGenButton2" text="편집" type="Emphasized" press=".onEdit" tooltip="edit"/>
-
-				</uxap:actions> -->
 			</uxap:ObjectPageDynamicHeaderTitle>
 		</uxap:headerTitle>
 
@@ -119,25 +103,48 @@
 								<Title text="관리"/>
 
                                 <VBox id="_IDGenVBox3" class="sapUiSmallMarginBottom">
-                                    <Label id="_IDGenLabel6" text="계정과목표" required="true"/>
-                                    <Input id="CoA" class="sapUiTinyMarginBegin"/>  
-                                </VBox>
-                                <VBox id="_IDGenVBox4" class="sapUiSmallMarginBottom">
-                                    <Label id="_IDGenLabel7" text="G/L 계정 유형" required="true" />
-                                    <Input id="GLAccType" class="sapUiTinyMarginBegin"/>  
+                                    <Label id="_IDGenLabel6" text="계정과목표" labelFor="CoA"/>
+									<Input id="CoA" showValueHelp="true" valueHelpRequest=".onSelectCoA" required="true"/>
 
                                 </VBox>
+                                <VBox id="_IDGenVBox4" class="sapUiSmallMarginBottom">
+                                    <Label id="_IDGenLabel7" text="G/L 계정 유형" labelFor="GLAcctType" />
+									
+									<Select id="GLAcctType" width="100%" required="true" forceSelection="false"
+                                		items="{
+											path: 'SelectOption>/AccountTypeList',
+											sorter: { path: 'AccountTypeList' }
+										}">
+										<core:Item key="{SelectOption>AccountType}" text="{SelectOption>Value}"/>
+                            		</Select>
+                                </VBox>
                                 <VBox id="_IDGenVBox5" class="sapUiSmallMarginBottom">
-                                    <Label id="_IDGenLabel8" text="계정 그룹" required="true" />
-                                    <Input id="GLGroup"  class="sapUiTinyMarginBegin"/>  
+                                    <Label id="_IDGenLabel8" text="계정 그룹" labelFor="GLGroup" />
+									<Input id="GLGroup" showValueHelp="true" valueHelpRequest=".onSelectGLGrp" required="true"/>
+
                                 </VBox>
                                 <VBox id="_IDGenVBox6" class="sapUiSmallMarginBottom">
                                     <Label id="_IDGenLabel9" text="손익계산서 계정 유형" />
-                                    <Input id="PLAccType" class="sapUiTinyMarginBegin"/>
+ 									<Select id="GLPLAcctType" width="100%" forceSelection="false"
+                                		items="{
+											path: 'SelectOption>/GLPLAcctTypeList',
+											sorter: { path: 'GLPLAcctTypeList' }
+										}">
+										<core:Item key="{SelectOption>PLType}" text="{SelectOption>Value}"/>
+                            		</Select>
+
+
                                 </VBox>
                                 <VBox id="_IDGenVBox7">
-                                    <Label id="_IDGenLabel10" text="기능 영역" required="true" />
-                                    <Input id="FuncArea" class="sapUiTinyMarginBegin"/>  
+                                    <Label id="_IDGenLabel10" text="기능 영역"/>
+ 									<Select id="FuncArea" width="100%" forceSelection="false"
+                                		items="{
+											path: 'SelectOption>/FunctionAreaList',
+											sorter: { path: 'FunctionAreaList' }
+										}">
+										<core:Item key="{SelectOption>FuncArea}" text="{SelectOption>Value}"/>
+                            		</Select>
+
                                 </VBox>
                                 <layout:layoutData>
                                     <layout:GridData id="_IDGenGridData1" span="XL3 L3 M6 S12"/>
@@ -156,7 +163,6 @@
                                     <Input id="GLAccDesc" class="sapUiTinyMarginBegin"/>  
 
                                 </VBox>
-								<Button text="저장" press=".onCreate"/>
 
                                 <layout:layoutData>
                                     <layout:GridData id="_IDGenGridData2" span="XL3 L3 M6 S12"/>
@@ -195,15 +201,6 @@
 									</t:extension>
 
 									<t:columns>
-										<t:Column id="_IDGenColumn0" width="4rem">
-											<CheckBox id="checkAll" select=".onCheckExecute" />
-											<!-- <t:template>
-												<CheckBox 
-												visible="{=${GlDataModel>request_state} === 'B' ? true : false}"
-												selected="{GlDataModel>CHK}" 
-												id="toBeDeleted"/>
-											</t:template>   -->
-										</t:Column>
 
 										<t:Column id="_IDGenColumn1" hAlign="Center">
 											<Label id="_IDGenLabel1" text="관리회계 영역"/>
