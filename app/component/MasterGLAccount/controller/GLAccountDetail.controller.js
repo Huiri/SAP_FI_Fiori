@@ -1,5 +1,6 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller", 
+    "../model/formatter",
     "sap/ui/model/json/JSONModel",
 	'sap/ui/model/type/String',
 	'sap/m/ColumnListItem',
@@ -8,20 +9,40 @@ sap.ui.define([
 	'sap/m/Token',
 	'sap/ui/model/Filter',
 	'sap/ui/model/FilterOperator',
-	'sap/ui/table/Column',
 	'sap/m/Column',
-	'sap/m/Text'
+	'sap/m/Text',
+    'sap/ui/core/Icon',
+    'sap/ui/model/BindingMode'
 
 ], function(
-	Controller, JSONModel, TypeString, ColumnListItem, Label, SearchField, 
-    Token, Filter, FilterOperator, UIColumn, MColumn, Text
+	Controller,
+    formatter,
+	JSONModel,
+	String,
+	ColumnListItem,
+	Label,
+	SearchField,
+	Token,
+	Filter,
+	FilterOperator,
+	Column,
+	Text,
+	Icon,
+    BindingMode
 ) {
 	"use strict";
     let SelectedItem;
 	return Controller.extend("project2.controller.GLAccountDetail", {
-        onInit(){
+        formatter:formatter,
+        onInit: function(){
+            console.log()
             let editModel = new JSONModel({editable : false});
             this.getView().setModel(editModel, "editModel");
+
+            let blockModel = new JSONModel({isBlock:false});
+            //blockModel.setDefaultBindingMode(BindingMode.OneWay);
+            this.getView().setModel(blockModel, "blockModel");
+
             // 나중에 지울 데이터 
             this.getView().setModel(new JSONModel([
                 {
@@ -68,6 +89,7 @@ sap.ui.define([
             this.getOwnerComponent().getRouter().getRoute("GLAccountDetail").attachPatternMatched(this.onMyRoutePatternMatched, this);
         },
         onMyRoutePatternMatched : async function(oEvent){
+            console.log("onMyRoutePatternMatched");
             SelectedItem = oEvent.getParameter("arguments").num;
 
             let url = "/gl/GL/" + SelectedItem;
@@ -76,38 +98,119 @@ sap.ui.define([
                 url : url
             })
             let GLDataModel = new JSONModel(GLData);
+            GLDataModel.setDefaultBindingMode(BindingMode.OneWay);
             this.getView().setModel(GLDataModel, "GLDataModel");
+
+            this.setGlBlockedL(GLDataModel);
+            this.onReconAcctFilter(GLDataModel);
 
             let cocdUrl = `/cocd/CoCd`;
             const CoCdData = await $.ajax({
                 type : "get",
                 url : cocdUrl
             })
-            console.log(CoCdData);
             let CoCdDataModel = new JSONModel(CoCdData.value);
+            CoCdDataModel.setDefaultBindingMode(BindingMode.OneWay);
             this.getView().setModel(CoCdDataModel, "CoCdDataModel");
 
+
+        },
+        /**
+         * G/L 차단 제어
+         * @param {JSONModel}
+         */
+        setGlBlockedL: function(oData){
+            let a;
+
+            if(!oData.getData().gl_blocked){//락->보통 경우 : true->false
+                this.byId("glBlocked").setIcon(new sap.ui.core.Icon({src:"sap-icon://locked"}).getSrc());
+                this.byId("glBlocked").getCustomData()[0].setProperty('value',"false");
+                this.byId("pageSection1").setVisible(true);
+                this.byId("pageSection2").setVisible(true);
+                //this.getView().getModel("blockModel").oData.isBlock=false;
+                //this.getView().setModel(new JSONModel({isBlock:false}),"blockModel");
+                
+            }else{//보통->락 건 경우 false->true
+                this.byId("glBlocked").setIcon(new sap.ui.core.Icon({src:"sap-icon://unlocked"}).getSrc());
+                this.byId("glBlocked").getCustomData()[0].setProperty('value',"true");
+                this.byId("pageSection1").setVisible(false);
+                this.byId("pageSection2").setVisible(false);
+                //this.getView().getModel("blockModel").oData.isBlock=true;
+                this.getView().setModel(new JSONModel({isBlock:true}),"blockModel");
+            }
+            console.log("setGlBlockedL");
+            console.log(this.getView().byId("glBlocked").getCustomData()[0].getProperty('value'));
+            console.log(this.getView().getModel("blockModel"));
+
+        },
+        onReconAcctFilter: function(oData){
+            let reconAcct = oData.getData().gl_recon_account 
+
+            if(reconAcct===null || reconAcct.length==0){
+                this.byId("colGlReconAccount").setVisible(false);
+            }else{
+                this.byId("colGlReconAccount").setVisible(true);
+            }
         },
         toBack : function(){
             this.getView().getModel("editModel").setProperty("/editable", false);
             this.getOwnerComponent().getRouter().navTo("GLAccountList");
 
         },
+        //
+        onLocked: function(){
+            var state = JSON.parse(this.getView().byId("glBlocked").getCustomData()[0].getProperty('value'));
+            console.log(state);
+            if(state){
+                //console.log("true 면 false로 바꿔주기 . : src 는 unlock->lock")
+                this.byId("glBlocked").setIcon(new sap.ui.core.Icon({src:"sap-icon://locked"}).getSrc());
+            }else{
+                //console.log("false 면 true 바꿔주기 . : src 는 lock->unlock")
+                this.byId("glBlocked").setIcon(new sap.ui.core.Icon({src:"sap-icon://unlocked"}).getSrc());
+            }
+            this.byId("glBlocked").getCustomData()[0].setProperty('value',!state);
+            this.byId("pageSection1").setVisible(JSON.parse(state));
+            this.byId("pageSection2").setVisible(JSON.parse(state));
+            //this.getView().getModel("blockModel").setProperty("/isBlock", !state);
+            
+            //this.byId("glBlocked").setIcon(new sap.ui.core.Icon({src:"sap-icon://unlocked"}).getSrc());
+
+
+            // if(this.byId("glBlocked").getCustomData()[0].getProperty('value')!='true'){
+            //     this.byId("glBlocked").getCustomData()[0].setProperty('value',"false");
+
+            //     this.byId("glBlocked").setIcon(new sap.ui.core.Icon({src:"sap-icon://unlocked"}).getSrc());
+            //     this.getView().getModel("blockModel").setProperty("isBlock", "true");
+            //     console.log("변경됨");
+            //     console.log(this.byId("glBlocked").getCustomData()[0].getProperty('value'));
+
+            // }else{
+            //     this.byId("glBlocked").getCustomData()[0].setProperty('value',"true");
+            //     this.byId("glBlocked").setIcon(new sap.ui.core.Icon({src:"sap-icon://locked"}).getSrc());
+            //     this.getView().getModel("blockModel").setProperty("isBlock", "true");
+
+            // }
+        },
 
 		onEdit: function() {
-			this.getView().getModel("editModel").setProperty("/editable", true);
+            this.getView().getModel("editModel").setProperty("/editable", true);
 
-            let TextGLAccType = this.byId("TextGLAccType").getText();
-            this.byId("InputGLAccType").setValue(TextGLAccType);
+            let TextGLAccType = this.getView().getModel("GLDataModel").getProperty("/gl_acct_type");
+            this.getView().byId("InputGLAccType");
+            this.getView().byId("InputGLAccType").setSelectedKey(TextGLAccType);
 
-            let TextGLGroup = this.byId("TextGLGroup").getText();
-            this.byId("InputGLGroup").setValue(TextGLGroup);
+            let TextGLGroup = this.byId("TextGLGroup").getCustomData()[0].getProperty('value');
+            this.byId("InputGLGroup").setSelectedKey(`${TextGLGroup}`);
 
-            let TextFuncArea = this.byId("TextFuncArea").getText();
-            this.byId("InputFuncArea").setValue(TextFuncArea);
+            let TextPLAccType = this.byId("TextPLAccType").getCustomData()[0].getProperty('value');
+            this.byId("InputPLAccType").setSelectedKey(`${TextPLAccType}`);           
 
+            let TextFuncArea = this.byId("TextFuncArea").getCustomData()[0].getProperty('value');
+
+            this.byId("InputFuncArea").setSelectedKey(TextFuncArea);
+            
             let TextCoAContent = this.byId("TextCoAContent").getText();
-            this.byId("InputCoAContent").setValue(TextCoAContent);
+            //this.byId("InputCoAContent").setSelectedKey(TextCoAContent);
             
             let TextGLAccDesc = this.byId("TextGLAccDesc").getText();
             this.byId("InputGLAccDesc").setValue(TextGLAccDesc);
@@ -260,6 +363,55 @@ x
 				oValueHelpDialog.update();
 			});
 		},
+        onAccept: async function(){
+            let isBlock = this.byId("glBlocked").getCustomData()[0].getProperty('value');
+
+            await(this.setPatchData(isBlock));
+            
+            //this.getView().getModel("blockModel").setProperty("/isBlock",isBlock);
+            this.byId("pageSection1").setVisible(!isBlock);
+            this.byId("pageSection2").setVisible(!isBlock);
+            this.getView().getModel("editModel").setProperty("/editable", false);
+            
+            //console.log(this.getView().getModel("blockModel").getProperty("/isBlock"));
+        },
+        onCancel: function(){
+            let vis =  this.getView().getModel("GLDataModel").getProperty("/gl_blocked");
+            this.byId("pageSection1").setVisible(!vis);
+            this.byId("pageSection2").setVisible(!vis)
+            
+            //this.getView().getModel("blockModel").setProperty("/isBlock", this.getView().getModel("GLDataModel").getProperty("/gl_blocked"));
+			this.getView().getModel("editModel").setProperty("/editable", false);
+        },
+        //recon null인경우 에러 확인
+        setPatchData: async function(isBlock){
+            let temp = {
+                "gl_acct_type" :this.getView().byId("InputGLAccType").getSelectedKey(),
+                "gl_acct_group" : this.getView().byId("InputGLGroup").getSelectedKey(),
+                "gl_func_area" : this.byId("InputFuncArea").getSelectedKey(),
+                "gl_acct_descript" : this.byId("InputGLAccDesc").getValue(),
+                "gl_ps_acct_type" : this.byId("InputPLAccType").getSelectedKey(),
+
+                "gl_co_area":this.byId("glCoArea").getText(),
+                "gl_company_code" :this.byId("glCompanyCode").getText(),
+                "gl_corp_name":this.byId("glCorpName").getText(),
+                "gl_acct_currency":this.byId("glAcctCurrency").getText(),
+                "gl_coa" : this.byId("glCoa").getText(),
+                "gl_recon_account":this.byId("glReconAccount").getText(),
+
+                "gl_blocked" : JSON.parse(isBlock)
+            }
+
+            let url = "/gl/GL/" + SelectedItem;
+            let glData = await $.ajax({
+                type:'patch',
+                url:url,
+                contentType: "application/json;IEEE745Compatible=true",
+                data: JSON.stringify(temp)
+           });
+           glData = new JSONModel(glData);
+           this.getView().setModel(glData,"GLDataModel");
+        }
 
 		// onRowSelectionChange: function(oEvent) {
         //     const oRowContext = oEvent.getParameter('rowContext'),
