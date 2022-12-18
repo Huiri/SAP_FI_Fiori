@@ -16,11 +16,6 @@ sap.ui.define([], function(){
                 default :
                     return sStatus;
             }
-        },
-        numberWithCommas: function(x) {
-            var regexp = /\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g;
-            return String(x).replace(regexp, ",");
         }
-
     }
 })

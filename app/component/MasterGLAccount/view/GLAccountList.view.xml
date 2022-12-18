@@ -56,11 +56,6 @@
                                     }">
                                     <core:Item key="{SelectOption>AccountType}" text="{SelectOption>Value}"/>
                                 </MultiComboBox>
-                            <!-- <Select id="GlAcctType" width="100%"
-                                items="{SelectOption>/AccountTypeList}">
-                                <core:Item id="_IDGenItem1" key="{SelectOption>AccountType}" text="{SelectOption>Value}" />
-                    
-                            </Select> -->
                             <layoutData>
                                 <layout:GridData id="_IDGenGridData4" span="XL3 L3 M6 S12"/>
                             </layoutData>
@@ -121,12 +116,6 @@
                 <t:columns>
                     <t:Column id="_IDGenColumn0" width="4rem">
                         <CheckBox id="checkAll" select=".onCheckExecute" />
-                        <!-- <t:template>
-                            <CheckBox 
-                            visible="{=${GLDataModel>request_state} === 'B' ? true : false}"
-                            selected="{GLDataModel>CHK}" 
-                            id="toBeDeleted"/>
-                        </t:template>   -->
                     </t:Column>
 
                     <t:Column id="_IDGenColumn1" hAlign="Center">

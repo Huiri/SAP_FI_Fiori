@@ -16,13 +16,6 @@
 		headerContentPinnable="false">
 		<uxap:headerTitle>
 			<uxap:ObjectPageDynamicHeaderTitle id="_IDGenObjectPageDynamicHeaderTitle1">
-				<!-- <uxap:breadcrumbs>
-					<Breadcrumbs id="breadcrumbsId" currentLocationText="Object Page Example" >
-						<Link id="_IDGenLink1" text="Page 1 a very long link" press="handleLink1Press"/>
-						<Link id="_IDGenLink2" text="Page 2 long link" press="handleLink2Press"/>
-					</Breadcrumbs>
-				</uxap:breadcrumbs> -->
-
 				<uxap:expandedHeading>
                     <VBox >
                         <HBox  height="3rem">
@@ -42,19 +35,6 @@
                         <Text id="_IDGenText6" text="{GLDataModel>/gl_acct_content}" class="sapUiMediumMarginBegin"/>
                     </VBox>
 				</uxap:snappedHeading>
-<!-- 
-				<uxap:expandedContent>
-					<Text id="_IDGenText1" text="Senior UI Developer"/>
-				</uxap:expandedContent>
-
-				<uxap:snappedContent>
-					<Text id="_IDGenText2" text="Senior UI Developer"/>
-				</uxap:snappedContent>
-
-				<uxap:snappedTitleOnMobile>
-					<Title id="_IDGenTitle3" text="Senior UI Developer"/>
-				</uxap:snappedTitleOnMobile> -->
-
 				<uxap:actions>
                     <OverflowToolbarButton id="_IDGenOverflowToolbarButton3" icon="sap-icon://locked" text="사용 중지" tooltip="show">
 						<layoutData>
@@ -62,46 +42,15 @@
 						</layoutData>
 					</OverflowToolbarButton>
 					<Button id="_IDGenButton2" text="편집" type="Emphasized" press=".onEdit" tooltip="edit"/>
-
-					<!-- <OverflowToolbarButton id="_IDGenOverflowToolbarButton2" icon="sap-icon://pull-down" text="show section" type="Emphasized" tooltip="pull-down"/> -->
-					<!-- <Button id="_IDGenButton2" text="Toggle Footer" press="toggleFooter"/> -->
 				</uxap:actions>
 			</uxap:ObjectPageDynamicHeaderTitle>
 		</uxap:headerTitle>
 
 		<uxap:headerContent>
-			<!-- <FlexBox id="_IDGenFlexBox2" wrap="Wrap">
-				<Avatar id="_IDGenAvatar2" class="sapUiSmallMarginEnd" src="./test-resources/sap/uxap/images/imageID_275314.png"  displaySize="L" />
-
-					<layout:VerticalLayout id="_IDGenVerticalLayout1" class="sapUiSmallMarginBeginEnd">
-						<Link id="_IDGenLink3" text="+33 6 4512 5158"/>
-						<Link id="_IDGenLink4" text="DeniseSmith@sap.com"/>
-					</layout:VerticalLayout>
-
-					<layout:HorizontalLayout id="_IDGenHorizontalLayout1" class="sapUiSmallMarginBeginEnd">
-						<Image id="_IDGenImage1" src="./test-resources/sap/uxap/images/linkedin.png"/>
-						<Image id="_IDGenImage2" src="./test-resources/sap/uxap/images/Twitter.png" class="sapUiSmallMarginBegin"/>
-					</layout:HorizontalLayout>
-
-				<layout:VerticalLayout id="_IDGenVerticalLayout2" class="sapUiSmallMarginBeginEnd">
-					<Label id="_IDGenLabel1" text="Hello! I am Denise and I use UxAP"/>
-					<VBox id="_IDGenVBox1">
-						<Label id="_IDGenLabel2" text="Achieved goals"/>
-						<ProgressIndicator id="_IDGenProgressIndicator1" percentValue="30" displayValue="30%"/>
-					</VBox>
-				</layout:VerticalLayout>
-
-				<layout:VerticalLayout id="_IDGenVerticalLayout3" class="sapUiSmallMarginBeginEnd">
-					<Label id="_IDGenLabel3" text="San Jose, USA"/>
-				</layout:VerticalLayout>
-			</FlexBox> -->
 		</uxap:headerContent>
 
 		<uxap:sections>
 			<uxap:ObjectPageSection id="_IDGenObjectPageSection1" title="일반" >
-				<!-- <uxap:heading>
-					<MessageStrip id="_IDGenMessageStrip1" text="Lorem Ipsum is simply dummy text of the printing and typesetting industry." type="Error" />
-				</uxap:heading> -->
 				<uxap:subSections >
 					<uxap:ObjectPageSubSection id="_IDGenObjectPageSubSection1"  title="일반">
 						<uxap:blocks>
@@ -113,7 +62,6 @@
                                 <VBox id="_IDGenVBox4" class="sapUiSmallMarginBottom">
                                     <Label id="_IDGenLabel7" text="G/L 계정 유형" required="true" />
                                     <Text id="TextGLAccType" text="{GLDataModel>/gl_acct_type}" visible="{=!${editModel>/editable}}" class="sapUiTinyMarginBegin"/>
-                                    <!-- <Input id="InputGLAccType" visible="{=${editModel>/editable}}" class="sapUiTinyMarginBegin"/>   -->
 									<Select id="InputGLAccType" width="100%" required="true" forceSelection="false" visible="{=${editModel>/editable}}"
                                 		items="{
 											path: 'SelectOption>/AccountTypeList',
@@ -126,8 +74,6 @@
                                 <VBox id="_IDGenVBox5" class="sapUiSmallMarginBottom">
                                     <Label id="_IDGenLabel8" text="계정 그룹" required="true" />
                                     <Text id="TextGLGroup" text="{GLDataModel>/gl_acct_group} ({GLDataModel>/gl_acct_group_mean})" visible="{=!${editModel>/editable}}" class="sapUiTinyMarginBegin"/>
-                                    
-									<!-- <Input id="InputGLGroup" visible="{=${editModel>/editable}}" class="sapUiTinyMarginBegin"/>   -->
 									<Select id="InputGLGroup" width="100%" required="true" forceSelection="false" visible="{=${editModel>/editable}}"
                                 		items="{
 											path: 'SelectOption>/GLAcctGroupList',
@@ -173,10 +119,7 @@
 			</uxap:ObjectPageSection>
 
 			<uxap:ObjectPageSection id="_IDGenObjectPageSection2" title="회사코드 데이터">
-					<!-- <uxap:heading>
-						<MessageStrip id="_IDGenMessageStrip2" text="Lorem Ipsum is simply dummy text of the printing and typesetting industry." type="Error" />
-					</uxap:heading> -->
-					<uxap:subSections>
+				<uxap:subSections>
 					<uxap:ObjectPageSubSection id="_IDGenObjectPageSubSection2">
 						<uxap:blocks>
                             <t:Table
@@ -200,12 +143,6 @@
                                 <t:columns>
                                     <t:Column id="_IDGenColumn0" width="4rem">
                                         <CheckBox id="checkAll" select=".onCheckExecute" />
-                                        <!-- <t:template>
-                                            <CheckBox 
-                                            visible="{=${GlDataModel>request_state} === 'B' ? true : false}"
-                                            selected="{GlDataModel>CHK}" 
-                                            id="toBeDeleted"/>
-                                        </t:template>   -->
                                     </t:Column>
 
                                     <t:Column id="_IDGenColumn1" hAlign="Center">
@@ -263,27 +200,6 @@
 					</uxap:ObjectPageSubSection>
 				</uxap:subSections>
 			</uxap:ObjectPageSection>
-
-			<!-- <uxap:ObjectPageSection titleUppercase="false" id="employmentSection" title="Employment">
-				<uxap:subSections>
-					<uxap:ObjectPageSubSection id="employmentSectionSS1" title="Job information" titleUppercase="false">
-						<uxap:blocks>
-						</uxap:blocks>
-					</uxap:ObjectPageSubSection>
-
-					<uxap:ObjectPageSubSection id="employmentSectionSS2" title="Employee Details" importance="Medium" titleUppercase="false">
-						<uxap:blocks>
-						</uxap:blocks>
-						<uxap:moreBlocks>
-						</uxap:moreBlocks>
-					</uxap:ObjectPageSubSection>
-
-					<uxap:ObjectPageSubSection id="employmentSectionSS3" title="Job Relationship" importance="Low" titleUppercase="false">
-						<uxap:blocks>
-						</uxap:blocks>
-					</uxap:ObjectPageSubSection>
-				</uxap:subSections>
-			</uxap:ObjectPageSection> -->
 		</uxap:sections>
 		<uxap:footer>
 			<OverflowToolbar id="_IDGenOverflowToolbar2" visible="{=${editModel>/editable}}">
