@@ -164,9 +164,13 @@ sap.ui.define([
             if(state){
                 //console.log("true 면 false로 바꿔주기 . : src 는 unlock->lock")
                 this.byId("glBlocked").setIcon(new sap.ui.core.Icon({src:"sap-icon://locked"}).getSrc());
+                this.byId("glBlocked").setText("잠금 해제");
+                this.byId("glBlocked").setTooltip("잠금 해제");
             }else{
                 //console.log("false 면 true 바꿔주기 . : src 는 lock->unlock")
                 this.byId("glBlocked").setIcon(new sap.ui.core.Icon({src:"sap-icon://unlocked"}).getSrc());
+                this.byId("glBlocked").setText("잠금");
+                this.byId("glBlocked").setTooltip("잠금");
             }
             this.byId("glBlocked").getCustomData()[0].setProperty('value',!state);
             this.byId("pageSection1").setVisible(JSON.parse(state));

@@ -49,7 +49,6 @@
                             <Label id="_IDGenLabel10" text="G/L 계정 유형 :"/>
                             	<MultiComboBox
                                     id="GLAcctType"
-                                    width="350px"
                                     items="{
                                         path: 'SelectOption>/AccountTypeList',
                                         sorter: { path: 'AccountTypeList' }
@@ -69,7 +68,6 @@
                             <Label id="_IDGenLabel11" text="계정 그룹 :"/>
                             <MultiComboBox
                                     id="GLAcctGroup"
-                                    width="350px"
                                     items="{
                                         path: 'SelectOption>/GLAcctGroupList',
                                         sorter: { path: 'GLAcctGroupList' }
