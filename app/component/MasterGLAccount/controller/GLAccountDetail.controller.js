@@ -101,7 +101,7 @@ sap.ui.define([
             GLDataModel.setDefaultBindingMode(BindingMode.OneWay);
             this.getView().setModel(GLDataModel, "GLDataModel");
 
-            this.setGlBlockedL(GLDataModel);
+            // this.setGlBlockedL(GLDataModel);
             this.onReconAcctFilter(GLDataModel);
 
             let cocdUrl = `/cocd/CoCd`;
@@ -119,30 +119,29 @@ sap.ui.define([
          * G/L 차단 제어
          * @param {JSONModel}
          */
-        setGlBlockedL: function(oData){
-            let a;
+        // setGlBlockedL: function(oData){
 
-            if(!oData.getData().gl_blocked){//락->보통 경우 : true->false
-                this.byId("glBlocked").setIcon(new sap.ui.core.Icon({src:"sap-icon://locked"}).getSrc());
-                this.byId("glBlocked").getCustomData()[0].setProperty('value',"false");
-                this.byId("pageSection1").setVisible(true);
-                this.byId("pageSection2").setVisible(true);
-                //this.getView().getModel("blockModel").oData.isBlock=false;
-                //this.getView().setModel(new JSONModel({isBlock:false}),"blockModel");
+        //     if(!oData.getData().gl_blocked){//락->보통 경우 : true->false
+        //         this.byId("glBlocked").setIcon(new sap.ui.core.Icon({src:"sap-icon://locked"}).getSrc());
+        //         this.byId("glBlocked").getCustomData()[0].setProperty('value',"false");
+        //         this.byId("pageSection1").setVisible(true);
+        //         this.byId("pageSection2").setVisible(true);
+        //         //this.getView().getModel("blockModel").oData.isBlock=false;
+        //         //this.getView().setModel(new JSONModel({isBlock:false}),"blockModel");
                 
-            }else{//보통->락 건 경우 false->true
-                this.byId("glBlocked").setIcon(new sap.ui.core.Icon({src:"sap-icon://unlocked"}).getSrc());
-                this.byId("glBlocked").getCustomData()[0].setProperty('value',"true");
-                this.byId("pageSection1").setVisible(false);
-                this.byId("pageSection2").setVisible(false);
-                //this.getView().getModel("blockModel").oData.isBlock=true;
-                this.getView().setModel(new JSONModel({isBlock:true}),"blockModel");
-            }
-            console.log("setGlBlockedL");
-            console.log(this.getView().byId("glBlocked").getCustomData()[0].getProperty('value'));
-            console.log(this.getView().getModel("blockModel"));
+        //     }else{//보통->락 건 경우 false->true
+        //         this.byId("glBlocked").setIcon(new sap.ui.core.Icon({src:"sap-icon://unlocked"}).getSrc());
+        //         this.byId("glBlocked").getCustomData()[0].setProperty('value',"true");
+        //         this.byId("pageSection1").setVisible(false);
+        //         this.byId("pageSection2").setVisible(false);
+        //         //this.getView().getModel("blockModel").oData.isBlock=true;
+        //         this.getView().setModel(new JSONModel({isBlock:true}),"blockModel");
+        //     }
+        //     console.log("setGlBlockedL");
+        //     console.log(this.getView().byId("glBlocked").getCustomData()[0].getProperty('value'));
+        //     console.log(this.getView().getModel("blockModel"));
 
-        },
+        // },
         onReconAcctFilter: function(oData){
             let reconAcct = oData.getData().gl_recon_account 
 
@@ -173,8 +172,8 @@ sap.ui.define([
                 this.byId("glBlocked").setTooltip("잠금");
             }
             this.byId("glBlocked").getCustomData()[0].setProperty('value',!state);
-            this.byId("pageSection1").setVisible(JSON.parse(state));
-            this.byId("pageSection2").setVisible(JSON.parse(state));
+            // this.byId("pageSection1").setVisible(JSON.parse(state));
+            // this.byId("pageSection2").setVisible(JSON.parse(state));
             //this.getView().getModel("blockModel").setProperty("/isBlock", !state);
             
             //this.byId("glBlocked").setIcon(new sap.ui.core.Icon({src:"sap-icon://unlocked"}).getSrc());
@@ -381,11 +380,19 @@ x
         },
         onCancel: function(){
             let vis =  this.getView().getModel("GLDataModel").getProperty("/gl_blocked");
+            var state = JSON.parse(this.getView().byId("glBlocked").getCustomData()[0].getProperty('value'));
+
             this.byId("pageSection1").setVisible(!vis);
             this.byId("pageSection2").setVisible(!vis)
             
             //this.getView().getModel("blockModel").setProperty("/isBlock", this.getView().getModel("GLDataModel").getProperty("/gl_blocked"));
 			this.getView().getModel("editModel").setProperty("/editable", false);
+            //취소 버튼을 누를 경우 lock true로 설정
+            if(state === false){
+                this.byId("glBlocked").getCustomData()[0].setProperty('value',true);
+                console.log("Asdfs")
+            }
+
         },
         //recon null인경우 에러 확인
         setPatchData: async function(isBlock){

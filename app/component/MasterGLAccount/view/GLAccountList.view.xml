@@ -93,7 +93,7 @@
 
                 id="GlAccountTable"
                 selectionMode="MultiToggle"
-                rows="{GlDataModel>/}" 
+                rows="{GLDataModel>/}" 
                 width="auto">
                 <t:extension> 
                     <OverflowToolbar id="_IDGenOverflowToolbar1" >
