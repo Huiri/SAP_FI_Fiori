@@ -9,6 +9,10 @@ sap.ui.define([
 
 		toCustomerList :function () {
 			this.getOwnerComponent().getRouter().navTo("CustomerList");
+		},
+		toCustomerChart: function(){
+			this.getOwnerComponent().getRouter().navTo("CustomerChart");
+
 		}
 	
 	});
