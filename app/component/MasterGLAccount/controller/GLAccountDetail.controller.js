@@ -382,16 +382,21 @@ x
             let vis =  this.getView().getModel("GLDataModel").getProperty("/gl_blocked");
             var state = JSON.parse(this.getView().byId("glBlocked").getCustomData()[0].getProperty('value'));
 
-            this.byId("pageSection1").setVisible(!vis);
-            this.byId("pageSection2").setVisible(!vis)
-            
+            // this.byId("pageSection1").setVisible(!vis);
+            // this.byId("pageSection2").setVisible(!vis)
+
+            /**
+             * 취소 버튼을 누를 경우 lock true로 설정
+             * 현재 정상적인 실행 X
+             * @todo 취소 버튼 누를 시 lock 초기값으로 설정 필요
+            */
+            if(vis === false){
+                this.byId("glBlocked").getCustomData()[0].setProperty('value',true);
+                // this.getView().getModel("GLDataModel").setProperty("/gl_blocked", true);
+            }
             //this.getView().getModel("blockModel").setProperty("/isBlock", this.getView().getModel("GLDataModel").getProperty("/gl_blocked"));
 			this.getView().getModel("editModel").setProperty("/editable", false);
-            //취소 버튼을 누를 경우 lock true로 설정
-            if(state === false){
-                this.byId("glBlocked").getCustomData()[0].setProperty('value',true);
-                console.log("Asdfs")
-            }
+
 
         },
         //recon null인경우 에러 확인
