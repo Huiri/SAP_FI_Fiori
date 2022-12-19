@@ -36,13 +36,18 @@ sap.ui.define([
 			selectedNum = e.getParameter("arguments").num;
 			await( this.initBpDetailDataView( this.getBpModelData() ) );
 
+			const CountryList = await $.ajax({
+				type: "get",
+				url: "/bp/BP_Nation_Region"
+			});
+			let BpCountryModel = new JSONModel(CountryList.value);
+			this.getView().setModel(BpCountryModel, "BpCountryModel");
 			this.controlVisiblebyCategory();
 		},
 		//bp 개인, 조직 각각 경우 보여질 아바타 아이콘 및 태그 가시성 제어
 		controlVisiblebyCategory(){
 			let org = "sap-icon://building";
 			let cus = "sap-icon://customer";
-
 			if(this.getView().getModel("bpModel").getData().bp_category == BPCATEGORY_ORG){
 				this.getView().byId("mAvatar").setSrc(new sap.ui.core.Icon({src:org}).getSrc());
 				this.setBpOrgVisibleModel(true);
@@ -220,7 +225,54 @@ sap.ui.define([
 			console.log("GET CANCEL");
 			console.log(originModel);
 			this.changeVisibleMode(true);
-		}
+		},
+
+		toBack: function() {
+			this.getOwnerComponent().getRouter().navTo("CustomerList");
+		},
+		EditInputCountry : function(){
+			if(!this.pDialog){
+				this.pDialog = this.loadFragment({
+					name:"project3.view.fragment.InputSingleCountry"
+				});
+			}
+			this.pDialog.then(function(oDialog){
+				oDialog.open();
+			});
+		},
+		onCloseCountryDialog: function() {
+			this.byId("CountryDialog").destroy();
+			this.pDialog = null;
+		},
+
+        onSearchCountryDialog: function() {
+			var SearchInputCountry = this.byId("SearchInputCountry").getValue();
+			var aFilter = [];
+
+			if (SearchInputCountry) {
+				aFilter = new Filter({
+					filters: [
+						new Filter("bp_nation", FilterOperator.Contains, SearchInputCountry),
+						new Filter("bp_nation_code", FilterOperator.Contains, SearchInputCountry),
+					],
+					and: false
+				});
+			}
+
+			let oTable = this.byId("CountrySelectTable").getBinding("rows");
+            oTable.filter(aFilter);
+
+		},
+
+		onSearchCountryReset: function() {
+			this.byId("SearchInputCountry").setValue("");
+            this.onSearchCountryDialog();
+		},
+        getCountryContext : function(oEvent){
+            this.byId("bpNation").setValue(oEvent.getParameters().cellControl.mProperties.text); 
+			this.onCloseCountryDialog();
+
+        },
 		
 	});
 });

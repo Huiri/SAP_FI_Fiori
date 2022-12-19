@@ -25,7 +25,7 @@
         <ObjectPageDynamicHeaderTitle>  
             <heading>
                 <m:HBox fitContainer="true" alignItems="Center">
-                    <m:Button id="btnBack" icon="sap-icon://nav-back" type="Transparent" class="sapUiTinyMarginEnd" press="onCustomerList"/>
+                    <m:Button type="Back" press=".toBack"/>
                     <m:Title id="bpName" text="{bpModel>/bp_name}" wrapping="true"/>
                 </m:HBox>
             </heading>

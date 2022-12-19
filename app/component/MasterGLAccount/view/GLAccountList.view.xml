@@ -3,7 +3,6 @@
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns="sap.m"
     xmlns:t="sap.ui.table"
-	xmlns:c="sap.ui.core"
     xmlns:core="sap.ui.core"
     xmlns:form="sap.ui.layout.form"
     xmlns:layout="sap.ui.layout"
@@ -32,35 +31,44 @@
             <f:DynamicPageHeader id="_IDGenDynamicPageHeader1" pinnable="true">
                 <form:SimpleForm id="_IDGenSimpleForm1" layout="ResponsiveGridLayout">
                     <form:content>
-
                         <VBox id="_IDGenVBox2">
-                            <Label id="_IDGenLabel8" text="계정과목표 :" required="true"/>
-                            <Input id="GlCoa" showValueHelp="true" valueHelpRequest=".onValueHelpCoA"/>
+                            <Label id="_IDGenLabel8" text="계정과목표 :"/>
+                            <MultiInput id="GLCoa" showValueHelp="true" valueHelpRequest=".onValueHelpCoA"/>
                             <layoutData>
                                 <layout:GridData id="_IDGenGridData2" span="XL3 L3 M6 S12"/>
                             </layoutData>
                         </VBox>
                         <VBox id="_IDGenVBox3">
                             <Label id="_IDGenLabel9" text="G/L 계정 :"/>
-                            <Input id="GlAcct" showValueHelp="true" valueHelpRequest=".onValueHelpGLAcc"/>
+                            <MultiInput id="GLAcct" showValueHelp="true" valueHelpRequest=".onValueHelpGLAcc"/>
                             <layoutData>
                                 <layout:GridData id="_IDGenGridData3" span="XL3 L3 M6 S12"/>
                             </layoutData>
                         </VBox>
                         <VBox id="_IDGenVBox4">
                             <Label id="_IDGenLabel10" text="G/L 계정 유형 :"/>
-                            <Select id="GlAcctType" width="100%"
-                                items="{SelectOption>/AccountTypeList}">
-                                <core:Item id="_IDGenItem1" key="{SelectOption>AccountType}" text="{SelectOption>Value}" />
-                    
-                            </Select>
+                            	<MultiComboBox
+                                    id="GLAcctType"
+                                    items="{
+                                        path: 'SelectOption>/AccountTypeList',
+                                        sorter: { path: 'AccountTypeList' }
+                                    }">
+                                    <core:Item key="{SelectOption>AccountType}" text="{SelectOption>Value}"/>
+                                </MultiComboBox>
                             <layoutData>
                                 <layout:GridData id="_IDGenGridData4" span="XL3 L3 M6 S12"/>
                             </layoutData>
                         </VBox>
                         <VBox id="_IDGenVBox5">
                             <Label id="_IDGenLabel11" text="계정 그룹 :"/>
-                            <Input id="GlAcctGroup" showSuggestion="true"/>
+                            <MultiComboBox
+                                    id="GLAcctGroup"
+                                    items="{
+                                        path: 'SelectOption>/GLAcctGroupList',
+                                        sorter: { path: 'GLAcctGroupList' }
+                                    }">
+                                    <core:Item key="{SelectOption>GLAcctGrp}" text="{SelectOption>GLAcctGrpContent}"/>
+                            </MultiComboBox>
                             <layoutData>
                                 <layout:GridData id="_IDGenGridData5" span="XL3 L3 M6 S12"/>
                             </layoutData>
@@ -81,8 +89,8 @@
         <!-- 실제 content 부분 -->
         <f:content>
             <t:Table
-                cellClick=".getRowData"
                 rowActionCount="1" 
+
                 id="GlAccountTable"
                 selectionMode="MultiToggle"
                 rows="{GlDataModel>/}" 
@@ -107,25 +115,19 @@
                 <t:columns>
                     <t:Column id="_IDGenColumn0" width="4rem">
                         <CheckBox id="checkAll" select=".onCheckExecute" />
-                        <!-- <t:template>
-                            <CheckBox 
-                            visible="{=${GlDataModel>request_state} === 'B' ? true : false}"
-                            selected="{GlDataModel>CHK}" 
-                            id="toBeDeleted"/>
-                        </t:template>   -->
                     </t:Column>
 
                     <t:Column id="_IDGenColumn1" hAlign="Center">
                         <Label id="_IDGenLabel1" text="G/L 계정"/>
                         <t:template>
-                            <Text id="_IDGenText1" text="{GlDataModel>gl_acct}"/>
+                            <Text id="_IDGenText1" text="{GLDataModel>gl_acct}"/>
                         </t:template>  
                     </t:Column>
 
                     <t:Column id="_IDGenColumn2" hAlign="Center">
                         <Label id="_IDGenLabel2" text="G/L 계정 내역"/>
                         <t:template>
-                            <Text id="_IDGenText2" text="{GlDataModel>gl_acct_content}"/>
+                            <Text id="_IDGenText2" text="{GLDataModel>gl_acct_content}"/>
 
                         </t:template>
                     </t:Column>
@@ -133,21 +135,24 @@
                     <t:Column id="_IDGenColumn3" hAlign="Center">
                         <Label id="_IDGenLabel3" text="계정과목표"/>
                         <t:template>
-                            <Text id="_IDGenText3" text="{GlDataModel>gl_coa}"/>
+                            <Text id="_IDGenText3" text="{GLDataModel>gl_coa}"/>
                         </t:template>
                     </t:Column>
 
                     <t:Column id="_IDGenColumn4" hAlign="Center">
                         <Label id="_IDGenLabel4" text="G/L 계정 유형"/>
                         <t:template>
-                            <Text id="_IDGenText4" text="{GlDataModel>gl_acct_type}"/>
+                            <Text id="_IDGenText4" text="{
+                                path:'GLDataModel>gl_acct_type',
+                                formatter:'.formatter.AcctTypeStatus'
+                            }"/>
                         </t:template>
                     </t:Column>
 
                     <t:Column id="_IDGenColumn5" hAlign="Center">
                         <Label id="_IDGenLabel5" text="계정 그룹"/>
                         <t:template>
-                            <Text id="_IDGenText5" text="{GlDataModel>gl_acct_group}"/>
+                            <Text id="_IDGenText5" text="{GLDataModel>gl_acct_group}"/>
                         </t:template>
                     </t:Column>
                 </t:columns>

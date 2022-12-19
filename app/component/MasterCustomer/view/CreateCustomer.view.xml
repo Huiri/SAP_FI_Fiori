@@ -8,12 +8,13 @@
     xmlns:form="sap.ui.layout.form"
     xmlns:layout="sap.ui.layout"
     height="100%">
-    <f:DynamicPage id="page" headerExpanded="false" showFooter="true" toggleHeaderOnTitleClick="true">
+    <f:DynamicPage id="page" headerExpanded="false" showFooter="true">
         <f:title>
             <f:DynamicPageTitle >
                 <f:heading >
-                    <HBox>
-                        <Title text="고객 마스터 생성" class="sapUiMediumMarginBegin sapUiMediumMarginTopBottom"/>
+                    <HBox class="sapUiMediumMarginBottom">
+                        <Button type="Back" press=".toCustomerList"/>
+                        <Title text="고객 마스터 생성"/>
                     </HBox>
                 </f:heading>
                 <!-- 헤더를 접었을 때 어떤 모양이 나올지를 정하는 부분이 snappedContent -->
@@ -38,8 +39,7 @@
                                 <Text id="BpCategory" class="sapUiSmallMarginBottom" text=""/>
                     
                                 <Label text="회사 코드 " class="sapUiTinyMarginBottom"/>
-                                <Input id="BpCompanyCode" class="sapUiSmallMarginBottom" valueHelpRequest="" showValueHelp="true"/>
-
+                                <Input id="BpCompanyCode" class="sapUiSmallMarginBottom" showValueHelp="true" valueHelpRequest=".onSelectCoCd"/>
                                 <Label text="개인 칭호 " visible="{=!${bpCategoryModel>/category}}" class="sapUiTinyMarginBottom"/>
                                 <Label text="조직 명칭 " visible="{=${bpCategoryModel>/category}}" class="sapUiTinyMarginBottom" required="true"/>
                                 <Select width="100rem" id="BpPersonTitle" class="sapUiSmallMarginBottom" visible="{=!${bpCategoryModel>/category}}">
@@ -83,10 +83,9 @@
                                 <Input id="BpPostalCode" class="sapUiSmallMarginBottom"/>  
 
                                 <Label text="국가/지역 " class="sapUiTinyMarginBottom"/>
-                                <Input id="BpNation" class="sapUiLargeMarginBottom" valueHelpRequest="" showValueHelp="true"/>                                                                                                                                  
-
+                                <Input id="BpNation" class="sapUiLargeMarginBottom" showValueHelp="true" valueHelpRequest=".onSelectCountry"/>
                                 <Label text="서류 제출 여부 " class="sapUiTinyMarginBottom"/>
-                                <CheckBox id="BpReportSubmission" selected="false"  />
+                                <CheckBox id="BpReportSubmission" />
 
                                 <layoutData>
                                     <layout:GridData span="XL3 L2 M3 S12"/>
