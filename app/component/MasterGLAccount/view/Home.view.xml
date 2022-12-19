@@ -17,6 +17,13 @@
                     <ImageContent id="_IDGenImageContent1" src="sap-icon://account"/>
                 </TileContent>
             </GenericTile>
+            <GenericTile id="_IDGenGenericTile2" class="sapUiTinyMarginBegin sapUiTinyMarginTop"
+                header="재무제표 버전 조회"
+                press=".toSelectFS">
+                <TileContent id="_IDGenTileContent2" >
+                    <ImageContent id="_IDGenImageContent2" src="sap-icon://expense-report"/>
+                </TileContent>
+            </GenericTile>
             <!-- <GenericTile id="_IDGenGenericTile2" class="sapUiTinyMarginBegin sapUiTinyMarginTop">
                 <TileContent id="_IDGenTileContent2" >
                     <ImageContent id="_IDGenImageContent2" src="sap-icon://bar-chart"/>
