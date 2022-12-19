@@ -8,7 +8,7 @@ entity CoCd{
         com_language                     : String @title : '회사언어';
         com_currency                     : String @title : '회사통화';
         com_coa                          : String @title : '회사계정과목표';
-        com_fiscal_year_variant          : String @title : '회계연도 object';
+        com_fiscal_year                  : String @title : '회계연도 object';
         com_fiscal_year_variant_name     : String @title : '회계연도 object 내역';
         com_co_area                      : String @title : '회사 관리회계영역';
         com_co_area_content              : String @title : '내역';
