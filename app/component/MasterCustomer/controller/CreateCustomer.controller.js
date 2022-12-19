@@ -205,7 +205,8 @@ sap.ui.define([
 
         // 국가 선택용 다이어로그 특정 row 선택 시 생성 페이지 Input에 값 입력
         getCountryContext : function(oEvent){
-            this.byId("BpNation").setValue(oEvent.getParameters().cellControl.mProperties.text); 
+            let rowIndex = oEvent.getParameters().rowIndex;
+            this.byId("BpNation").setValue(oEvent.getParameters().rowBindingContext.oModel.oData[rowIndex].bp_nation_code); 
 			this.onCloseCountryDialog();
 
         },
@@ -256,7 +257,9 @@ sap.ui.define([
 
         // 회사코드 선택용 다이어로그 특정 row 선택 시 생성 페이지 Input에 값 입력
         getCoCdContext : function(oEvent){
-            this.byId("BpCompanyCode").setValue(oEvent.getParameters().cellControl.mProperties.text); 
+            let rowIndex = oEvent.getParameters().rowIndex;
+            console.log(rowIndex);
+            this.byId("BpCompanyCode").setValue(oEvent.getParameters().rowBindingContext.oModel.oData[rowIndex].bp_company_code); 
 			this.onCloseCoCdDialog();
 
         }
