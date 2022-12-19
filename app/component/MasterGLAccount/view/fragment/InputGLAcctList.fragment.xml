@@ -1,0 +1,21 @@
+<core:FragmentDefinition
+    xmlns="sap.ui.comp.valuehelpdialog"
+	xmlns:fb="sap.ui.comp.filterbar"
+	xmlns:core="sap.ui.core">
+	<ValueHelpDialog
+		title="계정 내역"
+		ok=".onGLAcctSelectOkPress"
+		cancel=".onGLAcctSelectCancelPress"
+		supportRanges="true"
+		key="gl_acct"
+		descriptionKey="GLAcctContentSelection">
+		<filterBar>
+			<fb:FilterBar advancedMode="true" search=".onGLAcctContSelectSearch" isRunningInValueHelpDialog="true">
+				<fb:filterGroupItems>
+					
+				</fb:filterGroupItems>
+			</fb:FilterBar>
+		</filterBar>
+	</ValueHelpDialog>
+
+</core:FragmentDefinition>

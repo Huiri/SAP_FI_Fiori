@@ -68,9 +68,13 @@ sap.ui.define([
     },
     onCancel: function () {
       this.clearField()
-      this.getOwnerComponent().getRouter().navTo("CompanyCodeList");
+      this.onBack();
     },
 
+		onBack: function() {
+			this.getOwnerComponent().getRouter().navTo("CompanyCodeList");
+		},
+    
 
 
 

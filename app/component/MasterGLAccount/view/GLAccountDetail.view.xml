@@ -1,0 +1,285 @@
+<mvc:View
+	controllerName="project2.controller.GLAccountDetail"
+    xmlns:mvc="sap.ui.core.mvc"
+	xmlns:uxap="sap.uxap"
+	xmlns:layout="sap.ui.layout"
+	xmlns="sap.m"
+    xmlns:t="sap.ui.table"
+	xmlns:core="sap.ui.core"
+	height="100%">
+	<uxap:ObjectPageLayout id="ObjectPageLayout"
+		showFooter="true"
+		showTitleInHeaderContent="true"
+		showEditHeaderButton="true"
+		editHeaderButtonPress="onEdit"
+		upperCaseAnchorBar="false"
+		toggleHeaderOnTitleClick="false"
+		headerContentPinnable="false">
+		<uxap:headerTitle>
+			<uxap:ObjectPageDynamicHeaderTitle id="_IDGenObjectPageDynamicHeaderTitle1">
+				<uxap:expandedHeading>
+                    <VBox >
+                        <HBox  height="3rem">
+                            <Button  press=".toBack" type="Back" />
+                            <Title  text="{GLDataModel>/gl_acct}" class="sapUiTinyMarginTop"/>
+					    </HBox>
+                        <Text  text="{GLDataModel>/gl_acct_content}" class="sapUiMediumMarginBegin"/>
+                    </VBox>
+				</uxap:expandedHeading>
+
+				<uxap:snappedHeading>
+                    <VBox id="_IDGenVBox2">
+                        <HBox id="_IDGenHBox1" height="3rem">
+                            <Button id="_IDGenButton1" press=".toBack" type="Back" />
+                            <Title id="_IDGenTitle1" text="{GLDataModel>/gl_acct}" class="sapUiTinyMarginTop"/>
+					    </HBox>
+                        <Text id="_IDGenText6" text="{GLDataModel>/gl_acct_content}" class="sapUiMediumMarginBegin"/>
+                    </VBox>
+				</uxap:snappedHeading>
+				<uxap:actions>
+                    <OverflowToolbarButton id="glBlocked"  icon="sap-icon://locked" type="Critical" press=".onLocked" tooltip="show" visible="{=${editModel>/editable}}">
+						<customData>
+							<core:CustomData value="false"/>
+						</customData>
+						<layoutData>
+							<OverflowToolbarLayoutData id="_IDGenOverflowToolbarLayoutData1" priority="NeverOverflow"/>
+						</layoutData>
+					</OverflowToolbarButton>
+					<Button id="_IDGenButton2" text="편집" visible="{=!${editModel>/editable}}" type="Emphasized" press=".onEdit" tooltip="edit"/>
+
+					<!-- <OverflowToolbarButton id="_IDGenOverflowToolbarButton2" icon="sap-icon://pull-down" text="show section" type="Emphasized" tooltip="pull-down"/> -->
+					<!-- <Button id="_IDGenButton2" text="Toggle Footer" press="toggleFooter"/> -->
+				</uxap:actions>
+			</uxap:ObjectPageDynamicHeaderTitle>
+		</uxap:headerTitle>
+
+		<uxap:headerContent>
+		</uxap:headerContent>
+		
+		<uxap:sections>
+			<uxap:ObjectPageSection id="pageSection1" title="일반">
+				<uxap:subSections >
+					<uxap:ObjectPageSubSection id="_IDGenObjectPageSubSection1"  title="일반">
+						<uxap:blocks>
+                            <layout:VerticalLayout id="_IDGenVerticalLayout1" class="sapUiSmallMarginBeginEnd" >
+                                <VBox id="_IDGenVBox3" class="sapUiSmallMarginBottom">
+                                    <Label id="_IDGenLabel6" text="계정과목표" />
+                                    <Text id="TextCoA" text="{GLDataModel>/gl_coa} ({GLDataModel>/gl_coa_content})" class="sapUiTinyMarginBegin"/>  
+                                </VBox>
+                                <VBox id="_IDGenVBox4" class="sapUiSmallMarginBottom">
+                                    <Label id="_IDGenLabel7" text="G/L 계정 유형" required="true" />
+                                    <Text id="TextGLAccType" visible="{=!${editModel>/editable}}" class="sapUiTinyMarginBegin"
+											text="{path:'GLDataModel>/gl_acct_type',
+													formatter:'.formatter.AcctTypeStatus'
+													}" />
+                                    <!-- <Input id="InputGLAccType" visible="{=${editModel>/editable}}" class="sapUiTinyMarginBegin"/>   -->
+									<Select id="InputGLAccType" required="true" forceSelection="false" visible="{=${editModel>/editable}}"
+                                		items="{
+											path: 'SelectOption>/AccountTypeList',
+											sorter: { path: 'AccountTypeList' }
+										}">
+										<core:Item key="{SelectOption>AccountType}" text="{SelectOption>Value}"/>
+                            		</Select>
+
+                                </VBox>
+                                <VBox id="_IDGenVBox5" class="sapUiSmallMarginBottom">
+                                    <Label id="_IDGenLabel8" text="계정 그룹" required="true" />
+                                    <Text id="TextGLGroup" text="{GLDataModel>/gl_acct_group} ({GLDataModel>/gl_acct_group_mean})" visible="{=!${editModel>/editable}}" class="sapUiTinyMarginBegin">
+										<customData>
+											<core:CustomData value="{GLDataModel>/gl_acct_group}"/>
+										</customData>
+									</Text>
+                                    
+									<!-- <Input id="InputGLGroup" visible="{=${editModel>/editable}}" class="sapUiTinyMarginBegin"/>   -->
+									<Select id="InputGLGroup" forceSelection="false" visible="{=${editModel>/editable}}"
+                                		items="{
+											path: 'SelectOption>/GLAcctGroupList',
+											sorter: { path: 'GLAcctGroupList' }
+										}">
+										<core:Item key="{SelectOption>GLAcctGrp}" text="{SelectOption>GLAcctGrp} ({SelectOption>GLAcctGrpContent})"/>
+                            		</Select>
+								</VBox>
+                                <VBox id="_IDGenVBox6" class="sapUiSmallMarginBottom">
+                                    <Label id="_IDGenLabel9" text="손익계산서 계정 유형" />
+                                    <Text id="TextPLAccType"  visible="{=!${editModel>/editable}}" class="sapUiTinyMarginBegin"
+										text="{
+											path:'GLDataModel>/gl_ps_acct_type',
+											formatter:'.formatter.PLAccType'
+										}" >
+										<customData>
+											<core:CustomData value="{GLDataModel>/gl_ps_acct_type}"/>
+										</customData>
+									</Text>
+                                    <Select id="InputPLAccType" forceSelection="false" visible="{=${editModel>/editable}}"
+                                		items="{
+											path: 'SelectOption>/GLPLAcctTypeList',
+											sorter: { path: 'GLPLAcctTypeList' }
+										}">
+										<core:Item key="{SelectOption>PLType}" text="{SelectOption>Value}"/>
+                            		</Select>
+                                </VBox>
+                                <VBox id="_IDGenVBox7" class="sapUiSmallMarginBottom">
+                                    <Label id="_IDGenLabel10" text="기능 영역"/>
+                                    <Text id="TextFuncArea" visible="{=!${editModel>/editable}}" class="sapUiTinyMarginBegin" 
+										text="{
+											path:'GLDataModel>/gl_func_area',
+											formatter:'.formatter.FuncArea'
+										}" >
+										<customData>
+											<core:CustomData value="{GLDataModel>/gl_func_area}"/>
+										</customData>
+									</Text>
+                                    <Select id="InputFuncArea" forceSelection="false" visible="{=${editModel>/editable}}"
+										items="{
+											path: 'SelectOption>/FunctionAreaList',
+											sorter: { path: 'FunctionAreaList' }
+										}">
+										<core:Item key="{SelectOption>FuncArea}" text="{SelectOption>Value}"/>
+									</Select>  
+                                </VBox>
+                                <layout:layoutData>
+                                    <layout:GridData id="_IDGenGridData1" span="XL3 L3 M6 S12"/>
+                                </layout:layoutData>
+                            </layout:VerticalLayout>
+
+                            <layout:VerticalLayout id="_IDGenVerticalLayout2" class="sapUiSmallMarginBeginEnd">
+                                <VBox id="_IDGenVBox8" class="sapUiSmallMarginBottom">
+                                    <Label id="_IDGenLabel13" text="계정과목표 내역" required="true"/>
+                                    <Text id="TextCoAContent" text="{GLDataModel>/gl_coa_content}" class="sapUiTinyMarginBegin"/>
+
+                                </VBox>
+                                <VBox id="_IDGenVBox9">
+                                    <Label id="_IDGenLabel12" text="G/L 계정 설명" />
+                                    <Text id="TextGLAccDesc" visible="{=!${editModel>/editable}}" text="{GLDataModel>/gl_acct_descript}" class="sapUiTinyMarginBegin"/>
+                                    <Input id="InputGLAccDesc" visible="{=${editModel>/editable}}" value="{GLDataModel>/gl_acct_descript}" class="sapUiTinyMarginBegin"/>  
+
+                                </VBox>
+                                <layout:layoutData>
+                                    <layout:GridData id="_IDGenGridData2" span="XL3 L3 M6 S12"/>
+                                </layout:layoutData>
+                            </layout:VerticalLayout>
+
+						</uxap:blocks>
+					</uxap:ObjectPageSubSection>
+				</uxap:subSections>
+			</uxap:ObjectPageSection>
+      
+			<uxap:ObjectPageSection id="pageSection2" title="회사코드 데이터">
+					<!-- <uxap:heading>
+						<MessageStrip id="_IDGenMessageStrip2" text="Lorem Ipsum is simply dummy text of the printing and typesetting industry." type="Error" />
+					</uxap:heading> -->
+					<uxap:subSections>
+
+					<uxap:ObjectPageSubSection id="_IDGenObjectPageSubSection2">
+						<uxap:blocks>
+                            <t:Table
+                                id="GlAccountTable"
+                                selectionMode="None"
+                                rows="{copyCoCdDataModel>/}" 
+                                width="auto">
+                                <t:extension> 
+                                    <OverflowToolbar id="_IDGenOverflowToolbar1" >
+                                        <Title id="TableName" text="회사코드 지정"/>
+                                        <ToolbarSpacer id="_IDGenToolbarSpacer2"/>
+                                        <Button 
+                                            id="_IDGenButton7"
+                                            text="확장"
+                                            press=".onExpandCoCd"
+                                            type="Transparent"/>
+                                        
+                                    </OverflowToolbar>
+                                </t:extension>
+
+                                <t:columns>
+                                    <t:Column id="_IDGenColumn0" width="4rem">
+                                        <CheckBox id="checkAll" select=".onCheckExecute" />
+                                    </t:Column>
+
+                                    <t:Column id="_IDGenColumn1" hAlign="Center">
+                                        <Label id="_IDGenLabel1" text="관리회계 영역"/>
+                                        <t:template>
+                                            <Text id="glCoArea" text="{copyCoCdDataModel>com_co_area}"/>
+                                        </t:template>  
+                                    </t:Column>
+
+                                    <t:Column id="_IDGenColumn2" hAlign="Center">
+                                        <Label id="_IDGenLabel2" text="회사 코드"/>
+                                        <t:template>
+                                            <Text id="glCompanyCode" text="{copyCoCdDataModel>com_code}"/>
+
+                                        </t:template>
+                                    </t:Column>
+
+                                    <t:Column id="_IDGenColumn3" hAlign="Center">
+                                        <Label id="_IDGenLabel3" text="회사명"/>
+                                        <t:template>
+                                            <Text id="glCorpName" text="{copyCoCdDataModel>com_code_name}"/>
+                                        </t:template>
+                                    </t:Column>
+
+                                    <t:Column id="_IDGenColumn4" hAlign="Center">
+                                        <Label id="_IDGenLabel4" text="계정 통화"/>
+                                        <t:template>
+                                            <Text id="glAcctCurrency" text="{copyCoCdDataModel>com_currency}"/>
+                                        </t:template>
+                                    </t:Column>
+
+                                    <t:Column id="_IDGenColumn5" hAlign="Center">
+                                        <Label id="_IDGenLabel5" text="계정과목표"/>
+                                        <t:template>
+                                            <Text id="glCoa" text="{copyCoCdDataModel>com_coa}"/>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column id="colGlReconAccount" hAlign="Center">
+                                        <Label id="_IDGenLabel11"  text="조정계정"/>
+                                        <t:template>
+                                            <Text id="glReconAccount" text="{GLDataModel>/gl_recon_account}"/>
+                                        </t:template>
+                                    </t:Column>
+                                </t:columns>
+                            </t:Table>
+
+						</uxap:blocks>
+					</uxap:ObjectPageSubSection>
+
+					<uxap:ObjectPageSubSection id="personalSectionSS2" title="Payment information" titleUppercase="false">
+						<uxap:blocks>
+						</uxap:blocks>
+						<uxap:moreBlocks>
+						</uxap:moreBlocks>
+					</uxap:ObjectPageSubSection>
+				</uxap:subSections>
+			</uxap:ObjectPageSection>
+			
+			<!-- <uxap:ObjectPageSection titleUppercase="false" id="employmentSection" title="Employment">
+				<uxap:subSections>
+					<uxap:ObjectPageSubSection id="employmentSectionSS1" title="Job information" titleUppercase="false">
+						<uxap:blocks>
+						</uxap:blocks>
+					</uxap:ObjectPageSubSection>
+
+					<uxap:ObjectPageSubSection id="employmentSectionSS2" title="Employee Details" importance="Medium" titleUppercase="false">
+						<uxap:blocks>
+						</uxap:blocks>
+						<uxap:moreBlocks>
+						</uxap:moreBlocks>
+					</uxap:ObjectPageSubSection>
+
+					<uxap:ObjectPageSubSection id="employmentSectionSS3" title="Job Relationship" importance="Low" titleUppercase="false">
+						<uxap:blocks>
+						</uxap:blocks>
+					</uxap:ObjectPageSubSection>
+				</uxap:subSections>
+			</uxap:ObjectPageSection> -->
+		</uxap:sections>
+
+
+		<uxap:footer>
+			<OverflowToolbar id="_IDGenOverflowToolbar2" visible="{=${editModel>/editable}}">
+				<ToolbarSpacer id="_IDGenToolbarSpacer1" />
+				<Button id="_IDGenButton3" type="Emphasized" text="확인" press="onAccept" />
+				<Button id="_IDGenButton4" type="Reject" text="취소" press="onCancel"/>
+			</OverflowToolbar>
+		</uxap:footer>
+	</uxap:ObjectPageLayout>
+</mvc:View>

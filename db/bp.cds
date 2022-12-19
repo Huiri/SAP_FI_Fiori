@@ -7,8 +7,8 @@ entity BP {
         bp_category                    :   String	 @title : 'BP범주';
         bp_person_title                :   String	 @title : '개인칭호';
         bp_organization_title          :   String	 @title : '조직명칭';
-        bp_first_name	               :   String	 @title : '개인칭호';
-        bp_last_name	               :   String	 @title : '조직명칭';
+        bp_first_name	               :   String	 @title : '개인 성';
+        bp_last_name	               :   String	 @title : '개인 이름';
         bp_corp_name1	               :   String	 @title : '기업 이름1';
         bp_corp_name2	               :   String	 @title : '기업 이름2';
         bp_gender	                   :   String	 @title : '성별';
@@ -45,7 +45,7 @@ entity BP {
         bp_nation_code	               :   String	 @title : '국가 코드';
         bp_company_code		           :   String	 @title : '회사 코드';
         bp_credit_status			   :   String    @title : '신용상태';
-        bp_report_submission           :   Boolean	 @title : '서류 제출';
+        bp_report_submission           :   Boolean	 @title : '서류제출';
 };
 entity BP_Nation_Region {
     key bp_nation_code	               :   String	 @title : '국가 코드';
