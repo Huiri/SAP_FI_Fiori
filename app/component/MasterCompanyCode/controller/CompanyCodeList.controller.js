@@ -100,14 +100,20 @@ sap.ui.define([
             this.onSearch();
         },
         toBack : function(){
-            this.getOwnerComponent().getRouter.navTo("CompanyCode");
+            this.getOwnerComponent().getRouter().navTo("CompanyCode");
         },
 
 		toCreateCoCd: function() {
             this.getOwnerComponent().getRouter().navTo("CreateCoCd");
 
 		},
+		toCompanyCodeDetail: function(e){
+            let sPath = e.getSource().getParent().getBindingContext('CompanyCodeListModel').getPath();
+			let selectedNum = this.getView().getModel('CompanyCodeListModel').getProperty(sPath).com_code;
 
+			let num = e.getParameters();
+            this.getOwnerComponent().getRouter().navTo("CoCdDetail",{num:selectedNum});
+		},
         // 국가 코드 선택용 다이어로그 함수
         onValueHelpCountryList: function(oEvent) {
 			this.pWhitespaceDialog = null;
