@@ -184,14 +184,14 @@ sap.ui.define([
 		onCountrySelectOkPress: function(oEvent) {
             var aTokens = oEvent.getParameter("tokens");
 			var CompanyCountry = this.byId("CompanyCountry");
-
+			var arr=[];
 			aTokens.forEach(function (oToken) {
 				// console.log(oToken.getKey());
 				oToken.mProperties.text = oToken.getKey().toString()
-				CompanyCountry.addToken(oToken);
-			}.bind(this));
-
-			this.oWhitespaceDialog.close();
+				arr.push(oToken);
+            }.bind(this));
+            CompanyCountry.setTokens(arr);
+            this.oWhitespaceDialog.close();
 
 		},
 		onCountrySelectSearch: function() {
@@ -298,14 +298,14 @@ sap.ui.define([
         onCoCdSelectOkPress: function(oEvent) {
             var aTokens = oEvent.getParameter("tokens");
 			var CompanyCode = this.byId("CompanyCode");
-
+			var arr=[];
 			aTokens.forEach(function (oToken) {
 				// console.log(oToken.getKey());
 				oToken.mProperties.text = oToken.getKey().toString()
-				CompanyCode.addToken(oToken);
-			}.bind(this));
-
-			this.oWhitespaceDialog.close();
+				arr.push(oToken);
+            }.bind(this));
+            CompanyCode.setTokens(arr);
+            this.oWhitespaceDialog.close();
 
 		},
 		onCoCdSelectSearch: function() {
@@ -399,10 +399,10 @@ sap.ui.define([
 			aTokens.forEach(function (oToken) {
 				// console.log(oToken.getKey());
 				oToken.mProperties.text = oToken.getKey().toString()
-				CompanyCoa.addToken(oToken);
-			}.bind(this));
-
-			this.oWhitespaceDialog.close();
+				arr.push(oToken);
+            }.bind(this));
+            CompanyCoa.setTokens(arr);
+            this.oWhitespaceDialog.close();
 
 		},
         onCoASelectCancelPress: function (oEvent) {

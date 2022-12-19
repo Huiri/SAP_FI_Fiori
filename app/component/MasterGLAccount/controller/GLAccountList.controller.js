@@ -242,12 +242,12 @@ sap.ui.define([
 			this.pWhitespaceDialog.then(function (oWhitespaceDialog) {
 				var oFilterBar = oWhitespaceDialog.getFilterBar();
 				this.oWhitespaceDialog = oWhitespaceDialog;
-				if (this._bWhitespaceDialogInitialized) {
-					oWhitespaceDialog.setTokens([]);
-					oWhitespaceDialog.update();
+				// if (this._bWhitespaceDialogInitialized) {
+				// 	oWhitespaceDialog.setTokens([]);
+				// 	oWhitespaceDialog.update();
 
-					oWhitespaceDialog.open();
-				}
+				// 	oWhitespaceDialog.open();
+				// }
 				this.getView().addDependent(oWhitespaceDialog);
 
 				// if(!this.oWhitespaceDialog._getTokenizer().getTokenes().length){
@@ -282,7 +282,10 @@ sap.ui.define([
 
 					oWhitespaceDialog.update();
 				}.bind(this));
-
+				console.log(this.byId("GLCoa").getTokens())
+				var multiinput_tokens =this.byId("GLCoa").getTokens()
+				oWhitespaceDialog.setTokens(multiinput_tokens);
+				oWhitespaceDialog.update();
 				this._bWhitespaceDialogInitialized = true;
 				oWhitespaceDialog.open();
 			}.bind(this));
@@ -312,14 +315,14 @@ sap.ui.define([
 			this.pWhitespaceDialog.then(function (oWhitespaceDialog) {
 				var oFilterBar = oWhitespaceDialog.getFilterBar();
 				this.oWhitespaceDialog = oWhitespaceDialog;
-				if (this._bWhitespaceDialogInitialized) {
-					// Re-set the tokens from the input and update the table
-					oWhitespaceDialog.setTokens([]);
-					oWhitespaceDialog.update();
+				// if (this._bWhitespaceDialogInitialized) {
+				// 	// Re-set the tokens from the input and update the table
+				// 	oWhitespaceDialog.setTokens([]);
+				// 	oWhitespaceDialog.update();
 
-					oWhitespaceDialog.open();
-					// return;
-				}
+				// 	oWhitespaceDialog.open();
+				// 	// return;
+				// }
 				this.getView().addDependent(oWhitespaceDialog);
 
 				// Set key fields for filtering in the Define Conditions Tab
@@ -352,7 +355,9 @@ sap.ui.define([
 
 					oWhitespaceDialog.update();
 				}.bind(this));
-
+				var multiinput_tokens =this.byId("GLAcct").getTokens()
+				oWhitespaceDialog.setTokens(multiinput_tokens);
+				oWhitespaceDialog.update();
 				this._bWhitespaceDialogInitialized = true;
 				oWhitespaceDialog.open();
 			}.bind(this));
@@ -365,13 +370,13 @@ sap.ui.define([
 		onCoASelectOkPress: function (oEvent) {
 			var aTokens = oEvent.getParameter("tokens");
 			var GlCoa = this.byId("GLCoa");
-
+			var arr=[];
 			aTokens.forEach(function (oToken) {
 				// console.log(oToken.getKey());
 				oToken.mProperties.text = oToken.getKey().toString()
-				GlCoa.addToken(oToken);
+				arr.push(oToken);
 			}.bind(this));
-
+			GlCoa.setTokens(arr);
 			this.oWhitespaceDialog.close();
 
 		},
@@ -415,14 +420,13 @@ sap.ui.define([
 		onGLAcctSelectOkPress: function(oEvent) {
 			var aTokens = oEvent.getParameter("tokens");
 			var GlAcct = this.byId("GLAcct");
-
+			var arr=[];
 			aTokens.forEach(function (oToken) {
 				oToken.mProperties.text = oToken.getKey().toString()
-				GlAcct.addToken(oToken);
-			}.bind(this));
-
-			this.oWhitespaceDialog.close();
-
+                arr.push(oToken);
+            }.bind(this));
+            GlAcct.setTokens(arr);
+            this.oWhitespaceDialog.close();
 
 		},
 
