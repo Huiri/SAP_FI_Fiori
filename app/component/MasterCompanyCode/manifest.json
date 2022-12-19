@@ -172,6 +172,13 @@
           ]
         },
         {
+          "name": "CoCdDetail",
+          "pattern": "CoCdDetail",
+          "target": [
+            "CoCdDetail"
+          ]
+        },
+        {
           "name": "CompanyCodeList",
           "pattern": "CompanyCodeList",
           "target": [
@@ -195,6 +202,13 @@
           "viewId": "CreateCoCd",
           "viewName": "CreateCoCd"
         },
+        "CoCdDetail" : {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": true,
+          "viewId": "CoCdDetail",
+          "viewName": "CoCdDetail"
+          },
         "CompanyCodeList" : {
           "viewType": "XML",
           "transition": "slide",

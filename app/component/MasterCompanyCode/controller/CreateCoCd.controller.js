@@ -24,7 +24,9 @@ sap.ui.define([
         com_co_area: this.byId("CoCdCoArea").getValue(),
         com_address: this.byId("CoCdAddress").getValue(),
         com_fiscal_year: this.byId("CoCdFiscalYear").getValue(),
-        com_vat_registration: this.byId("CoCdVat").getSelectedKey()
+        com_cocd_tax_code: this.byId("CoCdTaxCode").getSelectedKey(),
+        com_cocd_constructor: this.byId("CoCdConstructor").getValue(),
+        com_cocd_date: this.byId("CoCdDate").getValue()
       }
       if (temp.com_code === "" ||
         temp.com_code_name === "" ||
@@ -33,7 +35,9 @@ sap.ui.define([
         temp.com_coa === "" ||
         temp.com_co_area === "" ||
         temp.com_fiscal_year === "" ||
-        temp.com_currency === ""
+        temp.com_currency === "" ||
+        com_cocd_create_person === ""||
+        com_cocd_create_date === ""
       ) {
         MessageBox.error("필수 항목을 입력해주세요")
       } else {
@@ -58,7 +62,9 @@ sap.ui.define([
         this.byId("CoCdCoArea").setValue(""),
         this.byId("CoCdAddress").setValue(""),
         this.byId("CoCdFiscalYear").setValue(""),
-        this.byId("CoCdVat").setSelectedKey("")
+        this.byId("CoCdTaxCode").setSelectedKey(""),
+        this.byId("CoCdCreatePeson").getValue(),
+        this.byId("CoCdCreateDate").getValue()
     },
     onCancel: function () {
       this.clearField()
