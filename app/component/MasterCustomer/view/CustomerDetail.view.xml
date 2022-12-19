@@ -459,7 +459,7 @@
                             <m:VBox class="sapUiSmallMarginTopBottom">
                                 <m:Label text="국가 지역" class="propertyColumn"/>
                                 <m:Text text="{bpModel>/bp_nation}" visible="{=${visibleMode>/visible}}" />
-                                <m:Input id="bpNation" value="{bpModel>/bp_nation}"  visible="{=!${visibleMode>/visible}}" showValueHelp="true"/>
+                                <m:Input id="bpNation" value="{bpModel>/bp_nation}" valueHelpRequest=".EditInputCountry" visible="{=!${visibleMode>/visible}}" showValueHelp="true"/>
                             </m:VBox>
                            
                             <m:VBox class="sapUiSmallMarginTopBottom">
