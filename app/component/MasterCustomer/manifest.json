@@ -239,8 +239,8 @@
           "viewType": "XML",
           "transition": "slide",
           "clearControlAggregation": true,
-          "viewId": "CreatePersonCustomer",
-          "viewName": "CreatePersonCustomer"
+          "viewId": "CreateCustomer",
+          "viewName": "CreateCustomer"
         },
         "CustomerChart" : {
           "viewType": "XML",
