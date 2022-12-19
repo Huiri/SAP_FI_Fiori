@@ -19,6 +19,14 @@ sap.ui.define([
 			selectedNum = e.getParameter("arguments").num;
 			await( this.initBpDetailDataView( this.getBpModelData() ) );
 
+			const CountryList = await $.ajax({
+				type: "get",
+				url: "/bp/BP_Nation_Region"
+			});
+			let BpCountryModel = new JSONModel(CountryList.value);
+			this.getView().setModel(BpCountryModel, "BpCountryModel");
+
+
 			if(this.getView().getModel("bpModel").getData().bp_category == BPCATEGORY_ORG){
 				//bpName 라벨 텍스트 변경 
 				this.setBpOrgVisibleModel(true);
@@ -197,7 +205,54 @@ sap.ui.define([
 		},
 		onCancel:function(){
 			this.changeVisibleMode(true);
-		}
+		},
+
+		toBack: function() {
+			this.getOwnerComponent().getRouter().navTo("CustomerList");
+		},
+		EditInputCountry : function(){
+			if(!this.pDialog){
+				this.pDialog = this.loadFragment({
+					name:"project3.view.fragment.InputSingleCountry"
+				});
+			}
+			this.pDialog.then(function(oDialog){
+				oDialog.open();
+			});
+		},
+		onCloseCountryDialog: function() {
+			this.byId("CountryDialog").destroy();
+			this.pDialog = null;
+		},
+
+        onSearchCountryDialog: function() {
+			var SearchInputCountry = this.byId("SearchInputCountry").getValue();
+			var aFilter = [];
+
+			if (SearchInputCountry) {
+				aFilter = new Filter({
+					filters: [
+						new Filter("bp_nation", FilterOperator.Contains, SearchInputCountry),
+						new Filter("bp_nation_code", FilterOperator.Contains, SearchInputCountry),
+					],
+					and: false
+				});
+			}
+
+			let oTable = this.byId("CountrySelectTable").getBinding("rows");
+            oTable.filter(aFilter);
+
+		},
+
+		onSearchCountryReset: function() {
+			this.byId("SearchInputCountry").setValue("");
+            this.onSearchCountryDialog();
+		},
+        getCountryContext : function(oEvent){
+            this.byId("bpNation").setValue(oEvent.getParameters().cellControl.mProperties.text); 
+			this.onCloseCountryDialog();
+
+        },
 		
 	});
 });
