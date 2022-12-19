@@ -230,13 +230,15 @@ sap.ui.define([
 		},
 
 		getGLGrpContext: function(oEvent) {
-			this.byId("GLGroup").setValue(oEvent.getParameters().cellControl.mProperties.text); 
+			let rowIndex = oEvent.getParameters().rowIndex;
+			this.byId("GLGroup").setValue(oEvent.getParameters().rowBindingContext.oModel.oData[rowIndex].gl_acct_group); 
 			this.onCloseGLGrpDialog();
 
 		},
 
 		getCoAContext: function(oEvent) {
-			this.byId("CoA").setValue(oEvent.getParameters().cellControl.mProperties.text); 
+			let rowIndex = oEvent.getParameters().rowIndex;
+			this.byId("CoA").setValue(oEvent.getParameters().rowBindingContext.oModel.oData[rowIndex].gl_coa); 
 			this.onCloseCoADialog();
 		},
 

@@ -269,7 +269,12 @@ sap.ui.define([
             this.onSearchCountryDialog();
 		},
         getCountryContext : function(oEvent){
-            this.byId("bpNation").setValue(oEvent.getParameters().cellControl.mProperties.text); 
+			console.log(oEvent.getParameters());
+			let rowIndex = oEvent.getParameters().rowIndex;
+			console.log(rowIndex);
+
+            this.byId("bpNation").setValue(oEvent.getParameters().rowBindingContext.oModel.oData[rowIndex].bp_nation_code); 
+            // console.log(oEvent.getParameters()); 
 			this.onCloseCountryDialog();
 
         },
