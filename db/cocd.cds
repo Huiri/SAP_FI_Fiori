@@ -18,3 +18,13 @@ entity CoCd{
         com_cocd_date                    : String @title : '생성일';
 
 };
+
+entity CoCd_Fis_Y_Variant{
+    key com_fiscal_year                  : String @title : '회계연도 object';
+        com_fiscal_year_variant_name     : String @title : '회계연도 object 내역';
+};
+
+entity CoCd_Co_Area{
+    key com_co_area                  : String @title : '관리회계영역';
+        com_co_area_content          : String @title : '관리회계영역 내역';
+};

@@ -31,7 +31,7 @@
             <f:DynamicPageHeader id="_IDGenDynamicPageHeader1" pinnable="true">
                 <form:SimpleForm id="_IDGenSimpleForm1" layout="ResponsiveGridLayout">
                     <form:content>
-                        <VBox id="_IDGenVBox2">
+                        <VBox id="_IDGenVBox2"> 
                             <Label id="_IDGenLabel8" text="계정과목표 :"/>
                             <MultiInput id="GLCoa" showValueHelp="true" valueHelpRequest=".onValueHelpCoA"/>
                             <layoutData>
