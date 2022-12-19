@@ -1,0 +1,89 @@
+<mvc:View controllerName="project3.controller.CustomerChart" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:c="sap.ui.core" xmlns:t="sap.ui.table" xmlns:grid="sap.ui.layout.cssgrid" xmlns:micro="sap.suite.ui.microchart" xmlns:card="sap.f.cards" xmlns:f="sap.f">
+    <f:DynamicPage id="BpStatePage">
+        <f:title>
+            <f:DynamicPageTitle id="_IDGenDynamicPageTitle1">
+                <f:heading>
+                    <HBox id="_IDGenHBox1">
+                        <Button id="_IDGenButton1" icon="sap-icon://nav-back" press=".toCustomerHome" type="Transparent" />
+                        <Title id="_IDGenTitle1" text="고객 분석" />
+                    </HBox>
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:content class="sapUiSmallMargin">
+            <grid:CSSGrid id="_IDGenCSSGrid1" class="cssgridpadding"
+                            	
+			gridTemplateRows="300px 400px"
+			gridTemplateColumns="repeat(2, 400px)"
+			gridGap="4rem" >
+                <grid:items>
+                <f:Card id="_IDGenCard1" class="sapUiMediumMarginBeginEnd sapUiTinyMarginTop" width="300px" height="350px">
+                    <f:header>
+                        <card:Header id="_IDGenHeader1" title="고객 신용 상태" iconSrc="sap-icon://donut-chart" />
+                    </f:header>
+                    <f:content>
+                         <micro:InteractiveDonutChart id="_IDGenInteractiveDonutChart1" class="sapUiMediumMarginTop"  displayedSegments="3">
+                            <micro:segments>
+                                <micro:InteractiveDonutChartSegment id="_IDGenInteractiveDonutChartSegment1" label="신뢰" value="{CreditStatus>/trust}" displayedValue="{CreditStatus>/trustpercent}"  />
+                                <micro:InteractiveDonutChartSegment id="_IDGenInteractiveDonutChartSegment2" label="주의" value="{CreditStatus>/wait}" displayedValue="{CreditStatus>/waitpercent}" />
+                                <micro:InteractiveDonutChartSegment id="_IDGenInteractiveDonutChartSegment3" label="보류" value="{CreditStatus>/caution}" displayedValue="{CreditStatus>/cautionpercent}" />
+                            </micro:segments>                           
+                            
+                        </micro:InteractiveDonutChart>              
+                    </f:content>
+                    <f:layoutData>
+                        <grid:ResponsiveColumnItemLayoutData id="_IDGenResponsiveColumnItemLayoutData1"  />
+                    </f:layoutData>
+                </f:Card>
+                    
+                </grid:items>
+                <grid:items>
+                <f:Card class="sapUiMediumMarginBeginEnd sapUiTinyMarginTop" width="300px" height="350px" >
+                 <f:header>
+                        <card:Header id="_IDGenHeader2" title="고객 서류 제출 여부" iconSrc="sap-icon://bar-chart" />
+                    </f:header>
+                <f:content >
+                        <micro:ColumnMicroChart id="_IDGenColumnMicroChart1" size="Responsive"   allowColumnLabels="true"  >
+                          
+								<micro:columns  >
+									<micro:ColumnMicroChartData id="_IDGenColumnMicroChartData1" label="제출 완료" displayValue="{bpReportSubmitModel>/submitpercent}"  value="{bpReportSubmitModel>/submit}" color="Good"  />
+									<micro:ColumnMicroChartData id="_IDGenColumnMicroChartData2"  label="미제출" displayValue="{bpReportSubmitModel>/notsubmitpercent}"  value="{bpReportSubmitModel>/notsubmit}" color="Error"/>
+								</micro:columns>
+							</micro:ColumnMicroChart>
+                    </f:content>
+                    </f:Card>
+                    
+                       </grid:items>
+                       <grid:items>
+                                    <f:Card id="_IDGenCard2" class="sapUiMediumMargin" width="300px">
+                    <f:header>
+                        <card:Header id="_IDGenHeader3"  title="서류 미제출 고객" subtitle="최신 3개의 고객 데이터가 보입니다." />
+                    </f:header>
+                    <f:content>
+                        <List showSeparators="None" items="{
+					path: 'submitWaitModel>/'}">
+                            <CustomListItem type="Active" press=".onNavToBpDetail">
+                                <HBox alignItems="Center" justifyContent="SpaceBetween">
+                                    <VBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom">
+                                        <Title  level="H3" text="{submitWaitModel>bp_name}" />
+                                        <Text text="최종 변경일: {submitWaitModel>bp_changed_date}" />
+                                    </VBox>
+                                    <ObjectStatus
+									class="sapUiSmallMarginBegin sapUiSmallMarginEnd"
+                                        text="{         
+                                path: 'submitWaitModel>bp_report_submission'                               
+                                }"
+                                        state="{= ${submitWaitModel>bp_report_submission} === true? 
+                                'Success' : 'Error'}"
+                                    />
+                                </HBox>                                
+                            </CustomListItem>
+                        </List>
+                    </f:content>
+                </f:Card>
+                </grid:items>
+
+            </grid:CSSGrid>
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>
