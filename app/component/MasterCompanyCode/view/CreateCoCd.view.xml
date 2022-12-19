@@ -18,26 +18,20 @@
                                 <Label id="_IDGenLabel2" text="회사 코드 : " class="sapUiTinyMarginBottom" labelFor="CoCdCod" />
                                 <Input id="CoCdCod" class="sapUiSmallMarginBottom" required="true"/>
 
-
-                                <Label id="_IDGenLabel3" text="회사명 : " class="sapUiTinyMarginBottom" required="true" />
-                                <Input id="CoCdName" class="sapUiSmallMarginBottom" />
-                                
-                                <Label id="_IDGenLabel8" text="도로주소 : " class="sapUiTinyMarginBottom" />
-                                <Input id="CoCdAddress" class="sapUiSmallMarginBottom" />
+                                <!-- labelfor 추가
+                                    required추가 -->
+                                <Label id="_IDGenLabel3" text="회사명 : " class="sapUiTinyMarginBottom" required="true" labelFor="CoCdName" />
+                                <Input id="CoCdName" class="sapUiSmallMarginBottom" required="true"/>
 
                                 <Label id="_IDGenLabel10" text="도시 : " class="sapUiTinyMarginBottom" required="true" />
                                 <Input id="CoCdCity" class="sapUiSmallMarginBottom" />
-
+                                
+                                <Label id="_IDGenLabel8" text="회사 주소 : " class="sapUiTinyMarginBottom" />
+                                <Input id="CoCdAddress" class="sapUiSmallMarginBottom" />
                                
                                 <Label id="_IDGenLabel12" text="국가/지역 : " class="sapUiTinyMarginBottom" required="true" />
-                                <Input id="CoCdCountry" class="sapUiSmallMarginBottom" valueHelpRequest=".onValueHelpCountry" showValueHelp="true" />
-
-                                <Label id="_IDGenLabel3" text="회사명 : " class="sapUiTinyMarginBottom" labelFor="CoCdName" />
-                                <Input id="CoCdName" class="sapUiSmallMarginBottom" required="true"/>
-
-                                <Label id="_IDGenLabel4" text="관리회계 영역 : " class="sapUiTinyMarginBottom" labelFor="CoCdCoArea" />
-                                <Input id="CoCdCoArea" class="sapUiSmallMarginBottom" valueHelpRequest="" showValueHelp="true" required="true"/>
-
+                                <!--<Input id="CoCdCountry" class="sapUiSmallMarginBottom" valueHelpRequest=".onValueHelpCountry" showValueHelp="true"/>-->
+                                <Input id="CoCdCountry" class="sapUiSmallMarginBottom" valueHelpRequest=".onSelectCountry" showValueHelp="true"/>
 
                                 <Label id="_IDGenLabel5" text="통화 단위 : " class="sapUiTinyMarginBottom" labelFor="CoCdCurrency" />
                                 <Select width="100rem" id="CoCdCurrency" class="sapUiSmallMarginBottom" required="true">
@@ -64,9 +58,6 @@
 
                             <VBox id="_IDGenVBox3">
                                 <Label id="_IDGenLabel7" text="생성 정보" design="Bold" class="sapUiMediumMarginBottom" />
-
-                                
-
                                  
                                 <Label id="_IDGenLabel17" text="생성자 : " class="sapUiTinyMarginBottom" required="true"  />
                                 <Input id="CoCdConstructor" class="sapUiSmallMarginBottom" />
@@ -96,30 +87,28 @@
                                                                     
 
                                 <Label id="_IDGenLabel14" text="회계연도 오브젝트 : " class="sapUiTinyMarginBottom" required="true" />
-                                <Input id="CoCdFiscalYear" class="sapUiSmallMarginBottom" />
+                                <Input id="CoCdFiscalYear" class="sapUiSmallMarginBottom" showValueHelp="true" valueHelpRequest=""/>
 
-                                <Label id="_IDGenLabel15" text="회사 계정 과목표 : " class="sapUiTinyMarginBottom" required="true" />
-                                <Input id="CoCdCoa" class="sapUiSmallMarginBottom" valueHelpRequest=".onValueHelpCoa" showValueHelp="true"/>
-
-                                <Label id="_IDGenLabel14" text="회계연도 : " class="sapUiTinyMarginBottom" labelFor="CoCdFiscalYear" />
-                                <Input id="CoCdFiscalYear" class="sapUiSmallMarginBottom" required="true"/>
 
                                 <Label id="_IDGenLabel15" text="회사 계정 과목표 : " class="sapUiTinyMarginBottom" labelFor="CoCdCoa" />
                                 <Input id="CoCdCoa" class="sapUiSmallMarginBottom" valueHelpRequest="" showValueHelp="true" required="true"/>
 
+                                <!-- <Label id="_IDGenLabel15" text="회사 계정 과목표 : " class="sapUiTinyMarginBottom" required="true" />
+                                <Input id="CoCdCoa" class="sapUiSmallMarginBottom" valueHelpRequest=".onValueHelpCoa" showValueHelp="true"/> -->
+
+                                <!-- <Label id="_IDGenLabel14" text="회계연도 : " class="sapUiTinyMarginBottom" labelFor="CoCdFiscalYear" />
+                                <Input id="CoCdFiscalYear" class="sapUiSmallMarginBottom" required="true"/> -->
 
                                 <Label id="_IDGenLabel16" text="세금 코드 : " class="sapUiTinyMarginBottom" />
                                 <Select id="CoCdTaxCode" width="100rem"  class="sapUiSmallMarginBottom">
                                     <core:Item id="_IDGenItem1" key="" text="선택" />
-                                    <core:Item id="_IDGenItem8" key="KR" text="K01" />
-                                    <core:Item id="_IDGenItem9" key="EN" text="K02" />
-                                    <core:Item id="_IDGenItem10" key="EN" text="K03" />
+                                    <core:Item id="_IDGenItem8" key="K01" text="K01" />
+                                    <core:Item id="_IDGenItem9" key="K02" text="K02" />
+                                    <core:Item id="_IDGenItem10" key="K03" text="K03" />
                                 </Select>
 
-                                <Label id="_IDGenLabel4" text="관리회계 영역 : " class="sapUiTinyMarginBottom" required="true" />
-                                <Input id="CoCdCoArea" class="sapUiSmallMarginBottom" valueHelpRequest=".onValueHelpCoArea" showValueHelp="true" />
-
-
+                                <Label id="_IDGenLabel4" text="관리회계 영역 : " class="sapUiTinyMarginBottom" labelFor="CoCdCoArea" />
+                                <Input id="CoCdCoArea" class="sapUiSmallMarginBottom" valueHelpRequest="" showValueHelp="true" required="true"/>
                                 
                                 <layoutData>
                                     <layout:GridData id="_IDGenGridData5" span="XL3 L2 M3 S12" />

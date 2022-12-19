@@ -40,6 +40,9 @@ sap.ui.define([
 			this.getView().setModel(cocdModel, "cocdModel")
 			console.log(this.getView().getModel("cocdModel"))
 		},
+
+
+		
 		toBack: function(){
 			this.getOwnerComponent().getRouter().navTo("CoCdList");
 		}
