@@ -1,25 +1,27 @@
 sap.ui.define([
-	"sap/ui/core/mvc/Controller",
-	"sap/ui/model/json/JSONModel",
-	'sap/ui/model/type/String',
-	'sap/m/ColumnListItem',
-	'sap/m/Label',
+    "sap/ui/core/mvc/Controller",
+    "sap/ui/model/Filter",
+    "sap/ui/model/FilterOperator",
+    "sap/ui/model/Sorter",
+    "sap/ui/model/json/JSONModel",
+    "sap/ui/export/Spreadsheet",
+    "sap/ui/export/library",
+    "../model/formatter",
 	'sap/m/SearchField',
-	'sap/m/Token',
-	'sap/ui/model/Filter',
-	'sap/ui/model/FilterOperator',
 	'sap/ui/table/Column',
-	'sap/m/Column',
 	'sap/m/Text',
-	 "../model/formatter"
-	
 ], function(
-	Controller,
-	Filter,
-	FilterOperator,
-	JSONModel,
-	Spreadsheet,
-	exportLibrary
+	Controller, 
+	Filter, 
+	FilterOperator, 
+	Sorter, 
+	JSONModel, 
+	Spreadsheet, 
+	exportLibrary, 
+	formatter,
+    SearchField,
+	UIColumn,
+	Text 
 ) {
 	"use strict";
 	const EdmType = exportLibrary.EdmType;
@@ -36,7 +38,7 @@ sap.ui.define([
 
 		},
 		onDataView: async function () {
-			this.getView().byId("GLAccountTable").setBusy(true);
+			this.getView().byId("GlAccountTable").setBusy(true);
 			const Gl = await $.ajax({
 				type: "get",
 				url: "/gl/GL"
@@ -69,7 +71,7 @@ sap.ui.define([
 			// this.getView().setModel(fragmentglModel, "GLDatafragmentModel");
 			// //fragment용 모델 생성 GLDatafragmentModel
 
-			this.getView().byId("GLAccountTable").setBusy(false);
+			this.getView().byId("GlAccountTable").setBusy(false);
 
 			let GLDataModel = new JSONModel(Gl.value);
 			this.getView().setModel(GLDataModel, "GLDataModel");
@@ -180,34 +182,34 @@ sap.ui.define([
 		onSearch: function () {
 			// var selectedItems = oEvent.getParameter("selectedItems");
 
-			let GlCoa = this.byId("GLCoa").getTokens();
-			let GlAcct = this.byId("GLAcct").getTokens();
-			let GlAcctType = this.byId("GLAcctType").getSelectedKeys();
-			let GlAcctGroup = this.byId("GLAcctGroup").getSelectedKeys();
+			// let GlCoa = this.byId("GLCoa").getTokens();
+			// let GlAcct = this.byId("GLAcct").getTokens();
+			// let GlAcctType = this.byId("GLAcctType").getSelectedKeys();
+			// let GlAcctGroup = this.byId("GLAcctGroup").getSelectedKeys();
 
-			var aFilter = [];
+			// var aFilter = [];
 
-			if (GlCoa) { 
-				for(let item in GlCoa){
-					aFilter.push(new Filter("gl_coa", FilterOperator.Contains, GlCoa[item].mProperties.key)) 
+			// if (GlCoa) { 
+			// 	for(let item in GlCoa){
+			// 		aFilter.push(new Filter("gl_coa", FilterOperator.Contains, GlCoa[item].mProperties.key)) 
 
-			}}
-			if (GlAcct) { 				
-				for(let item in GlAcct){
-					aFilter.push(new Filter("gl_acct", FilterOperator.Contains, GlAcct[item].mProperties.key)) 
-			}}
+			// }}
+			// if (GlAcct) { 				
+			// 	for(let item in GlAcct){
+			// 		aFilter.push(new Filter("gl_acct", FilterOperator.Contains, GlAcct[item].mProperties.key)) 
+			// }}
 
-			if (GlAcctType) { 
-				for(let item in GlAcctType){
-					aFilter.push(new Filter("gl_acct_type", FilterOperator.Contains, GlAcctType[item])) 
-			}}
-			if (GlAcctGroup) { 
-				for(let item in GlAcctGroup){
-					aFilter.push(new Filter("gl_acct_group", FilterOperator.Contains, GlAcctGroup[item])) 
-			}}
-			let oTable = this.byId("GLAccountTable").getBinding("rows");
-			oTable.filter(aFilter);
-			this.byId("TableName").setText(`G/L 계정(${oTable.iLength})`);
+			// if (GlAcctType) { 
+			// 	for(let item in GlAcctType){
+			// 		aFilter.push(new Filter("gl_acct_type", FilterOperator.Contains, GlAcctType[item])) 
+			// }}
+			// if (GlAcctGroup) { 
+			// 	for(let item in GlAcctGroup){
+			// 		aFilter.push(new Filter("gl_acct_group", FilterOperator.Contains, GlAcctGroup[item])) 
+			// }}
+			// let oTable = this.byId("GlAccountTable").getBinding("rows");
+			// oTable = oTable.filter(aFilter);
+			// this.byId("TableName").setText(`G/L 계정(${oTable.iLength})`);
 		},
 
 		

@@ -10,8 +10,18 @@ sap.ui.define([
 	'sap/m/SearchField',
 	'sap/ui/table/Column',
 	'sap/m/Text',
-], function (Controller, Filter, FilterOperator, Sorter, JSONModel, Spreadsheet, exportLibrary, formatter,
-    SearchField,UIColumn,Text ) {
+], function (
+	Controller, 
+	Filter, 
+	FilterOperator, 
+	Sorter, 
+	JSONModel, 
+	Spreadsheet, 
+	exportLibrary, 
+	formatter,
+    SearchField,
+	UIColumn,
+	Text ) {
     "use strict";
     let totalNumber;
     let selectedNum;

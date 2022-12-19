@@ -277,8 +277,8 @@
 		<uxap:footer>
 			<OverflowToolbar id="_IDGenOverflowToolbar2" visible="{=${editModel>/editable}}">
 				<ToolbarSpacer id="_IDGenToolbarSpacer1" />
-				<Button id="_IDGenButton3" type="Emphasized" text="확인" press="onAccept" />
-				<Button id="_IDGenButton4" type="Reject" text="취소" press="onCancel"/>
+				<Button id="_IDGenButton3" type="Emphasized" text="확인" press=".onAccept" />
+				<Button id="_IDGenButton4" type="Reject" text="취소" press=".onCancel"/>
 			</OverflowToolbar>
 		</uxap:footer>
 	</uxap:ObjectPageLayout>

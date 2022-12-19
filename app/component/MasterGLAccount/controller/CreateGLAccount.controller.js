@@ -101,7 +101,6 @@ sap.ui.define([
 			} else {
 				let temp = new JSONModel(this.temp).oData;
 				// temp.gl_acct = this.byId("GLAcct").getText();
-				temp.gl_acct = "1001";
 				temp.gl_coa = this.byId("CoA").getValue();
 				temp.gl_acct_type = this.byId("GLAcctType").getSelectedKey();
 				temp.gl_acct_group = this.byId("GLGroup").getValue();
@@ -135,7 +134,7 @@ sap.ui.define([
 					data:JSON.stringify(temp)
 				})
 			}
-			console.log("asdf");
+
 			this.onReset();
 			this.toBack();
 
