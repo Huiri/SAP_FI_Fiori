@@ -30,6 +30,29 @@ sap.ui.define([
       });
       let CoCdCountryModel = new JSONModel(CountryList.value);
       this.getView().setModel(CoCdCountryModel, "CoCdCountryModel");
+
+      const GLSelectCoA = await $.ajax({
+				type: "get",
+				url: "/gl/SelectCoA"
+			});
+      let SelectCoAModel = new JSONModel(GLSelectCoA.value);
+			this.getView().setModel(SelectCoAModel, "SelectCoAModel");
+      
+      const CoCdSelectFY = await $.ajax({
+				type: "get",
+				url: "/cocd/CoCd_Fis_Y_Variant"
+			});
+      let SelectCoCdFYModel = new JSONModel(CoCdSelectFY.value);
+			this.getView().setModel(SelectCoCdFYModel, "SelectCoCdFYModel");
+
+      const CoCdSelectCoArea = await $.ajax({
+				type: "get",
+				url: "/cocd/CoCd_Co_Area"
+			});
+      let SelectCoAreaModel = new JSONModel(CoCdSelectCoArea.value);
+			this.getView().setModel(SelectCoAreaModel, "SelectCoAreaModel");
+
+
     },
     onCreate: async function () {
       var temp = {
@@ -131,9 +154,8 @@ sap.ui.define([
 
     // 국가 선택용 다이어로그 특정 row 선택 시 생성 페이지 Input에 값 입력
     getCountryContext: function (oEvent) {
-      console.log(oEvent.getParameters());
-      this.byId("CoCdCountry").setValue(oEvent.getParameters().cellControl.mProperties.text);
-      console.log(this.byId("CoCdCountry").getValue());
+      let rowIndex = oEvent.getParameters().rowIndex;
+			this.byId("CoCdCountry").setValue(oEvent.getParameters().rowBindingContext.oModel.oData[rowIndex].bp_nation_code); 
       this.onCloseCountryDialog();
 
     },
@@ -146,8 +168,148 @@ sap.ui.define([
       this.getOwnerComponent().getRouter().navTo("CompanyCodeList");
     },
 
+		onSelectFiscalYear: function(oEvent) {
+			
+		},
+
+    //계정과목표 선택용 fragment 함수
+		onSelectCoA: function(oEvent) {
+			if(!this.pDialog){
+				this.pDialog = this.loadFragment({
+					name:"project2.view.fragment.CreateInputCoA"
+				});
+			}
+			this.pDialog.then(function(oDialog){
+				oDialog.open();
+			});  
+		},
+    onSearchCoADialog: function() {
+			var SearchInputCoA = this.byId("SearchInputCoA").getValue();
+			var aFilter = [];
+
+			if (SearchInputCoA) {
+				aFilter = new Filter({
+					filters: [
+						new Filter("gl_coa", FilterOperator.Contains, SearchInputCoA),
+						new Filter("gl_coa_content", FilterOperator.Contains, SearchInputCoA)
+					],
+					and: false
+				});
+			}
+
+			let oTable = this.byId("CoASelectTable").getBinding("rows"); 
+            oTable.filter(aFilter);
+		},
+
+		onSearchCoAReset: function() {
+			this.byId("SearchInputCoA").setValue("");
+			this.onSearchCoADialog();
+		},
+
+		onCloseCoADialog: function() {
+			this.byId("CoADialog").destroy();
+			this.pDialog = null;
+		},
+    getCoAContext: function(oEvent) {
+			let rowIndex = oEvent.getParameters().rowIndex;
+			this.byId("CoCdCoa").setValue(oEvent.getParameters().rowBindingContext.oModel.oData[rowIndex].gl_coa); 
+			this.onCloseCoADialog();
+		},
+
+    //회계연도 오브젝트 선택 fragment
+		onSelectFiscalYear: function() {
+      if(!this.pDialog){
+				this.pDialog = this.loadFragment({
+					name:"project4.view.fragment.CreateInputCoCdFiscalYear"
+				});
+			}
+			this.pDialog.then(function(oDialog){
+				oDialog.open();
+			});  
+
+		},
 
 
+    onSearchCoCdFYDialog: function() {
+			var SearchInputCoCarea = this.byId("SearchInputCoCarea").getValue();
+			var aFilter = [];
+
+			if (SearchInputCoCarea) {
+				aFilter = new Filter({
+					filters: [
+						new Filter("com_fiscal_year", FilterOperator.Contains, SearchInputCoCarea),
+						new Filter("com_fiscal_year_variant_name", FilterOperator.Contains, SearchInputCoCarea)
+					],
+					and: false
+				});
+			}
+
+			let oTable = this.byId("CoCdFYSelectTable").getBinding("rows"); 
+            oTable.filter(aFilter);
+		},
+
+		onSearchCoCdFYReset: function() {
+			this.byId("SearchInputCoCarea").setValue("");
+			this.onSearchCoADialog();
+		},
+
+		onCloseCoCdFYDialog: function() {
+			this.byId("CoCdFYDialog").destroy();
+			this.pDialog = null;
+		},
+    getCoCdFYContext: function(oEvent) {
+			let rowIndex = oEvent.getParameters().rowIndex;
+			this.byId("CoCdFiscalYear").setValue(oEvent.getParameters().rowBindingContext.oModel.oData[rowIndex].com_fiscal_year); 
+			this.onCloseCoCdFYDialog();
+		},
+
+
+    //관리회계영역 fragment용 함수
+    onSelectCoArea: function() {
+      if(!this.pDialog){
+				this.pDialog = this.loadFragment({
+					name:"project4.view.fragment.CreateInputCoCdCoArea"
+				});
+			}
+			this.pDialog.then(function(oDialog){
+				oDialog.open();
+			});  
+
+		},
+
+
+    onSearchCoAreaDialog: function() {
+			var SearchInputCoCarea = this.byId("SearchInputCoCarea").getValue();
+			var aFilter = [];
+
+			if (SearchInputCoCarea) {
+				aFilter = new Filter({
+					filters: [
+						new Filter("com_co_area", FilterOperator.Contains, SearchInputCoCarea),
+						new Filter("com_co_area_content", FilterOperator.Contains, SearchInputCoCarea)
+					],
+					and: false
+				});
+			}
+
+			let oTable = this.byId("CoAreaSelectTable").getBinding("rows"); 
+            oTable.filter(aFilter);
+		},
+
+		onSearchCoAreaReset: function() {
+			this.byId("SearchInputCoCarea").setValue("");
+			this.onSearchCoADialog();
+		},
+
+		onCloseCoCdCoAreaDialog: function() {
+			this.byId("CoCdCoAreaDialog").destroy();
+			this.pDialog = null;
+		},
+    getCoAreaContext: function(oEvent) {
+			let rowIndex = oEvent.getParameters().rowIndex;
+			this.byId("CoCdCoArea").setValue(oEvent.getParameters().rowBindingContext.oModel.oData[rowIndex].com_co_area); 
+			this.onCloseCoCdCoAreaDialog();
+		},
 
   });
 });
