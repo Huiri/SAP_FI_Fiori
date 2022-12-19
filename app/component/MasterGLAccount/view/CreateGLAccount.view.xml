@@ -16,13 +16,6 @@
 		headerContentPinnable="false">
 		<uxap:headerTitle>
 			<uxap:ObjectPageDynamicHeaderTitle id="_IDGenObjectPageDynamicHeaderTitle1">
-				<!-- <uxap:breadcrumbs>
-					<Breadcrumbs id="breadcrumbsId" currentLocationText="Object Page Example" >
-						<Link id="_IDGenLink1" text="Page 1 a very long link" press="handleLink1Press"/>
-						<Link id="_IDGenLink2" text="Page 2 long link" press="handleLink2Press"/>
-					</Breadcrumbs>
-				</uxap:breadcrumbs> -->
-
 				<uxap:expandedHeading>
                     <VBox >
                         <HBox height="3rem">
@@ -35,10 +28,9 @@
 
 				<uxap:snappedHeading>
                     <VBox id="_IDGenVBox2">
-                        <HBox id="_IDGenHBox1" height="3rem">
-                            <Button id="_IDGenButton1" press=".toBack" type="Back" />
-                            <Title id="_IDGenTitle1" text="New G/L계정 마스터 데이터 생성" class="sapUiTinyMarginTop"/>
-						<!-- <ObjectMarker type="Favorite" class="sapUiTinyMarginBegin"/> -->
+                        <HBox id="_IDGenHBox1">
+                            <Button press=".toBack" type="Back" />
+                            <Title text="New G/L계정 마스터 데이터 생성"/>
 					    </HBox>
                         <Text id="_IDGenText6" text="{GLDataModel>/gl_acct_content}" class="sapUiMediumMarginBegin"/>
                     </VBox>
@@ -51,38 +43,10 @@
 		</uxap:headerTitle>
 
 		<uxap:headerContent>
-			<!-- <FlexBox id="_IDGenFlexBox2" wrap="Wrap">
-				<Avatar id="_IDGenAvatar2" class="sapUiSmallMarginEnd" src="./test-resources/sap/uxap/images/imageID_275314.png"  displaySize="L" />
-
-					<layout:VerticalLayout id="_IDGenVerticalLayout1" class="sapUiSmallMarginBeginEnd">
-						<Link id="_IDGenLink3" text="+33 6 4512 5158"/>
-						<Link id="_IDGenLink4" text="DeniseSmith@sap.com"/>
-					</layout:VerticalLayout>
-
-					<layout:HorizontalLayout id="_IDGenHorizontalLayout1" class="sapUiSmallMarginBeginEnd">
-						<Image id="_IDGenImage1" src="./test-resources/sap/uxap/images/linkedin.png"/>
-						<Image id="_IDGenImage2" src="./test-resources/sap/uxap/images/Twitter.png" class="sapUiSmallMarginBegin"/>
-					</layout:HorizontalLayout>
-
-				<layout:VerticalLayout id="_IDGenVerticalLayout2" class="sapUiSmallMarginBeginEnd">
-					<Label id="_IDGenLabel1" text="Hello! I am Denise and I use UxAP"/>
-					<VBox id="_IDGenVBox1">
-						<Label id="_IDGenLabel2" text="Achieved goals"/>
-						<ProgressIndicator id="_IDGenProgressIndicator1" percentValue="30" displayValue="30%"/>
-					</VBox>
-				</layout:VerticalLayout>
-
-				<layout:VerticalLayout id="_IDGenVerticalLayout3" class="sapUiSmallMarginBeginEnd">
-					<Label id="_IDGenLabel3" text="San Jose, USA"/>
-				</layout:VerticalLayout>
-			</FlexBox> -->
 		</uxap:headerContent>
 
 		<uxap:sections>
 			<uxap:ObjectPageSection id="_IDGenObjectPageSection0" title="헤더" >
-				<!-- <uxap:heading>
-					<MessageStrip id="_IDGenMessageStrip1" text="Lorem Ipsum is simply dummy text of the printing and typesetting industry." type="Error" />
-				</uxap:heading> -->
 				<uxap:subSections >
 					<uxap:ObjectPageSubSection id="_IDGenObjectPageSubSection0"  title="헤더">
 						<uxap:blocks>
@@ -104,32 +68,51 @@
 
                                 <VBox id="_IDGenVBox3" class="sapUiSmallMarginBottom">
                                     <Label id="_IDGenLabel6" text="계정과목표" labelFor="CoA"/>
-									<Input id="CoA" showValueHelp="true" valueHelpRequest=".onSelectCoA" required="true"/>
+									<Input 
+										id="CoA" 
+										showValueHelp="true" 
+										valueHelpRequest=".onSelectCoA" 
+										required="true"
+										value="{copyCoCdDataModel>/CoA}"/>
 
                                 </VBox>
                                 <VBox id="_IDGenVBox4" class="sapUiSmallMarginBottom">
                                     <Label id="_IDGenLabel7" text="G/L 계정 유형" labelFor="GLAcctType" />
 									
-									<Select id="GLAcctType" width="100%" required="true" forceSelection="false"
+									<Select 
+										id="GLAcctType" 
+										width="100%" 
+										required="true" 
+										forceSelection="false"
                                 		items="{
 											path: 'SelectOption>/AccountTypeList',
 											sorter: { path: 'AccountTypeList' }
-										}">
+										}"
+										selectedKey="{copyCoCdDataModel>/GLAcctType}">
 										<core:Item key="{SelectOption>AccountType}" text="{SelectOption>Value}"/>
                             		</Select>
                                 </VBox>
                                 <VBox id="_IDGenVBox5" class="sapUiSmallMarginBottom">
                                     <Label id="_IDGenLabel8" text="계정 그룹" labelFor="GLGroup" />
-									<Input id="GLGroup" showValueHelp="true" valueHelpRequest=".onSelectGLGrp" required="true"/>
+									<Input 
+										id="GLGroup" 
+										showValueHelp="true" 
+										valueHelpRequest=".onSelectGLGrp" 
+										required="true"
+										selectedKey="{copyCoCdDataModel>/GLGroup}"/>
 
                                 </VBox>
                                 <VBox id="_IDGenVBox6" class="sapUiSmallMarginBottom">
                                     <Label id="_IDGenLabel9" text="손익계산서 계정 유형" />
- 									<Select id="GLPLAcctType" width="100%" forceSelection="false"
+ 									<Select 
+										id="GLPLAcctType" 
+										width="100%" 
+										forceSelection="false"
                                 		items="{
 											path: 'SelectOption>/GLPLAcctTypeList',
 											sorter: { path: 'GLPLAcctTypeList' }
-										}">
+										}"
+										selectedKey="{copyCoCdDataModel>/GLPLAcctType}">
 										<core:Item key="{SelectOption>PLType}" text="{SelectOption>Value}"/>
                             		</Select>
 
@@ -137,11 +120,15 @@
                                 </VBox>
                                 <VBox id="_IDGenVBox7">
                                     <Label id="_IDGenLabel10" text="기능 영역"/>
- 									<Select id="FuncArea" width="100%" forceSelection="false"
+ 									<Select 
+										id="FuncArea" 
+										width="100%" 
+										forceSelection="false"
                                 		items="{
 											path: 'SelectOption>/FunctionAreaList',
 											sorter: { path: 'FunctionAreaList' }
-										}">
+										}"
+										selectedKey="{copyCoCdDataModel>/FuncArea}">
 										<core:Item key="{SelectOption>FuncArea}" text="{SelectOption>Value}"/>
                             		</Select>
 
@@ -155,12 +142,18 @@
 								<Title text="내역(유지보수 언어)"/>
                                 <VBox id="_IDGenVBox8" class="sapUiSmallMarginBottom">
                                     <Label id="_IDGenLabel13" text="내역" required="true"/>
-                                    <Input id="GLAcctContent" class="sapUiTinyMarginBegin"/>  
+                                    <Input 
+										id="GLAcctContent" 
+										class="sapUiTinyMarginBegin"
+										value="{copyCoCdDataModel>/GLAcctContent}" />  
 
                                 </VBox>
                                 <VBox id="_IDGenVBox9">
                                     <Label id="_IDGenLabel12" text="G/L 계정 설명" />
-                                    <Input id="GLAccDesc" class="sapUiTinyMarginBegin"/>  
+                                    <Input 
+										id="GLAccDesc" 
+										class="sapUiTinyMarginBegin"
+										value="{copyCoCdDataModel>/GLAccDesc}"/>  
 
                                 </VBox>
 
@@ -175,17 +168,14 @@
 			</uxap:ObjectPageSection>
 
 			<uxap:ObjectPageSection id="_IDGenObjectPageSection2" title="회사코드 데이터">
-					<!-- <uxap:heading>
-						<MessageStrip id="_IDGenMessageStrip2" text="Lorem Ipsum is simply dummy text of the printing and typesetting industry." type="Error" />
-					</uxap:heading> -->
-					<uxap:subSections>
+				<uxap:subSections>
 					<uxap:ObjectPageSubSection id="_IDGenObjectPageSubSection2">
 						<uxap:blocks>
 							<VBox>
 								<t:Table
 									id="GlAccountTable"
 									selectionMode="None"
-									rows="{copyCoCdDataModel>/}" 
+									rows="{copyCoCdDataModel>/table}" 
 									width="100%">
 									<t:extension> 
 										<OverflowToolbar id="_IDGenOverflowToolbar1" >
@@ -258,27 +248,6 @@
 					</uxap:ObjectPageSubSection>
 				</uxap:subSections>
 			</uxap:ObjectPageSection>
-
-			<!-- <uxap:ObjectPageSection titleUppercase="false" id="employmentSection" title="Employment">
-				<uxap:subSections>
-					<uxap:ObjectPageSubSection id="employmentSectionSS1" title="Job information" titleUppercase="false">
-						<uxap:blocks>
-						</uxap:blocks>
-					</uxap:ObjectPageSubSection>
-
-					<uxap:ObjectPageSubSection id="employmentSectionSS2" title="Employee Details" importance="Medium" titleUppercase="false">
-						<uxap:blocks>
-						</uxap:blocks>
-						<uxap:moreBlocks>
-						</uxap:moreBlocks>
-					</uxap:ObjectPageSubSection>
-
-					<uxap:ObjectPageSubSection id="employmentSectionSS3" title="Job Relationship" importance="Low" titleUppercase="false">
-						<uxap:blocks>
-						</uxap:blocks>
-					</uxap:ObjectPageSubSection>
-				</uxap:subSections>
-			</uxap:ObjectPageSection> -->
 		</uxap:sections>
 		<uxap:footer>
 			<OverflowToolbar id="_IDGenOverflowToolbar2" visible="{=${editModel>/editable}}">

@@ -25,35 +25,35 @@
                 <form:content class="sapUiLargeMarginBeginEnd">
                     <VBox>
                         <Label text="회사코드 : "/>
-                        <Input id="CompanyCode" valueHelpRequest="" showValueHelp="true"/>
+                        <MultiInput id="CompanyCode" valueHelpRequest=".onValueHelpCoCdList" showValueHelp="true"/>
                         <layoutData>
                             <layout:GridData span="XL2 L2 M6 S12"/>
                         </layoutData>
                     </VBox>
                     <VBox>
                         <Label text="회사명 : "/>
-                        <Input id="CompanyCodeName" valueHelpRequest=""/>
+                        <Input id="CompanyCodeName"/>
                         <layoutData>
                             <layout:GridData span="XL2 L2 M6 S12"/>
                         </layoutData>
                     </VBox>
                     <VBox>
                         <Label text="회사 국가 : "/>
-                        <Input id="CompanyCountry" valueHelpRequest="" showValueHelp="true"/>
+                        <MultiInput id="CompanyCountry" valueHelpRequest=".onValueHelpCountryList" showValueHelp="true"/>
                         <layoutData>
                             <layout:GridData span="XL2 L2 M6 S12"/>
                         </layoutData>
                     </VBox>
                     <VBox>
                         <Label text="회사 통화 : "/>
-                        <Input id="CompanyCurrency" valueHelpRequest=""/>
+                        <Input id="CompanyCurrency"/>
                         <layoutData>
                             <layout:GridData span="XL2 L2 M6 S12"/>
                         </layoutData>
                     </VBox>
                     <VBox>
                         <Label text="회사 계정과목표 : "/>
-                        <Input id="CompanyCoa" valueHelpRequest="" showValueHelp="true"/>
+                        <MultiInput id="CompanyCoa" valueHelpRequest=".onValueHelpCoA" showValueHelp="true"/>
                         <layoutData>
                             <layout:GridData span="XL2 L2 M6 S12"/>
                         </layoutData>
@@ -70,7 +70,7 @@
         </f:DynamicPageHeader>
         </f:header>
         <f:content class="sapUiSmallMargin">
-        <t:Table id="CompanyCodeListTable" rows="{CompanyCodeListModel>/}" selectionMode="MultiToggle" rowActionCount="1" width="auto" visibleRowCount="20">
+        <t:Table id="CompanyCodeListTable" rows="{CompanyCodeListModel>/}" rowActionCount="1" visibleRowCount="20">
             <t:rowActionTemplate>
                 <t:RowAction>
                     <t:items>
@@ -83,9 +83,8 @@
                 <OverflowToolbar>
                     <Text id="totalNumber" class="sapUiTinyMarginBottom"/>
                     <ToolbarSpacer/>
-                        <MenuButton type="Transparent" text="생성">
-                        </MenuButton>
-                    <Button icon="sap-icon://excel-attachment" tooltip="Excel Download" press=".onDataExport" type="Default"/>
+                        <Button type="Transparent" text="생성" press=".toCreateCoCd"/>
+                        <Button icon="sap-icon://excel-attachment" tooltip="Excel Download" press=".onDataExport"/>
                 </OverflowToolbar>
             </t:extension>
             
