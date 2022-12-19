@@ -8,6 +8,9 @@ sap.ui.define([
 	return Controller.extend("project2.controller.Home", {
 		toGLMasterList : function(){
 			this.getOwnerComponent().getRouter().navTo("GLAccountList");
+		},
+		toSelectFS : function() {
+			this.getOwnerComponent().getRouter().navTo("SelectFS")
 		}
 	});
 });

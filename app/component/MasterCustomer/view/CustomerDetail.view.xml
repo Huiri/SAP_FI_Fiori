@@ -6,6 +6,7 @@
 	xmlns:layout="sap.ui.layout"
 	xmlns:m="sap.m"
 	xmlns:c="sap.ui.core"
+    xmlns:form="sap.ui.layout.form"
 	displayBlock="true"
 	height="100%"
 	busyIndicatorDelay="0"
@@ -40,7 +41,7 @@
 
     <headerContent>
         <m:FlexBox wrap="Wrap">
-            <m:Avatar class="sapUiSmallMarginEnd" src="sap-icon://customer"  displaySize="L" />
+            <m:Avatar id="mAvatar" class="sapUiSmallMarginEnd" src="sap-icon://customer"  displaySize="L" />
 
                 <layout:HorizontalLayout class="sapUiSmallMarginBeginEnd">
                     <m:VBox class="sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom">
@@ -85,7 +86,7 @@
                             visible="{=!${visibleMode>/visible}}"
                             forceSelection="false"
                             items="{BpCreditStatus>/bpCreditStatus}">
-                                <c:Item key="{BpCreditStatus>key}" text="{BpCreditStatus>value}" />
+                                <c:Item key="{BpCreditStatus>key}" text="{BpCreditStatus>value}"/>
                         </m:Select>
                     </m:VBox>
                 </layout:VerticalLayout>
@@ -262,8 +263,8 @@
                                     id="bpCorpTypeOrg" 
                                     visible="{=!${visibleMode>/visible}}"
                                     forceSelection="false">
-                                    <c:Item key="법인(01)" text="법인(01)" />
-                                    <c:Item key="개인(02)" text="개인(02)" />
+                                    <c:Item key="법인" text="법인" />
+                                    <c:Item key="개인" text="개인" />
                                 </m:Select>    
                             </m:VBox>
                             <m:VBox class="sapUiSmallMarginTopBottom">
@@ -437,57 +438,61 @@
         <ObjectPageSection titleUppercase="false" title="주소">
         
             <subSections>
-                <ObjectPageSubSection title="주소">
+                <ObjectPageSubSection title="주소" >
                     <blocks>
-                        <layout:Grid>
-                             <layout:HorizontalLayout class="sapUiSmallMarginBeginEnd">
-                                <m:VBox class="sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom">
-                                    <m:Label text="도로 주소" class="propertyColumn"/>
-                                    <m:Text text="{bpModel>/bp_road_address}" visible="{=${visibleMode>/visible}}" />
-                                    <m:Input id="bpRoadAddress" value="{bpModel>/bp_road_address}" visible="{=!${visibleMode>/visible}}"/>
-
-                                </m:VBox>
-                                <m:VBox class="sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom">
-                                    <m:Label text="우편 번호" class="propertyColumn" />
-                                    <m:Text text="{bpModel>/bp_postal_code}" visible="{=${visibleMode>/visible}}"/>
-                                    <m:Input id="bpPostalCode" value="{bpModel>/bp_postal_code}" visible="{=!${visibleMode>/visible}}"/>
-
-                                </m:VBox>
-                                <m:VBox class="sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom">
-                                    <m:Label text="국가 지역" class="propertyColumn"/>
-                                    <m:Text text="{bpModel>/bp_nation}" visible="{=${visibleMode>/visible}}" />
-                                    <m:Input id="bpNation" value="{bpModel>/bp_nation}"  visible="{=!${visibleMode>/visible}}" showValueHelp="true" valueHelpRequest=".EditInputCountry"/>
-                                </m:VBox>
-                                <layout:layoutData>
-                                    <layout:GridData span="XL12 L12 M12 S12"/>
-                                </layout:layoutData>
-                            </layout:HorizontalLayout>
-
-                            <layout:HorizontalLayout class="sapUiSmallMarginBeginEnd">
-                                <m:VBox class="sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom">
-                                    <m:Label text="번지" class="propertyColumn" />
-                                    <m:Text text="{bpModel>/bp_street_address}" visible="{=${visibleMode>/visible}}" />
-                                    <m:Input id="bpStreetAddress" value="{bpModel>/bp_street_address}" visible="{=!${visibleMode>/visible}}"/>
-
-                                </m:VBox>
-                                <m:VBox class="sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom">
-                                    <m:Label text="도시" class="propertyColumn" />
-                                    <m:Text text="{bpModel>/bp_city}" visible="{=${visibleMode>/visible}}" />
-                                    <m:Input id="bpCity" value ="{bpModel>/bp_city}" visible="{=!${visibleMode>/visible}}"/>
-
-                                </m:VBox>
-                                <m:VBox class="sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom">
-                                    <m:Label text="지역" class="propertyColumn"/>
-                                    <m:Text text="{bpModel>/bp_region}" visible="{=${visibleMode>/visible}}" />
-                                    <m:Input id="bpRegion" value="{bpModel>/bp_region}" visible="{=!${visibleMode>/visible}}"/>
-                                </m:VBox>
-                                <layout:layoutData>
-                                    <layout:GridData span="XL12 L12 M12 S12"/>
-                                </layout:layoutData>
-                            </layout:HorizontalLayout>
-                        </layout:Grid>
-                       
-                        
+                    <layout:VerticalLayout class="sapUiSmallMarginBeginEnd">
+                        <m:VBox class="sapUiSmallMarginTopBottom">
+                            <m:Label text="도로 주소" class="propertyColumn"/>
+                            <m:Text text="{bpModel>/bp_road_address}" visible="{=${visibleMode>/visible}}" />
+                            <m:Input id="bpRoadAddress" value="{bpModel>/bp_road_address}" visible="{=!${visibleMode>/visible}}"/>
+                        </m:VBox>
+                        <m:VBox class="sapUiSmallMarginTopBottom">
+                            <m:Label text="우편 번호" class="propertyColumn" />
+                            <m:Text text="{bpModel>/bp_postal_code}" visible="{=${visibleMode>/visible}}"/>
+                            <m:Input id="bpPostalCode" value="{bpModel>/bp_postal_code}" visible="{=!${visibleMode>/visible}}"/>
+                        </m:VBox>
+                            <layout:layoutData>
+                                <layout:GridData span="XL4 L4 M6 S12"/>
+                            </layout:layoutData>
+                    </layout:VerticalLayout>
+                    <layout:VerticalLayout class="sapUiSmallMarginBeginEnd">
+                            <m:VBox class="sapUiSmallMarginTopBottom">
+                                <m:Label text="국가 지역" class="propertyColumn"/>
+                                <m:Text text="{bpModel>/bp_nation}" visible="{=${visibleMode>/visible}}" />
+                                <m:Input id="bpNation" value="{bpModel>/bp_nation}"  visible="{=!${visibleMode>/visible}}" showValueHelp="true"/>
+                            </m:VBox>
+                           
+                            <m:VBox class="sapUiSmallMarginTopBottom">
+                                <m:Label text="번지" class="propertyColumn" />
+                                <m:Text text="{bpModel>/bp_street_address}" visible="{=${visibleMode>/visible}}" />
+                                <m:Input id="bpStreetAddress" value="{bpModel>/bp_street_address}" visible="{=!${visibleMode>/visible}}"/>
+                            </m:VBox>
+                            <layout:layoutData>
+                                <layout:GridData span="XL4 L4 M6 S12"/>
+                            </layout:layoutData>
+                    </layout:VerticalLayout>
+                    <layout:VerticalLayout class="sapUiSmallMarginBeginEnd">
+                            <m:VBox class="sapUiSmallMarginTopBottom">
+                                <m:Label text="도시" class="propertyColumn" />
+                                <m:Text text="{bpModel>/bp_city}" visible="{=${visibleMode>/visible}}" />
+                                <m:Input id="bpCity" value ="{bpModel>/bp_city}" visible="{=!${visibleMode>/visible}}"/>
+                            </m:VBox>
+                            <m:VBox class="sapUiSmallMarginTopBottom">
+                                <m:Label text="지역" class="propertyColumn"/>
+                                <m:Text text="{bpModel>/bp_region}" visible="{=${visibleMode>/visible}}" />
+                                <m:Input id="bpRegion" value="{bpModel>/bp_region}" visible="{=!${visibleMode>/visible}}"/>
+                            </m:VBox>
+                            <layout:layoutData>
+                                <layout:GridData span="XL4 L4 M6 S12"/>
+                            </layout:layoutData>
+                    </layout:VerticalLayout>
+                    <layout:VerticalLayout class="sapUiSmallMarginBeginEnd">
+                        <m:VBox>
+                            <m:layoutData>
+                                <layout:GridData span="XL4 L4 M6 S6"/>
+                            </m:layoutData>
+                        </m:VBox>
+                    </layout:VerticalLayout>
                     </blocks>
                 </ObjectPageSubSection>
             </subSections>

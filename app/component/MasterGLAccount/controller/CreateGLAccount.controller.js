@@ -110,15 +110,30 @@ sap.ui.define([
 				temp.gl_acct_content = this.byId("GLAcctContent").getValue();
 				temp.gl_acct_descript = this.byId("GLAccDesc").getValue();
 				temp.gl_created = Today;
+				
+				// 그룹별 +1 코드 시작 
+				const acctGroup = await $.ajax({
+					type:"GET",
+					url: "/gl/GL?$filter=gl_acct_group eq '" + temp.gl_acct_group + "'&$orderby=gl_acct desc&$top=1" 
+				}); 
 
-				await fetch("/gl/GL", {
-					method : "POST",
-					body : JSON.stringify(temp),
-					headers : {
-						"Content-Type" : "application/json;IEEE754Compatible=true"
-					}
+				let acctGrpModel = new JSONModel(acctGroup.value);
+				this.getView().setModel(acctGrpModel,"acctGrpModel");
+				let oModel = this.getView().getModel("acctGrpModel");
+				let oData = oModel.oData;
+				let oGlAcct = parseInt(oData[0].gl_acct);
+				// console.log(oData);
+				// console.log(oGlAcct);
+
+				temp.gl_acct = String(oGlAcct + 1); 
+				// console.log(temp.gl_acct);
+				
+				await $.ajax({
+					type:"POST",
+					url:"/gl/GL",
+					contentType:"application/json;IEEE754Compatible=true",
+					data:JSON.stringify(temp)
 				})
-
 			}
 			console.log("asdf");
 			this.onReset();
@@ -373,6 +388,5 @@ sap.ui.define([
 			});
 		},
 
-	
 	});
 });

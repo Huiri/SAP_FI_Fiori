@@ -90,9 +90,10 @@
         <f:content>
             <t:Table
                 rowActionCount="1" 
-                id="GLAccountTable"
-                selectionMode="None"
-                rows="{GLDataModel>/}" 
+
+                id="GlAccountTable"
+                selectionMode="MultiToggle"
+                rows="{GlDataModel>/}" 
                 width="auto">
                 <t:extension> 
                     <OverflowToolbar id="_IDGenOverflowToolbar1" >

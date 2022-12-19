@@ -200,8 +200,15 @@
             "name" : "CreateGLAccount",
             "prefix": "CreateGLAccount"
           }
+        },
+        {
+          "name": "SelectFS",
+          "pattern": "SelectFS",
+          "target": {
+            "name" : "SelectFS",
+            "prefix": "SelectFS"
+          }
         }
-        
         
       ],
       "targets": {
@@ -239,6 +246,13 @@
           "clearControlAggregation": true,
           "viewId": "CreateGLAccount",
           "viewName": "CreateGLAccount"
+        },
+        "SelectFS" : {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": true,
+          "viewId": "SelectFS",
+          "viewName": "SelectFS"
         }
       }
     },
