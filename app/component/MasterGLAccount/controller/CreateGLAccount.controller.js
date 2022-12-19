@@ -15,7 +15,8 @@ sap.ui.define([
 	Controller, JSONModel, MessageBox, Filter, FilterOperator, Sorter, Fragment, SearchField, UIColumn, Text
 ) {
 	"use strict";
-	let CreateNum, Today;
+	let temp = [];
+	let Today;
 	return Controller.extend("project2.controller.CreateGLAccount", {
 		onInit: function () {
 
@@ -60,7 +61,7 @@ sap.ui.define([
                 type : "get",
                 url : cocdUrl
             })
-            console.log(CoCdData);
+            //console.log(CoCdData);
             let CoCdDataModel = new JSONModel(CoCdData.value);
             this.getView().setModel(CoCdDataModel, "CoCdDataModel");
 
@@ -99,8 +100,8 @@ sap.ui.define([
 			if(isError === false){
 				return;
 			} else {
-				let temp = new JSONModel(this.temp).oData;
-				// temp.gl_acct = this.byId("GLAcct").getText();
+				temp = new JSONModel(this.temp).oData;
+				temp.gl_acct = this.byId("GLAcct").getText();
 				temp.gl_coa = this.byId("CoA").getValue();
 				temp.gl_acct_type = this.byId("GLAcctType").getSelectedKey();
 				temp.gl_acct_group = this.byId("GLGroup").getValue();
@@ -109,24 +110,7 @@ sap.ui.define([
 				temp.gl_acct_content = this.byId("GLAcctContent").getValue();
 				temp.gl_acct_descript = this.byId("GLAccDesc").getValue();
 				temp.gl_created = Today;
-				
-				// 그룹별 +1 코드 시작 
-				const acctGroup = await $.ajax({
-					type:"GET",
-					url: "/gl/GL?$filter=gl_acct_group eq '" + temp.gl_acct_group + "'&$orderby=gl_acct desc&$top=1" 
-				}); 
-
-				let acctGrpModel = new JSONModel(acctGroup.value);
-				this.getView().setModel(acctGrpModel,"acctGrpModel");
-				let oModel = this.getView().getModel("acctGrpModel");
-				let oData = oModel.oData;
-				let oGlAcct = parseInt(oData[0].gl_acct);
-				// console.log(oData);
-				// console.log(oGlAcct);
-
-				temp.gl_acct = String(oGlAcct + 1); 
-				// console.log(temp.gl_acct);
-				
+								
 				await $.ajax({
 					type:"POST",
 					url:"/gl/GL",
@@ -229,9 +213,33 @@ sap.ui.define([
 
 		},
 
-		getGLGrpContext: function(oEvent) {
+		getGLGrpContext: async function(oEvent) {
 			let rowIndex = oEvent.getParameters().rowIndex;
 			this.byId("GLGroup").setValue(oEvent.getParameters().rowBindingContext.oModel.oData.GLAcctGroupList[rowIndex].GLAcctGrp); 
+			temp.gl_acct = this.byId("GLGroup").setValue(oEvent.getParameters().rowBindingContext.oModel.oData.GLAcctGroupList[rowIndex].GLAcctGrp)._lastValue; 
+
+			// 그룹별 +1 코드 시작 
+			const acctGroup = await $.ajax({
+				type:"GET",
+				url: "/gl/GL?$filter=gl_acct_group eq '" + temp.gl_acct + "'&$orderby=gl_acct desc&$top=1" 
+			}); 
+
+			let acctGrpModel = new JSONModel(acctGroup.value);
+			this.getView().setModel(acctGrpModel,"acctGrpModel");
+			let oModel = this.getView().getModel("acctGrpModel");
+			let oData = oModel.oData;
+			let oGlAcct = parseInt(oData[0].gl_acct);
+			//console.log(oData);
+			//console.log(oGlAcct);
+
+			temp.gl_acct = String(oGlAcct + 1); 
+			console.log(temp.gl_acct);
+		
+			this.byId("GLAcct").setText(temp.gl_acct);
+
+
+
+
 			this.onCloseGLGrpDialog();
 
 		},
@@ -247,7 +255,7 @@ sap.ui.define([
             this._oBasicSearchField = null;
             this.oWhitespaceDialog = null;
             var oModel = this.getView().getModel('CoCdDataModel');
-			console.log(oModel);
+			//console.log(oModel);
 
 			var oCodeTemplate = new Text({text: {path: 'CoCdDataModel>com_code'}, renderWhitespace: true});
             var oCoCdNameTemplate = new Text({text: {path: 'CoCdDataModel>com_code_name'}, renderWhitespace: true});
@@ -320,7 +328,7 @@ sap.ui.define([
                 oValueRequestData = oValueRequestModel.getProperty('/');
             
             var aTokens = oEvent.getParameter("tokens");
-            console.log(aTokens);
+            //console.log(aTokens);
             if(aTokens.length > 5) {
                 return sap.m.MessageBox.warning('5개만 선택하세요!');
             }
@@ -356,7 +364,7 @@ sap.ui.define([
 
 		onCoCdSelectSearch: function() {
 			let CoCdSearchInput = this._oBasicSearchField.getValue();
-            console.log(CoCdSearchInput);
+            //console.log(CoCdSearchInput);
             var aFilter = [];
 
             if(CoCdSearchInput) {
