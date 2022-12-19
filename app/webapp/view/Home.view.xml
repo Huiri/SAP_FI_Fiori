@@ -1,11 +1,48 @@
-<mvc:View 
-  controllerName="project1.controller.Home"
-  xmlns:mvc="sap.ui.core.mvc" 
-  xmlns="sap.m" 
-  displayBlock="true">
-  <MessagePage id="_IDGenMessagePage1"
-    text="환영합니다." 
-    icon="sap-icon://home">
-  </MessagePage>
-
+<mvc:View
+	controllerName="project1.controller.Home"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+>
+	
+				<GenericTile
+					id="_IDGenGenericTile2"
+					press="onCustomer"
+					class="sapUiTinyMarginBegin sapUiTinyMarginTop"
+					header="Business Partner"
+				>
+					<TileContent id="_IDGenTileContent5">
+						<ImageContent
+							id="_IDGenImageContent5"
+							src="sap-icon://customer-and-supplier"
+						/>
+					</TileContent>
+				</GenericTile>
+        			<GenericTile
+					id="_IDGenGenericTile6"
+					press="onGLAccount"
+					class="sapUiTinyMarginBegin sapUiTinyMarginTop"
+					header="총계정원장"
+				>
+					<TileContent id="_IDGenTileContent4">
+						<ImageContent
+							id="_IDGenImageContent4"
+							src="sap-icon://survey"
+						/>
+					</TileContent>
+				</GenericTile>
+        			<GenericTile
+					id="_IDGenGenericTile1"
+					press="onCompanyCode"
+					class="sapUiTinyMarginBegin sapUiTinyMarginTop"
+					header="회사코드"
+				>
+					<TileContent id="_IDGenTileContent1">
+						<ImageContent
+							id="_IDGenImageContent1"
+							src="sap-icon://factory"
+						/>
+					</TileContent>
+				</GenericTile>
+				
+					
 </mvc:View>

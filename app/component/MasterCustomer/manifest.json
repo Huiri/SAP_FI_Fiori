@@ -203,6 +203,14 @@
             "name" : "CreateCustomer",
             "prefix": "CreateCustomer"
           }
+        },
+        {
+          "name": "CustomerChart",
+          "pattern": "CustomerChart",
+          "target": {
+            "name" : "CustomerChart",
+            "prefix": "CustomerChart"
+          }
         }
       ],
       "targets": {
@@ -231,8 +239,15 @@
           "viewType": "XML",
           "transition": "slide",
           "clearControlAggregation": true,
-          "viewId": "CreateCustomer",
-          "viewName": "CreateCustomer"
+          "viewId": "CreatePersonCustomer",
+          "viewName": "CreatePersonCustomer"
+        },
+        "CustomerChart" : {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": true,
+          "viewId": "CustomerChart",
+          "viewName": "CustomerChart"
         }
       }
     },

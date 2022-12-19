@@ -12,7 +12,6 @@ sap.ui.define([
 
         onMyRoutePatternMatched : async function (oEvent) {
         
- 
         }
 
 

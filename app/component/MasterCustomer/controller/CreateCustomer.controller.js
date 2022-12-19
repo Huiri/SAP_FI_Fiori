@@ -2,9 +2,11 @@ sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/ui/model/json/JSONModel",
     "sap/m/MessageBox",
-], function (Controller,JSONModel,MessageBox) {
+	"sap/ui/model/Filter",
+    "sap/ui/model/FilterOperator",
+], function (Controller,JSONModel,MessageBox, Filter,FilterOperator) {
     "use strict";
-    let SelectedBpCategory, Today;
+    let selectedBpCategory, Today;
     return Controller.extend("project3.controller.CreateCustomer", {
         onInit: async function () {
             var bpCategorymode={
@@ -19,23 +21,37 @@ sap.ui.define([
 
         onMyRoutePatternMatched : async function (oEvent) {
             this.onClearField();
-            SelectedBpCategory = oEvent.getParameter("arguments").bpCategory;
-            //console.log(SelectedBpCategory);
+            selectedBpCategory = oEvent.getParameter("arguments").bpCategory;
+            //console.log(selectedBpCategory);
             
-            if (SelectedBpCategory == 1){
+            if (selectedBpCategory == 1){
                 this.getView().getModel("bpCategoryModel").setProperty("/category",false);
-                this.byId("BpCategory").setText("개인(1)");
+                this.byId("BpCategory").setText("개인");
             }else{
                 this.getView().getModel("bpCategoryModel").setProperty("/category",true);
-                this.byId("BpCategory").setText("조직(2)");
+                this.byId("BpCategory").setText("조직");
             }
-
-            
 
             let now = new Date();
             Today = now.getFullYear() + "." +(now.getMonth() + 1).toString().padStart(2,'0') + "." +now.getDate().toString().padStart(2,'0');
-        
+
+            const bpNum = await $.ajax({
+                type:"GET",
+                url: "/bp/BP" 
+            }); 
+            let bpNumModel = new JSONModel(bpNum);
+            this.getView().setModel(bpNumModel,"bpNumModel");
+            let oModel = this.getView().getModel("bpNumModel");
+            let oData = oModel.oData;
+            let totalNumber = parseInt(oModel.oData.value.length) -1 
+            let bpNumber = parseInt(oData.value[totalNumber].bp_number) + 1 
+            
+            // console.log(oData);
+            console.log(totalNumber);
+            console.log(bpNumber);
+
             this.getView().byId("BpCreatedDate").setText(Today);
+            this.getView().byId("BpNumber").setText(bpNumber);
         },
         toCustomerList :function () {
 			this.getOwnerComponent().getRouter().navTo("CustomerList");
@@ -48,13 +64,28 @@ sap.ui.define([
             });
 
             let BpCustomerModel = new JSONModel(customerList.value);
-            
             this.getView().setModel(BpCustomerModel,"BpCustomerModel");
+
+            //국가 지역 데이터 불러오기
+            const CountryList = await $.ajax({
+                type:"GET",
+                url:"/bp/BP_Nation_Region"
+            });
+            let BpCountryModel = new JSONModel(CountryList.value);
+            this.getView().setModel(BpCountryModel,"BpCountryModel");
+
+            //회사코드 데이터 불러오기
+            const CoCdList = await $.ajax({
+                type:"GET",
+                url:"/cocd/CoCd"
+            });
+
+            let BpCoCdModel = new JSONModel(CoCdList.value);
+            this.getView().setModel(BpCoCdModel,"BpCoCdModel");
         },
 
         onClearField: function() {
             this.byId("BpName").setValue(""),
-            this.byId("BpNumber").setValue(""),
             this.byId("BpCategory").setText(""),        
             this.byId("BpCompanyCode").setValue(""),
             this.byId("BpPersonTitle").setSelectedKey(""),
@@ -75,7 +106,7 @@ sap.ui.define([
            var temp={
                 bp_name : this.byId("BpName").getValue(),
                 bp_created_date : Today,
-                bp_number : this.byId("BpNumber").getValue(),
+                bp_number : this.byId("BpNumber").getText(),
                 bp_category : this.byId("BpCategory").getText(),        
                 bp_company_code : this.byId("BpCompanyCode").getValue(),
                 bp_person_title : this.byId("BpPersonTitle").getSelectedKey(),
@@ -91,7 +122,7 @@ sap.ui.define([
                 bp_report_submission : this.byId("BpReportSubmission").getSelected()
             }
 
-            if( SelectedBpCategory == 1) {
+            if( selectedBpCategory == 1) {
                 if( temp.bp_name === "" || 
                     temp.bp_number === "" || 
                     temp.bp_first_name === "" || 
@@ -109,7 +140,7 @@ sap.ui.define([
                     this.toCustomerList();
                 }
             }    
-            else if(SelectedBpCategory == 2){
+            else if(selectedBpCategory == 2){
                 if( temp.bp_name === "" || 
                     temp.bp_number === "" || 
                     temp.bp_organization_title === "")
@@ -126,6 +157,109 @@ sap.ui.define([
                     this.toCustomerList();
                 }   
             }
+        },
+
+        //국가 선택용 다이어로그 열기
+        onSelectCountry : function(){
+            if(!this.pDialog){
+				this.pDialog = this.loadFragment({
+					name:"project3.view.fragment.InputSingleCountry"
+				});
+			}
+			this.pDialog.then(function(oDialog){
+				oDialog.open();
+			});
+        },
+        
+        //국가 선택용 다이어로그 close 함수
+		onCloseCountryDialog: function() {
+			this.byId("CountryDialog").destroy();
+			this.pDialog = null;
+		},
+
+        // 국가 선택용 다이어로그 search 함수
+        onSearchCountryDialog: function() {
+			var SearchInputCountry = this.byId("SearchInputCountry").getValue();
+			var aFilter = [];
+
+			if (SearchInputCountry) {
+				aFilter = new Filter({
+					filters: [
+						new Filter("bp_nation", FilterOperator.Contains, SearchInputCountry),
+						new Filter("bp_nation_code", FilterOperator.Contains, SearchInputCountry),
+					],
+					and: false
+				});
+			}
+
+			let oTable = this.byId("CountrySelectTable").getBinding("rows");
+            oTable.filter(aFilter);
+
+		},
+
+        // 국가 선택용 다이어로그 검색창 clear용 함수
+		onSearchCountryReset: function() {
+			this.byId("SearchInputCountry").setValue("");
+            this.onSearchCountryDialog();
+		},
+
+        // 국가 선택용 다이어로그 특정 row 선택 시 생성 페이지 Input에 값 입력
+        getCountryContext : function(oEvent){
+            this.byId("BpNation").setValue(oEvent.getParameters().cellControl.mProperties.text); 
+			this.onCloseCountryDialog();
+
+        },
+
+        // 회사코드 선택용 다이어로그 열기
+        onSelectCoCd : function(){
+            if(!this.pDialog){
+				this.pDialog = this.loadFragment({
+					name:"project3.view.fragment.CreateInputCoCd"
+				});
+			}
+			this.pDialog.then(function(oDialog){
+				oDialog.open();
+			});
+        },
+
+        // 회사코드 선택용 다이어로그 close 함수
+		onCloseCoCdDialog: function() {
+			this.byId("CoCdDialog").destroy();
+			this.pDialog = null;
+		},
+
+        // 회사코드 선택용 다이어로그 search 함수
+        onSearchCoCdDialog: function() {
+			var SearchInputCoCd = this.byId("SearchInputCoCd").getValue();
+			var aFilter = [];
+
+			if (SearchInputCoCd) {
+				aFilter = new Filter({
+					filters: [
+						new Filter("com_code", FilterOperator.Contains, SearchInputCoCd),
+						new Filter("com_code_name", FilterOperator.Contains, SearchInputCoCd),
+					],
+					and: false
+				});
+			}
+
+			let oTable = this.byId("CoCdSelectTable").getBinding("rows");
+            oTable.filter(aFilter);
+
+		},
+
+        // 회사코드 선택용 다이어로그 검색창 clear용 함수
+		onSearchCoCdReset: function() {
+			this.byId("SearchInputCoCd").setValue("");
+            this.onSearchCoCdDialog();
+		},
+
+        // 회사코드 선택용 다이어로그 특정 row 선택 시 생성 페이지 Input에 값 입력
+        getCoCdContext : function(oEvent){
+            this.byId("BpCompanyCode").setValue(oEvent.getParameters().cellControl.mProperties.text); 
+			this.onCloseCoCdDialog();
+
         }
+
     });
 });

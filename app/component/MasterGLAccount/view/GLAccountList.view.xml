@@ -49,18 +49,12 @@
                             <Label id="_IDGenLabel10" text="G/L 계정 유형 :"/>
                             	<MultiComboBox
                                     id="GLAcctType"
-                                    width="350px"
                                     items="{
                                         path: 'SelectOption>/AccountTypeList',
                                         sorter: { path: 'AccountTypeList' }
                                     }">
                                     <core:Item key="{SelectOption>AccountType}" text="{SelectOption>Value}"/>
                                 </MultiComboBox>
-                            <!-- <Select id="GlAcctType" width="100%"
-                                items="{SelectOption>/AccountTypeList}">
-                                <core:Item id="_IDGenItem1" key="{SelectOption>AccountType}" text="{SelectOption>Value}" />
-                    
-                            </Select> -->
                             <layoutData>
                                 <layout:GridData id="_IDGenGridData4" span="XL3 L3 M6 S12"/>
                             </layoutData>
@@ -69,7 +63,6 @@
                             <Label id="_IDGenLabel11" text="계정 그룹 :"/>
                             <MultiComboBox
                                     id="GLAcctGroup"
-                                    width="350px"
                                     items="{
                                         path: 'SelectOption>/GLAcctGroupList',
                                         sorter: { path: 'GLAcctGroupList' }
@@ -97,9 +90,10 @@
         <f:content>
             <t:Table
                 rowActionCount="1" 
-                id="GLAccountTable"
-                selectionMode="None"
-                rows="{GLDataModel>/}" 
+
+                id="GlAccountTable"
+                selectionMode="MultiToggle"
+                rows="{GlDataModel>/}" 
                 width="auto">
                 <t:extension> 
                     <OverflowToolbar id="_IDGenOverflowToolbar1" >
@@ -121,12 +115,6 @@
                 <t:columns>
                     <t:Column id="_IDGenColumn0" width="4rem">
                         <CheckBox id="checkAll" select=".onCheckExecute" />
-                        <!-- <t:template>
-                            <CheckBox 
-                            visible="{=${GLDataModel>request_state} === 'B' ? true : false}"
-                            selected="{GLDataModel>CHK}" 
-                            id="toBeDeleted"/>
-                        </t:template>   -->
                     </t:Column>
 
                     <t:Column id="_IDGenColumn1" hAlign="Center">
