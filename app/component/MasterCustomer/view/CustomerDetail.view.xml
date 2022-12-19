@@ -24,6 +24,7 @@
         <ObjectPageDynamicHeaderTitle>  
             <heading>
                 <m:HBox fitContainer="true" alignItems="Center">
+                    <m:Button type="Back" press=".toBack"/>
                     <m:Title id="bpName" text="{bpModel>/bp_name}" wrapping="true"/>
                 </m:HBox>
             </heading>
@@ -455,7 +456,7 @@
                                 <m:VBox class="sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom">
                                     <m:Label text="국가 지역" class="propertyColumn"/>
                                     <m:Text text="{bpModel>/bp_nation}" visible="{=${visibleMode>/visible}}" />
-                                    <m:Input id="bpNation" value="{bpModel>/bp_nation}"  visible="{=!${visibleMode>/visible}}" showValueHelp="true"/>
+                                    <m:Input id="bpNation" value="{bpModel>/bp_nation}"  visible="{=!${visibleMode>/visible}}" showValueHelp="true" valueHelpRequest=".EditInputCountry"/>
                                 </m:VBox>
                                 <layout:layoutData>
                                     <layout:GridData span="XL12 L12 M12 S12"/>

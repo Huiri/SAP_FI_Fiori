@@ -2,7 +2,9 @@ sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/ui/model/json/JSONModel",
     "sap/m/MessageBox",
-], function (Controller,JSONModel,MessageBox) {
+	"sap/ui/model/Filter",
+    "sap/ui/model/FilterOperator",
+], function (Controller,JSONModel,MessageBox, Filter,FilterOperator) {
     "use strict";
     let SelectedBpCategory, Today;
     return Controller.extend("project3.controller.CreateCustomer", {
@@ -48,13 +50,28 @@ sap.ui.define([
             });
 
             let BpCustomerModel = new JSONModel(customerList.value);
-            
             this.getView().setModel(BpCustomerModel,"BpCustomerModel");
+
+            //국가 지역 데이터 불러오기
+            const CountryList = await $.ajax({
+                type:"GET",
+                url:"/bp/BP_Nation_Region"
+            });
+            let BpCountryModel = new JSONModel(CountryList.value);
+            this.getView().setModel(BpCountryModel,"BpCountryModel");
+
+            //회사코드 데이터 불러오기
+            const CoCdList = await $.ajax({
+                type:"GET",
+                url:"/cocd/CoCd"
+            });
+
+            let BpCoCdModel = new JSONModel(CoCdList.value);
+            this.getView().setModel(BpCoCdModel,"BpCoCdModel");
         },
 
         onClearField: function() {
             this.byId("BpName").setValue(""),
-            this.byId("BpNumber").setValue(""),
             this.byId("BpCategory").setText(""),        
             this.byId("BpCompanyCode").setValue(""),
             this.byId("BpPersonTitle").setSelectedKey(""),
@@ -126,6 +143,109 @@ sap.ui.define([
                     this.toCustomerList();
                 }   
             }
+        },
+
+        //국가 선택용 다이어로그 열기
+        onSelectCountry : function(){
+            if(!this.pDialog){
+				this.pDialog = this.loadFragment({
+					name:"project3.view.fragment.InputSingleCountry"
+				});
+			}
+			this.pDialog.then(function(oDialog){
+				oDialog.open();
+			});
+        },
+        
+        //국가 선택용 다이어로그 close 함수
+		onCloseCountryDialog: function() {
+			this.byId("CountryDialog").destroy();
+			this.pDialog = null;
+		},
+
+        // 국가 선택용 다이어로그 search 함수
+        onSearchCountryDialog: function() {
+			var SearchInputCountry = this.byId("SearchInputCountry").getValue();
+			var aFilter = [];
+
+			if (SearchInputCountry) {
+				aFilter = new Filter({
+					filters: [
+						new Filter("bp_nation", FilterOperator.Contains, SearchInputCountry),
+						new Filter("bp_nation_code", FilterOperator.Contains, SearchInputCountry),
+					],
+					and: false
+				});
+			}
+
+			let oTable = this.byId("CountrySelectTable").getBinding("rows");
+            oTable.filter(aFilter);
+
+		},
+
+        // 국가 선택용 다이어로그 검색창 clear용 함수
+		onSearchCountryReset: function() {
+			this.byId("SearchInputCountry").setValue("");
+            this.onSearchCountryDialog();
+		},
+
+        // 국가 선택용 다이어로그 특정 row 선택 시 생성 페이지 Input에 값 입력
+        getCountryContext : function(oEvent){
+            this.byId("BpNation").setValue(oEvent.getParameters().cellControl.mProperties.text); 
+			this.onCloseCountryDialog();
+
+        },
+
+        // 회사코드 선택용 다이어로그 열기
+        onSelectCoCd : function(){
+            if(!this.pDialog){
+				this.pDialog = this.loadFragment({
+					name:"project3.view.fragment.CreateInputCoCd"
+				});
+			}
+			this.pDialog.then(function(oDialog){
+				oDialog.open();
+			});
+        },
+
+        // 회사코드 선택용 다이어로그 close 함수
+		onCloseCoCdDialog: function() {
+			this.byId("CoCdDialog").destroy();
+			this.pDialog = null;
+		},
+
+        // 회사코드 선택용 다이어로그 search 함수
+        onSearchCoCdDialog: function() {
+			var SearchInputCoCd = this.byId("SearchInputCoCd").getValue();
+			var aFilter = [];
+
+			if (SearchInputCoCd) {
+				aFilter = new Filter({
+					filters: [
+						new Filter("com_code", FilterOperator.Contains, SearchInputCoCd),
+						new Filter("com_code_name", FilterOperator.Contains, SearchInputCoCd),
+					],
+					and: false
+				});
+			}
+
+			let oTable = this.byId("CoCdSelectTable").getBinding("rows");
+            oTable.filter(aFilter);
+
+		},
+
+        // 회사코드 선택용 다이어로그 검색창 clear용 함수
+		onSearchCoCdReset: function() {
+			this.byId("SearchInputCoCd").setValue("");
+            this.onSearchCoCdDialog();
+		},
+
+        // 회사코드 선택용 다이어로그 특정 row 선택 시 생성 페이지 Input에 값 입력
+        getCoCdContext : function(oEvent){
+            this.byId("BpCompanyCode").setValue(oEvent.getParameters().cellControl.mProperties.text); 
+			this.onCloseCoCdDialog();
+
         }
+
     });
 });

@@ -19,26 +19,23 @@ sap.ui.define([
 	return Controller.extend("project2.controller.CreateGLAccount", {
 		onInit: function () {
 
-			// 나중에 지울 데이터 
-			this.getView().setModel(new JSONModel([
-				// {
-				// 	com_address: null,
-				// 	com_city: null,
-				// 	com_co_area: null,
-				// 	com_coa: null,
-				// 	com_code: null,
-				// 	com_code_name: null,
-				// 	com_country: null,
-				// 	com_currency: null,
-				// 	com_fiscal_year: null,
-				// 	com_language: null,
-				// 	com_vat_registration : null,
-				// }
-			]), 'copyCoCdDataModel');
-			
+			this._initModel();
+
 			const myRoute = this.getOwnerComponent().getRouter().getRoute("CreateGLAccount");
 			myRoute.attachPatternMatched(this.onMyRoutePatternMatched, this);
 		},
+
+		_initModel: function() {
+			// JSONModel - two-way binding model <-> view 
+			this.getView().setModel(new JSONModel(
+				{
+					table: []
+				}
+			), 'copyCoCdDataModel');
+			
+			// this.oCopyDataModel = this.getView().getModel('copyCoCdDataModel');
+		},
+
 		onMyRoutePatternMatched : function(oEvent) {
 			this.onDataView();
 			this.onReset();
@@ -303,7 +300,7 @@ sap.ui.define([
             var oView = this.getView(),
                 oModel = oView.getModel('copyCoCdDataModel'),
                 oValueRequestModel = oView.getModel('CoCdDataModel'),
-                oData = oModel.getProperty('/'),
+                oData = oModel.getProperty('/table'),
                 oValueRequestData = oValueRequestModel.getProperty('/');
             
             var aTokens = oEvent.getParameter("tokens");
@@ -325,7 +322,7 @@ sap.ui.define([
 
                     oData.push(aFindFilter[0]);
 
-                    oModel.setProperty('/', oData);
+                    oModel.setProperty('/table', oData);
                 }
                 
 			}.bind(this));
@@ -356,7 +353,7 @@ sap.ui.define([
                 });
             }
             this._filterTable(aFilter); 
-x
+
 		},
  
         /**
