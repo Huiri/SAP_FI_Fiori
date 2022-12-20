@@ -73,13 +73,7 @@
 									<VBox>
 										<Title
 											class="sapUiSmallMarginBegin sapUiSmallMarginEnd"
-											level="Auto"
 											text="관리"
-											textAlign="Initial"
-											titleStyle="Auto"
-											width=""
-											wrapping="false"
-											wrappingType="Normal"
 										/>
 
 										<VBox class="sapUiSmallMargin">
@@ -97,6 +91,7 @@
 											<Label id="_IDGenLabel7" text="G/L 계정 유형" labelFor="GLAcctType" />
 											
 											<Select 
+												change=".changeSelectGLType"
 												id="GLAcctType" 
 												width="100%" 
 												required="true" 
@@ -157,13 +152,7 @@
 									<VBox>
 										<Title
 											class="sapUiSmallMarginBegin sapUiSmallMarginEnd"
-											level="Auto"
 											text="내역(유지보수 언어)"
-											textAlign="Initial"
-											titleStyle="Auto"
-											width=""
-											wrapping="false"
-											wrappingType="Normal"
 										/>
 
 										<VBox id="_IDGenVBox8" class="sapUiSmallMargin">
