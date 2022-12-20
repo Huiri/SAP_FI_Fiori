@@ -426,5 +426,10 @@ sap.ui.define([
 			this._filterTable(aFilter);
 		},
 
+		toCompanyCodeDetail: function(oEvent) {
+			let selectedNum = oEvent.getParameters().row.mAggregations.cells[0].mProperties.text;
+			this.getOwnerComponent().getRouter().navTo("CoCdDetail", {num : selectedNum});
+		},
+
     });
 });
