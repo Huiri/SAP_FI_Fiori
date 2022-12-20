@@ -1,0 +1,82 @@
+<mvc:View controllerName="project3.controller.CustomerChartDetail"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:t="sap.ui.table"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core" 
+    xmlns:form="sap.ui.layout.form"
+    xmlns:layout="sap.ui.layout"
+    height="100%">
+
+    <f:DynamicPage id="CustomerListPage">
+        <f:title>
+            <f:DynamicPageTitle >
+                <f:heading>
+                    <HBox >
+                        <Button type="Back" press=".onBack"/>
+                        <Title id="title" text="신용상태 리스트"/>
+                    </HBox>
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+        </f:header>
+            <f:content class="sapUiSmallMargin">
+            <t:Table id="CustomerListTable" rows="{BpCustomerModel>/}" rowActionCount="1" visibleRowCount="20" selectionMode="None">
+                <t:rowActionTemplate>
+                    <t:RowAction>
+                        <t:items>
+                            <t:RowActionItem id="template" type="Navigation" press=".toCustomerDetail"></t:RowActionItem>
+                        </t:items>
+                    </t:RowAction>
+                </t:rowActionTemplate>                
+                <t:extension>
+                    <OverflowToolbar>
+                        <HBox>
+                            <ObjectStatus id="titleState"/>
+                            <Text id="totalNumber"/>
+                        </HBox>
+                    </OverflowToolbar>
+                </t:extension>
+                <t:columns>
+                    <t:Column hAlign="Center" sortProperty="bp_number" sorted="true">
+                        <Label text="BP"/>
+                        <t:template>
+                            <Text id="bpNumber" text="{BpCustomerModel>bp_number}"/>
+                        </t:template>
+                    </t:Column>
+                    <t:Column hAlign="Center" sortProperty="bp_name" sorted="true">
+                        <Label text="BP명"/>
+                        <t:template>
+                            <Text id="bpName" text="{BpCustomerModel>bp_name}"/>
+                        </t:template>
+                    </t:Column>
+                    <t:Column hAlign="Center" sortProperty="bp_company_code" sorted="true">
+                        <Label text="회사 코드"/>
+                        <t:template>
+                            <Text id="companyCode" text="{BpCustomerModel>bp_company_code}"/>
+                        </t:template>
+                    </t:Column>
+                    <t:Column hAlign="Center" sortProperty="bp_category" sorted="true">
+                        <Label text="BP 범주"/>
+                        <t:template>
+                            <Text id="bpCategory" text="{BpCustomerModel>bp_category}"/>
+                        </t:template>
+                    </t:Column>    
+                     <t:Column hAlign="Center">
+                        <Label text="신용 상태"/>
+                        <t:template>
+                            <ObjectStatus 
+                                id="bpCreditState"
+                                text="{BpCustomerModel>bp_credit_status}"
+                                state="{=${BpCustomerModel>bp_credit_status} === '신뢰'?'Success':
+                                        ${BpCustomerModel>bp_credit_status}==='보류'?'None':
+                                        'Error'}"/>
+                                </t:template>
+                    </t:Column>                    
+                </t:columns>
+            </t:Table>
+        </f:content>
+    </f:DynamicPage>
+
+</mvc:View>

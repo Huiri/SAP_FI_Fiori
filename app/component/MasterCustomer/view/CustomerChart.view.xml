@@ -22,11 +22,12 @@
                         <card:Header id="_IDGenHeader1" title="고객 신용 상태" iconSrc="sap-icon://donut-chart" />
                     </f:header>
                     <f:content>
-                         <micro:InteractiveDonutChart id="_IDGenInteractiveDonutChart1" class="sapUiMediumMarginTop"  displayedSegments="3">
+                         <micro:InteractiveDonutChart id="_IDGenInteractiveDonutChart1" class="sapUiMediumMarginTop"  displayedSegments="3" 
+                                selectionChanged=".onSelectionChanged">
                             <micro:segments>
-                                <micro:InteractiveDonutChartSegment id="_IDGenInteractiveDonutChartSegment1" label="신뢰" value="{CreditStatus>/trust}" displayedValue="{CreditStatus>/trustpercent}"  />
-                                <micro:InteractiveDonutChartSegment id="_IDGenInteractiveDonutChartSegment2" label="주의" value="{CreditStatus>/wait}" displayedValue="{CreditStatus>/waitpercent}" />
-                                <micro:InteractiveDonutChartSegment id="_IDGenInteractiveDonutChartSegment3" label="보류" value="{CreditStatus>/caution}" displayedValue="{CreditStatus>/cautionpercent}" />
+                                <micro:InteractiveDonutChartSegment id="trust" label="신뢰" value="{CreditStatus>/trust}" displayedValue="{CreditStatus>/trustpercent}"/>
+                                <micro:InteractiveDonutChartSegment id="caution" label="주의" value="{CreditStatus>/wait}" displayedValue="{CreditStatus>/waitpercent}" />
+                                <micro:InteractiveDonutChartSegment id="wait" label="보류" value="{CreditStatus>/caution}" displayedValue="{CreditStatus>/cautionpercent}"/>
                             </micro:segments>                           
                             
                         </micro:InteractiveDonutChart>              
@@ -44,7 +45,6 @@
                     </f:header>
                 <f:content >
                         <micro:ColumnMicroChart id="_IDGenColumnMicroChart1" size="Responsive"   allowColumnLabels="true"  >
-                          
 								<micro:columns  >
 									<micro:ColumnMicroChartData id="_IDGenColumnMicroChartData1" label="제출 완료" displayValue="{bpReportSubmitModel>/submitpercent}"  value="{bpReportSubmitModel>/submit}" color="Good"  />
 									<micro:ColumnMicroChartData id="_IDGenColumnMicroChartData2"  label="미제출" displayValue="{bpReportSubmitModel>/notsubmitpercent}"  value="{bpReportSubmitModel>/notsubmit}" color="Error"/>

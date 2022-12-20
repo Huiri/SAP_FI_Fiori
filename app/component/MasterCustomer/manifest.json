@@ -211,6 +211,14 @@
             "name" : "CustomerChart",
             "prefix": "CustomerChart"
           }
+        },
+        {
+          "name": "CustomerChartDetail",
+          "pattern": "CustomerChartDetail/{type}",
+          "target": {
+            "name" : "CustomerChartDetail",
+            "prefix": "CustomerChartDetail"
+          }
         }
       ],
       "targets": {
@@ -248,6 +256,13 @@
           "clearControlAggregation": true,
           "viewId": "CustomerChart",
           "viewName": "CustomerChart"
+        },
+        "CustomerChartDetail" : {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": true,
+          "viewId": "CustomerChartDetail",
+          "viewName": "CustomerChartDetail"
         }
       }
     },
