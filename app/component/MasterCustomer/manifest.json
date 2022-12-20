@@ -218,7 +218,7 @@
         },
         {
           "name": "EditCorres",
-          "pattern": "EditCorres/{obj}",
+          "pattern": "EditCorres",
           "target": {
             "name" : "EditCorres",
             "prefix": "EditCorres"
