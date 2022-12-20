@@ -23,35 +23,35 @@
         <f:DynamicPageHeader pinnable="true">
             <form:SimpleForm layout="ResponsiveGridLayout">
                 <form:content class="sapUiLargeMarginBeginEnd">
-                    <VBox>
+                    <VBox height="3rem">
                         <Label text="회사코드 : "/>
                         <MultiInput id="CompanyCode" valueHelpRequest=".onValueHelpCoCdList" showValueHelp="true"/>
                         <layoutData>
                             <layout:GridData span="XL2 L2 M6 S12"/>
                         </layoutData>
                     </VBox>
-                    <VBox>
+                    <VBox height="3rem">
                         <Label text="회사명 : "/>
                         <Input id="CompanyCodeName"/>
                         <layoutData>
                             <layout:GridData span="XL2 L2 M6 S12"/>
                         </layoutData>
                     </VBox>
-                    <VBox>
+                    <VBox height="3rem">
                         <Label text="회사 국가 : "/>
                         <MultiInput id="CompanyCountry" valueHelpRequest=".onValueHelpCountryList" showValueHelp="true"/>
                         <layoutData>
                             <layout:GridData span="XL2 L2 M6 S12"/>
                         </layoutData>
                     </VBox>
-                    <VBox>
+                    <VBox height="3rem">
                         <Label text="회사 통화 : "/>
                         <Input id="CompanyCurrency"/>
                         <layoutData>
                             <layout:GridData span="XL2 L2 M6 S12"/>
                         </layoutData>
                     </VBox>
-                    <VBox>
+                    <VBox height="3rem">
                         <Label text="회사 계정과목표 : "/>
                         <MultiInput id="CompanyCoa" valueHelpRequest=".onValueHelpCoA" showValueHelp="true"/>
                         <layoutData>

@@ -31,21 +31,21 @@
             <f:DynamicPageHeader id="_IDGenDynamicPageHeader1">
                 <form:SimpleForm id="_IDGenSimpleForm1" layout="ResponsiveGridLayout">
                     <form:content>
-                        <VBox id="_IDGenVBox2"> 
+                        <VBox height="3rem"> 
                             <Label id="_IDGenLabel8" text="계정과목표 :"/>
                             <MultiInput id="GLCoa" showValueHelp="true" valueHelpRequest=".onValueHelpCoA"/>
                             <layoutData>
                                 <layout:GridData id="_IDGenGridData2" span="XL3 L3 M6 S12"/>
                             </layoutData>
                         </VBox>
-                        <VBox id="_IDGenVBox3">
+                        <VBox  height="3rem">
                             <Label id="_IDGenLabel9" text="G/L 계정 :"/>
                             <MultiInput id="GLAcct" showValueHelp="true" valueHelpRequest=".onValueHelpGLAcc"/>
                             <layoutData>
                                 <layout:GridData id="_IDGenGridData3" span="XL3 L3 M6 S12"/>
                             </layoutData>
                         </VBox>
-                        <VBox id="_IDGenVBox4">
+                        <VBox  height="3rem">
                             <Label id="_IDGenLabel10" text="G/L 계정 유형 :"/>
                             	<MultiComboBox
                                     id="GLAcctType"
@@ -59,7 +59,7 @@
                                 <layout:GridData id="_IDGenGridData4" span="XL3 L3 M6 S12"/>
                             </layoutData>
                         </VBox>
-                        <VBox id="_IDGenVBox5">
+                        <VBox  height="3rem">
                             <Label id="_IDGenLabel11" text="계정 그룹 :"/>
                             <MultiComboBox
                                     id="GLAcctGroup"

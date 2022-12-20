@@ -23,7 +23,7 @@
             <f:DynamicPageHeader>
                 <form:SimpleForm layout="ResponsiveGridLayout">
                     <form:content class="sapUiLargeMarginBeginEnd">
-                        <VBox>
+                        <VBox height="3rem">
                             <Label text="비즈니스 파트너 : "/>
                             <MultiInput 
                                 id="BpName" 
@@ -34,7 +34,7 @@
                                 <layout:GridData span="XL2 L2 M6 S12"/>
                             </layoutData>
                         </VBox>
-                        <VBox>
+                        <VBox height="3rem">
                             <Label text="회사 코드 : "/>
                             <MultiInput 
                                 id="BpCompanyCode" 
@@ -44,7 +44,7 @@
                                 <layout:GridData span="XL2 L2 M6 S12"/>
                             </layoutData>
                         </VBox>
-                        <VBox>
+                        <VBox height="3rem">
                             <Label text="비즈니스 파트너 범주 : "/>
                             <Select width="100rem" id="BpCategory">
                                 <core:Item key="" text="전체" />
@@ -55,40 +55,40 @@
                                 <layout:GridData span="XL2 L2 M6 S12"/>
                             </layoutData>
                         </VBox>
-                         <VBox>
+                         <VBox height="3rem">
                             <layoutData>
                                 <layout:GridData span="XL12 L12 M6 S12"/>
                             </layoutData>
                         </VBox>                                             
-                        <VBox>
-                            <Label text="우편 번호 : "/>
+                        <VBox height="3rem">
+                            <Label text="우편번호 : "/>
                             <Input id="BpPostalCode"/>
                             <layoutData>
                                 <layout:GridData span="XL2 L2 M6 S12"/>
                             </layoutData>
                         </VBox>
-                        <VBox>
+                        <VBox height="3rem">
                             <Label text="국가/지역 : "/>
                             <MultiInput id="BpNation" valueHelpRequest=".onValueHelpCountryList" showValueHelp="true"/>
                             <layoutData>
                                 <layout:GridData span="XL2 L2 M6 S12"/>
                             </layoutData>
                         </VBox>
-                        <VBox>
+                        <VBox height="3rem">
                             <Label text="도시 : "/>
                             <Input id="BpCity"/>
                             <layoutData>
                                 <layout:GridData span="XL2 L2 M6 S12"/>
                             </layoutData>
                         </VBox>
-                        <VBox>
+                        <VBox height="3rem">
                             <Label text="도로 주소 : "/>
                             <Input id="BpRoadAddress"/>
                             <layoutData>
                                 <layout:GridData span="XL2 L2 M6 S12"/>
                             </layoutData>
                         </VBox>
-                        <VBox>
+                        <VBox height="3rem">
                             <layoutData>
                                 <layout:GridData span="XL2 L2 M6 S12"/>
                             </layoutData>
