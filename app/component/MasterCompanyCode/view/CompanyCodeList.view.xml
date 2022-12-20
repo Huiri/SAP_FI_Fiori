@@ -3,7 +3,6 @@
   xmlns:f="sap.f"
   xmlns:t="sap.ui.table"
   xmlns:mvc="sap.ui.core.mvc"
-  xmlns:core="sap.ui.core" 
   xmlns:form="sap.ui.layout.form"
   xmlns:layout="sap.ui.layout"
   height="100%">
@@ -20,9 +19,9 @@
         </f:DynamicPageTitle>
      </f:title>
     <f:header>
-        <f:DynamicPageHeader pinnable="true">
+        <f:DynamicPageHeader >
             <form:SimpleForm layout="ResponsiveGridLayout">
-                <form:content class="sapUiLargeMarginBeginEnd">
+                <form:content>
                     <VBox height="3rem">
                         <Label text="회사코드 : "/>
                         <MultiInput id="CompanyCode" valueHelpRequest=".onValueHelpCoCdList" showValueHelp="true"/>
@@ -69,7 +68,7 @@
             </form:SimpleForm>
         </f:DynamicPageHeader>
         </f:header>
-        <f:content class="sapUiSmallMargin">
+        <f:content >
         <t:Table id="CompanyCodeListTable" rows="{CompanyCodeListModel>/}" rowActionCount="1" visibleRowCount="20">
             <t:rowActionTemplate>
                 <t:RowAction>

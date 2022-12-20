@@ -100,7 +100,7 @@ sap.ui.define([
             this.onSearch();
         },
         toBack : function(){
-            this.getOwnerComponent().getRouter.navTo("CompanyCode");
+            this.getOwnerComponent().getRouter().navTo("Home");
         },
 
 		toCreateCoCd: function() {
