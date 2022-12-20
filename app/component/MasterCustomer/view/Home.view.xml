@@ -19,7 +19,6 @@
             </GenericTile>
            <GenericTile id="_IDGenGenericTile2" class="sapUiTinyMarginBegin sapUiTinyMarginTop"
                 header="고객 분석"
-               
                 press=".toCustomerChart">
                 <TileContent id="_IDGenTileContent2" >
                     <ImageContent id="_IDGenImageContent2" src="sap-icon://bar-chart"/>
