@@ -50,7 +50,7 @@
                                 <Input id="BpOrganizationTitle" class="sapUiSmallMarginBottom" visible="{=${bpCategoryModel>/category}}"/>
 
 
-                                <Label text="성 " visible="{=!${bpCategoryModel>/category}}" class="sapUiTinyMarginBottom" required="true"/>
+                                <Label text="성" visible="{=!${bpCategoryModel>/category}}" class="sapUiTinyMarginBottom" required="true"/>
                                 <Label text="회사명1 " visible="{=${bpCategoryModel>/category}}" class="sapUiTinyMarginBottom" />
                                 <Input id="BpFirstName" class="sapUiSmallMarginBottom" visible="{=!${bpCategoryModel>/category}}"/>   
                                 <Input id="BpCorpName1" class="sapUiSmallMarginBottom" visible="{=${bpCategoryModel>/category}}"/>  
@@ -73,13 +73,13 @@
                             <VBox>
                                 <Label text="표준 주소 " class="sapUiMediumMarginBottom"/>
 
-                                <Label text="도로주소 " class="sapUiTinyMarginBottom"/>
+                                <Label text="도로 주소 " class="sapUiTinyMarginBottom"/>
                                 <Input id="BpRoadAddress" class="sapUiSmallMarginBottom"/>  
                                 
                                 <Label text="번지 " class="sapUiTinyMarginBottom"/>
                                 <Input id="BpStreetAddress" class="sapUiSmallMarginBottom"/>  
 
-                                <Label text="우편번호 " class="sapUiTinyMarginBottom"/>
+                                <Label text="우편 번호 " class="sapUiTinyMarginBottom"/>
                                 <Input id="BpPostalCode" class="sapUiSmallMarginBottom"/>  
 
                                 <Label text="국가/지역 " class="sapUiTinyMarginBottom"/>

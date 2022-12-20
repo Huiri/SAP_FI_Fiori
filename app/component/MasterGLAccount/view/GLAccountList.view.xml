@@ -28,7 +28,7 @@
         </f:title>
 
         <f:header>
-            <f:DynamicPageHeader id="_IDGenDynamicPageHeader1" pinnable="true">
+            <f:DynamicPageHeader id="_IDGenDynamicPageHeader1">
                 <form:SimpleForm id="_IDGenSimpleForm1" layout="ResponsiveGridLayout">
                     <form:content>
                         <VBox id="_IDGenVBox2"> 
@@ -152,7 +152,11 @@
                     <t:Column id="_IDGenColumn5" hAlign="Center">
                         <Label id="_IDGenLabel5" text="계정 그룹"/>
                         <t:template>
-                            <Text id="_IDGenText5" text="{GLDataModel>gl_acct_group}"/>
+                            <Text id="_IDGenText5" 
+                            text="{
+                                path:'GLDataModel>gl_acct_group',
+                                formatter:'.formatter.AcctGrp'
+                            }"/>
                         </t:template>
                     </t:Column>
                 </t:columns>

@@ -150,7 +150,12 @@
                                 </VBox>
                                 <VBox id="_IDGenVBox9">
                                     <Label id="_IDGenLabel12" text="G/L 계정 설명" />
-                                    <Text id="TextGLAccDesc" visible="{=!${editModel>/editable}}" text="{GLDataModel>/gl_acct_descript}" class="sapUiTinyMarginBegin"/>
+                                    <Text id="TextGLAccDesc" visible="{=!${editModel>/editable}}" 
+										text="{
+											path:'GLDataModel>/gl_acct_descript',
+											formatter:'.formatter.IsNull'
+										}"
+										class="sapUiTinyMarginBegin"/>
                                     <Input id="InputGLAccDesc" visible="{=${editModel>/editable}}" value="{GLDataModel>/gl_acct_descript}" class="sapUiTinyMarginBegin"/>  
 
                                 </VBox>
@@ -175,8 +180,7 @@
                             <t:Table
                                 id="GlAccountTable"
                                 selectionMode="None"
-                                rows="{copyCoCdDataModel>/}" 
-                                width="auto">
+                                rows="{copyCoCdDataModel>/}">
                                 <t:extension> 
                                     <OverflowToolbar id="_IDGenOverflowToolbar1" >
                                         <Title id="TableName" text="회사코드 지정"/>
@@ -211,7 +215,7 @@
                                     </t:Column>
 
                                     <t:Column id="_IDGenColumn3" hAlign="Center">
-                                        <Label id="_IDGenLabel3" text="회사명"/>
+                                        <Label id="_IDGenLabel3" text="회사 이름"/>
                                         <t:template>
                                             <Text id="glCorpName" text="{copyCoCdDataModel>com_code_name}"/>
                                         </t:template>
@@ -233,7 +237,10 @@
                                     <t:Column id="colGlReconAccount" hAlign="Center">
                                         <Label id="_IDGenLabel11"  text="조정계정"/>
                                         <t:template>
-                                            <Text id="glReconAccount" text="{GLDataModel>/gl_recon_account}"/>
+                                            <Text id="glReconAccount" text="{
+												path:'GLDataModel>/gl_recon_account',
+												formatter:'.formatter.IsNull'
+											}"/>
                                         </t:template>
                                     </t:Column>
                                 </t:columns>

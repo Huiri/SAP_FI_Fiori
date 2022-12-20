@@ -2,21 +2,23 @@ sap.ui.define([
 	"sap/ui/core/mvc/Controller",
 	"sap/ui/model/json/JSONModel",
 	"sap/ui/core/URI",
-	"sap/ui/model/BindingMode"
+	"sap/ui/model/BindingMode",
+	"../model/formatter",
 ], function(
 	Controller,
 	JSONModel,
 	URI,
-	BindingMode
+	BindingMode,
+	formatter
 ) {
 	"use strict";
 	let selectedNum;
 	let originModel;
 	const BPCATEGORY_ORG="조직";
 	const BPCATEGORY_BP="개인";
-
 	return Controller.extend("project3.controller.CustomerDetail", {
-		
+		formatter : formatter,
+
 	//-----------초기화----------//
 		onInit: async function(){
 			console.log("onInit");
@@ -125,6 +127,7 @@ sap.ui.define([
 				"bp_street_address":v.byId("bpStreetAddress").getValue(),
 				"bp_city":v.byId("bpCity").getValue(),
 				"bp_region":v.byId("bpRegion").getValue(),
+				"bp_credit_status":v.byId("bpCreditStatus").getSelectedKey()
 			}
 			let bpData= await $.ajax({
 				type:"patch",

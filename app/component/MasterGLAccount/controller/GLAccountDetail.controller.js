@@ -9,7 +9,7 @@ sap.ui.define([
 	'sap/m/Token',
 	'sap/ui/model/Filter',
 	'sap/ui/model/FilterOperator',
-	'sap/m/Column',
+	'sap/ui/table/Column',
 	'sap/m/Text',
     'sap/ui/core/Icon',
     'sap/ui/model/BindingMode'
@@ -25,7 +25,7 @@ sap.ui.define([
 	Token,
 	Filter,
 	FilterOperator,
-	Column,
+	UIColumn,
 	Text,
 	Icon,
     BindingMode
@@ -216,42 +216,43 @@ sap.ui.define([
             //this.byId("InputCoAContent").setSelectedKey(TextCoAContent);
             
             let TextGLAccDesc = this.byId("TextGLAccDesc").getText();
-            this.byId("InputGLAccDesc").setValue(TextGLAccDesc);
+            if(TextGLAccDesc === "-"){
+                this.byId("InputGLAccDesc").setValue("");
+            } else{
+                this.byId("InputGLAccDesc").setValue(TextGLAccDesc);
+            }
 		},
 
 		onExpandCoCd: function(oEvent) {
-            this.pWhitespaceDialog = null;
-            this._oBasicSearchField = null;
-            this.oWhitespaceDialog = null;
             var oModel = this.getView().getModel('CoCdDataModel');
 
-			var oCodeTemplate = new Text({text: {path: 'CoCdDataModel>com_code'}, renderWhitespace: true});
-            var oCoCdNameTemplate = new Text({text: {path: 'CoCdDataModel>com_code_name'}, renderWhitespace: true});
+			var oCodeTemplate = new Text({text: '{CoCdDataModel>com_code}', renderWhitespace: true});
+            var oCoCdNameTemplate = new Text({text: '{CoCdDataModel>com_code_name}', renderWhitespace: true});
 			this._oBasicSearchField = new SearchField({
 				search: function() {
-					this.oWhitespaceDialog.getFilterBar().search();
+					this.oExpandDialog.getFilterBar().search();
 				}.bind(this)
 			});
 			
-				this.pWhitespaceDialog = this.loadFragment({
+				this.pExpandDialog = this.loadFragment({
 					name: "project2.view.fragment.ExpandCoCdInGLAcct"
 				});
 			
-			this.pWhitespaceDialog.then(function(oWhitespaceDialog) {
-				var oFilterBar = oWhitespaceDialog.getFilterBar();
-				this.oWhitespaceDialog = oWhitespaceDialog;
-				if (this._bWhitespaceDialogInitialized) {
+			this.pExpandDialog.then(function(oExpandDialog) {
+				var oFilterBar = oExpandDialog.getFilterBar();
+				this.oExpandDialog = oExpandDialog;
+				if (this._bExpandDialogInitialized) {
 					// Re-set the tokens from the input and update the table
-					oWhitespaceDialog.setTokens([]);
-					oWhitespaceDialog.update();
+					oExpandDialog.setTokens([]);
+					oExpandDialog.update();
 
-					oWhitespaceDialog.open();
+					oExpandDialog.open();
 					// return;
 				}
-				this.getView().addDependent(oWhitespaceDialog);
+				this.getView().addDependent(oExpandDialog);
 
 				// Set key fields for filtering in the Define Conditions Tab
-				oWhitespaceDialog.setRangeKeyFields([{
+				oExpandDialog.setRangeKeyFields([{
 					label: "회사코드",
 					key: "CoCdDataModel>com_code"
 				}]);
@@ -260,7 +261,7 @@ sap.ui.define([
 				oFilterBar.setFilterBarExpanded(false);
 				oFilterBar.setBasicSearch(this._oBasicSearchField);
 
-				oWhitespaceDialog.getTableAsync().then(function (oTable) {
+				oExpandDialog.getTableAsync().then(function (oTable) {
 					oTable.setModel(oModel);
 
 					// For Desktop and tabled the default table is sap.ui.table.Table
@@ -271,17 +272,17 @@ sap.ui.define([
 							path: "CoCdDataModel>/",
 							events: {
 								dataReceived: function() {
-									oWhitespaceDialog.update();
+									oExpandDialog.update();
 								}
 							}
 						});
 					}
 
-					oWhitespaceDialog.update();
+					oExpandDialog.update();
 				}.bind(this));
 
-				this._bWhitespaceDialogInitialized = true;
-				oWhitespaceDialog.open();
+				this._bExpandDialogInitialized = true;
+				oExpandDialog.open();
 			}.bind(this));
 
 
@@ -320,7 +321,7 @@ sap.ui.define([
                 }
                 
 			}.bind(this));
-			this.oWhitespaceDialog.close();
+			this.oExpandDialog.close();
 
         },
 
@@ -328,7 +329,7 @@ sap.ui.define([
          * valueHelpDialog 취소 버튼 클릭 이벤트
          */
         onWhitespaceCancelPress: function() {
-            this.oWhitespaceDialog.close();
+            this.oExpandDialog.close();
 
         },
 
@@ -355,7 +356,7 @@ x
          * @param {object}
          */
         _filterTable: function (oFilter) {
-			var oValueHelpDialog = this.oWhitespaceDialog;
+			var oValueHelpDialog = this.oExpandDialog;
 			oValueHelpDialog.getTableAsync().then(function (oTable) {
 				if (oTable.bindRows) {
 					oTable.getBinding("rows").filter(oFilter);

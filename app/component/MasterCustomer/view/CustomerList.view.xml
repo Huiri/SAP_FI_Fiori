@@ -61,7 +61,7 @@
                             </layoutData>
                         </VBox>                                             
                         <VBox>
-                            <Label text="우편번호 : "/>
+                            <Label text="우편 번호 : "/>
                             <Input id="BpPostalCode"/>
                             <layoutData>
                                 <layout:GridData span="XL2 L2 M6 S12"/>
@@ -151,7 +151,7 @@
                         </t:template>
                     </t:Column>                    
                     <t:Column hAlign="Center">
-                        <Label text="우편번호"/>
+                        <Label text="우편 번호"/>
                         <t:template>
                             <Text text="{BpCustomerModel>bp_postal_code}"/>
                         </t:template>
