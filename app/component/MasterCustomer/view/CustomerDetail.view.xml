@@ -182,7 +182,7 @@
                         <layout:VerticalLayout class="sapUiSmallMarginBeginEnd">
                         
                             <m:VBox class="sapUiSmallMarginTopBottom">
-                                <m:Label text="외부BP번호" class="propertyColumn"/>
+                                <m:Label text="외부 BP 번호" class="propertyColumn"/>
                                 <m:Text text="{bpModel>/bp_external_number}" visible="{=${visibleMode>/visible}}" />
                                 <m:Input id="bpExternalNumber" value="{bpModel>/bp_external_number}" visible="{=!${visibleMode>/visible}}"/>
                             </m:VBox>
