@@ -9,8 +9,8 @@ sap.ui.define([
 		toGLMasterList : function(){
 			this.getOwnerComponent().getRouter().navTo("GLAccountList");
 		},
-		toSelectFS : function() {
-			this.getOwnerComponent().getRouter().navTo("SelectFS")
+		toFSVersionBS : function() {
+			this.getOwnerComponent().getRouter().navTo("FSVersionBS")
 		}
 	});
 });
