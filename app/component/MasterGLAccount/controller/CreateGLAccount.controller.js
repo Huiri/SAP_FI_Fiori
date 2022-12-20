@@ -60,7 +60,6 @@ sap.ui.define([
                 type : "get",
                 url : cocdUrl
             })
-            console.log(CoCdData);
             let CoCdDataModel = new JSONModel(CoCdData.value);
             this.getView().setModel(CoCdDataModel, "CoCdDataModel");
 
@@ -231,7 +230,7 @@ sap.ui.define([
 
 		getGLGrpContext: function(oEvent) {
 			let rowIndex = oEvent.getParameters().rowIndex;
-			this.byId("GLGroup").setValue(oEvent.getParameters().rowBindingContext.oModel.oData[rowIndex].gl_acct_group); 
+			this.byId("GLGroup").setValue(oEvent.getParameters().rowBindingContext.oModel.oData.GLAcctGroupList[rowIndex].GLAcctGrp); 
 			this.onCloseGLGrpDialog();
 
 		},

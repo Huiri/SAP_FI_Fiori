@@ -24,11 +24,11 @@
                     <ImageContent id="_IDGenImageContent2" src="sap-icon://bar-chart"/>
                 </TileContent>
             </GenericTile>
-           <GenericTile id="_IDGenGenericTile3" class="sapUiTinyMarginBegin sapUiTinyMarginTop"
+            <GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop"
                 header="고객 서신 관리"
-                press=".toCustomerCorres">
-                <TileContent id="_IDGenTileContent3" >
-                    <ImageContent id="_IDGenImageContent3" src="sap-icon://email"/>
+                press=".toEditCorres">
+                <TileContent >
+                    <ImageContent src="sap-icon://letter"/>
                 </TileContent>
             </GenericTile>
               <!-- <SlideTile id="_IDGenSlideTile1" class="sapUiTinyMarginBegin sapUiTinyMarginTop" transitionTime="250" displayTime="2500">

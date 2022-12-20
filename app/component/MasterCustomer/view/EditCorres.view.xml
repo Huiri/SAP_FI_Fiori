@@ -1,0 +1,27 @@
+<mvc:View
+	controllerName="project3.controller.EditCorres"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	xmlns:c="sap.ui.core"
+    xmlns:l="sap.ui.layout"
+	displayBlock="true"
+	height="100%"
+	busyIndicatorDelay="0"
+>
+
+<l:VerticalLayout id="idVerticalLayout" class="sapUiContentPadding" width="100%">
+		<VBox>
+			<HBox alignItems="Center">
+				<Label text="서신 종류 선택:" labelFor="idSelect" class="sapUiSmallMarginEnd"/>
+				<Select id="idSelect" change=".handleSelect">
+					<c:Item key="ARBalanceConfirm" text="채권잔액조회서"/>
+					<c:Item key="Dunning" text="독촉장"/>
+				</Select>
+			</HBox>
+		</VBox>
+		<VBox id="RTEBox">
+
+		</VBox>
+		
+	</l:VerticalLayout>
+</mvc:View>

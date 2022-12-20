@@ -19,6 +19,7 @@ entity GL {
         gl_recon_account		    :   String   @title : '조정 계정';
         gl_blocked                  :   Boolean	 @title : 'G/L 활성화';
         gl_created                  :   String	 @title : '계정 생성 날짜';
+        gl_constructor              :   String	 @title : '계정 생성자';
 
 }
 entity SelectCoA {

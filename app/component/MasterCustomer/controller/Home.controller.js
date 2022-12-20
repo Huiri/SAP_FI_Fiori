@@ -13,9 +13,9 @@ sap.ui.define([
 		toCustomerChart: function(){
 			this.getOwnerComponent().getRouter().navTo("CustomerChart");
 		},
-		toCustomerCorres: function(){
-			this.getOwnerComponent().getRouter().navTo("CustomerCorres");
-		}
-	
+		toEditCorres :function (){
+			this.getOwnerComponent().getRouter().navTo("EditCorres");
+
+		},
 	});
 });
