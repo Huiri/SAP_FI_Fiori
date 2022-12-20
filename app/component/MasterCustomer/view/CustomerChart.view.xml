@@ -44,10 +44,9 @@
                     </f:header>
                 <f:content >
                         <micro:ColumnMicroChart id="_IDGenColumnMicroChart1" size="Responsive"   allowColumnLabels="true"  >
-                          
 								<micro:columns  >
-									<micro:ColumnMicroChartData id="_IDGenColumnMicroChartData1" label="제출 완료" displayValue="{bpReportSubmitModel>/submitpercent}"  value="{bpReportSubmitModel>/submit}" color="Good"  />
-									<micro:ColumnMicroChartData id="_IDGenColumnMicroChartData2"  label="미제출" displayValue="{bpReportSubmitModel>/notsubmitpercent}"  value="{bpReportSubmitModel>/notsubmit}" color="Error"/>
+									<micro:ColumnMicroChartData id="CompleteSubmit" label="제출 완료" displayValue="{bpReportSubmitModel>/submitpercent}"  value="{bpReportSubmitModel>/submit}" color="Good" press="onSubmitChartDetail1" />
+									<micro:ColumnMicroChartData id="NotSubmit"  label="미제출" displayValue="{bpReportSubmitModel>/notsubmitpercent}"  value="{bpReportSubmitModel>/notsubmit}" color="Error" press="onSubmitChartDetail2"/>
 								</micro:columns>
 							</micro:ColumnMicroChart>
                     </f:content>
