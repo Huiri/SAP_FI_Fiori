@@ -278,7 +278,7 @@
                                     displayFormat="yyyy.MM.dd" />
                             </m:VBox>
                             <m:VBox class="sapUiSmallMarginTopBottom">
-                                <m:Label text="정산일" class="propertyColumn" />
+                                <m:Label text="청산일" class="propertyColumn" />
                                 <m:Text text="{bpModel>/bp_cal_date}" visible="{=${visibleMode>/visible}}" />
                                 <m:DatePicker 
                                     id="bpCalDateOrg"

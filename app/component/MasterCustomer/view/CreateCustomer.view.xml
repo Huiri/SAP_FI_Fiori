@@ -23,8 +23,6 @@
                         <form:content>
                             <VBox class="sapUiMediumMarginBottom">
                                 <Label text="일반 데이터 " class="sapUiMediumMarginBottom" design="Bold"/>
-                                <Text class="sapUiSmallMarginBottom" text="개인" visible="{=!${bpCategoryModel>/category}}"/>
-                                <Text class="sapUiSmallMarginBottom" text="조직" visible="{=${bpCategoryModel>/category}}"/>
 
                                 <Label text="생성일 " class="sapUiTinyMarginBottom" />
                                 <Text id="BpCreatedDate" class="sapUiSmallMarginBottom"/>
