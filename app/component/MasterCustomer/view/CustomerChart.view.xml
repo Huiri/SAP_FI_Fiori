@@ -60,8 +60,7 @@
                         <card:Header id="_IDGenHeader3"  title="서류 미제출 고객" subtitle="최신 3개의 고객 데이터가 보입니다." />
                     </f:header>
                     <f:content>
-                        <List showSeparators="None" items="{
-					path: 'submitWaitModel>/'}">
+                        <List showSeparators="None" items="{path: 'submitWaitModel>/'}">
                             <CustomListItem type="Active" press=".onNavToBpDetail">
                                 <HBox alignItems="Center" justifyContent="SpaceBetween">
                                     <VBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom">
@@ -69,12 +68,11 @@
                                         <Text text="최종 변경일: {submitWaitModel>bp_changed_date}" />
                                     </VBox>
                                     <ObjectStatus
-									class="sapUiSmallMarginBegin sapUiSmallMarginEnd"
-                                        text="{         
-                                path: 'submitWaitModel>bp_report_submission'                               
-                                }"
-                                        state="{= ${submitWaitModel>bp_report_submission} === true? 
-                                'Success' : 'Error'}"
+                                        class="sapUiSmallMarginBegin sapUiSmallMarginEnd"
+                                        text="{=${submitWaitModel>bp_report_submission} === true?
+                                                '제출':'미제출'}"
+                                        state="{=${submitWaitModel>bp_report_submission} === true? 
+                                                'Success' : 'Error'}"
                                     />
                                 </HBox>                                
                             </CustomListItem>
