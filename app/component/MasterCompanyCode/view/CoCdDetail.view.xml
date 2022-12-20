@@ -11,59 +11,66 @@
         <headerTitle>
             <ObjectPageDynamicHeaderTitle id="_IDGenObjectPageDynamicHeaderTitle1">
                 <expandedHeading>
-                    <m:HBox id="_IDGenHBox2" height="3rem">
-                        <m:Button id="_IDGenButton2" press=".toBack" type="Back" />
-                        <m:Title id="_IDGenTitle2" text="회사 코드 상세 페이지" class="sapUiSmallMarginBegin" />
-                    </m:HBox>
+                    <m:VBox id="_IDGenHBox2">
+						<m:HBox>
+							<m:Button press=".toBack" type="Back" />
+							<m:Title text="{cocdModel>/com_code_name}" class="sapUiSmallMarginBegin" />
+						</m:HBox>
+						<m:HBox class="sapUiSmallMargin">
+							<m:Avatar 
+								class="sapUiSmallMarginEnd" 
+								src="sap-icon://factory" 
+								displaySize="M" />
+							<m:VBox class="sapUiSmallMarginEnd" >
+								<m:Label design="Bold" text="회사코드" class="propertyColumn" />
+								<m:Text text="{cocdModel>/com_code}" />
+							</m:VBox>
+
+							<m:VBox class="sapUiSmallMarginEnd" >
+								<m:Label design="Bold" text="회사 주소" class="propertyColumn" />
+								<m:Text
+								text="{
+									path:'cocdModel>/com_address',
+									formatter:'.formatter.IsNull'
+								}" />
+							</m:VBox>
+
+						</m:HBox>
+					</m:VBox>
                 </expandedHeading>
                 <snappedHeading>
-                    <m:VBox 
-					class="sapUiTinyMarginTop"
-					alignItems="Center">
-						<m:Title 
-						level="H6"
-						text="{cocdModel>/com_code_name}" />
-						<!-- <m:Avatar  
-						src="sap-icon://factory" 
-						displaySize="M" 
-						class="sapUiTinyMarginTop"/> -->
-                    </m:VBox>
+                    <m:VBox>
+						<m:HBox>
+							<m:Button press=".toBack" type="Back" />
+							<m:Title text="{cocdModel>/com_code_name}" class="sapUiSmallMarginBegin" />
+						</m:HBox>
+						<m:HBox class="sapUiSmallMargin">
+							<m:Avatar 
+								class="sapUiSmallMarginEnd" 
+								src="sap-icon://factory" 
+								displaySize="M" />
+							<m:VBox class="sapUiSmallMarginEnd" >
+								<m:Label design="Bold" text="회사코드" class="propertyColumn" />
+								<m:Text text="{cocdModel>/com_code}" />
+							</m:VBox>
+
+							<m:VBox class="sapUiSmallMarginEnd" >
+								<m:Label design="Bold" text="회사 주소" class="propertyColumn" />
+								<m:Text
+								text="{
+									path:'cocdModel>/com_address',
+									formatter:'.formatter.IsNull'
+								}" />
+							</m:VBox>
+
+						</m:HBox>
+					</m:VBox>
                 </snappedHeading>
             </ObjectPageDynamicHeaderTitle>
         </headerTitle>
-        <headerContent>
-            <m:VBox id="_IDGenFlexBox2" wrap="Wrap">
-                <layout:VerticalLayout>
-                    <m:VBox 
-					alignItems="Center">
-                        <m:Title  
-						level="H3"
-						text="{cocdModel>/com_code_name}" />
-                        <!-- <m:Avatar 
-						displaySize="M"
-						src="sap-icon://factory" 
-						class="sapUiTinyMarginTop" /> -->
-                    </m:VBox>
-
-                </layout:VerticalLayout>
-                <layout:HorizontalLayout
-				class="sapUiSmallMarginTop">
-					<m:VBox class="sapUiMediumMarginEnd">
-                        <m:Label design="Bold" text="회사코드" class="propertyColumn" />
-                        <m:Text id="ComCode" text="{cocdModel>/com_code}" />
-                    </m:VBox>
-
-					<m:VBox>
-                        <m:Label design="Bold" text="회사 주소" class="propertyColumn" />
-                        <m:Text id="comAddress" 
-						text="{
-							path:'cocdModel>/com_address',
-							formatter:'.formatter.IsNull'
-						}" />
-                    </m:VBox>
-                </layout:HorizontalLayout>
-            </m:VBox>
-        </headerContent>
+        <!-- <headerContent>
+            
+        </headerContent> -->
         <sections>
             <ObjectPageSection title="기본 데이터" id="myCustom" titleUppercase="false">
                 <subSections>
