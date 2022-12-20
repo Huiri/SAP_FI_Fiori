@@ -1,0 +1,112 @@
+<mvc:View
+	controllerName="project2.controller.FSVersionPL"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.ui.table"
+    xmlns:m="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:u="sap.ui.unified"
+    xmlns:f="sap.f"
+    xmlns:layout="sap.ui.layout"
+	height="100%"
+    xmlns:form="sap.ui.layout.form"
+	
+>
+
+<f:DynamicPage>
+<f:title>
+				<f:DynamicPageTitle>
+<f:heading>
+                    <m:HBox >
+                        <m:Button type="Back" press=".onBack"/>
+                        <m:Title text="재무제표 버전 조회"/>
+                    </m:HBox>
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+            <f:DynamicPageHeader>
+                <form:SimpleForm layout="ResponsiveGridLayout">
+                    <form:content>
+                        <m:VBox>
+                            <m:Label text="재무제표 버전 : "/>
+                            <m:Text id="fsVersion" text="KR01" class="sapUiTinyMarginBegin sapUiTinyMarginTop"/>
+                            <m:layoutData>
+                                <layout:GridData span="XL1 L1 M6 S12"/>
+                            </m:layoutData> 
+                        </m:VBox>
+                        <m:VBox>
+                            <m:Label text="재무제표 유형 : " required="true"/>
+                            <m:Select width="90%" id="fsVersionType" class="sapUiTinyMarginTop">
+                                <core:Item key="재무상태표" text="재무상태표" />
+                                <core:Item key="손익계산서" text="손익계산서" />
+                            </m:Select>
+                            <m:layoutData>
+                                <layout:GridData span="XL2 L2 M6 S12"/>
+                            </m:layoutData>
+                        </m:VBox>
+                            <m:HBox justifyContent="End" class="sapUiSmallMarginTop">
+                                <m:Button text="실행" type="Emphasized" press=".onRun"/>
+                                <m:layoutData>
+                                    <layout:GridData span="XL12 L12 M12 S12"/>
+                                </m:layoutData>
+                            </m:HBox>
+                    </form:content>
+                </form:SimpleForm>
+            </f:DynamicPageHeader>
+           
+        </f:header>
+    <f:content>
+        <TreeTable 
+            id="TreeTableBasic"
+            rows="{path:'/ProfitLoss', parameters: {arrayNames: ['ProfitLoss']}}"
+            enableSelectAll="false"
+            ariaLabelledBy="title"
+            selectionMode="None"
+            visibleRowCount="27"
+        >
+            <extension>
+                <m:OverflowToolbar style="Clear">
+                        <m:Title id="title" text="손익계산서"/>
+                        <m:ToolbarSpacer/>
+                        <m:Button text="접기" press="onCollapseAll"/>
+                        <m:Button text="펼치기" press="onExpandFirstLevel"/>
+                        <m:Button icon="sap-icon://excel-attachment" press="onDownload"/>
+                    </m:OverflowToolbar>
+            </extension>
+            <columns>
+                    <Column >
+                        <m:Label text="계정과목"/>
+                        <template>
+                            <m:Text text="{name}" wrapping="false" />
+                        </template>
+                    </Column>
+                    <Column >
+                        <m:Label text="계정번호"/>
+                        <template>
+                            <m:Text  text="{gl_account}" />
+                        </template>
+                    </Column>
+                    <Column >
+                        <m:Label text="생성일"/>
+                        <template>
+                            <m:Text  text="{gl_created}" />
+                        </template>
+                    </Column>
+                    <Column >
+                        <m:Label text="생성자"/>
+                        <template>
+                            <m:Text  text="{gl_constructor}" />
+                        </template>
+                    </Column>
+                     <Column >
+                        <m:Label text="통화"/>
+                        <template>
+                            <m:Text  text="{gl_acct_currency}" />
+                        </template>
+                    </Column>
+                  
+                </columns>
+        </TreeTable>
+    </f:content>
+</f:DynamicPage>
+</mvc:View>

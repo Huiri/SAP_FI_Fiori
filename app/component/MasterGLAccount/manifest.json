@@ -208,6 +208,14 @@
             "name" : "SelectFS",
             "prefix": "SelectFS"
           }
+        },
+        {
+          "name": "FSVersionPL",
+          "pattern": "FSVersionPL",
+          "target": {
+            "name" : "FSVersionPL",
+            "prefix": "FSVersionPL"
+          }
         }
         
       ],
@@ -253,6 +261,13 @@
           "clearControlAggregation": true,
           "viewId": "SelectFS",
           "viewName": "SelectFS"
+        },
+        "FSVersionPL" : {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": true,
+          "viewId": "FSVersionPL",
+          "viewName": "FSVersionPL"
         }
       }
     },
