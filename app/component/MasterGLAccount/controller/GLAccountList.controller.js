@@ -179,37 +179,37 @@ sap.ui.define([
 			this.getOwnerComponent().getRouter().navTo("Home");
 		},
 
-		onSearch: function () {
-			// var selectedItems = oEvent.getParameter("selectedItems");
+		onSearch: function (oEvent) {
+			var selectedItems = oEvent.getParameter("selectedItems");
 
-			// let GlCoa = this.byId("GLCoa").getTokens();
-			// let GlAcct = this.byId("GLAcct").getTokens();
-			// let GlAcctType = this.byId("GLAcctType").getSelectedKeys();
-			// let GlAcctGroup = this.byId("GLAcctGroup").getSelectedKeys();
+			let GlCoa = this.byId("GLCoa").getTokens();
+			let GlAcct = this.byId("GLAcct").getTokens();
+			let GlAcctType = this.byId("GLAcctType").getSelectedKeys();
+			let GlAcctGroup = this.byId("GLAcctGroup").getSelectedKeys();
 
-			// var aFilter = [];
+			var aFilter = [];
 
-			// if (GlCoa) { 
-			// 	for(let item in GlCoa){
-			// 		aFilter.push(new Filter("gl_coa", FilterOperator.Contains, GlCoa[item].mProperties.key)) 
+			if (GlCoa) { 
+				for(let item in GlCoa){
+					aFilter.push(new Filter("gl_coa", FilterOperator.Contains, GlCoa[item].mProperties.key)) 
 
-			// }}
-			// if (GlAcct) { 				
-			// 	for(let item in GlAcct){
-			// 		aFilter.push(new Filter("gl_acct", FilterOperator.Contains, GlAcct[item].mProperties.key)) 
-			// }}
+			}}
+			if (GlAcct) { 				
+				for(let item in GlAcct){
+					aFilter.push(new Filter("gl_acct", FilterOperator.Contains, GlAcct[item].mProperties.key)) 
+			}}
 
-			// if (GlAcctType) { 
-			// 	for(let item in GlAcctType){
-			// 		aFilter.push(new Filter("gl_acct_type", FilterOperator.Contains, GlAcctType[item])) 
-			// }}
-			// if (GlAcctGroup) { 
-			// 	for(let item in GlAcctGroup){
-			// 		aFilter.push(new Filter("gl_acct_group", FilterOperator.Contains, GlAcctGroup[item])) 
-			// }}
-			// let oTable = this.byId("GlAccountTable").getBinding("rows");
-			// oTable = oTable.filter(aFilter);
-			// this.byId("TableName").setText(`G/L 계정(${oTable.iLength})`);
+			if (GlAcctType) { 
+				for(let item in GlAcctType){
+					aFilter.push(new Filter("gl_acct_type", FilterOperator.Contains, GlAcctType[item])) 
+			}}
+			if (GlAcctGroup) { 
+				for(let item in GlAcctGroup){
+					aFilter.push(new Filter("gl_acct_group", FilterOperator.Contains, GlAcctGroup[item])) 
+			}}
+			let oTable = this.byId("GlAccountTable").getBinding("rows");
+			oTable = oTable.filter(aFilter);
+			this.byId("TableName").setText(`G/L 계정(${oTable.iLength})`);
 		},
 
 		

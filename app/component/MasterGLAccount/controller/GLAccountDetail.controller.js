@@ -38,6 +38,7 @@ sap.ui.define([
             console.log()
             let editModel = new JSONModel({editable : false});
             this.getView().setModel(editModel, "editModel");
+            this.getView().setModel(new JSONModel({}), 'historyModel');
 
             let blockModel = new JSONModel({isBlock:false});
             //blockModel.setDefaultBindingMode(BindingMode.OneWay);
@@ -160,39 +161,24 @@ sap.ui.define([
         onLocked: function(){
             var state = JSON.parse(this.getView().byId("glBlocked").getCustomData()[0].getProperty('value'));
             console.log(state);
+            var icon;
+
+            this.getView().getModel('historyModel').setProperty('/icon', this.byId("glBlocked").getIcon());
+
             if(state){
+                icon = "sap-icon://locked";
                 //console.log("true 면 false로 바꿔주기 . : src 는 unlock->lock")
-                this.byId("glBlocked").setIcon(new sap.ui.core.Icon({src:"sap-icon://locked"}).getSrc());
+                this.byId("glBlocked").setIcon(new sap.ui.core.Icon({src: icon}).getSrc());
                 this.byId("glBlocked").setText("잠금 해제");
                 this.byId("glBlocked").setTooltip("잠금 해제");
             }else{
+                icon = "sap-icon://unlocked";
                 //console.log("false 면 true 바꿔주기 . : src 는 lock->unlock")
-                this.byId("glBlocked").setIcon(new sap.ui.core.Icon({src:"sap-icon://unlocked"}).getSrc());
+                this.byId("glBlocked").setIcon(new sap.ui.core.Icon({src: icon}).getSrc());
                 this.byId("glBlocked").setText("잠금");
                 this.byId("glBlocked").setTooltip("잠금");
             }
             this.byId("glBlocked").getCustomData()[0].setProperty('value',!state);
-            // this.byId("pageSection1").setVisible(JSON.parse(state));
-            // this.byId("pageSection2").setVisible(JSON.parse(state));
-            //this.getView().getModel("blockModel").setProperty("/isBlock", !state);
-            
-            //this.byId("glBlocked").setIcon(new sap.ui.core.Icon({src:"sap-icon://unlocked"}).getSrc());
-
-
-            // if(this.byId("glBlocked").getCustomData()[0].getProperty('value')!='true'){
-            //     this.byId("glBlocked").getCustomData()[0].setProperty('value',"false");
-
-            //     this.byId("glBlocked").setIcon(new sap.ui.core.Icon({src:"sap-icon://unlocked"}).getSrc());
-            //     this.getView().getModel("blockModel").setProperty("isBlock", "true");
-            //     console.log("변경됨");
-            //     console.log(this.byId("glBlocked").getCustomData()[0].getProperty('value'));
-
-            // }else{
-            //     this.byId("glBlocked").getCustomData()[0].setProperty('value',"true");
-            //     this.byId("glBlocked").setIcon(new sap.ui.core.Icon({src:"sap-icon://locked"}).getSrc());
-            //     this.getView().getModel("blockModel").setProperty("isBlock", "true");
-
-            // }
         },
 
 		onEdit: function() {
@@ -379,8 +365,14 @@ x
             //console.log(this.getView().getModel("blockModel").getProperty("/isBlock"));
         },
         onCancel: function(){
-            let vis =  this.getView().getModel("GLDataModel").getProperty("/gl_blocked");
+            const oView = this.getView();
+            let vis =  oView.getModel("GLDataModel").getProperty("/gl_blocked");
             var state = JSON.parse(this.getView().byId("glBlocked").getCustomData()[0].getProperty('value'));
+
+            const oHistoryModel = oView.getModel('historyModel');
+            let sSrc = oHistoryModel.getProperty('/icon'); 
+            let oGlBlocked = this.byId("glBlocked");
+            if(oGlBlocked.getIcon() !== sSrc) oGlBlocked.setIcon(new sap.ui.core.Icon({src: sSrc}).getSrc());
 
             // this.byId("pageSection1").setVisible(!vis);
             // this.byId("pageSection2").setVisible(!vis)
@@ -390,6 +382,9 @@ x
              * 현재 정상적인 실행 X
              * @todo 취소 버튼 누를 시 lock 초기값으로 설정 필요
             */
+            
+            this.byId("glBlocked").getCustomData()[0].setProperty('value', true);
+
             if(vis === false){
                 this.byId("glBlocked").getCustomData()[0].setProperty('value',true);
                 // this.getView().getModel("GLDataModel").setProperty("/gl_blocked", true);
