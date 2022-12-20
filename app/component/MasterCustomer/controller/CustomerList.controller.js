@@ -212,7 +212,7 @@ sap.ui.define([
                 type: EdmType.String
             });
             aCols.push({
-                label: '시',
+                label: '도시',
                 property: 'bp_city',
                 type: EdmType.String
             });
