@@ -5,8 +5,9 @@
 	xmlns:layout="sap.ui.layout"
 	xmlns="sap.m"
 	xmlns:core="sap.ui.core"
-
+	xmlns:forms="sap.ui.layout.form"
     xmlns:t="sap.ui.table"
+	xmlns:l="sap.ui.layout"
 	height="100%">
 	<uxap:ObjectPageLayout id="ObjectPageLayout"
 		showTitleInHeaderContent="true"
@@ -22,7 +23,7 @@
                     <VBox >
                         <HBox height="3rem">
                             <Button press=".toBack" type="Back" />
-                            <Title text="New G/L계정 마스터 데이터 생성" class="sapUiTinyMarginTop"/>
+                            <Title text="총계정원장 마스터 신규 생성" class="sapUiTinyMarginTop"/>
 					    </HBox>
                         <Text text="{GLDataModel>/gl_acct_content}" class="sapUiMediumMarginBegin"/>
                     </VBox>
@@ -32,7 +33,7 @@
                     <VBox id="_IDGenVBox2">
                         <HBox id="_IDGenHBox1">
                             <Button press=".toBack" type="Back" />
-                            <Title text="New G/L계정 마스터 데이터 생성"/>
+                            <Title text="총계정원장 마스터 신규 생성"/>
 					    </HBox>
                         <Text id="_IDGenText6" text="{GLDataModel>/gl_acct_content}" class="sapUiMediumMarginBegin"/>
                     </VBox>
@@ -61,13 +62,134 @@
 					</uxap:ObjectPageSubSection>
 				</uxap:subSections>
 			</uxap:ObjectPageSection>
-			<uxap:ObjectPageSection id="_IDGenObjectPageSection1" title="일반" >
+			<uxap:ObjectPageSection id="_IDGenObjectPageSection1" title="일반" showTitle="false">
 				<uxap:subSections >
-					<uxap:ObjectPageSubSection id="defaultSubSection"  title="기본정보" >
-						<uxap:blocks>
-                            <layout:VerticalLayout id="_IDGenVerticalLayout1" class="sapUiSmallMarginBeginEnd" >
-								<Title text="관리"/>
+				<!-- 얘가 가지고 있는 마진 때문에 모양이 틀어짐 -->
+					<uxap:ObjectPageSubSection id="defaultSubSection"  title="기본정보">
+						<uxap:blocks >
 
+							<VBox>
+								<l:Grid containerQuery="true">
+									<VBox>
+										<Title
+											class="sapUiSmallMarginBegin sapUiSmallMarginEnd"
+											level="Auto"
+											text="관리"
+											textAlign="Initial"
+											titleStyle="Auto"
+											width=""
+											wrapping="false"
+											wrappingType="Normal"
+										/>
+
+										<VBox class="sapUiSmallMargin">
+											<Label text="계정과목표" labelFor="CoA"/>
+											<Input 
+												id="CoA" 
+												showValueHelp="true" 
+												valueHelpRequest=".onSelectCoA" 
+												required="true"
+												value="{copyCoCdDataModel>/CoA}"/>
+										</VBox>
+
+										
+										<VBox id="_IDGenVBox4" class="sapUiSmallMargin">
+											<Label id="_IDGenLabel7" text="G/L 계정 유형" labelFor="GLAcctType" />
+											
+											<Select 
+												id="GLAcctType" 
+												width="100%" 
+												required="true" 
+												forceSelection="false"
+												items="{
+													path: 'SelectOption>/AccountTypeList',
+													sorter: { path: 'AccountTypeList' }
+												}"
+												selectedKey="{copyCoCdDataModel>/GLAcctType}">
+												<core:Item key="{SelectOption>AccountType}" text="{SelectOption>Value}"/>
+											</Select>
+										</VBox>
+
+										<VBox id="_IDGenVBox5" class="sapUiSmallMargin">
+											<Label id="_IDGenLabel8" text="계정 그룹" labelFor="GLGroup" />
+											<Input 
+												id="GLGroup" 
+												showValueHelp="true" 
+												valueHelpRequest=".onSelectGLGrp" 
+												required="true"
+												selectedKey="{copyCoCdDataModel>/GLGroup}"/>
+										</VBox>
+
+										<VBox id="_IDGenVBox6" class="sapUiSmallMargin">
+											<Label id="_IDGenLabel9" text="손익계산서 계정 유형" />
+											<Select 
+												id="GLPLAcctType" 
+												width="100%" 
+												items="{
+													path: 'SelectOption>/GLPLAcctTypeList',
+													sorter: { path: 'GLPLAcctTypeList' }
+												}"
+												selectedKey="{copyCoCdDataModel>/GLPLAcctType}">
+												<core:Item key="{SelectOption>PLType}" text="{SelectOption>Value}"/>
+											</Select>
+										</VBox>
+
+										<VBox id="_IDGenVBox7" class="sapUiSmallMargin">
+											<Label id="_IDGenLabel10" text="기능 영역"/>
+											<Select 
+												id="FuncArea" 
+												width="100%" 
+												items="{
+													path: 'SelectOption>/FunctionAreaList',
+													sorter: { path: 'FunctionAreaList' }
+												}"
+												selectedKey="{copyCoCdDataModel>/FuncArea}">
+												<core:Item key="{SelectOption>FuncArea}" text="{SelectOption>Value}"/>
+											</Select>
+											
+										</VBox>
+
+										<layoutData>
+											<l:GridData span="XL3 L3 M3 S12"/>
+										</layoutData>
+									</VBox>
+
+									<VBox>
+										<Title
+											class="sapUiSmallMarginBegin sapUiSmallMarginEnd"
+											level="Auto"
+											text="내역(유지보수 언어)"
+											textAlign="Initial"
+											titleStyle="Auto"
+											width=""
+											wrapping="false"
+											wrappingType="Normal"
+										/>
+
+										<VBox id="_IDGenVBox8" class="sapUiSmallMargin">
+											<Label id="_IDGenLabel13" text="내역" required="true"/>
+											<Input 
+												id="GLAcctContent"
+												value="{copyCoCdDataModel>/GLAcctContent}" />  
+										</VBox>
+
+										<VBox id="_IDGenVBox9" class="sapUiSmallMargin">
+											<Label id="_IDGenLabel12" text="G/L 계정 설명" />
+											<Input 
+												id="GLAccDesc" 
+												value="{copyCoCdDataModel>/GLAccDesc}"/> 
+										</VBox>
+
+										<layoutData>
+											<l:GridData span="XL3 L3 M3 S12"/>
+										</layoutData>
+									</VBox>
+								</l:Grid>
+							</VBox>
+
+							<!-- <layout:VerticalLayout width="10rem">
+							<Title text="기본 정보"/>
+							<forms:SimpleForm title="관리">
                                 <VBox id="_IDGenVBox3" class="sapUiSmallMarginBottom">
                                     <Label id="_IDGenLabel6" text="계정과목표" labelFor="CoA"/>
 									<Input 
@@ -76,7 +198,6 @@
 										valueHelpRequest=".onSelectCoA" 
 										required="true"
 										value="{copyCoCdDataModel>/CoA}"/>
-
                                 </VBox>
                                 <VBox id="_IDGenVBox4" class="sapUiSmallMarginBottom">
                                     <Label id="_IDGenLabel7" text="G/L 계정 유형" labelFor="GLAcctType" />
@@ -102,7 +223,6 @@
 										valueHelpRequest=".onSelectGLGrp" 
 										required="true"
 										selectedKey="{copyCoCdDataModel>/GLGroup}"/>
-
                                 </VBox>
                                 <VBox id="_IDGenVBox6" class="sapUiSmallMarginBottom">
                                     <Label id="_IDGenLabel9" text="손익계산서 계정 유형" />
@@ -118,7 +238,6 @@
 										<core:Item key="{SelectOption>PLType}" text="{SelectOption>Value}"/>
                             		</Select>
 
-
                                 </VBox>
                                 <VBox id="_IDGenVBox7">
                                     <Label id="_IDGenLabel10" text="기능 영역"/>
@@ -133,36 +252,33 @@
 										selectedKey="{copyCoCdDataModel>/FuncArea}">
 										<core:Item key="{SelectOption>FuncArea}" text="{SelectOption>Value}"/>
                             		</Select>
-
+									
                                 </VBox>
-                                <layout:layoutData>
-                                    <layout:GridData id="_IDGenGridData1" span="XL3 L3 M6 S12"/>
-                                </layout:layoutData>
-                            </layout:VerticalLayout>
+							</forms:SimpleForm>
+							<layout:layoutData>
+										<layout:GridData span="XL4 L4 M6 S12"/>
+									</layout:layoutData>
+							</layout:VerticalLayout>
+						
 
-                            <layout:VerticalLayout id="_IDGenVerticalLayout2" class="sapUiSmallMarginBeginEnd">
-								<Title text="내역(유지보수 언어)"/>
+							<layout:VerticalLayout width="10rem">
+
+							<forms:SimpleForm title="내역(유지보수 언어)">
+
                                 <VBox id="_IDGenVBox8" class="sapUiSmallMarginBottom">
                                     <Label id="_IDGenLabel13" text="내역" required="true"/>
                                     <Input 
-										id="GLAcctContent" 
-										class="sapUiTinyMarginBegin"
+										id="GLAcctContent"
 										value="{copyCoCdDataModel>/GLAcctContent}" />  
-
                                 </VBox>
                                 <VBox id="_IDGenVBox9">
                                     <Label id="_IDGenLabel12" text="G/L 계정 설명" />
                                     <Input 
 										id="GLAccDesc" 
-										class="sapUiTinyMarginBegin"
-										value="{copyCoCdDataModel>/GLAccDesc}"/>  
-
-                                </VBox>
-
-                                <layout:layoutData>
-                                    <layout:GridData id="_IDGenGridData2" span="XL3 L3 M6 S12"/>
-                                </layout:layoutData>
-                            </layout:VerticalLayout>
+										value="{copyCoCdDataModel>/GLAccDesc}"/> 
+                                </VBox>>
+							</forms:SimpleForm>
+							</layout:VerticalLayout> -->
 
 						</uxap:blocks>
 					</uxap:ObjectPageSubSection>

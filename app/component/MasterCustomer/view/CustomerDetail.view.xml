@@ -173,7 +173,7 @@
 
                             </m:VBox>
                             <layout:layoutData>
-                                <layout:GridData span="XL3 L3 M6 S6"/>
+                                <layout:GridData span="XL4 L4 M6 S6"/>
                             </layout:layoutData>
                         </layout:VerticalLayout>
 
@@ -212,7 +212,7 @@
                                 <m:Input id="bpBirthplace" value="{bpModel>/bp_birthplace}" visible="{=!${visibleMode>/visible}}"/>
                             </m:VBox>
                             <layout:layoutData>
-                                <layout:GridData span="XL3 L3 M6 S6"/>
+                                <layout:GridData span="XL4 L4 M6 S6"/>
                             </layout:layoutData>
                         </layout:VerticalLayout>
 
@@ -243,7 +243,7 @@
                                     }"/>
                             </m:VBox>
                             <layout:layoutData>
-                                <layout:GridData span="XL3 L3 M6 S6"/>
+                                <layout:GridData span="XL4 L4 M6 S6"/>
                             </layout:layoutData>
                         </layout:VerticalLayout>
 
@@ -287,7 +287,7 @@
                                 <m:Input id="bpName2Org" value="{bpModel>/bp_corp_name2}" visible="{=!${visibleMode>/visible}}"/>
                             </m:VBox>
                             <layout:layoutData>
-                                <layout:GridData span="XL3 L3 M6 S12"/>
+                                <layout:GridData span="XL4 L4 M6 S6"/>
                             </layout:layoutData>
                         </layout:VerticalLayout>
 
@@ -314,7 +314,7 @@
 
                             </m:VBox>
                             <layout:layoutData>
-                                <layout:GridData span="XL3 L3 M6 S6"/>
+                                <layout:GridData span="XL4 L4 M6 S6"/>
                             </layout:layoutData>
                         </layout:VerticalLayout>
 
@@ -371,7 +371,7 @@
                                 <m:Input id="bpExternalNumberOrg" value="{bpModel>/bp_external_number}" visible="{=!${visibleMode>/visible}}"/>
                             </m:VBox>
                             <layout:layoutData>
-                                <layout:GridData span="XL3 L3 M6 S6"/>
+                                <layout:GridData span="XL4 L4 M6 S6"/>
                             </layout:layoutData>
                         </layout:VerticalLayout>
 
@@ -389,7 +389,7 @@
                                 <m:Text id="bpChangedDateOrg" text="{bpModel>/bp_changed_date}"/>
                             </m:VBox>
                             <layout:layoutData>
-                                <layout:GridData span="XL3 L3 M6 S6"/>
+                                <layout:GridData span="XL4 L4 M6 S6"/>
                             </layout:layoutData>
                         </layout:VerticalLayout>
 
@@ -417,7 +417,7 @@
                                 
                             </m:VBox>
                             <layout:layoutData>
-                                <layout:GridData span="XL3 L3 M6 S12"/>
+                                <layout:GridData span="XL4 L4 M6 S6"/>
                             </layout:layoutData>
                         </layout:VerticalLayout>
 
@@ -440,7 +440,7 @@
 
                             </m:VBox>
                             <layout:layoutData>
-                                <layout:GridData span="XL3 L3 M6 S12"/>
+                                <layout:GridData span="XL4 L4 M6 S6"/>
                             </layout:layoutData>
                         </layout:VerticalLayout>
 
@@ -491,7 +491,7 @@
                                 </m:Select>
                             </m:VBox>
                             <layout:layoutData>
-                                <layout:GridData span="XL3 L3 M6 S6"/>
+                                <layout:GridData span="XL4 L4 M6 S6"/>
                             </layout:layoutData>
                         </layout:VerticalLayout>
 
@@ -514,7 +514,7 @@
                                       '-'}"/>
                             </m:VBox>
                             <layout:layoutData>
-                                <layout:GridData span="XL3 L3 M6 S6"/>
+                                <layout:GridData span="XL4 L4 M6 S6"/>
                             </layout:layoutData>
                         </layout:VerticalLayout>
                     </blocks>

@@ -373,8 +373,9 @@ x
             await(this.setPatchData(isBlock));
             
             //this.getView().getModel("blockModel").setProperty("/isBlock",isBlock);
-            this.byId("pageSection1").setVisible(!isBlock);
-            this.byId("pageSection2").setVisible(!isBlock);
+
+            // this.byId("pageSection1").setVisible(!isBlock);
+            // this.byId("pageSection2").setVisible(!isBlock);
             this.getView().getModel("editModel").setProperty("/editable", false);
             
             //console.log(this.getView().getModel("blockModel").getProperty("/isBlock"));
@@ -413,7 +414,6 @@ x
                 "gl_company_code" :this.byId("glCompanyCode").getText(),
                 "gl_corp_name":this.byId("glCorpName").getText(),
                 "gl_acct_currency":this.byId("glAcctCurrency").getText(),
-                "gl_coa" : this.byId("glCoa").getText(),
                 "gl_recon_account":this.byId("glReconAccount").getText(),
 
                 "gl_blocked" : JSON.parse(isBlock)

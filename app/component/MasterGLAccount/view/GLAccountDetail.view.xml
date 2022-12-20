@@ -61,10 +61,10 @@
 				<uxap:subSections >
 					<uxap:ObjectPageSubSection id="_IDGenObjectPageSubSection1"  title="일반">
 						<uxap:blocks>
-                            <layout:VerticalLayout id="_IDGenVerticalLayout1" class="sapUiSmallMarginBeginEnd" >
-                                <VBox id="_IDGenVBox3" class="sapUiSmallMarginBottom">
+                            <layout:VerticalLayout id="_IDGenVerticalLayout1" >
+                                <VBox id="_IDGenVBox3" class="sapUiSmallMarginBottom" >
                                     <Label id="_IDGenLabel6" text="계정과목표" />
-                                    <Text id="TextCoA" text="{GLDataModel>/gl_coa} ({GLDataModel>/gl_coa_content})" class="sapUiTinyMarginBegin"/>  
+                                    <Text id="TextCoA" text="{GLDataModel>/gl_coa}" class="sapUiTinyMarginBegin"/>  
                                 </VBox>
                                 <VBox id="_IDGenVBox4" class="sapUiSmallMarginBottom">
                                     <Label id="_IDGenLabel7" text="G/L 계정 유형" required="true" />
@@ -84,7 +84,7 @@
                                 </VBox>
                                 <VBox id="_IDGenVBox5" class="sapUiSmallMarginBottom">
                                     <Label id="_IDGenLabel8" text="계정 그룹" required="true" />
-                                    <Text id="TextGLGroup" text="{GLDataModel>/gl_acct_group} ({GLDataModel>/gl_acct_group_mean})" visible="{=!${editModel>/editable}}" class="sapUiTinyMarginBegin">
+                                    <Text id="TextGLGroup" text="{GLDataModel>/gl_acct_group}" visible="{=!${editModel>/editable}}" class="sapUiTinyMarginBegin">
 										<customData>
 											<core:CustomData value="{GLDataModel>/gl_acct_group}"/>
 										</customData>
@@ -137,16 +137,13 @@
 										<core:Item key="{SelectOption>FuncArea}" text="{SelectOption>Value}"/>
 									</Select>  
                                 </VBox>
-                                <layout:layoutData>
-                                    <layout:GridData id="_IDGenGridData1" span="XL3 L3 M6 S12"/>
-                                </layout:layoutData>
+
                             </layout:VerticalLayout>
 
-                            <layout:VerticalLayout id="_IDGenVerticalLayout2" class="sapUiSmallMarginBeginEnd">
+                            <layout:VerticalLayout id="_IDGenVerticalLayout2" >
                                 <VBox id="_IDGenVBox8" class="sapUiSmallMarginBottom">
                                     <Label id="_IDGenLabel13" text="계정과목표 내역" required="true"/>
                                     <Text id="TextCoAContent" text="{GLDataModel>/gl_coa_content}" class="sapUiTinyMarginBegin"/>
-
                                 </VBox>
                                 <VBox id="_IDGenVBox9">
                                     <Label id="_IDGenLabel12" text="G/L 계정 설명" />
@@ -159,9 +156,7 @@
                                     <Input id="InputGLAccDesc" visible="{=${editModel>/editable}}" value="{GLDataModel>/gl_acct_descript}" class="sapUiTinyMarginBegin"/>  
 
                                 </VBox>
-                                <layout:layoutData>
-                                    <layout:GridData id="_IDGenGridData2" span="XL3 L3 M6 S12"/>
-                                </layout:layoutData>
+
                             </layout:VerticalLayout>
 
 						</uxap:blocks>
