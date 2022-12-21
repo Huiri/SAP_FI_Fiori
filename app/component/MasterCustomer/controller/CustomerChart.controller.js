@@ -105,10 +105,15 @@ sap.ui.define([
 
             //console.log(this.getView().getModel("bpReportSubmitModel"));
 
-            this.getView().getModel("bpReportSubmitModel").setProperty("/submit", a / data.oData.length * 100);
-            this.getView().getModel("bpReportSubmitModel").setProperty("/notsubmit", b / data.oData.length * 100);
-            this.getView().getModel("bpReportSubmitModel").setProperty("/submitpercent", (a / data.oData.length * 100).toFixed(2) + '%');
-            this.getView().getModel("bpReportSubmitModel").setProperty("/notsubmitpercent", (b / data.oData.length * 100).toFixed(2) + '%');
+            this.getView().getModel("bpReportSubmitModel").setProperty("/submit", a);
+            this.getView().getModel("bpReportSubmitModel").setProperty("/notsubmit", b );
+            this.getView().getModel("bpReportSubmitModel").setProperty("/submitpercent", a +" 건");
+            this.getView().getModel("bpReportSubmitModel").setProperty("/notsubmitpercent", b +" 건");
+
+            // this.getView().getModel("bpReportSubmitModel").setProperty("/submit", a / data.oData.length * 100);
+            // this.getView().getModel("bpReportSubmitModel").setProperty("/notsubmit", b / data.oData.length * 100);
+            // this.getView().getModel("bpReportSubmitModel").setProperty("/submitpercent", (a / data.oData.length * 100).toFixed(2) + '%');
+            // this.getView().getModel("bpReportSubmitModel").setProperty("/notsubmitpercent", (b / data.oData.length * 100).toFixed(2) + '%');
 
             //console.log(this.getView().getModel("bpReportSubmitModel"));
 
