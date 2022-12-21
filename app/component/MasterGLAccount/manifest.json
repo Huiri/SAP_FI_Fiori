@@ -208,6 +208,14 @@
             "name" : "FSVersionBS",
             "prefix": "FSVersionBS"
           }
+        },
+        {
+          "name": "FSVersionPL",
+          "pattern": "FSVersionPL",
+          "target": {
+            "name" : "FSVersionPL",
+            "prefix": "FSVersionPL"
+          }
         }
         
       ],
@@ -251,8 +259,17 @@
           "viewType": "XML",
           "transition": "slide",
           "clearControlAggregation": true,
+
           "viewId": "FSVersionBS",
           "viewName": "FSVersionBS"
+        },
+        "FSVersionPL" : {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": true,
+          "viewId": "FSVersionPL",
+          "viewName": "FSVersionPL"
+
         }
       }
     },
