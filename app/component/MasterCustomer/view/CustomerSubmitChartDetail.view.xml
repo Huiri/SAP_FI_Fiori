@@ -1,0 +1,83 @@
+<mvc:View controllerName="project3.controller.CustomerSubmitChartDetail"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:t="sap.ui.table"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core" 
+    xmlns:form="sap.ui.layout.form"
+    xmlns:layout="sap.ui.layout"
+    height="100%">
+    <f:DynamicPage id="page" headerExpanded="false" showFooter="true">
+        <f:title>
+            <f:DynamicPageTitle >
+                <f:heading>
+                    <HBox >
+                        <Button type="Back" press=".onBack"/>
+                        <Title id="title" text="서류 제출 리스트"/>
+                        <ObjectStatus id="titleState" class="titleDesign"/>
+                    </HBox>
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+        </f:header>
+        <f:content class="sapUiSmallMargin">
+            <t:Table id="SubmitChartTable" selectionMode="None" rows="{BpCustomerModel>/}" rowActionCount="1" visibleRowCount="20">
+                <t:rowActionTemplate>
+                    <t:RowAction >
+                        <t:items>
+                            <t:RowActionItem type="Navigation" press=".toCustomerDetail"></t:RowActionItem>
+                        </t:items>
+                    </t:RowAction>
+                </t:rowActionTemplate>                
+                <t:extension>
+                    <OverflowToolbar>
+                        <Text id="submitStateId" class="sapUiTinyMarginBottom"/>
+                        <Text id="totalNumber" class="sapUiTinyMarginBottom"/>
+                        <ToolbarSpacer/>
+                    </OverflowToolbar>
+                    <!-- 아이콘을 눌렀을 때, .onSort함수가 실행 -->
+                    <!-- tooltip => 아이콘에 마우스를 올렸을 때, 정렬 기능을 한다고 알려준다 -->
+                </t:extension>
+                <t:columns>
+                    <t:Column hAlign="Center">
+                        <Label text="BP"/>
+                        <t:template>
+                            <Text text="{BpCustomerModel>bp_number}"/>
+                        </t:template>
+                    </t:Column>
+                    <t:Column hAlign="Center">
+                        <Label text="BP명"/>
+                        <t:template>
+                            <Text text="{BpCustomerModel>bp_name}"/>
+                        </t:template>
+                    </t:Column>                    
+                    <t:Column hAlign="Center">
+                        <Label text="회사 코드"/>
+                        <t:template>
+                            <Text text="{BpCustomerModel>bp_company_code}"/>
+                        </t:template>
+                    </t:Column>
+                    <t:Column hAlign="Center">
+                        <Label text="BP 범주"/>
+                        <t:template>
+                            <Text text="{BpCustomerModel>bp_category}"/>
+                        </t:template>
+                    </t:Column>                    
+                    <t:Column hAlign="Center">
+                        <Label text="서류 제출 여부"/>
+                        <t:template>
+                           <Text text="{=${BpCustomerModel>bp_report_submission}===true?'제출 완료':'미제출'}" />
+                        </t:template>
+                    </t:Column>
+                    
+                </t:columns>
+            </t:Table>
+        </f:content>
+        
+
+
+    </f:DynamicPage>
+    
+</mvc:View>
+

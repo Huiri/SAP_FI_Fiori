@@ -15,8 +15,9 @@ sap.ui.define([
 	Controller, JSONModel, MessageBox, Filter, FilterOperator, Sorter, Fragment, SearchField, UIColumn, Text
 ) {
 	"use strict";
-	let CreateNum, Today;
 	let temp = [];
+	let Today;
+
 	return Controller.extend("project2.controller.CreateGLAccount", {
 		onInit: function () {
 
@@ -40,13 +41,9 @@ sap.ui.define([
 		onMyRoutePatternMatched : function(oEvent) {
 			this.onDataView();
 			this.onReset();
-			// CreateNum = parseInt(oEvent.getParameter("arguments").num) + 1;
 
 			let now = new Date();
 			Today = now.getFullYear() + "." +(now.getMonth()+1).toString().padStart(2,'0')+"."+now.getDate().toString().padStart(2, '0');
-
-			// this.getView().byId("GLAcct").setText(CreateNum);
-			// this.getView().byId("CreateDate").setText(Today);
 			
 		},
 		onDataView: async function () {
@@ -61,6 +58,8 @@ sap.ui.define([
                 type : "get",
                 url : cocdUrl
             })
+            //console.log(CoCdData);
+
             let CoCdDataModel = new JSONModel(CoCdData.value);
             this.getView().setModel(CoCdDataModel, "CoCdDataModel");
 
@@ -95,6 +94,7 @@ sap.ui.define([
 			return false;
 		},
 		onCreate : async function(){
+
             let isError = this.onErrorMessageBoxPress();
             if(isError === false){
                 return;
@@ -252,7 +252,7 @@ sap.ui.define([
             this._oBasicSearchField = null;
             this.oWhitespaceDialog = null;
             var oModel = this.getView().getModel('CoCdDataModel');
-			console.log(oModel);
+			//console.log(oModel);
 
 			var oCodeTemplate = new Text({text: {path: 'CoCdDataModel>com_code'}, renderWhitespace: true});
             var oCoCdNameTemplate = new Text({text: {path: 'CoCdDataModel>com_code_name'}, renderWhitespace: true});
@@ -325,7 +325,7 @@ sap.ui.define([
                 oValueRequestData = oValueRequestModel.getProperty('/');
             
             var aTokens = oEvent.getParameter("tokens");
-            console.log(aTokens);
+            //console.log(aTokens);
             if(aTokens.length > 5) {
                 return sap.m.MessageBox.warning('5개만 선택하세요!');
             }
@@ -361,7 +361,7 @@ sap.ui.define([
 
 		onCoCdSelectSearch: function() {
 			let CoCdSearchInput = this._oBasicSearchField.getValue();
-            console.log(CoCdSearchInput);
+            //console.log(CoCdSearchInput);
             var aFilter = [];
 
             if(CoCdSearchInput) {

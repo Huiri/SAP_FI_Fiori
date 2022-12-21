@@ -66,7 +66,7 @@
                 <layout:VerticalLayout class="sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom">
                     <m:VBox>
                         <m:Label text="서류 제출 여부" class="propertyColumn"/>
-                        <m:Text visible="{visibleMode>/visible}" text="{=${bpModel>/bp_report_submission}===true?'제출':'미제출'}"/>
+                        <m:Text visible="{visibleMode>/visible}" text="{=${bpModel>/bp_report_submission}===true?'제출 완료':'미제출'}"/>
                         <m:Select
                             id="bpReportSubmission" 
                             visible="{=!${visibleMode>/visible}}"
