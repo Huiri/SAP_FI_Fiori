@@ -215,7 +215,7 @@
         },
         {
           "name": "CustomerChart",
-          "pattern": "CustomerChart",
+          "pattern": "CustomerChart/0/chart:?query:",
           "target": {
             "name" : "CustomerChart",
             "prefix": "CustomerChart"

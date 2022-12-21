@@ -26,12 +26,29 @@ sap.ui.define([
             this.getOwnerComponent().getRouter().getRoute("CustomerChart").attachPatternMatched(this.columnChartDataView, this);
             this.getOwnerComponent().getRouter().getRoute("CustomerChart").attachPatternMatched(this.columnChartDataView, this);
             this.getOwnerComponent().getRouter().getRoute("CustomerChart").attachPatternMatched(this.reportSubmitDataView, this);
+            this.getOwnerComponent().getRouter().getRoute("CustomerChart").attachPatternMatched(this.matchedNavTo, this);
 
 
 
         },
 
-        donutChartDataView: async function () {
+        matchedNavTo: function(e){
+            console.log( e.getParameter("arguments")["?query"]);
+            let a= e.getParameter("arguments")["?query"];
+            if(a!=null){
+                if(a.type!=null){
+                    console.log("도넛");
+                    console.log(a.type);
+                    this.getOwnerComponent().getRouter().navTo('CustomerChartDetail', {type:a.type});
+                }else{
+                    console.log("스틱");
+                    console.log(a.submitState);
+                    this.getOwnerComponent().getRouter().navTo('CustomerSubmitChartDetail', {submitState:a.submitState});
+                }
+            }
+        },
+        donutChartDataView: async function (e) {
+
             const BpCreditstatus = await $.ajax({
                 type: "get",
                 url: "/bp/BP"

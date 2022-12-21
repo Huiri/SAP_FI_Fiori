@@ -251,8 +251,12 @@ sap.ui.define([
 		},
 		//back
 		toBack: function() {	
-			if(source==SOURCE_CHART) this.getOwnerComponent().getRouter().navTo("CustomerChartDetail",{type:donut});
-			else if(source==SOURCE_CHART_STICK) this.getOwnerComponent().getRouter().navTo("CustomerSubmitChartDetail",{submitState:stickType});
+			// if(source==SOURCE_CHART) this.getOwnerComponent().getRouter().navTo("CustomerChart",{type:donut});
+			// else if(source==SOURCE_CHART_STICK) this.getOwnerComponent().getRouter().navTo("CustomerSubmitChartDetail",{submitState:stickType});
+			// else if(source==null) this.getOwnerComponent().getRouter().navTo("CustomerList");
+
+			if(source==SOURCE_CHART) this.getOwnerComponent().getRouter().navTo("CustomerChart",{"?query":{type:donut}});
+			else if(source==SOURCE_CHART_STICK) this.getOwnerComponent().getRouter().navTo("CustomerChart",{"?query":{submitState:stickType}});
 			else if(source==null) this.getOwnerComponent().getRouter().navTo("CustomerList");
 			
 		},
