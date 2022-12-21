@@ -181,7 +181,7 @@ sap.ui.define([
 			this.byId("FuncArea").setSelectedKey("");
 			this.byId("GLAcctContent").setValue("");
 			this.byId("GLAccDesc").setValue("");
-			this.byId("GLAcct").setValue("");
+			this.byId("GLAcct").setText("");
 
 		},
 
