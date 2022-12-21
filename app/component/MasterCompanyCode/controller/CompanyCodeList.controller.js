@@ -402,7 +402,7 @@ sap.ui.define([
 		onCoASelectOkPress: function (oEvent) {
 			var aTokens = oEvent.getParameter("tokens");
 			var CompanyCoa = this.byId("CompanyCoa");
-
+			var arr=[];
 			aTokens.forEach(function (oToken) {
 				// console.log(oToken.getKey());
 				oToken.mProperties.text = oToken.getKey().toString()

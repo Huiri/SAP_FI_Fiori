@@ -5,7 +5,6 @@ controllerName="project3.controller.CreateCustomer"
 	xmlns:layout="sap.ui.layout"
 	xmlns="sap.m"
 	xmlns:core="sap.ui.core"
-    xmlns:t="sap.ui.table"
 	height="100%">
 	<uxap:ObjectPageLayout id="ObjectPageLayout"
 		showTitleInHeaderContent="true"
@@ -35,7 +34,7 @@ controllerName="project3.controller.CreateCustomer"
                     </HBox>
 				</uxap:snappedHeading>
 				<uxap:actions>
-					<Button text="저장" type="Emphasized" press=".onCreate" tooltip="저장"  ariaHasPopup="Dialog"/>               
+					<Button text="생성" type="Emphasized" press=".onCreate" tooltip="생성"  ariaHasPopup="Dialog"/>               
                 </uxap:actions>
 			</uxap:ObjectPageDynamicHeaderTitle>
 		</uxap:headerTitle>
