@@ -130,6 +130,42 @@ sap.ui.define([
 
             aCols = this.createColumnConfig();
 
+			for(let i = 0; i < oList.length; i++){
+				if(oList[i].gl_acct_type === 'P'){
+					oList[i].gl_acct_type2 = "1차 원가 또는 수익";
+				}
+				if(oList[i].gl_acct_type === 'S'){
+					oList[i].gl_acct_type2 = "2차 원가";
+				}
+				if(oList[i].gl_acct_type === 'X'){
+					oList[i].gl_acct_type2 = "대차대조표 계정";
+				}
+				if(oList[i].gl_acct_type === 'C'){
+					oList[i].gl_acct_type2 = "현금 계정";
+				}
+				if(oList[i].gl_acct_type === null){
+					oList[i].gl_acct_type2 = "-";
+				}
+				if(oList[i].gl_acct_type === 'N'){
+					oList[i].gl_acct_type2 = "영업외 비용 또는 수익";
+				}
+				if(oList[i].gl_acct_group === 'ANL'){
+					oList[i].gl_acct_group2 = "자산 계정";
+				}
+				if(oList[i].gl_acct_group === 'FIN'){
+					oList[i].gl_acct_group2 = "대차대조표 계정";
+				}
+				if(oList[i].gl_acct_group === 'GUV'){
+					oList[i].gl_acct_group2 = "손익계정";
+				}
+				if(oList[i].gl_acct_group === 'MAT'){
+					oList[i].gl_acct_group2 = "자재";
+				}
+				if(oList[i].gl_acct_group === null){
+					oList[i].gl_acct_group2 = "-";
+				}				
+			}
+
             oSettings = {
                 workbook: {
                     columns: aCols,
@@ -163,12 +199,12 @@ sap.ui.define([
             });
             aCols.push({
                 label: 'G/L 계정 유형',
-                property: 'gl_acct_type',
+                property: 'gl_acct_type2',
                 type: EdmType.String
             });
             aCols.push({
                 label: '계정 그룹',
-                property: 'gl_acct_group',
+                property: 'gl_acct_group2',
                 type: EdmType.String
             });
 

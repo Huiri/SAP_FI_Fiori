@@ -24,7 +24,7 @@
                 <form:SimpleForm layout="ResponsiveGridLayout">
                     <form:content class="sapUiLargeMarginBeginEnd">
                         <VBox height="3rem">
-                            <Label text="비즈니스 파트너 : "/>
+                            <Label text="BP명 : "/>
                             <MultiInput 
                                 id="BpName" 
                                 showSuggestion="true" 
@@ -47,7 +47,7 @@
                             </layoutData>
                         </VBox>
                         <VBox height="3rem">
-                            <Label text="비즈니스 파트너 범주 : "/>
+                            <Label text="BP범주 : "/>
                             <Select width="100rem" id="BpCategory">
                                 <core:Item key="" text="전체" />
                                 <core:Item key="개인" text="개인" />
@@ -139,7 +139,7 @@
                 </t:extension>
                 <t:columns>
                     <t:Column hAlign="Center">
-                        <Label text="비즈니스 파트너"/>
+                        <Label text="BP명"/>
                         <t:template>
                             <Text text="{BpCustomerModel>bp_name}"/>
                         </t:template>
@@ -151,7 +151,7 @@
                         </t:template>
                     </t:Column>
                     <t:Column hAlign="Center">
-                        <Label text="비즈니스 파트너 범주"/>
+                        <Label text="BP범주"/>
                         <t:template>
                             <Text text="{BpCustomerModel>bp_category}"/>
                         </t:template>
