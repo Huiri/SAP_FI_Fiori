@@ -187,7 +187,7 @@ sap.ui.define([
         createColumnConfig: function () {
             const aCols = [];
             aCols.push({
-                label: '비즈니스 파트너',
+                label: 'BP명',
                 property: 'bp_name',
                 type: EdmType.String
             });
@@ -197,7 +197,7 @@ sap.ui.define([
                 type: EdmType.String
             });
             aCols.push({
-                label: '비즈니스 파트너 범주',
+                label: 'BP범주',
                 property: 'bp_category',
                 type: EdmType.String
             });
