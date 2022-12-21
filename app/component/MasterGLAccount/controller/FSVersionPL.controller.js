@@ -33,14 +33,19 @@ sap.ui.define([
             let fsVersionType = this.byId("fsVersionType").getSelectedKey();
             if (fsVersionType == "재무상태표") {
                 this.getOwnerComponent().getRouter().navTo("FSVersionBS");
+                this.byId("fsVersionType").setSelectedItemId("bs");
             }
             else {
                 this.getOwnerComponent().getRouter().navTo("FSVersionPL")
+                this.byId("fsVersionType").setSelectedItemId("pl");
+
             }
+            this.onCollapseAll();
         },
 
         onBack: function () {
             this.getOwnerComponent().getRouter().navTo("Home");
+            this.onCollapseAll();
         },
        
 
