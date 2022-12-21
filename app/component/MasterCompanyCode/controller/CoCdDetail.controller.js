@@ -28,8 +28,8 @@ sap.ui.define([
 
 		// 	this.getView().byId('myTEST2').getDomRef().childNodes[0].childNodes[0].class = "sapUxAPObjectPageSectionTitle";
 		//},
-		initView: async function(e){
-			//selectedNum = e.getParameter("arguments").num;			
+		initView: async function(e){	
+			selectedNum = e.getParameter("arguments").num;		
 			let url="/cocd/CoCd/"+selectedNum;			
 			const COCDDATA= await $.ajax({
 				type:'get',
@@ -38,13 +38,13 @@ sap.ui.define([
 			var cocdModel = new JSONModel(COCDDATA);
 			console.log(cocdModel)
 			this.getView().setModel(cocdModel, "cocdModel")
-			console.log(this.getView().getModel("cocdModel"))
+			console.log(this.getView().getModel("cocdModel"));
 		},
 
 
 		
 		toBack: function(){
-			this.getOwnerComponent().getRouter().navTo("CoCdList");
+			this.getOwnerComponent().getRouter().navTo("CompanyCodeList");
 		}
 		
 		

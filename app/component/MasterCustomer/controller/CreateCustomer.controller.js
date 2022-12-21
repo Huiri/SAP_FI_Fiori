@@ -83,7 +83,6 @@ sap.ui.define([
             let BpCoCdModel = new JSONModel(CoCdList.value);
             this.getView().setModel(BpCoCdModel,"BpCoCdModel");
         },
-
         onClearField: function() {
             this.byId("BpName").setValue(""),
             this.byId("BpCategory").setText(""),        
@@ -96,6 +95,7 @@ sap.ui.define([
             this.byId("BpCorpName2").setValue(""),
             this.byId("BpRoadAddress").setValue(""),
             this.byId("BpStreetAddress").setValue(""),
+            this.byId("BpCity").setValue(""),
             this.byId("BpPostalCode").setValue(""),
             this.byId("BpNation").setValue(""),
             this.byId("BpReportSubmission").setSelected(false)
@@ -116,6 +116,7 @@ sap.ui.define([
                 bp_corp_name1 : this.byId("BpCorpName1").getValue(),
                 bp_corp_name2 : this.byId("BpCorpName2").getValue(),
                 bp_road_address : this.byId("BpRoadAddress").getValue(),
+                bp_city : this.byId("BpCity").getValue(),
                 bp_street_address : this.byId("BpStreetAddress").getValue(),
                 bp_postal_code : this.byId("BpPostalCode").getValue(),
                 bp_nation : this.byId("BpNation").getValue(),
