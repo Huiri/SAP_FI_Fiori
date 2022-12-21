@@ -142,8 +142,6 @@ controllerName="project3.controller.CreateCustomer"
 					</uxap:ObjectPageSubSection>
 				</uxap:subSections>
 			</uxap:ObjectPageSection>
-<!-- >>>>>>> Stashed changes -->
-
 		</uxap:sections>
 </uxap:ObjectPageLayout>
 </mvc:View>

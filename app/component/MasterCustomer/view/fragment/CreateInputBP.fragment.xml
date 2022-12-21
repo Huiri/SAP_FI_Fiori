@@ -4,18 +4,18 @@
     xmlns:t = "sap.ui.table"
     xmlns:layout = "sap.ui.layout"
 >
-<Dialog id="CoCdDialog" title ="회사 코드" contentWidth="50%" >
+<Dialog id="BPDialog" title ="비즈니스 파트너" contentWidth="50%" >
         <layout:VerticalLayout class="sapUiContentPadding" width="100%">
             <VBox>
                 <Label  text="검색 : "/>
-                <Input id="SearchInputCoCd" />
+                <Input id="SearchInputBP" />
                 <layoutData>
                     <layout:GridData span="XL12 L12 M12 S12"/>
                 </layoutData>
             </VBox>
             <FlexBox justifyContent="End">
-                <Button text="검색" type="Emphasized" press=".onSearchCoCdDialog"/>
-                <Button text="초기화" type="Transparent" press=".onSearchCoCdReset" class="sapUiTinyMarginBegin"/>
+                <Button text="검색" type="Emphasized" press=".onSearchBPDialog"/>
+                <Button text="초기화" type="Transparent" press=".onSearchBPReset" class="sapUiTinyMarginBegin"/>
                 <layoutData>
                     <layout:GridData span="XL12 L12 M12 S12"/>
                 </layoutData>
@@ -29,24 +29,30 @@
 				rows="{Material>/productList}"
 				paste="onPaste"
 				ariaLabelledBy="title"> -->
-            <t:Table id="CoCdSelectTable"
+            <t:Table id="BPSelectTable"
                 class="sapUiSmallMarginBeginEnd"
-                cellClick = ".getCoCdContext"
+                cellClick = ".getBPContext"
                 selectionBehavior="RowOnly"
 	            selectionMode="Single"
-				rows="{BpCoCdModel>/}"
+				rows="{BpCustomerModel>/}"
 				ariaLabelledBy="title">
                 <t:columns>
+                    <t:Column hAlign="Center">
+						<Label text="BP" textAlign="Center" width="10rem"/>
+						<t:template>
+							<Text text="{BpCustomerModel>bp_number}" wrapping="false" />
+						</t:template>
+					</t:Column>
 					<t:Column hAlign="Center">
 						<Label text="회사 코드" textAlign="Center" width="10rem"/>
 						<t:template>
-							<Text text="{BpCoCdModel>com_code}" wrapping="false" />
+							<Text text="{BpCustomerModel>bp_company_code}" wrapping="false" />
 						</t:template>
 					</t:Column>
 					<t:Column hAlign="Center">
 						<Label text="회사 이름" textAlign="Center"/>
 						<t:template>
-							<Text text="{BpCoCdModel>com_code_name}" wrapping="false" />
+							<Text text="{BpCustomerModel>bp_name}" wrapping="false" />
 						</t:template>
 					</t:Column>
                 </t:columns>
@@ -54,7 +60,7 @@
 		</content>
         <!-- </content> -->
         <beginButton>
-            <Button text="취소" press=".onCloseCoCdDialog"/>
+            <Button text="취소" press=".onCloseBPDialog"/>
         </beginButton>
     </Dialog>
 </c:FragmentDefinition>

@@ -78,8 +78,8 @@ sap.ui.define([
         temp.com_co_area === "" ||
         temp.com_fiscal_year === "" ||
         temp.com_currency === "" ||
-        com_cocd_create_person === "" ||
-        com_cocd_create_date === ""
+        temp.com_cocd_constructor === "" ||
+        temp.com_cocd_date === "" 
       ) {
         MessageBox.error("필수 항목을 입력해주세요")
       } else {
@@ -91,6 +91,7 @@ sap.ui.define([
           data: JSON.stringify(temp)
         });
         this.onCancel();
+        this.getOwnerComponent().getRouter().navTo("GLAccountList")
       }
     },
     clearField: function () {
@@ -105,8 +106,8 @@ sap.ui.define([
         this.byId("CoCdAddress").setValue(""),
         this.byId("CoCdFiscalYear").setValue(""),
         this.byId("CoCdTaxCode").setSelectedKey(""),
-        this.byId("CoCdCreatePeson").getValue(),
-        this.byId("CoCdCreateDate").getValue()
+        this.byId("CoCdConstructor").setValue(""),
+        this.byId("CoCdDate").setValue("")
     },
 
     //국가 선택용 다이어로그 열기

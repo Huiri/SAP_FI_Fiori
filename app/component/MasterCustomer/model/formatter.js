@@ -28,6 +28,13 @@ sap.ui.define([], function(){
                 default :
                     return sStatus;
             }
+        },
+        IsNull : function(sStatus){
+            if(!sStatus){
+                return "-";
+            }
+
+            return sStatus;
         }
 
     }

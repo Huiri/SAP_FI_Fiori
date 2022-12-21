@@ -1,0 +1,101 @@
+<mvc:View
+	controllerName="project3.controller.EditCorres"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:layout="sap.ui.layout"
+    xmlns:form="sap.ui.layout.form"
+	xmlns:c="sap.ui.core"
+	displayBlock="true"
+	height="100%"
+	busyIndicatorDelay="0"
+>
+    <f:DynamicPage id="page" headerExpanded="false" showFooter="true">
+        <f:title>
+            <f:DynamicPageTitle >
+                <f:heading >
+                    <HBox class="sapUiMediumMarginBottom">
+                        <Button type="Back" press=".toHome"/>
+                        <Title text="고객 서신 관리 - 정보 입력"/>
+                    </HBox>
+                </f:heading>
+                <!-- 헤더를 접었을 때 어떤 모양이 나올지를 정하는 부분이 snappedContent -->
+                <f:snappedContent>
+                    <form:SimpleForm layout="ResponsiveGridLayout">
+                        <form:content>
+                                <VBox>
+                                    <Label text="회사명: " class="sapUiTinyMarginBottom"/>
+                                    <Input id="BpCompanyName" class="sapUiSmallMarginBottom" showValueHelp="true" valueHelpRequest=".onSelectCoCd"/>
+                                    <layoutData>
+                                        <layout:GridData span="XL4 L4 M6 S12"/>
+                                    </layoutData>
+                                </VBox>
+                                <VBox>
+                                    <Label text="작성자: " class="sapUiTinyMarginBottom" />
+                                    <Input id="constructor" class="sapUiSmallMarginBottom"/>
+                                    <layoutData>
+                                        <layout:GridData span="XL4 L4 M6 S12"/>
+                                    </layoutData>
+                                </VBox>
+                                <VBox>
+                                    <Label text="고객 :  " class="sapUiTinyMarginBottom" labelFor="bpName" />
+                                    <Input id="bpName" required="true" class="sapUiSmallMarginBottom" showValueHelp="true" valueHelpRequest="onSelectBP"/>
+                                    <layoutData>
+                                        <layout:GridData span="XL4 L4 M6 S12"/>
+                                    </layoutData>
+                                </VBox>
+                                <VBox>
+                                    <Label text="작성일자: " class="sapUiTinyMarginBottom"/>
+                                    <DatePicker id="createdDate" class="sapUiSmallMarginBottom" valueFormat="yyyy.MM.dd" displayFormat="yyyy.MM.dd"/>
+                                    <layoutData>
+                                        <layout:GridData span="XL4 L4 M6 S12"/>
+                                    </layoutData>
+                                </VBox>
+                                <VBox>
+                                    <Label text="잔액기준일/만기: " class="sapUiTinyMarginBottom"/>
+                                    <DatePicker id="DueDate" class="sapUiSmallMarginBottom" valueFormat="yyyy.MM.dd" displayFormat="yyyy.MM.dd"/>
+                                    <layoutData>
+                                        <layout:GridData span="XL4 L4 M6 S12"/>
+                                    </layoutData>
+                                </VBox>        
+                                <HBox justifyContent="End">
+                                    <Button text="입력" type="Emphasized" press=".onSetValue"/>
+                                    <Button text="초기화" type="Transparent" press=".onClearField" class="sapUiSmallMarginBegin"/>
+                                    <layoutData>
+                                        <layout:GridData span="XL12 L12 M12 S12"/>
+                                    </layoutData>
+                                </HBox>
+                        </form:content>
+                    </form:SimpleForm>
+                </f:snappedContent>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:content>
+            <layout:VerticalLayout id="idVerticalLayout" class="sapUiContentPadding" width="100%">
+                <VBox>
+                    <HBox alignItems="Center">
+                        <Label text="서신 종류 선택:" labelFor="idSelect" class="sapUiSmallMarginEnd"/>
+                        <Select id="idSelect" change=".handleSelect">
+                            <c:Item key="ARBalanceConfirm" text="채권잔액조회서"/>
+                            <c:Item key="Dunning" text="독촉장"/>
+                        </Select>
+                    </HBox>
+                </VBox>
+                <VBox id="RTEBox">
+
+                </VBox>
+
+            </layout:VerticalLayout>
+
+        </f:content>
+
+        <f:footer>
+            <OverflowToolbar>
+                <ToolbarSpacer/>
+                <Button type="Emphasized" text="저장" press=".toEditconfirm" ariaHasPopup="Dialog"/>
+                <Button text="취소" press=".toHome"/>
+            </OverflowToolbar>
+        </f:footer>
+
+    </f:DynamicPage>
+</mvc:View>
