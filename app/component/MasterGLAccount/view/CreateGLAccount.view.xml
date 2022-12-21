@@ -39,7 +39,7 @@
                     </VBox>
 				</uxap:snappedHeading>
 				<uxap:actions>
-					<Button id="_IDGenButton2" text="저장" type="Emphasized" press=".onCreate" tooltip="저장"/>
+					<Button id="_IDGenButton2" text="생성" type="Emphasized" press=".onCreate" tooltip="생성"/>
 				</uxap:actions>
 
 			</uxap:ObjectPageDynamicHeaderTitle>

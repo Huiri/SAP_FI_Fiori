@@ -1,15 +1,162 @@
-<mvc:View controllerName="project4.controller.CreateCoCd"  xmlns="sap.m" xmlns:f="sap.f" xmlns:t="sap.ui.table" xmlns:mvc="sap.ui.core.mvc" xmlns:core="sap.ui.core" xmlns:form="sap.ui.layout.form" xmlns:layout="sap.ui.layout" height="100%">
-    <f:DynamicPage id="page" headerExpanded="false" showFooter="true" >
-        <f:title>
-            <f:DynamicPageTitle id="_IDGenDynamicPageTitle1">
-                <f:heading>
-                    <HBox id="_IDGenHBox1"  class="sapUiMediumMarginBottom">
-                        <Button type="Back" press=".onBack"/>
-                        <Title id="_IDGenTitle1" text="회사 코드 생성"/>
+<mvc:View 
+controllerName="project3.controller.CreateCustomer"
+    xmlns:mvc="sap.ui.core.mvc"
+	xmlns:uxap="sap.uxap"
+	xmlns:layout="sap.ui.layout"
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+	height="100%">
+	<uxap:ObjectPageLayout id="ObjectPageLayout"
+		showTitleInHeaderContent="true"
+		showEditHeaderButton="true"
+		upperCaseAnchorBar="false"
+		toggleHeaderOnTitleClick="false"
+		headerContentPinnable="false"
+		selectedSection="_IDGenObjectPageSection1"
+		>
+        <uxap:headerTitle>
+			<uxap:ObjectPageDynamicHeaderTitle id="_IDGenObjectPageDynamicHeaderTitle1">
+				<uxap:expandedHeading> 
+                    <HBox>
+                        <HBox  class="sapUiMediumMarginBottom">
+                            <Button type="Back" press=".onBack"/>
+                            <Title text="회사 코드 생성"/>
+                        </HBox>
+
                     </HBox>
-                </f:heading>
+                </uxap:expandedHeading>
+
+				<uxap:snappedHeading>
+                    <HBox>
+                        <HBox  class="sapUiMediumMarginBottom">
+                            <Button type="Back" press=".onBack"/>
+                            <Title text="회사 코드 생성"/>
+                        </HBox>
+
+                    </HBox>
+                </uxap:snappedHeading>
+				<uxap:actions>
+					<Button text="생성" type="Emphasized" press=".onCreate" tooltip="저장"  ariaHasPopup="Dialog"/>               
+                </uxap:actions>
+			</uxap:ObjectPageDynamicHeaderTitle>
+		</uxap:headerTitle>
+		<uxap:sections>
+
+			<uxap:ObjectPageSection id="_IDGenObjectPageSection0" title="헤더">
+				<uxap:subSections>
+					<uxap:ObjectPageSubSection id="_IDGenObjectPageSubSection0"  title="헤더">
+						<uxap:blocks>
+                            <Label id="_IDGenLabel0" text="회사 코드 생성"/>
+						</uxap:blocks>
+					</uxap:ObjectPageSubSection>
+				</uxap:subSections>
+			</uxap:ObjectPageSection>
+			<uxap:ObjectPageSection id="_IDGenObjectPageSection1" title="일반" >
+				<uxap:subSections >
+					<uxap:ObjectPageSubSection id="defaultSubSection"  title="일반정보" >
+						<uxap:blocks>
+                            <layout:Grid>
+                                    <VBox>
+                                        <Title id="_IDGenLabel1" text="일반 정보 " />
+
+                                        <VBox class="sapUiMediumMarginBottom">
+
+                                            <Label id="_IDGenLabel2" text="회사코드 : " class="sapUiTinyMarginBottom" labelFor="CoCdCod" />
+                                            <Input id="CoCdCod" class="sapUiSmallMarginBottom" required="true"/>
+
+                                            <Label id="_IDGenLabel3" text="회사명 : " class="sapUiTinyMarginBottom" required="true" labelFor="CoCdName" />
+                                            <Input id="CoCdName" class="sapUiSmallMarginBottom" required="true"/>
+
+                                            <Label id="_IDGenLabel10" text="도시 : " class="sapUiTinyMarginBottom" required="true" />
+                                            <Input id="CoCdCity" class="sapUiSmallMarginBottom" />
+                                            
+                                            <Label id="_IDGenLabel8" text="회사 주소 : " class="sapUiTinyMarginBottom" />
+                                            <Input id="CoCdAddress" class="sapUiSmallMarginBottom" />
+                                        
+                                            <Label id="_IDGenLabel12" text="국가/지역 : " class="sapUiTinyMarginBottom" required="true" />
+                                            <Input id="CoCdCountry" class="sapUiSmallMarginBottom" valueHelpRequest=".onSelectCountry" showValueHelp="true"/>
+
+                                            <Label id="_IDGenLabel5" text="회사 통화 : " class="sapUiTinyMarginBottom" labelFor="CoCdCurrency" />
+                                            <Select width="100rem" id="CoCdCurrency" class="sapUiSmallMarginBottom" required="true">
+                                                <core:Item id="_IDGenItem2" key="" text="선택" />
+                                                <core:Item id="_IDGenItem3" key="KRW" text="KRW" />
+                                                <core:Item id="_IDGenItem4" key="USD" text="USD" />
+                                            </Select>
+                                            <Label id="_IDGenLabel6" text="회사 언어 : " class="sapUiTinyMarginBottom" labelFor="CoCdLanguage" />
+                                            <Select width="100rem" id="CoCdLanguage" class="sapUiSmallMarginBottom" required="true">
+                                                <core:Item id="_IDGenItem5" key="" text="선택" />
+                                                <core:Item id="_IDGenItem6" key="KR" text="한국어" />
+                                                <core:Item id="_IDGenItem7" key="EN" text="영어" />
+                                            </Select>
+
+                                        </VBox>
+                                        <layoutData>
+                                            <layout:GridData  span="XL4 L4 M4 S12" />
+                                        </layoutData>
+                                    </VBox>
+                                    
+                                    <VBox>
+                                        <Title text="개인 칭호 " visible="{=!${bpCategoryModel>/category}}"/>
+
+                                        <VBox id="_IDGenVBox3">
+                                            <Label id="_IDGenLabel17" text="생성자 : " class="sapUiTinyMarginBottom" required="true"  />
+                                            <Input id="CoCdConstructor" class="sapUiSmallMarginBottom" />
+            
+                                            <Label id="_IDGenLabel18" text="생성일 : " class="sapUiTinyMarginBottom" required="true"  />
+                                            <DatePicker
+                                                id="CoCdDate"
+                                                displayFormat="yyyy-MM-dd"
+                                                valueFormat="yy.MM.dd"
+                                            >                                  
+                                            </DatePicker>
+                                            <layoutData>
+                                                <layout:GridData id="_IDGenGridData3" span="XL3 L2 M3 S12" />
+                                            </layoutData>
+                                        </VBox>
+                                        <layoutData>
+                                            <layout:GridData  span="XL4 L4 M4 S12" />
+                                        </layoutData>
+                                    
+                                    </VBox>
+                                    
+                                    <VBox>
+
+                                        <Title text="표준 주소"/>
+                                    
+                                        <VBox class="sapUiMediumMarginBottom">
+                                            <Label text="도로주소 : " class="sapUiTinyMarginBottom"/>
+                                            <Input id="BpRoadAddress" class="sapUiSmallMarginBottom"/>  
+                                            
+                                            <Label text="번지 : " class="sapUiTinyMarginBottom"/>
+                                            <Input id="BpStreetAddress" class="sapUiSmallMarginBottom"/>  
+
+                                            <Label text="도시 : " class="sapUiTinyMarginBottom"/>
+                                            <Input id="BpCity" class="sapUiSmallMarginBottom"/>                                  
+
+                                            <Label text="우편번호 : " class="sapUiTinyMarginBottom"/>
+                                            <Input id="BpPostalCode" class="sapUiSmallMarginBottom"/>  
+
+                                            <Label text="국가/지역 : " class="sapUiTinyMarginBottom"/>
+                                            <Input id="BpNation" class="sapUiLargeMarginBottom" showValueHelp="true" valueHelpRequest=".onSelectCountry"/>
+                                            <Label text="서류 제출 여부 : " class="sapUiTinyMarginBottom"/>
+                                            <CheckBox id="BpReportSubmission" />
+                                        </VBox>
+                                        <layoutData>
+                                            <layout:GridData  span="XL4 L4 M4 S12" />
+                                        </layoutData>
+                                        
+                                    </VBox>
+
+                            </layout:Grid>
+						</uxap:blocks>
+					</uxap:ObjectPageSubSection>
+				</uxap:subSections>
+			</uxap:ObjectPageSection>
+		</uxap:sections>
+</uxap:ObjectPageLayout>
+
                 <!-- 헤더를 접었을 때 어떤 모양이 나올지를 정하는 부분이 snappedContent -->
-                <f:snappedContent>
+                <!-- <f:snappedContent>
                     <form:SimpleForm id="_IDGenSimpleForm1" layout="ResponsiveGridLayout">
                         <form:content>
                             <VBox id="_IDGenVBox1" class="sapUiMediumMarginBottom">
@@ -18,8 +165,6 @@
                                 <Label id="_IDGenLabel2" text="회사코드 : " class="sapUiTinyMarginBottom" labelFor="CoCdCod" />
                                 <Input id="CoCdCod" class="sapUiSmallMarginBottom" required="true"/>
 
-                                <!-- labelfor 추가
-                                    required추가 -->
                                 <Label id="_IDGenLabel3" text="회사명 : " class="sapUiTinyMarginBottom" required="true" labelFor="CoCdName" />
                                 <Input id="CoCdName" class="sapUiSmallMarginBottom" required="true"/>
 
@@ -90,12 +235,6 @@
                                 <Label id="_IDGenLabel15" text="계정과목표 : " class="sapUiTinyMarginBottom" labelFor="CoCdCoa" />
                                 <Input id="CoCdCoa" class="sapUiSmallMarginBottom" valueHelpRequest=".onSelectCoA" showValueHelp="true" required="true"/>
 
-                                <!-- <Label id="_IDGenLabel15" text="회사 계정 과목표 : " class="sapUiTinyMarginBottom" required="true" />
-                                <Input id="CoCdCoa" class="sapUiSmallMarginBottom" valueHelpRequest=".onValueHelpCoa" showValueHelp="true"/> -->
-
-                                <!-- <Label id="_IDGenLabel14" text="회계연도 : " class="sapUiTinyMarginBottom" labelFor="CoCdFiscalYear" />
-                                <Input id="CoCdFiscalYear" class="sapUiSmallMarginBottom" required="true"/> -->
-
                                 <Label id="_IDGenLabel16" text="세금 코드 : " class="sapUiTinyMarginBottom" />
                                 <Select id="CoCdTaxCode" width="100rem"  class="sapUiSmallMarginBottom">
                                     <core:Item id="_IDGenItem1" key="" text="선택" />
@@ -124,5 +263,5 @@
                 <Button id="_IDGenButton2" text="취소" press=".onCancel" />
             </OverflowToolbar>
         </f:footer>
-    </f:DynamicPage>
+    </f:DynamicPage> -->
 </mvc:View>
