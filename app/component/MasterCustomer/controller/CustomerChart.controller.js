@@ -45,6 +45,7 @@ sap.ui.define([
                     console.log(a.submitState);
                     this.getOwnerComponent().getRouter().navTo('CustomerSubmitChartDetail', {submitState:a.submitState});
                 }
+                e.getParameter("arguments")["?query"] = null;
             }
         },
         donutChartDataView: async function (e) {
