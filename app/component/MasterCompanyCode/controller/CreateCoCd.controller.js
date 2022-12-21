@@ -83,15 +83,24 @@ sap.ui.define([
       ) {
         MessageBox.error("필수 항목을 입력해주세요")
       } else {
-
-        await $.ajax({
-          type: "POST",
-          url: "/cocd/CoCd",
-          contentType: "application/json;IEEE754Compatible=true",
-          data: JSON.stringify(temp)
-        });
-        this.onCancel();
-        this.getOwnerComponent().getRouter().navTo("GLAccountList")
+        try{
+          await $.ajax({
+            type: "POST",
+            url: "/cocd/CoCd",
+            contentType: "application/json;IEEE754Compatible=true",
+            data: JSON.stringify(temp)
+          });
+          this.onCancel();
+          this.getOwnerComponent().getRouter().navTo("GLAccountList")
+        }catch(e){
+          console.log(e);
+          let errCode = e.responseJSON.error.code;
+          let msg = e.responseJSON.error.message;
+          if(msg==="Entity already exists"){
+            msg = "동일한 이름의 회사코드가 존재합니다. 다른 코드를 지정해주세요.";
+          }
+          MessageBox.error(msg,{title:errCode});
+        }
       }
     },
     clearField: function () {
