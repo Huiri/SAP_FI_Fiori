@@ -20,6 +20,7 @@ sap.ui.define(
         toHome : function(){
           this.byId('menu').setText('메뉴');
           this.getOwnerComponent().getRouter().navTo("Home");
+          this.getView().byId("menu").setText("FI Module Home");
         }
       });
     }

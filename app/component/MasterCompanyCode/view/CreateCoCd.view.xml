@@ -1,5 +1,6 @@
 <mvc:View 
 controllerName="project4.controller.CreateCoCd"
+
     xmlns:mvc="sap.ui.core.mvc"
 	xmlns:uxap="sap.uxap"
 	xmlns:layout="sap.ui.layout"
@@ -34,6 +35,7 @@ controllerName="project4.controller.CreateCoCd"
                         </HBox>
 
                     </HBox>
+
                 </uxap:snappedHeading>
 				<uxap:actions>
 					<Button text="생성" type="Emphasized" press=".onCreate" tooltip="저장"  ariaHasPopup="Dialog"/>               
@@ -131,6 +133,7 @@ controllerName="project4.controller.CreateCoCd"
                                             <Label id="_IDGenLabel18" text="생성일 : "  labelFor="CoCdDate" />
                                             <DatePicker
                                                 required="true"
+
                                                 id="CoCdDate"
                                                 displayFormat="yyyy-MM-dd"
                                                 valueFormat="yy.MM.dd"
@@ -138,6 +141,7 @@ controllerName="project4.controller.CreateCoCd"
                                             </DatePicker>
 
                                         </VBox>
+
                                         </VBox>
                                         <layoutData>
                                             <layout:GridData  span="XL4 L4 M4 S12" />

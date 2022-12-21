@@ -423,6 +423,7 @@ sap.ui.define([
             this.byId("DueDate").setValue("");
 
             this.onValueInit();
+
         }, 
 
         toHome: function(){

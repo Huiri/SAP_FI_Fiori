@@ -80,8 +80,6 @@ sap.ui.define([
         com_cocd_constructor: this.byId("CoCdConstructor").getValue(),
         com_cocd_date: this.byId("CoCdDate").getValue()
       }
-      
-
         await $.ajax({
           type: "POST",
           url: "/cocd/CoCd",
@@ -164,6 +162,7 @@ sap.ui.define([
     },
 
     onBack: function () {
+      this.clearField()
       this.getOwnerComponent().getRouter().navTo("CompanyCodeList");
       this.validateForVboxClear("generalData");
 			this.validateForVboxClear("generateData");

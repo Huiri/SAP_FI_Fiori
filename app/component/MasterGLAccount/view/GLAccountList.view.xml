@@ -49,6 +49,7 @@
                             showValueHelp="true" 
                             valueHelpRequest=".onValueHelpCoA"
                             valueHelpOnly="true"/>
+
                             <layoutData>
                                 <layout:GridData id="_IDGenGridData2" span="XL3 L3 M6 S12"/>
                             </layoutData>
