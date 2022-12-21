@@ -24,7 +24,11 @@
                 <form:content>
                     <VBox height="3rem">
                         <Label text="회사코드 : "/>
-                        <MultiInput id="CompanyCode" valueHelpRequest=".onValueHelpCoCdList" showValueHelp="true"/>
+                        <MultiInput 
+                        id="CompanyCode" 
+                        valueHelpRequest=".onValueHelpCoCdList" 
+                        showValueHelp="true"
+                        valueHelpOnly="true"/>
                         <layoutData>
                             <layout:GridData span="XL2 L2 M6 S12"/>
                         </layoutData>
@@ -38,7 +42,11 @@
                     </VBox>
                     <VBox height="3rem">
                         <Label text="회사 국가 : "/>
-                        <MultiInput id="CompanyCountry" valueHelpRequest=".onValueHelpCountryList" showValueHelp="true"/>
+                        <MultiInput 
+                        id="CompanyCountry" 
+                        valueHelpRequest=".onValueHelpCountryList" 
+                        showValueHelp="true"
+                        valueHelpOnly="true"/>
                         <layoutData>
                             <layout:GridData span="XL2 L2 M6 S12"/>
                         </layoutData>
@@ -52,7 +60,11 @@
                     </VBox>
                     <VBox height="3rem">
                         <Label text="회사 계정과목표 : "/>
-                        <MultiInput id="CompanyCoa" valueHelpRequest=".onValueHelpCoA" showValueHelp="true"/>
+                        <MultiInput 
+                        id="CompanyCoa" 
+                        valueHelpRequest=".onValueHelpCoA" 
+                        showValueHelp="true"
+                        valueHelpOnly="true"/>
                         <layoutData>
                             <layout:GridData span="XL2 L2 M6 S12"/>
                         </layoutData>

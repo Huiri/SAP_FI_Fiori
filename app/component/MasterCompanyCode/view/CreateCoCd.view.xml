@@ -1,5 +1,5 @@
 <mvc:View 
-controllerName="project3.controller.CreateCustomer"
+controllerName="project4.controller.CreateCoCd"
     xmlns:mvc="sap.ui.core.mvc"
 	xmlns:uxap="sap.uxap"
 	xmlns:layout="sap.ui.layout"
@@ -121,25 +121,28 @@ controllerName="project3.controller.CreateCustomer"
                                     
                                     <VBox>
 
-                                        <Title text="표준 주소"/>
+                                        <Title text="회계 데이터"/>
                                     
-                                        <VBox class="sapUiMediumMarginBottom">
-                                            <Label text="도로주소 : " class="sapUiTinyMarginBottom"/>
-                                            <Input id="BpRoadAddress" class="sapUiSmallMarginBottom"/>  
-                                            
-                                            <Label text="번지 : " class="sapUiTinyMarginBottom"/>
-                                            <Input id="BpStreetAddress" class="sapUiSmallMarginBottom"/>  
+                                        <VBox class="sapUiMediumMarginBottom">                                                                   
 
-                                            <Label text="도시 : " class="sapUiTinyMarginBottom"/>
-                                            <Input id="BpCity" class="sapUiSmallMarginBottom"/>                                  
+                                            <Label id="_IDGenLabel14" text="회계연도 오브젝트 : " class="sapUiTinyMarginBottom" required="true" />
+                                            <Input id="CoCdFiscalYear" class="sapUiSmallMarginBottom" showValueHelp="true" valueHelpRequest=".onSelectFiscalYear"/>
 
-                                            <Label text="우편번호 : " class="sapUiTinyMarginBottom"/>
-                                            <Input id="BpPostalCode" class="sapUiSmallMarginBottom"/>  
 
-                                            <Label text="국가/지역 : " class="sapUiTinyMarginBottom"/>
-                                            <Input id="BpNation" class="sapUiLargeMarginBottom" showValueHelp="true" valueHelpRequest=".onSelectCountry"/>
-                                            <Label text="서류 제출 여부 : " class="sapUiTinyMarginBottom"/>
-                                            <CheckBox id="BpReportSubmission" />
+                                            <Label id="_IDGenLabel15" text="계정과목표 : " class="sapUiTinyMarginBottom" labelFor="CoCdCoa" />
+                                            <Input id="CoCdCoa" class="sapUiSmallMarginBottom" valueHelpRequest=".onSelectCoA" showValueHelp="true" required="true"/>
+
+                                            <Label id="_IDGenLabel16" text="세금 코드 : " class="sapUiTinyMarginBottom" />
+                                            <Select id="CoCdTaxCode" width="100rem"  class="sapUiSmallMarginBottom">
+                                                <core:Item id="_IDGenItem1" key="" text="선택" />
+                                                <core:Item id="_IDGenItem8" key="K01" text="K01" />
+                                                <core:Item id="_IDGenItem9" key="K02" text="K02" />
+                                                <core:Item id="_IDGenItem10" key="K03" text="K03" />
+                                            </Select>
+
+                                            <Label id="_IDGenLabel4" text="관리회계영역 : " class="sapUiTinyMarginBottom" labelFor="CoCdCoArea" />
+                                            <Input id="CoCdCoArea" class="sapUiSmallMarginBottom" valueHelpRequest=".onSelectCoArea" showValueHelp="true" required="true"/>
+
                                         </VBox>
                                         <layoutData>
                                             <layout:GridData  span="XL4 L4 M4 S12" />
