@@ -167,7 +167,7 @@ sap.ui.define([
 				MessageBox.error("필수항목을 입력해주세요.");
 			}
 			return check;
-		},
+		
             this.onReset();
             this.toBack();
 
