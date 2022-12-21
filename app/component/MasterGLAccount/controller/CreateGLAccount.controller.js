@@ -62,6 +62,7 @@ sap.ui.define([
                 url : cocdUrl
             })
             //console.log(CoCdData);
+
             let CoCdDataModel = new JSONModel(CoCdData.value);
             this.getView().setModel(CoCdDataModel, "CoCdDataModel");
 

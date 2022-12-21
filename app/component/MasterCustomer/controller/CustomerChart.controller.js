@@ -1,6 +1,6 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
-    "sap/ui/model/json/JSONModel",
+    "sap/ui/model/json/JSONModel"
 ], function (
     Controller, JSONModel
 ) {
@@ -28,11 +28,6 @@ sap.ui.define([
             this.getOwnerComponent().getRouter().getRoute("CustomerChart").attachPatternMatched(this.reportSubmitDataView, this);
 
 
-
-        },
-
-        toCustomerHome: function () {
-            this.getOwnerComponent().getRouter().navTo("Home");
 
         },
 
@@ -67,7 +62,6 @@ sap.ui.define([
             this.getView().getModel("CreditStatus").setProperty("/trustpercent", (a / data.oData.length * 100).toFixed(2) + '%');
             this.getView().getModel("CreditStatus").setProperty("/waitpercent", (b / data.oData.length * 100).toFixed(2) + '%');
             this.getView().getModel("CreditStatus").setProperty("/cautionpercent", (c / data.oData.length * 100).toFixed(2) + '%');
-            // console.log(this.getView().getModel("CreditStatus"));
 
         },
         columnChartDataView: async function () {
@@ -91,23 +85,28 @@ sap.ui.define([
                     b++;
                 }
             }
+
             //console.log(this.getView().getModel("bpReportSubmitModel"));
+
             this.getView().getModel("bpReportSubmitModel").setProperty("/submit", a / data.oData.length * 100);
             this.getView().getModel("bpReportSubmitModel").setProperty("/notsubmit", b / data.oData.length * 100);
             this.getView().getModel("bpReportSubmitModel").setProperty("/submitpercent", (a / data.oData.length * 100).toFixed(2) + '%');
             this.getView().getModel("bpReportSubmitModel").setProperty("/notsubmitpercent", (b / data.oData.length * 100).toFixed(2) + '%');
+
             //console.log(this.getView().getModel("bpReportSubmitModel"));
+
 
         },
         reportSubmitDataView: async function (oEvent) {
 
             let url = "/bp/BP?$filter=bp_report_submission%20eq%20false&$orderby=bp_changed_date%20desc&$top=3"
+
             //console.log(url);
+            
             const SubmitWait = await $.ajax({
                 type: "get",
                 url: url
             });
-
             let submitWaitModel = new JSONModel(SubmitWait.value); //RequestWait.value 값을 JSONModel의 odata에 담는다.
             this.getView().setModel(submitWaitModel, "submitWaitModel");
 
@@ -115,16 +114,23 @@ sap.ui.define([
 
         },
 
+        onSelectionChanged:function(e){
+            let type=e.getParameter("segment").sId;
+            type= type.split('-').reverse()[0];
 
-
+            this.getOwnerComponent().getRouter().navTo('CustomerChartDetail',{type:type});
+        },
+        
         onNavToBpDetail: function (oEvent) {
-            var sPath = oEvent.getSource().oBindingContexts.submitWaitModel.sPath
-
-
-
-            var SelectedNum = this.getView().getModel("submitWaitModel").getProperty(sPath).bp_number
+            var sPath = oEvent.getSource().oBindingContexts.submitWaitModel.sPath;
+            var SelectedNum = this.getView().getModel("submitWaitModel").getProperty(sPath).bp_number;
             
             this.getOwnerComponent().getRouter().navTo("CustomerDetail", {num: SelectedNum});
+        },
+        
+        toCustomerHome: function () {
+            this.getOwnerComponent().getRouter().navTo("Home");
+
         },
 
         onSubmitChartDetail1: function (oEvent) {
