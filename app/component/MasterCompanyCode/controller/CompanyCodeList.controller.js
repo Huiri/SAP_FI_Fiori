@@ -23,8 +23,9 @@ sap.ui.define([
         },
 
         onMyRoutePatternMatched: async function(){
-
             this.onDataView();
+			this.onReset();
+
         },
         onDataView: async function(){
             const CompanyCodeList = await $.ajax({

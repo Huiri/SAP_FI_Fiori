@@ -50,6 +50,7 @@ sap.ui.define([
         onMyRoutePatternMatched: async function () {
 
             this.onDataView();
+			this.onClearField();
         },
         onDataView: async function () {
             const customerList = await $.ajax({
