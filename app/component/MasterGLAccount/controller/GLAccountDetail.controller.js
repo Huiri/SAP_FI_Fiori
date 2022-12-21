@@ -348,7 +348,21 @@ sap.ui.define([
                 });
             }
             this._filterTable(aFilter); 
-x
+		},
+
+
+		changeSelectGLType: function(oEvent) {
+            let oPLSelect = this.byId("InputPLAccType");
+			let selectedGLType = this.byId("InputGLAccType").getSelectedKey();
+			if(selectedGLType === 'X' || selectedGLType === 'C'){
+				oPLSelect.setSelectedKey("");
+				oPLSelect.setEditable(false);
+
+			} else {
+				oPLSelect.setEditable(true);
+
+			}
+
 		},
  
         /**

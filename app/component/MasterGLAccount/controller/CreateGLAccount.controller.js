@@ -396,7 +396,8 @@ sap.ui.define([
 				oPLSelect.setEditable(false);
 
 			} else {
-				return
+				oPLSelect.setEditable(true);
+
 			}
 		},
 
