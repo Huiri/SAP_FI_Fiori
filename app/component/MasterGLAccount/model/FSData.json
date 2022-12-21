@@ -1,0 +1,548 @@
+{   "categories" : [
+    {"gl_account_content":"자산", "categories":[
+        {"gl_account_content":"유동자산", "categories":[
+            {"gl_account_content":"현금 및 현금성 자산", "categories":[
+                {"gl_account_content" :"현금", "gl_acct" :"10000001", "gl_created" :"2022-01-01", "gl_constructor" :"김경훈", "gl_acct_currency" :"KRW"},
+                {"gl_account_content" :"요구불예금", "gl_acct" :"10000002", "gl_created" :"2022-01-02", "gl_constructor" :"김경훈", "gl_acct_currency" :"USD"},
+                {"gl_account_content" :"외화예금", "gl_acct" :"10000003", "gl_created" :"2022-01-03", "gl_constructor" :"김경훈", "gl_acct_currency" :"JPY"},
+                {"gl_account_content" :"정기예금", "gl_acct" :"10000010", "gl_created" :"2022-01-10", "gl_constructor" :"김경훈", "gl_acct_currency" :"SGD"}          
+            ]},
+            {"gl_account_content":"매출채권 및 기타유동채권","categories": [
+                {"gl_account_content" :"매출채권", "gl_acct" :"10000004", "gl_created" :"2022-01-04", "gl_constructor" :"김경훈", "gl_acct_currency" :"CNY"},
+                {"gl_account_content" :"손실충당금(매출채권)", "gl_acct" :"10000005", "gl_created" :"2022-01-05", "gl_constructor" :"김경훈", "gl_acct_currency" :"HKD"},
+                {"gl_account_content" :"미수금", "gl_acct" :"10000006", "gl_created" :"2022-01-06", "gl_constructor" :"김경훈", "gl_acct_currency" :"EUR"},
+                {"gl_account_content" :"손실충당금(미수금)", "gl_acct" :"10000007", "gl_created" :"2022-01-07", "gl_constructor" :"김경훈", "gl_acct_currency" :"TWD"},
+                {"gl_account_content" :"외상매출금", "gl_acct" :"20000022", "gl_created" :"2022-02-17", "gl_constructor" :"김경훈", "gl_acct_currency" :"CNY"}
+            ]},
+            {"gl_account_content":"재고자산", "categories":[
+                {"gl_account_content" :"상품", "gl_acct" :"40000001", "gl_created" :"2022-04-08", "gl_constructor" :"김경훈", "gl_acct_currency" :"SGD"},
+                {"gl_account_content" :"제품", "gl_acct" :"40000002", "gl_created" :"2022-04-09", "gl_constructor" :"김경훈", "gl_acct_currency" :"EUR"},
+                {"gl_account_content" :"재공품", "gl_acct" :"40000003", "gl_created" :"2022-04-10", "gl_constructor" :"김경훈", "gl_acct_currency" :"KRW"},
+                {"gl_account_content" :"원재료", "gl_acct" :"40000004", "gl_created" :"2022-04-11", "gl_constructor" :"김경훈", "gl_acct_currency" :"USD"},
+                {"gl_account_content" :"저장품", "gl_acct" :"40000005", "gl_created" :"2022-04-12", "gl_constructor" :"김경훈", "gl_acct_currency" :"JPY"},
+                {"gl_account_content" :"미착품", "gl_acct" :"40000006", "gl_created" :"2022-04-13", "gl_constructor" :"김경훈", "gl_acct_currency" :"CNY"}
+            ]},
+            {"gl_account_content":"기타유동자산", "categories":[
+                {"gl_account_content" :"미수수익", "gl_acct" :"10000017", "gl_created" :"2022-01-11", "gl_constructor" :"김경훈", "gl_acct_currency" :"EUR"},
+                {"gl_account_content" :"선급금", "gl_acct" :"10000018", "gl_created" :"2022-01-12", "gl_constructor" :"김경훈", "gl_acct_currency" :"KRW"},
+                {"gl_account_content" :"선급비용", "gl_acct" :"10000019", "gl_created" :"2022-01-13", "gl_constructor" :"김경훈", "gl_acct_currency" :"USD"}
+            ]}
+        ]},
+        {"gl_account_content":"비유동자산", "categories":[
+            {"gl_account_content":"장기매출채권 및 기타비유동채권", "categories":[
+                {"gl_account_content" :"장기매출채권", "gl_acct" :"10000008", "gl_created" :"2022-01-08", "gl_constructor" :"김경훈", "gl_acct_currency" :"DKK"},
+                {"gl_account_content" :"현재가치할인차금(장기매출채권)", "gl_acct" :"10000009", "gl_created" :"2022-01-09", "gl_constructor" :"김경훈", "gl_acct_currency" :"EUR"}
+        ]},
+        {"gl_account_content":"유형자산", "categories":[
+            {"gl_account_content" :"토지", "gl_acct" :"10000020", "gl_created" :"2022-01-14", "gl_constructor" :"김경훈", "gl_acct_currency" :"JPY"},
+            {"gl_account_content" :"건물", "gl_acct" :"10000021", "gl_created" :"2022-01-15", "gl_constructor" :"김경훈", "gl_acct_currency" :"CNY"},
+            {"gl_account_content" :"구축물", "gl_acct" :"10000022", "gl_created" :"2022-01-16", "gl_constructor" :"김경훈", "gl_acct_currency" :"HKD"},
+            {"gl_account_content" :"기계장치", "gl_acct" :"10000023", "gl_created" :"2022-01-17", "gl_constructor" :"김경훈", "gl_acct_currency" :"EUR"},
+            {"gl_account_content" :"차량운반구", "gl_acct" :"10000024", "gl_created" :"2022-01-18", "gl_constructor" :"김경훈", "gl_acct_currency" :"TWD"},
+            {"gl_account_content" :"공기구비품", "gl_acct" :"10000025", "gl_created" :"2022-01-19", "gl_constructor" :"김경훈", "gl_acct_currency" :"DKK"},
+            {"gl_account_content" :"건설중인자산", "gl_acct" :"10000026", "gl_created" :"2022-01-20", "gl_constructor" :"김경훈", "gl_acct_currency" :"EUR"},
+            {"gl_account_content" :"사용권자산", "gl_acct" :"10000027", "gl_created" :"2022-01-21", "gl_constructor" :"김경훈", "gl_acct_currency" :"SGD"}
+        ]},
+        {"gl_account_content":"무형자산", "categories":[
+            {"gl_account_content" :"산업재산권", "gl_acct" :"10000028", "gl_created" :"2022-01-22", "gl_constructor" :"김경훈", "gl_acct_currency" :"EUR"},
+            {"gl_account_content" :"소프트웨어", "gl_acct" :"10000029", "gl_created" :"2022-01-23", "gl_constructor" :"김경훈", "gl_acct_currency" :"KRW"}
+        ]},
+        {"gl_account_content":"기타비유동자산", "categories":[
+            {"gl_account_content" :"보증금", "gl_acct" :"10000030", "gl_created" :"2022-01-24", "gl_constructor" :"김경훈", "gl_acct_currency" :"USD"},
+            {"gl_account_content" :"장기선급비용", "gl_acct" :"10000031", "gl_created" :"2022-01-25", "gl_constructor" :"김경훈", "gl_acct_currency" :"JPY"}
+        ]}
+     ]}
+    ]},
+
+    {"gl_account_content":"부채", "categories":[
+        {"gl_account_content":"유동부채", "categories":[
+            {"gl_account_content":"매입채무 및 기타채무","categories":[
+                {"gl_account_content" :"외상매입금", "gl_acct" :"10000032", "gl_created" :"2022-01-26", "gl_constructor" :"김경훈", "gl_acct_currency" :"CNY"},
+                {"gl_account_content" :"매입채무", "gl_acct" :"20000001", "gl_created" :"2022-01-27", "gl_constructor" :"김경훈", "gl_acct_currency" :"HKD"},
+                {"gl_account_content" :"미지급금", "gl_acct" :"20000002", "gl_created" :"2022-01-28", "gl_constructor" :"김경훈", "gl_acct_currency" :"EUR"}
+            ]},
+            {"gl_account_content":"단기차입금","categories":[
+                {"gl_account_content" :"단기차입금", "gl_acct" :"20000003", "gl_created" :"2022-01-29", "gl_constructor" :"김경훈", "gl_acct_currency" :"TWD"}
+            ]},
+            {"gl_account_content":"충당부채","categories":[
+                {"gl_account_content" :"반품충당부채", "gl_acct" :"20000005", "gl_created" :"2022-01-31", "gl_constructor" :"김경훈", "gl_acct_currency" :"EUR"},
+                {"gl_account_content" :"복구충당부채", "gl_acct" :"20000006", "gl_created" :"2022-02-01", "gl_constructor" :"김경훈", "gl_acct_currency" :"SGD"},
+                {"gl_account_content" :"마일리지충당부채", "gl_acct" :"20000007", "gl_created" :"2022-02-02", "gl_constructor" :"김경훈", "gl_acct_currency" :"EUR"}
+            ]},
+            {"gl_account_content":"기타유동부채","categories":[
+                {"gl_account_content" :"미지급배당금", "gl_acct" :"20000008", "gl_created" :"2022-02-03", "gl_constructor" :"김경훈", "gl_acct_currency" :"KRW"},
+                {"gl_account_content" :"미지급비용", "gl_acct" :"20000009", "gl_created" :"2022-02-04", "gl_constructor" :"김경훈", "gl_acct_currency" :"USD"},
+                {"gl_account_content" :"선수금", "gl_acct" :"20000010", "gl_created" :"2022-02-05", "gl_constructor" :"김경훈", "gl_acct_currency" :"JPY"},
+                {"gl_account_content" :"예수금", "gl_acct" :"20000011", "gl_created" :"2022-02-06", "gl_constructor" :"김경훈", "gl_acct_currency" :"CNY"},
+                {"gl_account_content" :"순확정급여부채", "gl_acct" :"20000012", "gl_created" :"2022-02-07", "gl_constructor" :"김경훈", "gl_acct_currency" :"HKD"}
+            ]}
+        ]}  
+    ]},
+        {"gl_account_content":"비유동부채","categories":[
+            {"gl_account_content":"장기차입금","categories":[
+                {"gl_account_content" :"장기차입금", "gl_acct" :"20000004", "gl_created" :"2022-01-30", "gl_constructor" :"김경훈", "gl_acct_currency" :"DKK"}
+            ]},
+            {"gl_account_content":"기타비유동부채","categories":[
+                {"gl_account_content" :"임대보증금", "gl_acct" :"20000013", "gl_created" :"2022-02-08", "gl_constructor" :"김경훈", "gl_acct_currency" :"EUR"},
+                {"gl_account_content" :"장기미지급비용", "gl_acct" :"20000014", "gl_created" :"2022-02-09", "gl_constructor" :"김경훈", "gl_acct_currency" :"TWD"}
+            ]}
+        
+    ]},
+
+    {"gl_account_content":"자본","categories":[
+        {"gl_account_content":"자본금","categories":[
+            {"gl_account_content" :"자본금", "gl_acct" :"20000015", "gl_created" :"2022-02-10", "gl_constructor" :"김경훈", "gl_acct_currency" :"DKK"}
+        ]},
+        {"gl_account_content":"자본잉여금","categories":[
+            {"gl_account_content" :"주식발행초과금", "gl_acct" :"20000016", "gl_created" :"2022-02-11", "gl_constructor" :"김경훈", "gl_acct_currency" :"EUR"}
+        ]},
+        {"gl_account_content":"이익잉여금","categories":[
+            {"gl_account_content" :"이익준비금", "gl_acct" :"20000017", "gl_created" :"2022-02-12", "gl_constructor" :"김경훈", "gl_acct_currency" :"SGD"},
+            {"gl_account_content" :"임의적립금", "gl_acct" :"20000018", "gl_created" :"2022-02-13", "gl_constructor" :"김경훈", "gl_acct_currency" :"EUR"},
+            {"gl_account_content" :"미처분이익잉여금", "gl_acct" :"20000019", "gl_created" :"2022-02-14", "gl_constructor" :"김경훈", "gl_acct_currency" :"KRW"}
+        ]},
+        {"gl_account_content":"기타자본구성요소","categories":[
+            {"gl_account_content" :"지분법 자본변동", "gl_acct" :"20000020", "gl_created" :"2022-02-15", "gl_constructor" :"김경훈", "gl_acct_currency" :"USD"},
+            {"gl_account_content" :"자기주식", "gl_acct" :"20000021", "gl_created" :"2022-02-16", "gl_constructor" :"김경훈", "gl_acct_currency" :"JPY"}
+        ]}
+    ]}   
+],
+    "ProfitLoss": [
+        {
+            "name": "수익(매출액)",
+            "ProfitLoss": [
+                {
+                    "name": "재화의 판매로 인한 수익(매출액)",
+                    "ProfitLoss": [
+                        {
+                            "name": "제품매출",
+                            "gl_account": "30000001",
+                            "gl_created": "2022-01-01",
+                            "gl_constructor": "김경훈",
+                            "gl_acct_currency": "HKD"
+                        },
+                        {
+                            "name": "상품매출",
+                            "gl_account": "30000003",
+                            "gl_created": "2022-01-02",
+                            "gl_constructor": "문희리",
+                            "gl_acct_currency": "TWD"
+                        }
+                    ]
+                },
+                {
+                    "name": "용역의 제공으로 인한 수익(매출액)",
+                    "ProfitLoss": [
+                        {
+                            "name": "용역수익",
+                            "gl_account": "30000050",
+                            "gl_created": "2022-01-03",
+                            "gl_constructor": "이수민",
+                            "gl_acct_currency": "TWD"
+                        }
+                    ]
+                },
+                {
+                    "name": "수익(매출액) 합계"
+                }
+            ]
+        },
+        {
+            "name": "매출원가",
+            "ProfitLoss": [
+                {
+                    "name": "재화의 판매로 인한 수익(매출액)에 대한 매출원가",
+                    "ProfitLoss": [
+                        {
+                            "name": "제품매출원가",
+                            "gl_account": "30000002",
+                            "gl_created": "2022-01-01",
+                            "gl_constructor": "김경훈",
+                            "gl_acct_currency": "EUR"
+                        },
+                        {
+                            "name": "상품매출원가",
+                            "gl_account": "30000004",
+                            "gl_created": "2022-01-01",
+                            "gl_constructor": "김주미",
+                            "gl_acct_currency": "DKK"
+                        }
+                    ]
+                },
+                {
+                    "name": "용역의 제공으로 인한 수익(매출액)에 대한 매출원가",
+                    "ProfitLoss": [
+                        {
+                            "name": "용역 제공 매출원가",
+                            "gl_account": "30000051",
+                            "gl_created": "2022-01-01",
+                            "gl_constructor": "김경훈",
+                            "gl_acct_currency": "KRW"
+                        }
+                    ]
+                },
+                {
+                    "name": "매출원가 합계"
+                }
+            ]
+        },
+        {
+            "name": "매출총이익"
+        },
+        {
+            "name": "판매비와관리비",
+            "ProfitLoss": [
+                {
+                    "name": "판매비-종업원급여",
+                    "gl_account": "30000005",
+                    "gl_created": "2022-01-04",
+                    "gl_constructor": "조일환",
+                    "gl_acct_currency": "EUR"
+                },
+                {
+                    "name": "판매비-퇴직급여",
+                    "gl_account": "30000006",
+                    "gl_created": "2022-01-01",
+                    "gl_constructor": "김경훈",
+                    "gl_acct_currency": "SGD"
+                },
+                {
+                    "name": "판매비-복리후생비",
+                    "gl_account": "30000007",
+                    "gl_created": "2022-01-01",
+                    "gl_constructor": "김경훈",
+                    "gl_acct_currency": "EUR"
+                },
+                {
+                    "name": "관리비-복리후생비",
+                    "gl_account": "30000008",
+                    "gl_created": "2022-01-01",
+                    "gl_constructor": "김주미",
+                    "gl_acct_currency": "KRW"
+                },
+                {
+                    "name": "판매비-감가상각비-건물",
+                    "gl_account": "30000022",
+                    "gl_created": "2022-01-01",
+                    "gl_constructor": "김경훈",
+                    "gl_acct_currency": "KRW"
+                },
+                {
+                    "name": "판매비-감가상각비-구축물",
+                    "gl_account": "30000023",
+                    "gl_created": "2022-01-01",
+                    "gl_constructor": "김경훈",
+                    "gl_acct_currency": "KRW"
+                },
+                {
+                    "name": "판매비-감가상각비-기계장치",
+                    "gl_account": "30000024",
+                    "gl_created": "2022-01-01",
+                    "gl_constructor": "김경훈",
+                    "gl_acct_currency": "KRW"
+                },
+                {
+                    "name": "판매비-감가상각비-차랑운반구",
+                    "gl_account": "30000025",
+                    "gl_created": "2022-01-01",
+                    "gl_constructor": "김경훈",
+                    "gl_acct_currency": "KRW"
+                },
+                {
+                    "name": "판매비-감가상각비-공기구비품",
+                    "gl_account": "30000026",
+                    "gl_created": "2022-01-01",
+                    "gl_constructor": "김경훈",
+                    "gl_acct_currency": "KRW"
+                },
+                {
+                    "name": "관리비-감가상각비-건물",
+                    "gl_account": "30000030",
+                    "gl_created": "2022-01-01",
+                    "gl_constructor": "김경훈",
+                    "gl_acct_currency": "KRW"
+                },
+                {
+                    "name": "관리비-감가상각비-구축물",
+                    "gl_account": "30000031",
+                    "gl_created": "2022-01-01",
+                    "gl_constructor": "김경훈",
+                    "gl_acct_currency": "USD"
+                },
+                {
+                    "name": "관리비-감가상각비-기계장치",
+                    "gl_account": "30000032",
+                    "gl_created": "2022-01-01",
+                    "gl_constructor": "김경훈",
+                    "gl_acct_currency": "JPY"
+                },
+                {
+                    "name": "관리비-감가상각비-차량운반구",
+                    "gl_account": "30000033",
+                    "gl_created": "2022-01-01",
+                    "gl_constructor": "김경훈",
+                    "gl_acct_currency": "CNY"
+                },
+                {
+                    "name": "관리비-감가상각비-차량운반구",
+                    "gl_account": "30000034",
+                    "gl_created": "2022-01-01",
+                    "gl_constructor": "김경훈",
+                    "gl_acct_currency": "HKD"
+                },
+                {
+                    "name": "대손상각비",
+                    "gl_account": "30000052",
+                    "gl_created": "2022-01-01",
+                    "gl_constructor": "김경훈",
+                    "gl_acct_currency": "KRW"
+                },
+                {
+                    "name": "지급수수료",
+                    "gl_account": "30000053",
+                    "gl_created": "2022-01-01",
+                    "gl_constructor": "김경훈",
+                    "gl_acct_currency": "KRW"
+                },
+                {
+                    "name": "광고선전비",
+                    "gl_account": "30000054",
+                    "gl_created": "2022-01-01",
+                    "gl_constructor": "김경훈",
+                    "gl_acct_currency": "KRW"
+                },
+                {
+                    "name": "교육훈련비",
+                    "gl_account": "30000055",
+                    "gl_created": "2022-01-01",
+                    "gl_constructor": "김경훈",
+                    "gl_acct_currency": "KRW"
+                },
+                {
+                    "name": "접대비",
+                    "gl_account": "30000056",
+                    "gl_created": "2022-01-01",
+                    "gl_constructor": "김경훈",
+                    "gl_acct_currency": "KRW"
+                },
+                {
+                    "name": "판매비-통신비",
+                    "gl_account": "30000013",
+                    "gl_created": "2022-01-01",
+                    "gl_constructor": "김주미",
+                    "gl_acct_currency": "EUR"
+                },
+                {
+                    "name": "관리비-통신비",
+                    "gl_account": "30000014",
+                    "gl_created": "2022-01-01",
+                    "gl_constructor": "김경훈",
+                    "gl_acct_currency": "TWD"
+                },
+                {
+                    "name": "운반비",
+                    "gl_account": "30000056",
+                    "gl_created": "2022-01-01",
+                    "gl_constructor": "김경훈",
+                    "gl_acct_currency": "KRW"
+                },
+                {
+                    "name": "판매비-세금과공과",
+                    "gl_account": "30000016",
+                    "gl_created": "2022-01-01",
+                    "gl_constructor": "김경훈",
+                    "gl_acct_currency": "EUR"
+                },
+                {
+                    "name": "관리비-세금과공과",
+                    "gl_account": "30000017",
+                    "gl_created": "2022-01-01",
+                    "gl_constructor": "김경훈",
+                    "gl_acct_currency": "SGD"
+                },
+                {
+                    "name": "판매비-소모품비",
+                    "gl_account": "30000049",
+                    "gl_created": "2022-01-01",
+                    "gl_constructor": "김경훈",
+                    "gl_acct_currency": "EUR"
+                },
+                {
+                    "name": "수도광열비",
+                    "gl_account": "30000057",
+                    "gl_created": "2022-01-01",
+                    "gl_constructor": "김경훈",
+                    "gl_acct_currency": "KRW"
+                },
+                {
+                    "name": "수선비",
+                    "gl_account": "30000058",
+                    "gl_created": "2022-01-01",
+                    "gl_constructor": "김경훈",
+                    "gl_acct_currency": "KRW"
+                },
+                {
+                    "name": "판매비-여비교통비",
+                    "gl_account": "30000010",
+                    "gl_created": "2022-01-01",
+                    "gl_constructor": "김경훈",
+                    "gl_acct_currency": "KRW"
+                },
+                {
+                    "name": "관리비-여비교통비",
+                    "gl_account": "30000011",
+                    "gl_created": "022-02-28",
+                    "gl_constructor": "김경훈",
+                    "gl_acct_currency": "CNY"
+                },
+                {
+                    "name": "판매비와 관리비 합계"
+                }
+            ]
+        },
+        {
+            "name": "영업이익(손실)"
+        },
+        {
+            "name": "기타수익",
+            "ProfitLoss":[
+                {
+                    "name": "재고자산감액환입",
+                    "gl_account": "30000059",
+                    "gl_created": "2022-01-01",
+                    "gl_constructor": "김경훈",
+                    "gl_acct_currency": "KRW"
+                },
+                {
+                    "name": "유형자산감액환입",
+                    "gl_account": "30000060",
+                    "gl_created": "2022-01-01",
+                    "gl_constructor": "김경훈",
+                    "gl_acct_currency": "KRW"
+                },
+                {
+                    "name": "유형자산처분이익",
+                    "gl_account": "30000061",
+                    "gl_created": "2022-01-01",
+                    "gl_constructor": "김경훈",
+                    "gl_acct_currency": "KRW"
+                },
+                {
+                    "name": "기타충당부채의환입",
+                    "gl_account": "30000062",
+                    "gl_created": "2022-01-01",
+                    "gl_constructor": "김경훈",
+                    "gl_acct_currency": "KRW"
+                },
+                {
+                    "name": "대손충당금환입",
+                    "gl_account": "30000063",
+                    "gl_created": "2022-01-01",
+                    "gl_constructor": "김경훈",
+                    "gl_acct_currency": "KRW"
+                },
+                {
+                    "name": "기타수익의 합계"
+                }
+            ]
+        },
+        {
+            "name": "기타비용",
+            "ProfitLoss": [
+                {
+                    "name": "재고자산감액",
+                    "gl_account": "30000064",
+                    "gl_created": "2022-01-01",
+                    "gl_constructor": "김경훈",
+                    "gl_acct_currency": "KRW"
+                },
+                {
+                    "name": "유형자산감액",
+                    "gl_account": "30000065",
+                    "gl_created": "2022-01-01",
+                    "gl_constructor": "김경훈",
+                    "gl_acct_currency": "KRW"
+                },
+                {
+                    "name": "유형자산처분손실",
+                    "gl_account": "30000066",
+                    "gl_created": "2022-01-01",
+                    "gl_constructor": "김경훈",
+                    "gl_acct_currency": "KRW"
+                },
+                {
+                    "name": "기타비용의 합계"
+                }
+
+            ]
+        },
+        {
+            "name": "금융수익",
+            "ProfitLoss": [
+                {
+                    "name": "이자수익",
+                    "gl_account": "30000067",
+                    "gl_created": "2022-01-01",
+                    "gl_constructor": "김경훈",
+                    "gl_acct_currency": "KRW"
+                },
+                {
+                    "name": "배당금수익",
+                    "gl_account": "30000068",
+                    "gl_created": "2022-01-01",
+                    "gl_constructor": "김경훈",
+                    "gl_acct_currency": "KRW"
+                },
+                {
+                    "name": "금융수익 합계"
+                    
+                }
+            ]
+        },
+        {
+            
+            "name": "금융원가",
+            "ProfitLoss": [
+                {
+                    "name": "이자비용",
+                    "gl_account": "30000069",
+                    "gl_created": "2022-01-01",
+                    "gl_constructor": "김경훈",
+                    "gl_acct_currency": "KRW"
+                },
+               
+                {
+                    "name": "금융원가 합계"
+                    
+                }
+            ]
+
+        },
+        {
+            
+            "name": "법인세비용차감전순이익(손실)"
+            
+
+        },
+        {
+            
+            "name": "법인세비용",
+            "gl_account": "30000070",
+            "gl_created": "2022-01-01",
+            "gl_constructor": "김경훈",
+            "gl_acct_currency": "KRW"
+            
+        },
+        {
+            
+            "name": "계속영업이익(손실)"
+            
+        },
+        {
+            
+            "name": "당기순이익(손실)"
+            
+        }
+
+    ]
+}

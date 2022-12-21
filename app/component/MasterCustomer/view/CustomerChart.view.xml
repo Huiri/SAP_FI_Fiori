@@ -84,80 +84,36 @@
 						</f:layoutData>
 					</f:Card>
 				</grid:items>
-				<grid:items>
-					<f:Card
-						class="sapUiMediumMarginBeginEnd sapUiTinyMarginTop"
-						width="300px"
-						height="350px"
-					>
-						<f:header>
-							<card:Header
-								id="_IDGenHeader2"
-								title="고객 서류 제출 여부"
-								iconSrc="sap-icon://bar-chart"
-							/>
-						</f:header>
-						<f:content>
-							<micro:ColumnMicroChart
-								id="_IDGenColumnMicroChart1"
-								size="Responsive"
-								allowColumnLabels="true"
-							>
-								<micro:columns>
-									<micro:ColumnMicroChartData
-										id="_IDGenColumnMicroChartData1"
-										label="제출 완료"
-										displayValue="{bpReportSubmitModel>/submitpercent}"
-										value="{bpReportSubmitModel>/submit}"
-										color="Good"
-									/>
-									<micro:ColumnMicroChartData
-										id="_IDGenColumnMicroChartData2"
-										label="미제출"
-										displayValue="{bpReportSubmitModel>/notsubmitpercent}"
-										value="{bpReportSubmitModel>/notsubmit}"
-										color="Error"
-									/>
+               <grid:items>
+                <f:Card class="sapUiMediumMarginBeginEnd sapUiTinyMarginTop" width="300px" height="350px" >
+                 <f:header>
+                        <card:Header id="_IDGenHeader2" title="고객 서류 제출 여부" iconSrc="sap-icon://bar-chart" />
+                    </f:header>
+                <f:content >
+                        <micro:ColumnMicroChart id="_IDGenColumnMicroChart1" size="Responsive"   allowColumnLabels="true"  >
+								<micro:columns  >
+									<micro:ColumnMicroChartData id="CompleteSubmit" label="제출 완료" displayValue="{bpReportSubmitModel>/submitpercent}"  value="{bpReportSubmitModel>/submit}" color="Good" press="onSubmitChartDetail1" />
+									<micro:ColumnMicroChartData id="NotSubmit"  label="미제출" displayValue="{bpReportSubmitModel>/notsubmitpercent}"  value="{bpReportSubmitModel>/notsubmit}" color="Error" press="onSubmitChartDetail2"/>
 								</micro:columns>
 							</micro:ColumnMicroChart>
-						</f:content>
-					</f:Card>
-				</grid:items>
-				<grid:items>
-					<f:Card
-						id="_IDGenCard2"
-						class="sapUiMediumMargin"
-						width="300px"
-					>
-						<f:header>
-							<card:Header
-								id="_IDGenHeader3"
-								title="서류 미제출 고객"
-								subtitle="최신 3개의 고객 데이터가 보입니다."
-							/>
-						</f:header>
-						<f:content>
-							<List
-								showSeparators="None"
-								items="{
-									path: 'submitWaitModel>/'
-								}"
-							>
-								<CustomListItem
-									type="Active"
-									press=".onNavToBpDetail"
-								>
-									<HBox
-										alignItems="Center"
-										justifyContent="SpaceBetween"
-									>
-										<VBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom">
-											<Title
-												level="H3"
-												text="{submitWaitModel>bp_name}"
-											/>
-											<Text text="최종 변경일: {submitWaitModel>bp_changed_date}"/>
-										</VBox>
+                    </f:content>
+                    </f:Card>
+                    
+                       </grid:items>
+                       <grid:items>
+                                    <f:Card id="_IDGenCard2" class="sapUiMediumMargin" width="300px">
+                    <f:header>
+                        <card:Header id="_IDGenHeader3"  title="서류 미제출 고객" subtitle="최신 3개의 고객 데이터가 보입니다." />
+                    </f:header>
+                    <f:content>
+                        <List showSeparators="None" items="{
+					path: 'submitWaitModel>/'}">
+                            <CustomListItem type="Active" press=".onNavToBpDetail">
+                                <HBox alignItems="Center" justifyContent="SpaceBetween">
+                                    <VBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom">
+                                        <Title  level="H3" text="{submitWaitModel>bp_name}" />
+                                        <Text text="최종 변경일: {submitWaitModel>bp_changed_date}" />
+                                    </VBox>
 										<ObjectStatus
 											class="sapUiSmallMarginBegin sapUiSmallMarginEnd"
 											text="{=${submitWaitModel>bp_report_submission} === true?
@@ -165,13 +121,14 @@
 											state="{=${submitWaitModel>bp_report_submission} === true? 
 												'Success' : 'Error'}"
 										/>
-									</HBox>
-								</CustomListItem>
-							</List>
-						</f:content>
-					</f:Card>
-				</grid:items>
-			</grid:CSSGrid>
-		</f:content>
-	</f:DynamicPage>
+                                </HBox>                                
+                            </CustomListItem>
+                        </List>
+                    </f:content>
+                </f:Card>
+                </grid:items>
+
+            </grid:CSSGrid>
+        </f:content>
+    </f:DynamicPage>
 </mvc:View>

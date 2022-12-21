@@ -85,21 +85,33 @@ sap.ui.define([
                     b++;
                 }
             }
+
+            //console.log(this.getView().getModel("bpReportSubmitModel"));
+
             this.getView().getModel("bpReportSubmitModel").setProperty("/submit", a / data.oData.length * 100);
             this.getView().getModel("bpReportSubmitModel").setProperty("/notsubmit", b / data.oData.length * 100);
             this.getView().getModel("bpReportSubmitModel").setProperty("/submitpercent", (a / data.oData.length * 100).toFixed(2) + '%');
             this.getView().getModel("bpReportSubmitModel").setProperty("/notsubmitpercent", (b / data.oData.length * 100).toFixed(2) + '%');
 
+            //console.log(this.getView().getModel("bpReportSubmitModel"));
+
+
         },
         reportSubmitDataView: async function (oEvent) {
 
             let url = "/bp/BP?$filter=bp_report_submission%20eq%20false&$orderby=bp_changed_date%20desc&$top=3"
+
+            //console.log(url);
+            
             const SubmitWait = await $.ajax({
                 type: "get",
                 url: url
             });
             let submitWaitModel = new JSONModel(SubmitWait.value); //RequestWait.value 값을 JSONModel의 odata에 담는다.
             this.getView().setModel(submitWaitModel, "submitWaitModel");
+
+            //console.log(submitWaitModel)
+
         },
 
         onSelectionChanged:function(e){
@@ -119,6 +131,16 @@ sap.ui.define([
         toCustomerHome: function () {
             this.getOwnerComponent().getRouter().navTo("Home");
 
+        },
+
+        onSubmitChartDetail1: function (oEvent) {
+            //var oSubmitState = oEvent.getSource().mProperties.label;    // 제출 완료
+            //console.log(osubmitState);
+            this.getOwnerComponent().getRouter().navTo("CustomerSubmitChartDetail",{submitState: "1"}); 
+        },
+        onSubmitChartDetail2: function (oEvent) {
+            //var oSubmitState = oEvent.getSource().mProperties.label;    // 미제출
+            this.getOwnerComponent().getRouter().navTo("CustomerSubmitChartDetail",{submitState: "2"});
         },
 
     });
