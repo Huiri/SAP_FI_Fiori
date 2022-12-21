@@ -106,7 +106,7 @@ sap.ui.define([
             }
             // Generate a file name
             var BOM = "\uFEFF";
-            var fileName = "Financial Statement";
+            var fileName = "Financial Statement PL";
             CSV = BOM + CSV;
             var blob = new Blob([CSV], {
                 type: "text/csv;charset=utf-8;"
