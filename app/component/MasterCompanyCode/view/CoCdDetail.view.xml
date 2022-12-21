@@ -168,7 +168,7 @@
 								>
 									<m:Label
 										id="_IDGenLabel5"
-										text="국가 코드"
+										text="국가/지역"
 										class="propertyColumn"
 									/>
 									<m:Text
@@ -260,7 +260,7 @@
 									/>
 									<m:Text
 										id="CoCdDate"
-										text="{cocdModel>/com_code_date}"
+										text="{cocdModel>/com_cocd_date}"
 									/>
 								</m:VBox>
 								<m:VBox
@@ -273,8 +273,8 @@
 										class="propertyColumn"
 									/>
 									<m:Text
-										id="ComCodeConstructor"
-										text="{cocdModel>/com_code_constructor}"
+										id="CoCdConstructor"
+										text="{cocdModel>/com_cocd_constructor}"
 									/>
 								</m:VBox>
 								<layout:layoutData>
@@ -360,7 +360,7 @@
 								>
 									<m:Label
 										id="_IDGenLabel12"
-										text="관리 회계 영역"
+										text="관리회계영역"
 										class="propertyColumn"
 									/>
 									<m:Text
@@ -390,7 +390,7 @@
 									/>
 									<m:Text
 										id="ComCodeTaxCode"
-										text="{cocdModel>/com_code_taxcode}"
+										text="{cocdModel>/com_cocd_tax_code}"
 									/>
 								</m:VBox>
 								<layout:layoutData>

@@ -8,8 +8,8 @@ sap.ui.define([
 	
 ) {
 	"use strict";
-	let selectedNum = 1011
-	//변경필요
+	let selectedNum;
+	
 	
 
 	return Controller.extend("project4.controller.CoCdDetail", {
