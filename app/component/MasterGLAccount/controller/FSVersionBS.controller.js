@@ -5,7 +5,6 @@ sap.ui.define([
     "sap/ui/export/library"
 ], function (Controller, JSONModel, Spreadsheet, exportLibrary) {
     "use strict";
-    const EdmType = exportLibrary.EdmType;
     return Controller.extend("project2.controller.FSVersionBS", {
         onInit: async function () {
 
