@@ -145,6 +145,10 @@
       "BpCreditStatus" :{
         "type" : "sap.ui.model.json.JSONModel",
         "uri" : "model/BpCreditStatus.json" 
+      },
+      "CorresText" : {
+        "type" : "sap.ui.model.json.JSONModel",
+        "uri" : "model/Correspondence.json"
       }
     },
     "resources": {
@@ -211,6 +215,30 @@
             "name" : "CustomerChart",
             "prefix": "CustomerChart"
           }
+        },
+        {
+          "name": "EditCorres",
+          "pattern": "EditCorres",
+          "target": {
+            "name" : "EditCorres",
+            "prefix": "EditCorres"
+          }
+        },
+        {
+          "name": "CustomerChartDetail",
+          "pattern": "CustomerChartDetail/{type}",
+          "target": {
+            "name" : "CustomerChartDetail",
+            "prefix": "CustomerChartDetail"
+          }
+         },
+         {
+          "name": "CustomerSubmitChartDetail",
+          "pattern": "CustomerSubmitChartDetail/{submitState}",
+          "target": {
+            "name" : "CustomerSubmitChartDetail",
+            "prefix": "CustomerSubmitChartDetail"
+          }
         }
       ],
       "targets": {
@@ -248,6 +276,27 @@
           "clearControlAggregation": true,
           "viewId": "CustomerChart",
           "viewName": "CustomerChart"
+        },
+        "EditCorres" : {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": true,
+          "viewId": "EditCorres",
+          "viewName": "EditCorres"
+        },
+        "CustomerChartDetail" : {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": true,
+          "viewId": "CustomerChartDetail",
+          "viewName": "CustomerChartDetail"
+        },
+        "CustomerSubmitChartDetail" : {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": true,
+          "viewId": "CustomerSubmitChartDetail",
+          "viewName": "CustomerSubmitChartDetail"
         }
       }
     },

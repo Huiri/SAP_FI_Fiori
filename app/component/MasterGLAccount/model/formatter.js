@@ -13,7 +13,13 @@ sap.ui.define([], function(){
                     return "N (영업외 비용 또는 수익)";
                 case "C" :
                     return "C (현금 계정)";
+                case null :
+                    return "-";
                 default :
+                    if(!sStatus) {
+                        return "-";
+                    }
+
                     return sStatus;
             }
         },
@@ -33,7 +39,14 @@ sap.ui.define([], function(){
                     return "판매 및 일반 관리비";
                 case "T" :
                     return "세금";
+                case null :
+                case "null":
+                    return "-";
                 default :
+                    if(!sStatus) {
+                        return "-";
+                    }
+
                     return sStatus;
             }
         },
@@ -47,9 +60,44 @@ sap.ui.define([], function(){
                     return "생산";
                 case "A" :
                     return "관리";
+                case null :
+                case "null":
+                    return "-";
                 default :
+                    if(!sStatus) {
+                        return "-";
+                    }
+
                     return sStatus;
             }
+        },
+        AcctGrp : function(sStatus){
+            switch(sStatus){
+                case "ANL" :
+                    return "자산 계정";
+                case "FIN" :
+                    return "대차대조표 계정"
+                case "GUV" :
+                    return "손익계정";
+                case "MAT" :
+                    return "자재";
+                case null :
+                case "null":
+                    return "-";
+                default :
+                    if(!sStatus) {
+                        return "-";
+                    }
+
+                    return sStatus;
+            }
+        },
+        IsNull : function(sStatus){
+            if(!sStatus){
+                return "-"
+            }
+            
+            return sStatus;
         }
     }
 })

@@ -19,10 +19,16 @@
             </GenericTile>
            <GenericTile id="_IDGenGenericTile2" class="sapUiTinyMarginBegin sapUiTinyMarginTop"
                 header="고객 분석"
-               
                 press=".toCustomerChart">
                 <TileContent id="_IDGenTileContent2" >
                     <ImageContent id="_IDGenImageContent2" src="sap-icon://bar-chart"/>
+                </TileContent>
+            </GenericTile>
+            <GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop"
+                header="고객 서신 관리"
+                press=".toEditCorres">
+                <TileContent >
+                    <ImageContent src="sap-icon://letter"/>
                 </TileContent>
             </GenericTile>
               <!-- <SlideTile id="_IDGenSlideTile1" class="sapUiTinyMarginBegin sapUiTinyMarginTop" transitionTime="250" displayTime="2500">

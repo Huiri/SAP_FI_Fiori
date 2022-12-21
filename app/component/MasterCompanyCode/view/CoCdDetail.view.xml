@@ -1,409 +1,196 @@
-<mvc:View
-	xmlns="sap.uxap"
-	xmlns:f="sap.f"
-	controllerName="project4.controller.CoCdDetail"
-	xmlns:mvc="sap.ui.core.mvc"
-	xmlns:layout="sap.ui.layout"
-	xmlns:m="sap.m"
-	xmlns:c="sap.ui.core"
-	displayBlock="true"
-	height="100%"
-	busyIndicatorDelay="0"
->
-	<ObjectPageLayout
-		showTitleInHeaderContent="true"
-		showEditHeaderButton="true"
-		upperCaseAnchorBar="false"
-		toggleHeaderOnTitleClick="false"
-		headerContentPinnable="false"
-	>
-		<headerTitle>
-			<ObjectPageDynamicHeaderTitle id="_IDGenObjectPageDynamicHeaderTitle1">
-				<expandedHeading>
-					<m:HBox
-						id="_IDGenHBox2"
-						height="3rem"
-					>
-						<m:Button
-							id="_IDGenButton2"
-							press=".toBack"
-							type="Back"
-						/>
-						<m:Title
-							id="_IDGenTitle2"
-							text="회사 코드 상세 페이지"
-							class="sapUiSmallMarginBegin"
-						/>
-					</m:HBox>
-				</expandedHeading>
-				<snappedHeading>
-					<m:VBox id="_IDGenVBox12">
-						<m:HBox
-							id="_IDGenHBox1"
-							height="3rem"
-						>
-							<m:Avatar
-								id="_IDGenAvatar1"
-								src="sap-icon://factory"
-								class="sapUiTinyMarginEnd"
-							/>
-							<m:Title
-								id="_IDGenTitle1"
-								text="{cocdModel>/com_code_name}"
-								class="sapUiTinyMarginTop"
-							/>
+<mvc:View 
+	xmlns="sap.uxap" 
+	controllerName="project4.controller.CoCdDetail" 
+	xmlns:mvc="sap.ui.core.mvc" 
+	xmlns:layout="sap.ui.layout" 
+	xmlns:m="sap.m" 
+	displayBlock="true" 
+	height="100%" 
+	busyIndicatorDelay="0">
+    <ObjectPageLayout showTitleInHeaderContent="true" showEditHeaderButton="true" upperCaseAnchorBar="false" toggleHeaderOnTitleClick="false" headerContentPinnable="false">
+        <headerTitle>
+            <ObjectPageDynamicHeaderTitle id="_IDGenObjectPageDynamicHeaderTitle1">
+                <expandedHeading>
+                    <m:VBox id="_IDGenHBox2">
+						<m:HBox>
+							<m:Button press=".toBack" type="Back" />
+							<m:Title text="{cocdModel>/com_code_name}" class="sapUiSmallMarginBegin" />
+						</m:HBox>
+						<m:HBox class="sapUiSmallMargin">
+							<m:Avatar 
+								class="sapUiSmallMarginEnd" 
+								src="sap-icon://factory" 
+								displaySize="M" />
+							<m:VBox class="sapUiSmallMarginEnd" >
+								<m:Label design="Bold" text="회사코드" class="propertyColumn" />
+								<m:Text text="{cocdModel>/com_code}" />
+							</m:VBox>
+
+							<m:VBox class="sapUiSmallMarginEnd" >
+								<m:Label design="Bold" text="회사 주소" class="propertyColumn" />
+								<m:Text
+								text="{
+									path:'cocdModel>/com_address',
+									formatter:'.formatter.IsNull'
+								}" />
+							</m:VBox>
+
 						</m:HBox>
 					</m:VBox>
-				</snappedHeading>
-			</ObjectPageDynamicHeaderTitle>
-		</headerTitle>
-		<headerContent>
-			<m:FlexBox
-				id="_IDGenFlexBox2"
-				wrap="Wrap"
-			>
-				<layout:HorizontalLayout
-					id="_IDGenHorizontalLayout1"
-					class="sapUiSmallMarginBeginEnd"
-				>
-					<m:VBox class="sapUiLargeMarginBottom">
-						<m:Title
-							id="_IDGenTitle3"
-							text="{cocdModel>/com_code_name}"
-							class="sapUiTinyMarginBegin "
-						/>
-						<m:Avatar
-							id="_IDGenAvatar2"
-							src="sap-icon://factory"
-							class="sapUiTinyMarginEnd"
-						/>
+                </expandedHeading>
+                <snappedHeading>
+                    <m:VBox>
+						<m:HBox>
+							<m:Button press=".toBack" type="Back" />
+							<m:Title text="{cocdModel>/com_code_name}" class="sapUiSmallMarginBegin" />
+						</m:HBox>
+						<m:HBox class="sapUiSmallMargin">
+							<m:Avatar 
+								class="sapUiSmallMarginEnd" 
+								src="sap-icon://factory" 
+								displaySize="M" />
+							<m:VBox class="sapUiSmallMarginEnd" >
+								<m:Label design="Bold" text="회사코드" class="propertyColumn" />
+								<m:Text text="{cocdModel>/com_code}" />
+							</m:VBox>
+
+							<m:VBox class="sapUiSmallMarginEnd" >
+								<m:Label design="Bold" text="회사 주소" class="propertyColumn" />
+								<m:Text
+								text="{
+									path:'cocdModel>/com_address',
+									formatter:'.formatter.IsNull'
+								}" />
+							</m:VBox>
+
+						</m:HBox>
 					</m:VBox>
-					<m:VBox
-						id="_IDGenVBox1"
-						class="sapUiMediumMarginBegin sapUiSmallMarginTop"
-					>
-						<m:Label
-							id="_IDGenLabel1"
-							text="회사코드"
-							class="propertyColumn"
-						/>
-					</m:VBox>
-					<m:VBox
-						id="_IDGenVBox2"
-						class="sapUiTinyMarginBeginEnd sapUiSmallMarginTopBottom"
-					>
-						<m:Text
-							id="ComCode"
-							text="{cocdModel>/com_code}"
-						/>
-					</m:VBox>
-				</layout:HorizontalLayout>
-				<layout:VerticalLayout
-					id="_IDGenVerticalLayout1"
-					class="sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom"
-				>
-					<m:VBox id="_IDGenVBox3">
-						<m:Label
-							id="_IDGenLabel2"
-							text="회사 주소"
-							class="propertyColumn"
-						/>
-						<m:Text
-							id="comAddress"
-							text="{cocdModel>/com_address}"
-						/>
-					</m:VBox>
-				</layout:VerticalLayout>
-			</m:FlexBox>
-		</headerContent>
-		<sections>
-			<ObjectPageSection
-				title="기본 데이터"
-				showTitle="true"
-				id="myCustom"
-				titleUppercase="false"
-			>
-				<subSections>
-					<ObjectPageSubSection
-						title="일반 정보"
-						titleUppercase="false"
-						id="myTEST"
-					>
-						<blocks>
-							<layout:VerticalLayout
-								id="_IDGenVerticalLayout2"
-								class="sapUiSmallMarginBeginEnd"
-							>
-								<m:VBox
-									id="_IDGenVBox4"
-									class="sapUiSmallMarginTopBottom"
-								>
-									<m:Label
-										id="_IDGenLabel3"
-										text="회사명"
-										class="propertyColumn"
-									/>
-									<m:Text
-										id="ComCodeName"
-										text="{cocdModel>/com_code_name}"
-									/>
-								</m:VBox>
-								<m:VBox
-									id="_IDGenVBox5"
-									class="sapUiSmallMarginTopBottom"
-								>
-									<m:Label
-										id="_IDGenLabel4"
-										text="도시"
-										class="propertyColumn"
-									/>
-									<m:Text
-										id="ComCity"
-										text="{cocdModel>/com_city}"
-									/>
-								</m:VBox>
-								<m:VBox
-									id="_IDGenVBox6"
-									class="sapUiSmallMarginTopBottom"
-								>
-									<m:Label
-										id="_IDGenLabel5"
-										text="국가 코드"
-										class="propertyColumn"
-									/>
-									<m:Text
-										id="ComCountry"
-										text="{cocdModel>/com_country}"
-									/>
-								</m:VBox>
-								<layout:layoutData>
-									<layout:GridData
-										id="_IDGenGridData1"
-										span="XL3 L3 M6 S12"
-									/>
-								</layout:layoutData>
-							</layout:VerticalLayout>
-							<layout:VerticalLayout>
-								<layout:layoutData>
-									<layout:GridData
-										id="_IDGenGridData9"
-										span="XL3 L3 M6 S12"
-									/>
-								</layout:layoutData>
-							</layout:VerticalLayout>
-							<layout:VerticalLayout
-								id="_IDGenVerticalLayout3"
-								class="sapUiSmallMarginBeginEnd"
-							>
-								<m:VBox
-									id="_IDGenVBox7"
-									class="sapUiSmallMarginTopBottom"
-								>
-									<m:Label
-										id="_IDGenLabel6"
-										text="회사 언어"
-										class="propertyColumn"
-									/>
-									<m:Text
-										id="ComLanguage"
-										text="{cocdModel>/com_language}"
-									/>
-								</m:VBox>
-								<m:VBox
-									id="_IDGenVBox8"
-									class="sapUiSmallMarginTopBottom"
-								>
-									<m:Label
-										id="_IDGenLabel7"
-										text="회사 통화"
-										class="propertyColumn"
-									/>
-									<m:Text
-										id="ComCurrency"
-										text="{cocdModel>/com_currency}"
-									/>
-								</m:VBox>
-								<layout:layoutData>
-									<layout:GridData
-										id="_IDGenGridData2"
-										span="XL3 L3 M6 S12"
-									/>
-								</layout:layoutData>
-							</layout:VerticalLayout>
-							<layout:VerticalLayout id="_IDGenVerticalLayout9">
-								<layout:layoutData>
-									<layout:GridData
-										id="_IDGenGridData10"
-										span="XL3 L3 M6 S12"
-									/>
-								</layout:layoutData>
-							</layout:VerticalLayout>
-						</blocks>
-					</ObjectPageSubSection>
-					<ObjectPageSubSection
-						id="_IDGenObjectPageSubSection3"
-						title="생성 정보"
-					>
-						<blocks>
-							<layout:VerticalLayout
-								id="_IDGenVerticalLayout4"
-								class="sapUiSmallMarginBeginEnd"
-							>
-								<m:VBox
-									id="_IDGenVBox9"
-									class="sapUiSmallMarginTopBottom"
-								>
-									<m:Label
-										id="_IDGenLabel8"
-										text="생성일"
-										class="propertyColumn"
-									/>
-									<m:Text
-										id="CoCdDate"
-										text="{cocdModel>/com_code_date}"
-									/>
-								</m:VBox>
-								<m:VBox
-									id="_IDGenVBox10"
-									class="sapUiSmallMarginTopBottom"
-								>
-									<m:Label
-										id="_IDGenLabel9"
-										text="생성자"
-										class="propertyColumn"
-									/>
-									<m:Text
-										id="ComCodeConstructor"
-										text="{cocdModel>/com_code_constructor}"
-									/>
-								</m:VBox>
-								<layout:layoutData>
-									<layout:GridData
-										id="_IDGenGridData3"
-										span="XL4 L4 M6 S12"
-									/>
-								</layout:layoutData>
-							</layout:VerticalLayout>
-						</blocks>
-					</ObjectPageSubSection>
-				</subSections>
-			</ObjectPageSection>
-			<ObjectPageSection
-				id="_IDGenObjectPageSection2"
-				title="회계 정보"
-				titleUppercase="false"
-			>
-				<subSections>
-					<ObjectPageSubSection
-						id="_IDGenObjectPageSubSection2"
-						title="회계 정보"
-						titleUppercase="false"
-					>
-						<blocks>
-							<layout:VerticalLayout
-								id="_IDGenVerticalLayout5"
-								class="sapUiSmallMarginBeginEnd"
-							>
-								<m:VBox
-									id="_IDGenVBox14"
-									class="sapUiSmallMarginTopBottom"
-								>
-									<m:Label
-										id="_IDGenLabel10"
-										text="계정과목표"
-										class="propertyColumn"
-									/>
-									<m:Text
-										id="_IDGenText1"
-										text="{cocdModel>/com_coa}"
-									/>
-								</m:VBox>
-								<layout:layoutData>
-									<layout:GridData
-										id="_IDGenGridData4"
-										span="XL3 L3 M6 S12"
-									/>
-								</layout:layoutData>
-							</layout:VerticalLayout>
-							<layout:VerticalLayout
-								id="_IDGenVerticalLayout6"
-								class="sapUiSmallMarginBeginEnd"
-							>
-								<m:VBox
-									id="_IDGenVBox15"
-									class="sapUiSmallMarginTopBottom"
-								>
-									<m:Label
-										id="_IDGenLabel11"
-										text="회계연도 오브젝트"
-										class="propertyColumn"
-									/>
-									<m:Text
-										id="ComFiscalYear"
-										text="{cocdModel>/com_fiscal_year}"
-									/>
-								</m:VBox>
-								<layout:layoutData>
-									<layout:GridData
-										id="_IDGenGridData5"
-										span="XL3 L3 M6 S12"
-									/>
-								</layout:layoutData>
-							</layout:VerticalLayout>
-							<layout:VerticalLayout
-								id="_IDGenVerticalLayout7"
-								class="sapUiSmallMarginBeginEnd"
-							>
-								<m:VBox
-									id="_IDGenVBox16"
-									class="sapUiSmallMarginTopBottom"
-								>
-									<m:Label
-										id="_IDGenLabel12"
-										text="관리 회계 영역"
-										class="propertyColumn"
-									/>
-									<m:Text
-										id="ComCoArea"
-										text="{cocdModel>/com_co_area}"
-									/>
-								</m:VBox>
-								<layout:layoutData>
-									<layout:GridData
-										id="_IDGenGridData6"
-										span="XL3 L3 M6 S6"
-									/>
-								</layout:layoutData>
-							</layout:VerticalLayout>
-							<layout:VerticalLayout
-								id="_IDGenVerticalLayout8"
-								class="sapUiSmallMarginBeginEnd"
-							>
-								<m:VBox
-									id="_IDGenVBox17"
-									class="sapUiSmallMarginTopBottom"
-								>
-									<m:Label
-										id="_IDGenLabel13"
-										text="세금 코드"
-										class="propertyColumn"
-									/>
-									<m:Text
-										id="ComCodeTaxCode"
-										text="{cocdModel>/com_code_taxcode}"
-									/>
-								</m:VBox>
-								<layout:layoutData>
-									<layout:GridData
-										id="_IDGenGridData7"
-										span="XL3 L3 M6 S6"
-									/>
-								</layout:layoutData>
-							</layout:VerticalLayout>
-						</blocks>
-					</ObjectPageSubSection>
-				</subSections>
-			</ObjectPageSection>
-		</sections>
-	</ObjectPageLayout>
+                </snappedHeading>
+            </ObjectPageDynamicHeaderTitle>
+        </headerTitle>
+        <!-- <headerContent>
+            
+        </headerContent> -->
+        <sections>
+            <ObjectPageSection title="기본 데이터" id="myCustom" titleUppercase="false">
+                <subSections>
+                    <ObjectPageSubSection title="일반 정보" id="myTEST">
+                        <blocks>
+                            <layout:VerticalLayout id="_IDGenVerticalLayout2" class="sapUiSmallMarginBeginEnd">
+                                <m:VBox id="_IDGenVBox4" class="sapUiSmallMarginTopBottom">
+                                    <m:Label id="_IDGenLabel3" text="회사명" class="propertyColumn" />
+                                    <m:Text id="ComCodeName" text="{cocdModel>/com_code_name}" />
+                                </m:VBox>
+                                <m:VBox id="_IDGenVBox5" class="sapUiSmallMarginTopBottom">
+                                    <m:Label id="_IDGenLabel4" text="도시" class="propertyColumn" />
+                                    <m:Text id="ComCity" text="{cocdModel>/com_city}" />
+                                </m:VBox>
+                                <m:VBox id="_IDGenVBox6" class="sapUiSmallMarginTopBottom">
+                                    <m:Label id="_IDGenLabel5" text="회사 국가" class="propertyColumn" />
+                                    <m:Text id="ComCountry" 
+										text="{
+											path:'cocdModel>/com_country',
+											formatter:'.formatter.NationStatus'
+										}"/>
+                                </m:VBox>
+                                <layout:layoutData>
+                                    <layout:GridData id="_IDGenGridData1" span="XL3 L3 M6 S12" />
+                                </layout:layoutData>
+                            </layout:VerticalLayout>
+                            <layout:VerticalLayout>
+                                <layout:layoutData>
+                                    <layout:GridData id="_IDGenGridData9" span="XL3 L3 M6 S12" />
+                                </layout:layoutData>
+                            </layout:VerticalLayout>
+                            <layout:VerticalLayout id="_IDGenVerticalLayout3" class="sapUiSmallMarginBeginEnd">
+                                <m:VBox id="_IDGenVBox7" class="sapUiSmallMarginTopBottom">
+                                    <m:Label id="_IDGenLabel6" text="회사 언어" class="propertyColumn" />
+                                    <m:Text 
+										id="ComLanguage" 
+										text="{cocdModel>/com_language}"/>
+                                </m:VBox>
+                                <m:VBox id="_IDGenVBox8" class="sapUiSmallMarginTopBottom">
+                                    <m:Label id="_IDGenLabel7" text="회사 통화" class="propertyColumn" />
+                                    <m:Text id="ComCurrency" text="{cocdModel>/com_currency}" />
+                                </m:VBox>
+                                <layout:layoutData>
+                                    <layout:GridData id="_IDGenGridData2" span="XL3 L3 M6 S12" />
+                                </layout:layoutData>
+                            </layout:VerticalLayout>
+                            <layout:VerticalLayout id="_IDGenVerticalLayout9">
+                                <layout:layoutData>
+                                    <layout:GridData id="_IDGenGridData10" span="XL3 L3 M6 S12" />
+                                </layout:layoutData>
+                            </layout:VerticalLayout>
+                        </blocks>
+                    </ObjectPageSubSection>
+                    <ObjectPageSubSection id="_IDGenObjectPageSubSection3" title="생성 정보">
+                        <blocks>
+                            <layout:VerticalLayout id="_IDGenVerticalLayout4" class="sapUiSmallMarginBeginEnd">
+                                <m:VBox id="_IDGenVBox9" class="sapUiSmallMarginTopBottom">
+                                    <m:Label id="_IDGenLabel8" text="생성일" class="propertyColumn" />
+                                    <m:Text id="CoCdDate" text="{cocdModel>/com_cocd_date}" />
+                                </m:VBox>
+                                <m:VBox id="_IDGenVBox10" class="sapUiSmallMarginTopBottom">
+                                    <m:Label id="_IDGenLabel9" text="생성자" class="propertyColumn" />
+                                    <m:Text id="ComCodeConstructor" text="{cocdModel>/com_cocd_constructor}" />
+                                </m:VBox>
+                                <layout:layoutData>
+                                    <layout:GridData id="_IDGenGridData3" span="XL4 L4 M6 S12" />
+                                </layout:layoutData>
+                            </layout:VerticalLayout>
+                        </blocks>
+                    </ObjectPageSubSection>
+                </subSections>
+            </ObjectPageSection>
+            <ObjectPageSection id="_IDGenObjectPageSection2" title="회계 정보" titleUppercase="false">
+                <subSections>
+                    <ObjectPageSubSection id="_IDGenObjectPageSubSection2" title="회계 정보">
+                        <blocks>
+                            <layout:VerticalLayout id="_IDGenVerticalLayout5" class="sapUiSmallMarginBeginEnd">
+                                <m:VBox id="_IDGenVBox14" class="sapUiSmallMarginTopBottom">
+                                    <m:Label id="_IDGenLabel10" text="계정과목표" class="propertyColumn" />
+                                    <m:Text id="_IDGenText1" text="{cocdModel>/com_coa}" />
+                                </m:VBox>
+                                <layout:layoutData>
+                                    <layout:GridData id="_IDGenGridData4" span="XL3 L3 M6 S12" />
+                                </layout:layoutData>
+                            </layout:VerticalLayout>
+                            <layout:VerticalLayout id="_IDGenVerticalLayout6" class="sapUiSmallMarginBeginEnd">
+                                <m:VBox id="_IDGenVBox15" class="sapUiSmallMarginTopBottom">
+                                    <m:Label id="_IDGenLabel11" text="회계연도 오브젝트" class="propertyColumn" />
+                                    <m:Text id="ComFiscalYear" text="{cocdModel>/com_fiscal_year}" />
+                                </m:VBox>
+                                <layout:layoutData>
+                                    <layout:GridData id="_IDGenGridData5" span="XL3 L3 M6 S12" />
+                                </layout:layoutData>
+                            </layout:VerticalLayout>
+                            <layout:VerticalLayout id="_IDGenVerticalLayout7" class="sapUiSmallMarginBeginEnd">
+                                <m:VBox id="_IDGenVBox16" class="sapUiSmallMarginTopBottom">
+                                    <m:Label id="_IDGenLabel12" text="관리 회계 영역" class="propertyColumn" />
+                                    <m:Text id="ComCoArea" text="{cocdModel>/com_co_area}" />
+                                </m:VBox>
+                                <layout:layoutData>
+                                    <layout:GridData id="_IDGenGridData6" span="XL3 L3 M6 S6" />
+                                </layout:layoutData>
+                            </layout:VerticalLayout>
+                            <layout:VerticalLayout id="_IDGenVerticalLayout8" class="sapUiSmallMarginBeginEnd">
+                                <m:VBox id="_IDGenVBox17" class="sapUiSmallMarginTopBottom">
+                                    <m:Label id="_IDGenLabel13" text="세금 코드" class="propertyColumn" />
+                                    <m:Text id="ComCodeTaxCode" 
+										text="{
+											path:'cocdModel>/com_cocd_tax_code',
+											formatter:'.formatter.IsNull'
+										}" />
+                                </m:VBox>
+                                <layout:layoutData>
+                                    <layout:GridData span="XL3 L3 M6 S6" />
+                                </layout:layoutData>
+                            </layout:VerticalLayout>
+                        </blocks>
+                    </ObjectPageSubSection>
+                </subSections>
+            </ObjectPageSection>
+        </sections>
+    </ObjectPageLayout>
 </mvc:View>

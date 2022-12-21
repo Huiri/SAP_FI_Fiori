@@ -9,7 +9,7 @@ sap.ui.define([
 	'sap/m/Token',
 	'sap/ui/model/Filter',
 	'sap/ui/model/FilterOperator',
-	'sap/m/Column',
+	'sap/ui/table/Column',
 	'sap/m/Text',
     'sap/ui/core/Icon',
     'sap/ui/model/BindingMode'
@@ -25,7 +25,7 @@ sap.ui.define([
 	Token,
 	Filter,
 	FilterOperator,
-	Column,
+	UIColumn,
 	Text,
 	Icon,
     BindingMode
@@ -38,6 +38,7 @@ sap.ui.define([
             console.log()
             let editModel = new JSONModel({editable : false});
             this.getView().setModel(editModel, "editModel");
+            this.getView().setModel(new JSONModel({}), 'historyModel');
 
             let blockModel = new JSONModel({isBlock:false});
             //blockModel.setDefaultBindingMode(BindingMode.OneWay);
@@ -160,39 +161,24 @@ sap.ui.define([
         onLocked: function(){
             var state = JSON.parse(this.getView().byId("glBlocked").getCustomData()[0].getProperty('value'));
             console.log(state);
+            var icon;
+
+            this.getView().getModel('historyModel').setProperty('/icon', this.byId("glBlocked").getIcon());
+
             if(state){
+                icon = "sap-icon://locked";
                 //console.log("true 면 false로 바꿔주기 . : src 는 unlock->lock")
-                this.byId("glBlocked").setIcon(new sap.ui.core.Icon({src:"sap-icon://locked"}).getSrc());
+                this.byId("glBlocked").setIcon(new sap.ui.core.Icon({src: icon}).getSrc());
                 this.byId("glBlocked").setText("잠금 해제");
                 this.byId("glBlocked").setTooltip("잠금 해제");
             }else{
+                icon = "sap-icon://unlocked";
                 //console.log("false 면 true 바꿔주기 . : src 는 lock->unlock")
-                this.byId("glBlocked").setIcon(new sap.ui.core.Icon({src:"sap-icon://unlocked"}).getSrc());
+                this.byId("glBlocked").setIcon(new sap.ui.core.Icon({src: icon}).getSrc());
                 this.byId("glBlocked").setText("잠금");
                 this.byId("glBlocked").setTooltip("잠금");
             }
             this.byId("glBlocked").getCustomData()[0].setProperty('value',!state);
-            // this.byId("pageSection1").setVisible(JSON.parse(state));
-            // this.byId("pageSection2").setVisible(JSON.parse(state));
-            //this.getView().getModel("blockModel").setProperty("/isBlock", !state);
-            
-            //this.byId("glBlocked").setIcon(new sap.ui.core.Icon({src:"sap-icon://unlocked"}).getSrc());
-
-
-            // if(this.byId("glBlocked").getCustomData()[0].getProperty('value')!='true'){
-            //     this.byId("glBlocked").getCustomData()[0].setProperty('value',"false");
-
-            //     this.byId("glBlocked").setIcon(new sap.ui.core.Icon({src:"sap-icon://unlocked"}).getSrc());
-            //     this.getView().getModel("blockModel").setProperty("isBlock", "true");
-            //     console.log("변경됨");
-            //     console.log(this.byId("glBlocked").getCustomData()[0].getProperty('value'));
-
-            // }else{
-            //     this.byId("glBlocked").getCustomData()[0].setProperty('value',"true");
-            //     this.byId("glBlocked").setIcon(new sap.ui.core.Icon({src:"sap-icon://locked"}).getSrc());
-            //     this.getView().getModel("blockModel").setProperty("isBlock", "true");
-
-            // }
         },
 
 		onEdit: function() {
@@ -216,42 +202,43 @@ sap.ui.define([
             //this.byId("InputCoAContent").setSelectedKey(TextCoAContent);
             
             let TextGLAccDesc = this.byId("TextGLAccDesc").getText();
-            this.byId("InputGLAccDesc").setValue(TextGLAccDesc);
+            if(TextGLAccDesc === "-"){
+                this.byId("InputGLAccDesc").setValue("");
+            } else{
+                this.byId("InputGLAccDesc").setValue(TextGLAccDesc);
+            }
 		},
 
 		onExpandCoCd: function(oEvent) {
-            this.pWhitespaceDialog = null;
-            this._oBasicSearchField = null;
-            this.oWhitespaceDialog = null;
             var oModel = this.getView().getModel('CoCdDataModel');
 
-			var oCodeTemplate = new Text({text: {path: 'CoCdDataModel>com_code'}, renderWhitespace: true});
-            var oCoCdNameTemplate = new Text({text: {path: 'CoCdDataModel>com_code_name'}, renderWhitespace: true});
+			var oCodeTemplate = new Text({text: '{CoCdDataModel>com_code}', renderWhitespace: true});
+            var oCoCdNameTemplate = new Text({text: '{CoCdDataModel>com_code_name}', renderWhitespace: true});
 			this._oBasicSearchField = new SearchField({
 				search: function() {
-					this.oWhitespaceDialog.getFilterBar().search();
+					this.oExpandDialog.getFilterBar().search();
 				}.bind(this)
 			});
 			
-				this.pWhitespaceDialog = this.loadFragment({
+				this.pExpandDialog = this.loadFragment({
 					name: "project2.view.fragment.ExpandCoCdInGLAcct"
 				});
 			
-			this.pWhitespaceDialog.then(function(oWhitespaceDialog) {
-				var oFilterBar = oWhitespaceDialog.getFilterBar();
-				this.oWhitespaceDialog = oWhitespaceDialog;
-				if (this._bWhitespaceDialogInitialized) {
+			this.pExpandDialog.then(function(oExpandDialog) {
+				var oFilterBar = oExpandDialog.getFilterBar();
+				this.oExpandDialog = oExpandDialog;
+				if (this._bExpandDialogInitialized) {
 					// Re-set the tokens from the input and update the table
-					oWhitespaceDialog.setTokens([]);
-					oWhitespaceDialog.update();
+					oExpandDialog.setTokens([]);
+					oExpandDialog.update();
 
-					oWhitespaceDialog.open();
+					oExpandDialog.open();
 					// return;
 				}
-				this.getView().addDependent(oWhitespaceDialog);
+				this.getView().addDependent(oExpandDialog);
 
 				// Set key fields for filtering in the Define Conditions Tab
-				oWhitespaceDialog.setRangeKeyFields([{
+				oExpandDialog.setRangeKeyFields([{
 					label: "회사코드",
 					key: "CoCdDataModel>com_code"
 				}]);
@@ -260,7 +247,7 @@ sap.ui.define([
 				oFilterBar.setFilterBarExpanded(false);
 				oFilterBar.setBasicSearch(this._oBasicSearchField);
 
-				oWhitespaceDialog.getTableAsync().then(function (oTable) {
+				oExpandDialog.getTableAsync().then(function (oTable) {
 					oTable.setModel(oModel);
 
 					// For Desktop and tabled the default table is sap.ui.table.Table
@@ -271,17 +258,17 @@ sap.ui.define([
 							path: "CoCdDataModel>/",
 							events: {
 								dataReceived: function() {
-									oWhitespaceDialog.update();
+									oExpandDialog.update();
 								}
 							}
 						});
 					}
 
-					oWhitespaceDialog.update();
+					oExpandDialog.update();
 				}.bind(this));
 
-				this._bWhitespaceDialogInitialized = true;
-				oWhitespaceDialog.open();
+				this._bExpandDialogInitialized = true;
+				oExpandDialog.open();
 			}.bind(this));
 
 
@@ -320,7 +307,7 @@ sap.ui.define([
                 }
                 
 			}.bind(this));
-			this.oWhitespaceDialog.close();
+			this.oExpandDialog.close();
 
         },
 
@@ -328,7 +315,7 @@ sap.ui.define([
          * valueHelpDialog 취소 버튼 클릭 이벤트
          */
         onWhitespaceCancelPress: function() {
-            this.oWhitespaceDialog.close();
+            this.oExpandDialog.close();
 
         },
 
@@ -347,7 +334,21 @@ sap.ui.define([
                 });
             }
             this._filterTable(aFilter); 
-x
+		},
+
+
+		changeSelectGLType: function(oEvent) {
+            let oPLSelect = this.byId("InputPLAccType");
+			let selectedGLType = this.byId("InputGLAccType").getSelectedKey();
+			if(selectedGLType === 'X' || selectedGLType === 'C'){
+				oPLSelect.setSelectedKey("");
+				oPLSelect.setEditable(false);
+
+			} else {
+				oPLSelect.setEditable(true);
+
+			}
+
 		},
  
         /**
@@ -355,7 +356,7 @@ x
          * @param {object}
          */
         _filterTable: function (oFilter) {
-			var oValueHelpDialog = this.oWhitespaceDialog;
+			var oValueHelpDialog = this.oExpandDialog;
 			oValueHelpDialog.getTableAsync().then(function (oTable) {
 				if (oTable.bindRows) {
 					oTable.getBinding("rows").filter(oFilter);
@@ -372,15 +373,22 @@ x
             await(this.setPatchData(isBlock));
             
             //this.getView().getModel("blockModel").setProperty("/isBlock",isBlock);
-            this.byId("pageSection1").setVisible(!isBlock);
-            this.byId("pageSection2").setVisible(!isBlock);
+
+            // this.byId("pageSection1").setVisible(!isBlock);
+            // this.byId("pageSection2").setVisible(!isBlock);
             this.getView().getModel("editModel").setProperty("/editable", false);
             
             //console.log(this.getView().getModel("blockModel").getProperty("/isBlock"));
         },
         onCancel: function(){
-            let vis =  this.getView().getModel("GLDataModel").getProperty("/gl_blocked");
+            const oView = this.getView();
+            let vis =  oView.getModel("GLDataModel").getProperty("/gl_blocked");
             var state = JSON.parse(this.getView().byId("glBlocked").getCustomData()[0].getProperty('value'));
+
+            const oHistoryModel = oView.getModel('historyModel');
+            let sSrc = oHistoryModel.getProperty('/icon'); 
+            let oGlBlocked = this.byId("glBlocked");
+            if(oGlBlocked.getIcon() !== sSrc) oGlBlocked.setIcon(new sap.ui.core.Icon({src: sSrc}).getSrc());
 
             // this.byId("pageSection1").setVisible(!vis);
             // this.byId("pageSection2").setVisible(!vis)
@@ -390,6 +398,9 @@ x
              * 현재 정상적인 실행 X
              * @todo 취소 버튼 누를 시 lock 초기값으로 설정 필요
             */
+            
+            this.byId("glBlocked").getCustomData()[0].setProperty('value', true);
+
             if(vis === false){
                 this.byId("glBlocked").getCustomData()[0].setProperty('value',true);
                 // this.getView().getModel("GLDataModel").setProperty("/gl_blocked", true);
@@ -412,7 +423,6 @@ x
                 "gl_company_code" :this.byId("glCompanyCode").getText(),
                 "gl_corp_name":this.byId("glCorpName").getText(),
                 "gl_acct_currency":this.byId("glAcctCurrency").getText(),
-                "gl_coa" : this.byId("glCoa").getText(),
                 "gl_recon_account":this.byId("glReconAccount").getText(),
 
                 "gl_blocked" : JSON.parse(isBlock)

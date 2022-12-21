@@ -61,20 +61,28 @@
 				<uxap:subSections >
 					<uxap:ObjectPageSubSection id="_IDGenObjectPageSubSection1"  title="일반">
 						<uxap:blocks>
-                            <layout:VerticalLayout id="_IDGenVerticalLayout1" class="sapUiSmallMarginBeginEnd" >
-                                <VBox id="_IDGenVBox3" class="sapUiSmallMarginBottom">
+							<VBox>
+								<layout:Grid containerQuery="true">
+								<VBox>
+                                <VBox class="sapUiSmallMargin">
                                     <Label id="_IDGenLabel6" text="계정과목표" />
-                                    <Text id="TextCoA" text="{GLDataModel>/gl_coa} ({GLDataModel>/gl_coa_content})" class="sapUiTinyMarginBegin"/>  
+                                    <Text id="TextCoA" text="{GLDataModel>/gl_coa}"/>  
                                 </VBox>
-                                <VBox id="_IDGenVBox4" class="sapUiSmallMarginBottom">
+                                <VBox class="sapUiSmallMargin">
                                     <Label id="_IDGenLabel7" text="G/L 계정 유형" required="true" />
-                                    <Text id="TextGLAccType" visible="{=!${editModel>/editable}}" class="sapUiTinyMarginBegin"
+                                    <Text id="TextGLAccType" visible="{=!${editModel>/editable}}" 
 											text="{path:'GLDataModel>/gl_acct_type',
 													formatter:'.formatter.AcctTypeStatus'
 													}" />
-                                    <!-- <Input id="InputGLAccType" visible="{=${editModel>/editable}}" class="sapUiTinyMarginBegin"/>   -->
-									<Select id="InputGLAccType" required="true" forceSelection="false" visible="{=${editModel>/editable}}"
-                                		items="{
+                                    <!-- <Input id="InputGLAccType" visible="{=${editModel>/editable}}" />   -->
+									<Select 
+									id="InputGLAccType" 
+									required="true"
+									visible="{=${editModel>/editable}}"
+									width="100%"
+
+                                		change=".changeSelectGLType"
+										items="{
 											path: 'SelectOption>/AccountTypeList',
 											sorter: { path: 'AccountTypeList' }
 										}">
@@ -82,16 +90,20 @@
                             		</Select>
 
                                 </VBox>
-                                <VBox id="_IDGenVBox5" class="sapUiSmallMarginBottom">
-                                    <Label id="_IDGenLabel8" text="계정 그룹" required="true" />
-                                    <Text id="TextGLGroup" text="{GLDataModel>/gl_acct_group} ({GLDataModel>/gl_acct_group_mean})" visible="{=!${editModel>/editable}}" class="sapUiTinyMarginBegin">
+                                <VBox class="sapUiSmallMargin">
+                                    <Label  text="계정 그룹" required="true" />
+                                    <Text id="TextGLGroup" text="{GLDataModel>/gl_acct_group}" visible="{=!${editModel>/editable}}" >
 										<customData>
 											<core:CustomData value="{GLDataModel>/gl_acct_group}"/>
 										</customData>
 									</Text>
                                     
-									<!-- <Input id="InputGLGroup" visible="{=${editModel>/editable}}" class="sapUiTinyMarginBegin"/>   -->
-									<Select id="InputGLGroup" forceSelection="false" visible="{=${editModel>/editable}}"
+									<!-- <Input id="InputGLGroup" visible="{=${editModel>/editable}}"/>   -->
+									<Select 
+									id="InputGLGroup" 
+									visible="{=${editModel>/editable}}"
+									width="100%"
+
                                 		items="{
 											path: 'SelectOption>/GLAcctGroupList',
 											sorter: { path: 'GLAcctGroupList' }
@@ -99,9 +111,9 @@
 										<core:Item key="{SelectOption>GLAcctGrp}" text="{SelectOption>GLAcctGrp} ({SelectOption>GLAcctGrpContent})"/>
                             		</Select>
 								</VBox>
-                                <VBox id="_IDGenVBox6" class="sapUiSmallMarginBottom">
+                                <VBox class="sapUiSmallMargin">
                                     <Label id="_IDGenLabel9" text="손익계산서 계정 유형" />
-                                    <Text id="TextPLAccType"  visible="{=!${editModel>/editable}}" class="sapUiTinyMarginBegin"
+                                    <Text id="TextPLAccType"  visible="{=!${editModel>/editable}}"
 										text="{
 											path:'GLDataModel>/gl_ps_acct_type',
 											formatter:'.formatter.PLAccType'
@@ -110,17 +122,21 @@
 											<core:CustomData value="{GLDataModel>/gl_ps_acct_type}"/>
 										</customData>
 									</Text>
-                                    <Select id="InputPLAccType" forceSelection="false" visible="{=${editModel>/editable}}"
-                                		items="{
+                                    <Select 
+									id="InputPLAccType" 
+									visible="{=${editModel>/editable}}"
+									width="100%"
+
+										items="{
 											path: 'SelectOption>/GLPLAcctTypeList',
 											sorter: { path: 'GLPLAcctTypeList' }
 										}">
 										<core:Item key="{SelectOption>PLType}" text="{SelectOption>Value}"/>
                             		</Select>
                                 </VBox>
-                                <VBox id="_IDGenVBox7" class="sapUiSmallMarginBottom">
+                                <VBox class="sapUiSmallMargin">
                                     <Label id="_IDGenLabel10" text="기능 영역"/>
-                                    <Text id="TextFuncArea" visible="{=!${editModel>/editable}}" class="sapUiTinyMarginBegin" 
+                                    <Text id="TextFuncArea" visible="{=!${editModel>/editable}}"  
 										text="{
 											path:'GLDataModel>/gl_func_area',
 											formatter:'.formatter.FuncArea'
@@ -129,36 +145,45 @@
 											<core:CustomData value="{GLDataModel>/gl_func_area}"/>
 										</customData>
 									</Text>
-                                    <Select id="InputFuncArea" forceSelection="false" visible="{=${editModel>/editable}}"
+                                    <Select id="InputFuncArea"
+										visible="{=${editModel>/editable}}"
 										items="{
 											path: 'SelectOption>/FunctionAreaList',
 											sorter: { path: 'FunctionAreaList' }
-										}">
+										}"
+										width="100%"
+										>
 										<core:Item key="{SelectOption>FuncArea}" text="{SelectOption>Value}"/>
 									</Select>  
                                 </VBox>
-                                <layout:layoutData>
-                                    <layout:GridData id="_IDGenGridData1" span="XL3 L3 M6 S12"/>
-                                </layout:layoutData>
-                            </layout:VerticalLayout>
+							<layoutData>
+								<layout:GridData span="XL3 L3 M3 S12"/>
+							</layoutData>
+							</VBox>
 
-                            <layout:VerticalLayout id="_IDGenVerticalLayout2" class="sapUiSmallMarginBeginEnd">
-                                <VBox id="_IDGenVBox8" class="sapUiSmallMarginBottom">
+
+                            <VBox>
+                                <VBox class="sapUiSmallMargin">
                                     <Label id="_IDGenLabel13" text="계정과목표 내역" required="true"/>
-                                    <Text id="TextCoAContent" text="{GLDataModel>/gl_coa_content}" class="sapUiTinyMarginBegin"/>
-
+                                    <Text id="TextCoAContent" text="{GLDataModel>/gl_coa_content}"/>
                                 </VBox>
-                                <VBox id="_IDGenVBox9">
+                                <VBox class="sapUiSmallMargin">
                                     <Label id="_IDGenLabel12" text="G/L 계정 설명" />
-                                    <Text id="TextGLAccDesc" visible="{=!${editModel>/editable}}" text="{GLDataModel>/gl_acct_descript}" class="sapUiTinyMarginBegin"/>
-                                    <Input id="InputGLAccDesc" visible="{=${editModel>/editable}}" value="{GLDataModel>/gl_acct_descript}" class="sapUiTinyMarginBegin"/>  
+                                    <Text id="TextGLAccDesc" visible="{=!${editModel>/editable}}" 
+										text="{
+											path:'GLDataModel>/gl_acct_descript',
+											formatter:'.formatter.IsNull'
+										}"/>
+                                    <Input id="InputGLAccDesc" visible="{=${editModel>/editable}}" value="{GLDataModel>/gl_acct_descript}"/>  
+										
+								</VBox>
+								<layoutData>
+									<layout:GridData span="XL3 L3 M3 S12"/>
+								</layoutData>
 
                                 </VBox>
-                                <layout:layoutData>
-                                    <layout:GridData id="_IDGenGridData2" span="XL3 L3 M6 S12"/>
-                                </layout:layoutData>
-                            </layout:VerticalLayout>
-
+								</layout:Grid>
+							</VBox>
 						</uxap:blocks>
 					</uxap:ObjectPageSubSection>
 				</uxap:subSections>
@@ -175,8 +200,7 @@
                             <t:Table
                                 id="GlAccountTable"
                                 selectionMode="None"
-                                rows="{copyCoCdDataModel>/}" 
-                                width="auto">
+                                rows="{copyCoCdDataModel>/}">
                                 <t:extension> 
                                     <OverflowToolbar id="_IDGenOverflowToolbar1" >
                                         <Title id="TableName" text="회사코드 지정"/>
@@ -211,7 +235,7 @@
                                     </t:Column>
 
                                     <t:Column id="_IDGenColumn3" hAlign="Center">
-                                        <Label id="_IDGenLabel3" text="회사명"/>
+                                        <Label id="_IDGenLabel3" text="회사 이름"/>
                                         <t:template>
                                             <Text id="glCorpName" text="{copyCoCdDataModel>com_code_name}"/>
                                         </t:template>
@@ -233,7 +257,10 @@
                                     <t:Column id="colGlReconAccount" hAlign="Center">
                                         <Label id="_IDGenLabel11"  text="조정계정"/>
                                         <t:template>
-                                            <Text id="glReconAccount" text="{GLDataModel>/gl_recon_account}"/>
+                                            <Text id="glReconAccount" text="{
+												path:'GLDataModel>/gl_recon_account',
+												formatter:'.formatter.IsNull'
+											}"/>
                                         </t:template>
                                     </t:Column>
                                 </t:columns>
