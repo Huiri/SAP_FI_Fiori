@@ -79,6 +79,9 @@
                                 <Label text="번지 " class="sapUiTinyMarginBottom"/>
                                 <Input id="BpStreetAddress" class="sapUiSmallMarginBottom"/>  
 
+                                <Label text="도시 " class="sapUiTinyMarginBottom"/>
+                                <Input id="BpCity" class="sapUiSmallMarginBottom"/>                                  
+
                                 <Label text="우편번호 " class="sapUiTinyMarginBottom"/>
                                 <Input id="BpPostalCode" class="sapUiSmallMarginBottom"/>  
 

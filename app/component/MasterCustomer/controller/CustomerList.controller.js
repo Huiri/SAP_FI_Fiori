@@ -212,7 +212,7 @@ sap.ui.define([
                 type: EdmType.String
             });
             aCols.push({
-                label: '시',
+                label: '도시',
                 property: 'bp_city',
                 type: EdmType.String
             });
@@ -453,12 +453,14 @@ sap.ui.define([
 		onBPSelectOkPress: function(oEvent) {
             var aTokens = oEvent.getParameter("tokens");
 			var BpName = this.byId("BpName");
-
+			var arr=[];
 			aTokens.forEach(function (oToken) {
 				// console.log(oToken.getKey());
 				oToken.mProperties.text = oToken.getKey().toString()
-				BpName.addToken(oToken);
-			}.bind(this));
+				arr.push(oToken);
+            }.bind(this));
+            BpName.setTokens(arr);
+            this.oWhitespaceDialog.close();
 
 			this.oWhitespaceDialog.close();
 
@@ -466,27 +468,27 @@ sap.ui.define([
 		onCountrySelectOkPress: function(oEvent) {
             var aTokens = oEvent.getParameter("tokens");
 			var BpNation = this.byId("BpNation");
-
+			var arr=[];
 			aTokens.forEach(function (oToken) {
 				// console.log(oToken.getKey());
 				oToken.mProperties.text = oToken.getKey().toString()
-				BpNation.addToken(oToken);
-			}.bind(this));
-
-			this.oWhitespaceDialog.close();
+				arr.push(oToken);
+            }.bind(this));
+            BpNation.setTokens(arr);
+            this.oWhitespaceDialog.close();
 
 		},
 		onCoCdSelectOkPress: function(oEvent) {
             var aTokens = oEvent.getParameter("tokens");
 			var BpCompanyCode = this.byId("BpCompanyCode");
-
+			var arr=[];
 			aTokens.forEach(function (oToken) {
 				// console.log(oToken.getKey());
 				oToken.mProperties.text = oToken.getKey().toString()
-				BpCompanyCode.addToken(oToken);
-			}.bind(this));
-
-			this.oWhitespaceDialog.close();
+                arr.push(oToken);
+            }.bind(this));
+            BpCompanyCode.setTokens(arr);
+            this.oWhitespaceDialog.close();
 
 		},
 

@@ -202,11 +202,11 @@
           }
         },
         {
-          "name": "SelectFS",
-          "pattern": "SelectFS",
+          "name": "FSVersionBS",
+          "pattern": "FSVersionBS",
           "target": {
-            "name" : "SelectFS",
-            "prefix": "SelectFS"
+            "name" : "FSVersionBS",
+            "prefix": "FSVersionBS"
           }
         },
         {
@@ -255,12 +255,13 @@
           "viewId": "CreateGLAccount",
           "viewName": "CreateGLAccount"
         },
-        "SelectFS" : {
+        "FSVersionBS" : {
           "viewType": "XML",
           "transition": "slide",
           "clearControlAggregation": true,
-          "viewId": "SelectFS",
-          "viewName": "SelectFS"
+
+          "viewId": "FSVersionBS",
+          "viewName": "FSVersionBS"
         },
         "FSVersionPL" : {
           "viewType": "XML",
@@ -268,6 +269,7 @@
           "clearControlAggregation": true,
           "viewId": "FSVersionPL",
           "viewName": "FSVersionPL"
+
         }
       }
     },

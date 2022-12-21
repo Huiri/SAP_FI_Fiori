@@ -83,7 +83,6 @@ sap.ui.define([
             let BpCoCdModel = new JSONModel(CoCdList.value);
             this.getView().setModel(BpCoCdModel,"BpCoCdModel");
         },
-
         onClearField: function() {
             this.byId("BpName").setValue(""),
             this.byId("BpCategory").setText(""),        
@@ -96,6 +95,7 @@ sap.ui.define([
             this.byId("BpCorpName2").setValue(""),
             this.byId("BpRoadAddress").setValue(""),
             this.byId("BpStreetAddress").setValue(""),
+            this.byId("BpCity").setValue(""),
             this.byId("BpPostalCode").setValue(""),
             this.byId("BpNation").setValue(""),
             this.byId("BpReportSubmission").setSelected(false)
@@ -116,6 +116,7 @@ sap.ui.define([
                 bp_corp_name1 : this.byId("BpCorpName1").getValue(),
                 bp_corp_name2 : this.byId("BpCorpName2").getValue(),
                 bp_road_address : this.byId("BpRoadAddress").getValue(),
+                bp_city : this.byId("BpCity").getValue(),
                 bp_street_address : this.byId("BpStreetAddress").getValue(),
                 bp_postal_code : this.byId("BpPostalCode").getValue(),
                 bp_nation : this.byId("BpNation").getValue(),
@@ -206,6 +207,7 @@ sap.ui.define([
         // 국가 선택용 다이어로그 특정 row 선택 시 생성 페이지 Input에 값 입력
         getCountryContext : function(oEvent){
             let rowIndex = oEvent.getParameters().rowIndex;
+
             this.byId("BpNation").setValue(oEvent.getParameters().rowBindingContext.oModel.oData[rowIndex].bp_nation_code); 
 			this.onCloseCountryDialog();
 
@@ -258,8 +260,7 @@ sap.ui.define([
         // 회사코드 선택용 다이어로그 특정 row 선택 시 생성 페이지 Input에 값 입력
         getCoCdContext : function(oEvent){
             let rowIndex = oEvent.getParameters().rowIndex;
-            console.log(rowIndex);
-            this.byId("BpCompanyCode").setValue(oEvent.getParameters().rowBindingContext.oModel.oData[rowIndex].bp_company_code); 
+            this.byId("BpCompanyCode").setValue(oEvent.getParameters().rowBindingContext.oModel.oData[rowIndex].com_code); 
 			this.onCloseCoCdDialog();
 
         }

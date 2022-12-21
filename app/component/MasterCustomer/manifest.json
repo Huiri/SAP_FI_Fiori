@@ -211,6 +211,14 @@
             "name" : "CustomerChart",
             "prefix": "CustomerChart"
           }
+        },
+        {
+          "name": "CustomerSubmitChartDetail",
+          "pattern": "CustomerSubmitChartDetail/{submitState}",
+          "target": {
+            "name" : "CustomerSubmitChartDetail",
+            "prefix": "CustomerSubmitChartDetail"
+          }
         }
       ],
       "targets": {
@@ -248,6 +256,13 @@
           "clearControlAggregation": true,
           "viewId": "CustomerChart",
           "viewName": "CustomerChart"
+        },
+        "CustomerSubmitChartDetail" : {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": true,
+          "viewId": "CustomerSubmitChartDetail",
+          "viewName": "CustomerSubmitChartDetail"
         }
       }
     },

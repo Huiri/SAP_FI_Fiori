@@ -67,7 +67,7 @@ sap.ui.define([
             this.getView().getModel("CreditStatus").setProperty("/trustpercent", (a / data.oData.length * 100).toFixed(2) + '%');
             this.getView().getModel("CreditStatus").setProperty("/waitpercent", (b / data.oData.length * 100).toFixed(2) + '%');
             this.getView().getModel("CreditStatus").setProperty("/cautionpercent", (c / data.oData.length * 100).toFixed(2) + '%');
-            console.log(this.getView().getModel("CreditStatus"));
+            // console.log(this.getView().getModel("CreditStatus"));
 
         },
         columnChartDataView: async function () {
@@ -91,18 +91,18 @@ sap.ui.define([
                     b++;
                 }
             }
-            console.log(this.getView().getModel("bpReportSubmitModel"));
+            //console.log(this.getView().getModel("bpReportSubmitModel"));
             this.getView().getModel("bpReportSubmitModel").setProperty("/submit", a / data.oData.length * 100);
             this.getView().getModel("bpReportSubmitModel").setProperty("/notsubmit", b / data.oData.length * 100);
             this.getView().getModel("bpReportSubmitModel").setProperty("/submitpercent", (a / data.oData.length * 100).toFixed(2) + '%');
             this.getView().getModel("bpReportSubmitModel").setProperty("/notsubmitpercent", (b / data.oData.length * 100).toFixed(2) + '%');
-            console.log(this.getView().getModel("bpReportSubmitModel"));
+            //console.log(this.getView().getModel("bpReportSubmitModel"));
 
         },
         reportSubmitDataView: async function (oEvent) {
 
             let url = "/bp/BP?$filter=bp_report_submission%20eq%20false&$orderby=bp_changed_date%20desc&$top=3"
-            console.log(url);
+            //console.log(url);
             const SubmitWait = await $.ajax({
                 type: "get",
                 url: url
@@ -111,7 +111,7 @@ sap.ui.define([
             let submitWaitModel = new JSONModel(SubmitWait.value); //RequestWait.value 값을 JSONModel의 odata에 담는다.
             this.getView().setModel(submitWaitModel, "submitWaitModel");
 
-            console.log(submitWaitModel)
+            //console.log(submitWaitModel)
 
         },
 
@@ -125,6 +125,16 @@ sap.ui.define([
             var SelectedNum = this.getView().getModel("submitWaitModel").getProperty(sPath).bp_number
             
             this.getOwnerComponent().getRouter().navTo("CustomerDetail", {num: SelectedNum});
+        },
+
+        onSubmitChartDetail1: function (oEvent) {
+            //var oSubmitState = oEvent.getSource().mProperties.label;    // 제출 완료
+            //console.log(osubmitState);
+            this.getOwnerComponent().getRouter().navTo("CustomerSubmitChartDetail",{submitState: "1"}); 
+        },
+        onSubmitChartDetail2: function (oEvent) {
+            //var oSubmitState = oEvent.getSource().mProperties.label;    // 미제출
+            this.getOwnerComponent().getRouter().navTo("CustomerSubmitChartDetail",{submitState: "2"});
         },
 
     });
