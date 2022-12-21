@@ -15,7 +15,9 @@ sap.ui.define([
 	Controller, JSONModel, MessageBox, Filter, FilterOperator, Sorter, Fragment, SearchField, UIColumn, Text
 ) {
 	"use strict";
-	let CreateNum, Today;
+	let temp = [];
+	let Today;
+
 	return Controller.extend("project2.controller.CreateGLAccount", {
 		onInit: function () {
 
@@ -39,13 +41,9 @@ sap.ui.define([
 		onMyRoutePatternMatched : function(oEvent) {
 			this.onDataView();
 			this.onReset();
-			// CreateNum = parseInt(oEvent.getParameter("arguments").num) + 1;
 
 			let now = new Date();
 			Today = now.getFullYear() + "." +(now.getMonth()+1).toString().padStart(2,'0')+"."+now.getDate().toString().padStart(2, '0');
-
-			// this.getView().byId("GLAcct").setText(CreateNum);
-			// this.getView().byId("CreateDate").setText(Today);
 			
 		},
 		onDataView: async function () {
@@ -60,6 +58,8 @@ sap.ui.define([
                 type : "get",
                 url : cocdUrl
             })
+            //console.log(CoCdData);
+
             let CoCdDataModel = new JSONModel(CoCdData.value);
             this.getView().setModel(CoCdDataModel, "CoCdDataModel");
 
@@ -73,31 +73,15 @@ sap.ui.define([
 			this.onReset();
 			this.getOwnerComponent().getRouter().navTo("GLAccountList");
 		},
-		onErrorMessageBoxPress: function () {
-			let CoA = this.byId("CoA").getValue();
-			let GLAcctType = this.byId("GLAcctType").getSelectedKey();
-			let GLGroup = this.byId("GLGroup").getValue();
-			let GLAcctContent = this.byId("GLAcctContent").getValue();
-			let msg;
-			if(CoA === null || CoA === "") {
-				msg = "계정과목표를 선택해주세요.";
-			} else if(GLAcctType === null || GLAcctType === "") {
-				msg = "계정 유형을 선택해주세요.";
-			} else if(GLGroup === null || GLGroup === "") {
-				msg = "계정 그룹을 선택해주세요.";
-			} else if(GLAcctContent === null || GLAcctContent === "") {
-				msg = "계정 내역을 입력해주세요.";
-			} else{
+		
+		onCreate : async function(){
+			var check = await this.validate("operating");
+			var check2 = await this.validate("content");
+			if(check===true||check2===true){
 				return;
 			}
-			MessageBox.error(msg);
-			return false;
-		},
-		onCreate : async function(){
-			let isError = this.onErrorMessageBoxPress();
-			if(isError === false){
-				return;
-			} else {
+			
+			else {
 				let temp = new JSONModel(this.temp).oData;
 				// temp.gl_acct = this.byId("GLAcct").getText();
 				temp.gl_coa = this.byId("CoA").getValue();
@@ -134,10 +118,61 @@ sap.ui.define([
 				})
 			}
 
-			this.onReset();
-			this.toBack();
+            let isError = this.onErrorMessageBoxPress();
+            if(isError === false){
+                return;
+            } else {
+                temp = new JSONModel(this.temp).oData;
+                temp.gl_acct = this.byId("GLAcct").getText();
+                temp.gl_coa = this.byId("CoA").getValue();
+                temp.gl_acct_type = this.byId("GLAcctType").getSelectedKey();
+                temp.gl_acct_group = this.byId("GLGroup").getValue();
+                temp.gl_ps_acct_type = this.byId("GLPLAcctType").getSelectedKey();
+                temp.gl_func_area = this.byId("FuncArea").getSelectedKey();
+                temp.gl_acct_content = this.byId("GLAcctContent").getValue();
+                temp.gl_acct_descript = this.byId("GLAccDesc").getValue();
+                temp.gl_created = Today;
+
+                await $.ajax({
+                    type:"POST",
+                    url:"/gl/GL",
+                    contentType:"application/json;IEEE754Compatible=true",
+                    data:JSON.stringify(temp)
+                })
+            }
 
 		},
+		validate:function(formid){
+			var check=false;
+			var content = this.byId(formid).getContent()
+            for (var i = 0; i < content.length; i++) {
+                var item = content[i].mAggregations.items
+                for (var j = 0; j < item.length; j++) {
+                    var element_type = item[j].getMetadata().getName().split('.')[2];
+                    if (element_type == 'Input'|| element_type=='DatePicker'||element_type == 'ComboBox') {
+                        item[j].setValueState("None");
+                        item[j].setValueStateText(null);
+                        if (item[j].mProperties.required == true) {
+                            var element_value = item[j].mProperties.value;
+                            if(element_value ==''||element_value==null||element_value==undefined){
+								check=true;
+                                item[j].setValueState("Error");
+                                item[j].setValueStateText("필수 값을 입력해주세요.");
+                            }
+                        }
+                    }
+                }
+            }
+			if(check===true){
+				MessageBox.error("필수항목을 입력해주세요.");
+			}
+			return check;
+		
+            this.onReset();
+            this.toBack();
+
+        },
+
 		onReset : function(){
 			this.byId("CoA").setValue("");
 			this.byId("GLAcctType").setSelectedKey("");
@@ -228,9 +263,31 @@ sap.ui.define([
 
 		},
 
-		getGLGrpContext: function(oEvent) {
+		getGLGrpContext: async function(oEvent) {
 			let rowIndex = oEvent.getParameters().rowIndex;
 			this.byId("GLGroup").setValue(oEvent.getParameters().rowBindingContext.oModel.oData.GLAcctGroupList[rowIndex].GLAcctGrp); 
+			
+			temp.gl_acct = this.byId("GLGroup").setValue(oEvent.getParameters().rowBindingContext.oModel.oData.GLAcctGroupList[rowIndex].GLAcctGrp)._lastValue; 
+
+            // 그룹별 +1 코드 시작 
+            const acctGroup = await $.ajax({
+                type:"GET",
+                url: "/gl/GL?$filter=gl_acct_group eq '" + temp.gl_acct + "'&$orderby=gl_acct desc&$top=1" 
+            }); 
+
+            let acctGrpModel = new JSONModel(acctGroup.value);
+            this.getView().setModel(acctGrpModel,"acctGrpModel");
+            let oModel = this.getView().getModel("acctGrpModel");
+            let oData = oModel.oData;
+            let oGlAcct = parseInt(oData[0].gl_acct);
+            //console.log(oData);
+            //console.log(oGlAcct);
+
+            temp.gl_acct = String(oGlAcct + 1); 
+            console.log(temp.gl_acct);
+
+            this.byId("GLAcct").setText(temp.gl_acct);
+			
 			this.onCloseGLGrpDialog();
 
 		},
@@ -246,7 +303,7 @@ sap.ui.define([
             this._oBasicSearchField = null;
             this.oWhitespaceDialog = null;
             var oModel = this.getView().getModel('CoCdDataModel');
-			console.log(oModel);
+			//console.log(oModel);
 
 			var oCodeTemplate = new Text({text: {path: 'CoCdDataModel>com_code'}, renderWhitespace: true});
             var oCoCdNameTemplate = new Text({text: {path: 'CoCdDataModel>com_code_name'}, renderWhitespace: true});
@@ -319,7 +376,7 @@ sap.ui.define([
                 oValueRequestData = oValueRequestModel.getProperty('/');
             
             var aTokens = oEvent.getParameter("tokens");
-            console.log(aTokens);
+            //console.log(aTokens);
             if(aTokens.length > 5) {
                 return sap.m.MessageBox.warning('5개만 선택하세요!');
             }
@@ -355,7 +412,7 @@ sap.ui.define([
 
 		onCoCdSelectSearch: function() {
 			let CoCdSearchInput = this._oBasicSearchField.getValue();
-            console.log(CoCdSearchInput);
+            //console.log(CoCdSearchInput);
             var aFilter = [];
 
             if(CoCdSearchInput) {

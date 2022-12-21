@@ -12,6 +12,7 @@ sap.ui.define([
 ], function (Controller, Filter, FilterOperator, Sorter, JSONModel, Spreadsheet, exportLibrary,
     SearchField,UIColumn,Text) {
     "use strict";
+	const EdmType = exportLibrary.EdmType;
     let totalNumber;
     let selectedNum;
 
@@ -107,7 +108,13 @@ sap.ui.define([
             this.getOwnerComponent().getRouter().navTo("CreateCoCd");
 
 		},
+		toCompanyCodeDetail: function(e){
+            let sPath = e.getSource().getParent().getBindingContext('CompanyCodeListModel').getPath();
+			let selectedNum = this.getView().getModel('CompanyCodeListModel').getProperty(sPath).com_code;
 
+			let num = e.getParameters();
+            this.getOwnerComponent().getRouter().navTo("CoCdDetail",{num:selectedNum});
+		},
         // 국가 코드 선택용 다이어로그 함수
         onValueHelpCountryList: function(oEvent) {
 			this.pWhitespaceDialog = null;
@@ -425,6 +432,78 @@ sap.ui.define([
 			}
 			this._filterTable(aFilter);
 		},
+		
+        onDataExport: function () {
+            let aCols, oRowBinding, tableIndices, oSettings, oSheet, oTable;
+
+            oTable = this.byId('CompanyCodeListTable');    // 테이블 
+            oRowBinding = oTable.getBinding('rows');    // 테이블 전체 데이터
+            tableIndices = oRowBinding.aIndices;        // 조건에 의해 필터링된 데이터의 테이블 Index
+            console.log(oRowBinding);
+
+            let oList = []; // 데이터 담을 배열 생성
+
+            var selectedIndex = this.byId("CompanyCodeListTable").getSelectedIndices();    // 멀티토글에서 체크한 열의 테이블 데이터
+
+            if (selectedIndex.length == 0) {    // 선택한 열이 없을 때
+                for (let j = 0; j < oRowBinding.oList.length; j++) {    // 전체 데이터 만큼 for문 돌림
+                    if (oRowBinding.aIndices.indexOf(j) > -1) {         // 데이터가 있을 때
+                        oList.push(oRowBinding.oList[j]);               // 전체 데이터를 oList에 Push
+                    }
+                }
+            }
+            else {                              // 선택한 열이 있을 때
+                for (let j = 0; j < selectedIndex.length; j++) {        // 선택한 열의 수만큼 for문 돌림
+                    oList.push(oRowBinding.oList[tableIndices[selectedIndex[j]]]);      // [전체 데이터의 [필터링된 데이터의 [선택한 데이터[j]]]]
+                    // console.log(oRowBinding.oList[tableIndices[selectedIndex[j]]]);
+                }
+            }
+
+            aCols = this.createColumnConfig();
+
+            oSettings = {
+                workbook: {
+                    columns: aCols,
+                    hierarchyLevel: 'Level'
+                },
+                dataSource: oList,
+                fileName: 'CompanyCodeListTable.xlsx',
+                worker: false
+            };
+            oSheet = new Spreadsheet(oSettings);
+            oSheet.build().finally(function () {
+                oSheet.destroy();
+            });
+        },
+        createColumnConfig: function () {
+            const aCols = [];
+            aCols.push({
+                label: '회사 코드',
+                property: 'com_code',
+                type: EdmType.String
+            });
+            aCols.push({
+                label: '회사명',
+                property: 'com_code_name',
+                type: EdmType.String
+            });
+            aCols.push({
+                label: '국가/지역',
+                property: 'com_country',
+                type: EdmType.String
+            });
+            aCols.push({
+                label: '회사 통화',
+                property: 'com_currency',
+                type: EdmType.String
+            });
+            aCols.push({
+                label: '계정과목표',
+                property: 'com_coa',
+                type: EdmType.String
+            });
+            return aCols;
+        },
 
 		toCompanyCodeDetail: function(oEvent) {
 			let selectedNum = oEvent.getParameters().row.mAggregations.cells[0].mProperties.text;

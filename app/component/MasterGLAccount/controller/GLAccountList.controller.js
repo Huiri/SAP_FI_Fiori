@@ -179,8 +179,7 @@ sap.ui.define([
 			this.getOwnerComponent().getRouter().navTo("Home");
 		},
 
-		onSearch: function () {
-			// var selectedItems = oEvent.getParameter("selectedItems");
+		onSearch: function (oEvent) {
 
 			let GlCoa = this.byId("GLCoa").getTokens();
 			let GlAcct = this.byId("GLAcct").getTokens();

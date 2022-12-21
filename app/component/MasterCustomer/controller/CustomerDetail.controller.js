@@ -231,7 +231,7 @@ sap.ui.define([
 		},
 
 		toBack: function() {
-			this.getOwnerComponent().getRouter().navTo("CustomerList");
+			window.history.back();
 		},
 		EditInputCountry : function(){
 			if(!this.pDialog){

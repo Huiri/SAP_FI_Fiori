@@ -89,7 +89,7 @@
             
             <t:columns>
                 <t:Column hAlign="Center">
-                    <Label text="회사 코드"/>
+                    <Label text="회사코드"/>
                     <t:template>
                         <Text text="{CompanyCodeListModel>com_code}"/>
                     </t:template>
@@ -101,7 +101,7 @@
                     </t:template>
                 </t:Column>
                 <t:Column hAlign="Center">
-                    <Label text="회사 국가"/>
+                    <Label text="국가/지역"/>
                     <t:template>
                         <Text text="{CompanyCodeListModel>com_country}"/>
                     </t:template>
@@ -113,7 +113,7 @@
                     </t:template>
                 </t:Column> 
                 <t:Column hAlign="Center">
-                    <Label text="회사 계정과목표"/>
+                    <Label text="계정과목표"/>
                     <t:template>
                         <Text text="{CompanyCodeListModel>com_coa}"/>
                     </t:template>
