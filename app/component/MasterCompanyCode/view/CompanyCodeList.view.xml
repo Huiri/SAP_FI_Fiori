@@ -3,7 +3,6 @@
   xmlns:f="sap.f"
   xmlns:t="sap.ui.table"
   xmlns:mvc="sap.ui.core.mvc"
-  xmlns:core="sap.ui.core" 
   xmlns:form="sap.ui.layout.form"
   xmlns:layout="sap.ui.layout"
   height="100%">
@@ -20,39 +19,39 @@
         </f:DynamicPageTitle>
      </f:title>
     <f:header>
-        <f:DynamicPageHeader pinnable="true">
+        <f:DynamicPageHeader >
             <form:SimpleForm layout="ResponsiveGridLayout">
-                <form:content class="sapUiLargeMarginBeginEnd">
-                    <VBox>
+                <form:content>
+                    <VBox height="3rem">
                         <Label text="회사코드 : "/>
                         <MultiInput id="CompanyCode" valueHelpRequest=".onValueHelpCoCdList" showValueHelp="true"/>
                         <layoutData>
                             <layout:GridData span="XL2 L2 M6 S12"/>
                         </layoutData>
                     </VBox>
-                    <VBox>
+                    <VBox height="3rem">
                         <Label text="회사명 : "/>
                         <Input id="CompanyCodeName"/>
                         <layoutData>
                             <layout:GridData span="XL2 L2 M6 S12"/>
                         </layoutData>
                     </VBox>
-                    <VBox>
-                        <Label text="국가/지역 : "/>
+                    <VBox height="3rem">
+                        <Label text="회사 국가 : "/>
                         <MultiInput id="CompanyCountry" valueHelpRequest=".onValueHelpCountryList" showValueHelp="true"/>
                         <layoutData>
                             <layout:GridData span="XL2 L2 M6 S12"/>
                         </layoutData>
                     </VBox>
-                    <VBox>
+                    <VBox height="3rem">
                         <Label text="회사 통화 : "/>
                         <Input id="CompanyCurrency"/>
                         <layoutData>
                             <layout:GridData span="XL2 L2 M6 S12"/>
                         </layoutData>
                     </VBox>
-                    <VBox>
-                        <Label text="계정과목표 : "/>
+                    <VBox height="3rem">
+                        <Label text="회사 계정과목표 : "/>
                         <MultiInput id="CompanyCoa" valueHelpRequest=".onValueHelpCoA" showValueHelp="true"/>
                         <layoutData>
                             <layout:GridData span="XL2 L2 M6 S12"/>
@@ -69,7 +68,7 @@
             </form:SimpleForm>
         </f:DynamicPageHeader>
         </f:header>
-        <f:content class="sapUiSmallMargin">
+        <f:content >
         <t:Table id="CompanyCodeListTable" rows="{CompanyCodeListModel>/}" rowActionCount="1" visibleRowCount="20">
             <t:rowActionTemplate>
                 <t:RowAction>

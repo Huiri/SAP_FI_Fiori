@@ -33,7 +33,7 @@ sap.ui.define([
 			// this.getOwnerComponent().getRouter().getRoute("GLAccountDetail").attachPatternMatched(this.onMyRoutePatternMatched, this);
 		},
 		onMyRoutePatternMatched: async function () {
-			this.onDataView();
+			await this.onDataView();
 			this.onReset();
 
 		},

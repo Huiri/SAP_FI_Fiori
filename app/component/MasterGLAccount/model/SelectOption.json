@@ -25,6 +25,10 @@
     ],
     "FunctionAreaList" : [
         {
+            "FuncArea" : "",
+            "Value" : "미선택"
+        },
+        {
             "FuncArea" : "M",
             "Value" : "제조"
         },
@@ -42,6 +46,10 @@
         }
     ],
     "GLPLAcctTypeList" : [
+        {
+            "PLType" : "",
+            "Value" : "미선택"
+        },
         {
             "PLType" : "S",
             "Value" : "매출원가"

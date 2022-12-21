@@ -58,7 +58,7 @@
 
                 <layout:VerticalLayout class="sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom">
                     <m:VBox>
-                        <m:Label text="표준 주소" class="propertyColumn"/>
+                        <m:Label text="도로 주소" class="propertyColumn"/>
                         <m:Text id="bpAddress"/>
                     </m:VBox>
                 </layout:VerticalLayout>
@@ -101,7 +101,9 @@
                         <layout:VerticalLayout class="sapUiSmallMarginBeginEnd">
                             <m:VBox class="sapUiSmallMarginTopBottom">
                                 <m:Label text="개인 칭호" class="propertyColumn"/>
-                                <m:Text visible="{=${visibleMode>/visible}}" text="{bpModel>/bp_person_title}"/>
+                                <m:Text 
+                                    visible="{=${visibleMode>/visible}}" 
+                                    text="{bpModel>/bp_person_title}"/>
                                 <m:Select
                                     id="bpPersonTitle"
                                     visible="{=!${visibleMode>/visible}}"
@@ -112,7 +114,9 @@
                             </m:VBox>
                             <m:VBox class="sapUiSmallMarginTopBottom">
                                 <m:Label text="이름" class="propertyColumn" />
-                                <m:Text visible="{=${visibleMode>/visible}}" text="{bpModel>/bp_last_name}"/>
+                                <m:Text 
+                                    visible="{=${visibleMode>/visible}}" 
+                                    text="{bpModel>/bp_last_name}"/>
                                 <m:Input id="bpLastName" value="{bpModel>/bp_last_name}" visible="{=!${visibleMode>/visible}}"/>
                             </m:VBox>
                             <m:VBox class="sapUiSmallMarginTopBottom">
@@ -133,7 +137,12 @@
                             </m:VBox>
                             <m:VBox class="sapUiSmallMarginTopBottom">
                                 <m:Label text="학위" class="propertyColumn"/>
-                                <m:Text text="{bpModel>/bp_degree}"  visible="{=${visibleMode>/visible}}" />
+                                <m:Text 
+                                    text="{
+                                        path:'bpModel>/bp_degree',
+                                        formatter:'.formatter.IsNull'
+                                    }"
+                                    visible="{=${visibleMode>/visible}}" />
                                 <m:Input id="bpDegree" value="{bpModel>/bp_degree}" visible="{=!${visibleMode>/visible}}"/>
                             </m:VBox>
                             <layout:layoutData>
@@ -144,17 +153,27 @@
                         <layout:VerticalLayout class="sapUiSmallMarginBeginEnd">
                             <m:VBox class="sapUiSmallMarginTopBottom">
                                 <m:Label text="검색어1" class="propertyColumn"/>
-                                <m:Text text="{bpModel>/bp_search1}" visible="{=${visibleMode>/visible}}" />
+                                <m:Text 
+                                    text="{
+                                        path:'bpModel>/bp_search1',
+                                        formatter:'.formatter.IsNull'
+                                    }"
+                                    visible="{=${visibleMode>/visible}}" />
                                 <m:Input id="bpSearch1" value="{bpModel>/bp_search1}" visible="{=!${visibleMode>/visible}}"/>
                             </m:VBox>
                             <m:VBox class="sapUiSmallMarginTopBottom">
                                 <m:Label text="검색어2" class="propertyColumn"/>
-                                <m:Text text="{bpModel>/bp_search2}" visible="{=${visibleMode>/visible}}" />
+                                <m:Text 
+                                    text="{
+                                        path:'bpModel>/bp_search2',
+                                        formatter:'.formatter.IsNull'
+                                    }"
+                                    visible="{=${visibleMode>/visible}}" />
                                 <m:Input id="bpSearch2" value="{bpModel>/bp_search2}" visible="{=!${visibleMode>/visible}}"/>
 
                             </m:VBox>
                             <layout:layoutData>
-                                <layout:GridData span="XL3 L3 M6 S6"/>
+                                <layout:GridData span="XL4 L4 M6 S6"/>
                             </layout:layoutData>
                         </layout:VerticalLayout>
 
@@ -169,7 +188,12 @@
                             </m:VBox>
                             <m:VBox class="sapUiSmallMarginTopBottom">
                                 <m:Label text="생년월일" class="propertyColumn" />
-                                <m:Text text="{bpModel>/bp_birthday}" visible="{=${visibleMode>/visible}}" />
+                                <m:Text 
+                                    text="{
+                                        path:'bpModel>/bp_birthday',
+                                        formatter:'.formatter.IsNull'
+                                    }"
+                                    visible="{=${visibleMode>/visible}}" />
                                 <m:DatePicker 
                                     id="bpBirthday"
                                     placeholder="{=${bpModel>/bp_birthday}==='-'?'날짜 입력':${bpModel>/bp_birthday}}" 
@@ -179,11 +203,16 @@
                             </m:VBox>
                             <m:VBox class="sapUiSmallMarginTopBottom">
                                 <m:Label text="출생지" class="propertyColumn"/>
-                                <m:Text text="{bpModel>/bp_birthplace}" visible="{=${visibleMode>/visible}}" />
+                                <m:Text 
+                                    text="{
+                                        path:'bpModel>/bp_birthplace',
+                                        formatter:'.formatter.IsNull'
+                                    }"
+                                    visible="{=${visibleMode>/visible}}" />
                                 <m:Input id="bpBirthplace" value="{bpModel>/bp_birthplace}" visible="{=!${visibleMode>/visible}}"/>
                             </m:VBox>
                             <layout:layoutData>
-                                <layout:GridData span="XL3 L3 M6 S6"/>
+                                <layout:GridData span="XL4 L4 M6 S6"/>
                             </layout:layoutData>
                         </layout:VerticalLayout>
 
@@ -198,14 +227,23 @@
                             </m:VBox>
                             <m:VBox class="sapUiSmallMarginTopBottom">
                                 <m:Label text="최종 변경자" class="propertyColumn"/>
-                                <m:Text id="bpChanger" text="{bpModel>/bp_changer}"/>
+                                <m:Text id="bpChanger" 
+                                    text="{
+                                        path:'bpModel>/bp_changer',
+                                        formatter:'.formatter.IsNull'
+                                    }"/>
                             </m:VBox>
                             <m:VBox class="sapUiSmallMarginTopBottom">
                                 <m:Label text="최종 변경일" class="propertyColumn"/>
-                                <m:Text id="bpChangedDate" text="{bpModel>/bp_changed_date}"/>
+                                <m:Text 
+                                    id="bpChangedDate" 
+                                    text="{
+                                        path:'bpModel>/bp_changed_date',
+                                        formatter:'.formatter.IsNull'
+                                    }"/>
                             </m:VBox>
                             <layout:layoutData>
-                                <layout:GridData span="XL3 L3 M6 S6"/>
+                                <layout:GridData span="XL4 L4 M6 S6"/>
                             </layout:layoutData>
                         </layout:VerticalLayout>
 
@@ -220,38 +258,63 @@
                         <layout:VerticalLayout class="sapUiSmallMarginBeginEnd">
                             <m:VBox class="sapUiSmallMarginTopBottom">
                                 <m:Label text="조직 명칭" class="propertyColumn"/>
-                                <m:Text visible="{=${visibleMode>/visible}}" text="{bpModel>/bp_organization_title}"/>
+                                <m:Text 
+                                    visible="{=${visibleMode>/visible}}" 
+                                    text="{
+                                        path:'bpModel>/bp_organization_title',
+                                        formatter:'.formatter.IsNull'
+                                    }"/>
                                 <m:Input id="bpOrganizationTitle" value="{bpModel>/bp_organization_title}" visible="{=!${visibleMode>/visible}}"/>
                             </m:VBox>
                             <m:VBox class="sapUiSmallMarginTopBottom">
                                 <m:Label text="이름1" class="propertyColumn" />
-                                <m:Text visible="{=${visibleMode>/visible}}" text="{bpModel>/bp_corp_name1}"/>
+                                <m:Text 
+                                    visible="{=${visibleMode>/visible}}" 
+                                    text="{
+                                        path:'bpModel>/bp_corp_name1',
+                                        formatter:'.formatter.IsNull'
+                                    }"/>
                                 <m:Input id="bpName1Org" value="{bpModel>/bp_corp_name1}" visible="{=!${visibleMode>/visible}}"/>
                             </m:VBox>
                             <m:VBox class="sapUiSmallMarginTopBottom">
                                 <m:Label text="이름2" class="propertyColumn"/>
-                                <m:Text visible="{=${visibleMode>/visible}}" text="{bpModel>/bp_corp_name2}"/>
+                                <m:Text 
+                                    visible="{=${visibleMode>/visible}}" 
+                                    text="{
+                                        path:'bpModel>/bp_corp_name2',
+                                        formatter:'.formatter.IsNull'
+                                    }"/>
                                 <m:Input id="bpName2Org" value="{bpModel>/bp_corp_name2}" visible="{=!${visibleMode>/visible}}"/>
                             </m:VBox>
                             <layout:layoutData>
-                                <layout:GridData span="XL3 L3 M6 S12"/>
+                                <layout:GridData span="XL4 L4 M6 S6"/>
                             </layout:layoutData>
                         </layout:VerticalLayout>
 
                         <layout:VerticalLayout class="sapUiSmallMarginBeginEnd">
                             <m:VBox class="sapUiSmallMarginTopBottom">
                                 <m:Label text="검색어1" class="propertyColumn"/>
-                                <m:Text text="{bpModel>/bp_search1}" visible="{=${visibleMode>/visible}}" />
+                                <m:Text 
+                                    text="{
+                                        path:'bpModel>/bp_search1',
+                                        formatter:'.formatter.IsNull'
+                                    }"
+                                    visible="{=${visibleMode>/visible}}" />
                                 <m:Input id="bpSearch1Org" value="{bpModel>/bp_search1}" visible="{=!${visibleMode>/visible}}"/>
                             </m:VBox>
                             <m:VBox class="sapUiSmallMarginTopBottom">
                                 <m:Label text="검색어2" class="propertyColumn"/>
-                                <m:Text text="{bpModel>/bp_search2}" visible="{=${visibleMode>/visible}}" />
+                                <m:Text 
+                                    text="{
+                                        path:'bpModel>/bp_search2',
+                                        formatter:'.formatter.IsNull'
+                                    }"
+                                    visible="{=${visibleMode>/visible}}" />
                                 <m:Input id="bpSearch2Org" value="{bpModel>/bp_search2}" visible="{=!${visibleMode>/visible}}"/>
 
                             </m:VBox>
                             <layout:layoutData>
-                                <layout:GridData span="XL3 L3 M6 S6"/>
+                                <layout:GridData span="XL4 L4 M6 S6"/>
                             </layout:layoutData>
                         </layout:VerticalLayout>
 
@@ -269,7 +332,12 @@
                             </m:VBox>
                             <m:VBox class="sapUiSmallMarginTopBottom">
                                 <m:Label text="설립일" class="propertyColumn" />
-                                <m:Text text="{bpModel>/bp_corp_est_date}" visible="{=${visibleMode>/visible}}" />
+                                <m:Text 
+                                    text="{
+                                        path:'bpModel>/bp_corp_est_date',
+                                        formatter:'.formatter.IsNull'
+                                    }"
+                                    visible="{=${visibleMode>/visible}}" />
                                 <m:DatePicker 
                                     id="bpCorpEstDateOrg"
                                     placeholder="{=${bpModel>/bp_corp_est_date}==='-'?'날짜 입력':${bpModel>/bp_corp_est_date}}" 
@@ -279,7 +347,12 @@
                             </m:VBox>
                             <m:VBox class="sapUiSmallMarginTopBottom">
                                 <m:Label text="청산일" class="propertyColumn" />
-                                <m:Text text="{bpModel>/bp_cal_date}" visible="{=${visibleMode>/visible}}" />
+                                <m:Text 
+                                    text="{
+                                        path:'bpModel>/bp_cal_date',
+                                        formatter:'.formatter.IsNull'
+                                    }"
+                                    visible="{=${visibleMode>/visible}}" />
                                 <m:DatePicker 
                                     id="bpCalDateOrg"
                                     placeholder="{=${bpModel>/bp_cal_date}==='-'?'날짜 입력':${bpModel>/bp_cal_date}}" 
@@ -289,11 +362,16 @@
                             </m:VBox>
                              <m:VBox class="sapUiSmallMarginTopBottom">
                                 <m:Label text="외부 BP 번호" class="propertyColumn"/>
-                                <m:Text text="{bpModel>/bp_external_number}" visible="{=${visibleMode>/visible}}" />
+                                <m:Text 
+                                    text="{
+                                        path:'bpModel>/bp_external_number',
+                                        formatter:'.formatter.IsNull'
+                                    }"
+                                    visible="{=${visibleMode>/visible}}" />
                                 <m:Input id="bpExternalNumberOrg" value="{bpModel>/bp_external_number}" visible="{=!${visibleMode>/visible}}"/>
                             </m:VBox>
                             <layout:layoutData>
-                                <layout:GridData span="XL3 L3 M6 S6"/>
+                                <layout:GridData span="XL4 L4 M6 S6"/>
                             </layout:layoutData>
                         </layout:VerticalLayout>
 
@@ -311,7 +389,7 @@
                                 <m:Text id="bpChangedDateOrg" text="{bpModel>/bp_changed_date}"/>
                             </m:VBox>
                             <layout:layoutData>
-                                <layout:GridData span="XL3 L3 M6 S6"/>
+                                <layout:GridData span="XL4 L4 M6 S6"/>
                             </layout:layoutData>
                         </layout:VerticalLayout>
 
@@ -325,7 +403,7 @@
                     <blocks>
                         <layout:VerticalLayout class="sapUiSmallMarginBeginEnd">
                             <m:VBox class="sapUiSmallMarginTopBottom">
-                                <m:Label text="고객" class="propertyColumn"/>
+                                <m:Label text="BP" class="propertyColumn"/>
                                 <m:Text text="{bpModel>/bp_number}" />
                             </m:VBox>
                             <m:VBox class="sapUiSmallMarginTopBottom">
@@ -339,14 +417,19 @@
                                 
                             </m:VBox>
                             <layout:layoutData>
-                                <layout:GridData span="XL3 L3 M6 S12"/>
+                                <layout:GridData span="XL4 L4 M6 S6"/>
                             </layout:layoutData>
                         </layout:VerticalLayout>
 
                         <layout:VerticalLayout class="sapUiSmallMarginBeginEnd">
                             <m:VBox class="sapUiSmallMarginTopBottom">
-                                <m:Label text="공급업체" class="propertyColumn"/>
-                                <m:Text text="{bpModel>/bp_vendor}" visible="{=${visibleMode>/visible}}" />
+                                <m:Label text="공급 업체" class="propertyColumn"/>
+                                <m:Text 
+                                    text="{
+                                        path:'bpModel>/bp_vendor',
+                                        formatter:'.formatter.IsNull'
+                                    }"
+                                    visible="{=${visibleMode>/visible}}" />
                                 <m:Input id="bpVendor" value="{bpModel>/bp_vendor}" visible="{=!${visibleMode>/visible}}"/>
 
                             </m:VBox>
@@ -357,7 +440,7 @@
 
                             </m:VBox>
                             <layout:layoutData>
-                                <layout:GridData span="XL3 L3 M6 S12"/>
+                                <layout:GridData span="XL4 L4 M6 S6"/>
                             </layout:layoutData>
                         </layout:VerticalLayout>
 
@@ -408,14 +491,19 @@
                                 </m:Select>
                             </m:VBox>
                             <layout:layoutData>
-                                <layout:GridData span="XL3 L3 M6 S6"/>
+                                <layout:GridData span="XL4 L4 M6 S6"/>
                             </layout:layoutData>
                         </layout:VerticalLayout>
 
                         <layout:VerticalLayout class="sapUiSmallMarginBeginEnd">
                             <m:VBox class="sapUiSmallMarginTopBottom">
                                 <m:Label text="고객 분류" class="propertyColumn"/>
-                                <m:Text text="{bpModel>/bp_customer_classification}" visible="{=${visibleMode>/visible}}" />
+                                <m:Text 
+                                    text="{
+                                        path:'bpModel>/bp_customer_classification',
+                                        formatter:'.formatter.IsNull'
+                                    }"
+                                    visible="{=${visibleMode>/visible}}" />
                                 <m:Input id="bpCustomerClassification" value="{bpModel>/bp_customer_classification}" visible="{=!${visibleMode>/visible}}"/>
                             </m:VBox>
                             <m:VBox class="sapUiSmallMarginTopBottom">
@@ -426,7 +514,7 @@
                                       '-'}"/>
                             </m:VBox>
                             <layout:layoutData>
-                                <layout:GridData span="XL3 L3 M6 S6"/>
+                                <layout:GridData span="XL4 L4 M6 S6"/>
                             </layout:layoutData>
                         </layout:VerticalLayout>
                     </blocks>
@@ -443,12 +531,22 @@
                     <layout:VerticalLayout class="sapUiSmallMarginBeginEnd">
                         <m:VBox class="sapUiSmallMarginTopBottom">
                             <m:Label text="도로 주소" class="propertyColumn"/>
-                            <m:Text text="{bpModel>/bp_road_address}" visible="{=${visibleMode>/visible}}" />
+                            <m:Text 
+                                text="{
+                                        path:'bpModel>/bp_road_address',
+                                        formatter:'.formatter.IsNull'
+                                    }"
+                                visible="{=${visibleMode>/visible}}" />
                             <m:Input id="bpRoadAddress" value="{bpModel>/bp_road_address}" visible="{=!${visibleMode>/visible}}"/>
                         </m:VBox>
                         <m:VBox class="sapUiSmallMarginTopBottom">
                             <m:Label text="우편 번호" class="propertyColumn" />
-                            <m:Text text="{bpModel>/bp_postal_code}" visible="{=${visibleMode>/visible}}"/>
+                            <m:Text 
+                                text="{
+                                        path:'bpModel>/bp_postal_code',
+                                        formatter:'.formatter.IsNull'
+                                    }"
+                                visible="{=${visibleMode>/visible}}"/>
                             <m:Input id="bpPostalCode" value="{bpModel>/bp_postal_code}" visible="{=!${visibleMode>/visible}}"/>
                         </m:VBox>
                             <layout:layoutData>
@@ -457,14 +555,24 @@
                     </layout:VerticalLayout>
                     <layout:VerticalLayout class="sapUiSmallMarginBeginEnd">
                             <m:VBox class="sapUiSmallMarginTopBottom">
-                                <m:Label text="국가 지역" class="propertyColumn"/>
-                                <m:Text text="{bpModel>/bp_nation}" visible="{=${visibleMode>/visible}}" />
+                                <m:Label text="국가/지역" class="propertyColumn"/>
+                                <m:Text 
+                                    text="{
+                                            path:'bpModel>/bp_nation',
+											formatter:'.formatter.IsNull'
+                                        }" 
+                                    visible="{=${visibleMode>/visible}}" />
                                 <m:Input id="bpNation" value="{bpModel>/bp_nation}" valueHelpRequest=".EditInputCountry" visible="{=!${visibleMode>/visible}}" showValueHelp="true"/>
                             </m:VBox>
                            
                             <m:VBox class="sapUiSmallMarginTopBottom">
                                 <m:Label text="번지" class="propertyColumn" />
-                                <m:Text text="{bpModel>/bp_street_address}" visible="{=${visibleMode>/visible}}" />
+                                <m:Text 
+                                    text="{
+                                                path:'bpModel>/bp_street_address',
+                                                formatter:'.formatter.IsNull'
+                                            }"
+                                    visible="{=${visibleMode>/visible}}" />
                                 <m:Input id="bpStreetAddress" value="{bpModel>/bp_street_address}" visible="{=!${visibleMode>/visible}}"/>
                             </m:VBox>
                             <layout:layoutData>
@@ -474,7 +582,12 @@
                     <layout:VerticalLayout class="sapUiSmallMarginBeginEnd">
                             <m:VBox class="sapUiSmallMarginTopBottom">
                                 <m:Label text="도시" class="propertyColumn" />
-                                <m:Text text="{bpModel>/bp_city}" visible="{=${visibleMode>/visible}}" />
+                                <m:Text 
+                                    text="{
+                                        path:'bpModel>/bp_city',
+                                        formatter:'.formatter.IsNull'
+                                    }"
+                                    visible="{=${visibleMode>/visible}}" />
                                 <m:Input id="bpCity" value ="{bpModel>/bp_city}" visible="{=!${visibleMode>/visible}}"/>
                             </m:VBox>
                             <m:VBox class="sapUiSmallMarginTopBottom">

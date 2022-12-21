@@ -1,19 +1,20 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
 	"sap/ui/model/json/JSONModel",
+	"project3/model/formatter"
 	
 ], function(
 	Controller,
 	JSONModel,
-	
+	formatter
 ) {
 	"use strict";
 	let selectedNum;
-	
+	//변경필요
 	
 
 	return Controller.extend("project4.controller.CoCdDetail", {
-		
+		formatter:formatter,
 	//-----------초기화----------//
 		onInit: async function(){
 			
@@ -28,8 +29,8 @@ sap.ui.define([
 
 		// 	this.getView().byId('myTEST2').getDomRef().childNodes[0].childNodes[0].class = "sapUxAPObjectPageSectionTitle";
 		//},
-		initView: async function(e){	
-			selectedNum = e.getParameter("arguments").num;		
+		initView: async function(e){
+			selectedNum = e.getParameter("arguments").num;			
 			let url="/cocd/CoCd/"+selectedNum;			
 			const COCDDATA= await $.ajax({
 				type:'get',
@@ -38,7 +39,7 @@ sap.ui.define([
 			var cocdModel = new JSONModel(COCDDATA);
 			console.log(cocdModel)
 			this.getView().setModel(cocdModel, "cocdModel")
-			console.log(this.getView().getModel("cocdModel"));
+			console.log(this.getView().getModel("cocdModel"))
 		},
 
 

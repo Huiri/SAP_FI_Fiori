@@ -101,7 +101,7 @@ sap.ui.define([
             this.onSearch();
         },
         toBack : function(){
-            this.getOwnerComponent().getRouter().navTo("CompanyCode");
+            this.getOwnerComponent().getRouter().navTo("Home");
         },
 
 		toCreateCoCd: function() {
@@ -504,6 +504,11 @@ sap.ui.define([
             });
             return aCols;
         },
+
+		toCompanyCodeDetail: function(oEvent) {
+			let selectedNum = oEvent.getParameters().row.mAggregations.cells[0].mProperties.text;
+			this.getOwnerComponent().getRouter().navTo("CoCdDetail", {num : selectedNum});
+		},
 
     });
 });
