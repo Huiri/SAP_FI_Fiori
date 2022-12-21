@@ -50,6 +50,7 @@ sap.ui.define([
         onMyRoutePatternMatched: async function () {
 
             this.onDataView();
+			this.onClearField();
         },
         onDataView: async function () {
             const customerList = await $.ajax({
@@ -291,12 +292,12 @@ sap.ui.define([
 			this.pWhitespaceDialog.then(function (oWhitespaceDialog) {
 				var oFilterBar = oWhitespaceDialog.getFilterBar();
 				this.oWhitespaceDialog = oWhitespaceDialog;
-				if (this._bWhitespaceDialogInitialized) {
-					oWhitespaceDialog.setTokens([]);
-					oWhitespaceDialog.update();
+				// if (this._bWhitespaceDialogInitialized) {
+				// 	oWhitespaceDialog.setTokens([]);
+				// 	oWhitespaceDialog.update();
 
-					oWhitespaceDialog.open();
-				}
+				// 	oWhitespaceDialog.open();
+				// }
 				this.getView().addDependent(oWhitespaceDialog);
 
 				// if(!this.oWhitespaceDialog._getTokenizer().getTokenes().length){
@@ -332,6 +333,9 @@ sap.ui.define([
 
 					oWhitespaceDialog.update();
 				}.bind(this));
+				var multiinput_tokens =this.byId("BpName").getTokens()
+				oWhitespaceDialog.setTokens(multiinput_tokens);
+				oWhitespaceDialog.update();
 
 				this._bWhitespaceDialogInitialized = true;
 				oWhitespaceDialog.open();
@@ -360,12 +364,12 @@ sap.ui.define([
 			this.pWhitespaceDialog.then(function (oWhitespaceDialog) {
 				var oFilterBar = oWhitespaceDialog.getFilterBar();
 				this.oWhitespaceDialog = oWhitespaceDialog;
-				if (this._bWhitespaceDialogInitialized) {
-					oWhitespaceDialog.setTokens([]);
-					oWhitespaceDialog.update();
+				// if (this._bWhitespaceDialogInitialized) {
+				// 	oWhitespaceDialog.setTokens([]);
+				// 	oWhitespaceDialog.update();
 
-					oWhitespaceDialog.open();
-				}
+				// 	oWhitespaceDialog.open();
+				// }
 				this.getView().addDependent(oWhitespaceDialog);
 
 				// if(!this.oWhitespaceDialog._getTokenizer().getTokenes().length){
@@ -400,6 +404,9 @@ sap.ui.define([
 
 					oWhitespaceDialog.update();
 				}.bind(this));
+				var multiinput_tokens =this.byId("BpCompanyCode").getTokens()
+				oWhitespaceDialog.setTokens(multiinput_tokens);
+				oWhitespaceDialog.update();
 
 				this._bWhitespaceDialogInitialized = true;
 				oWhitespaceDialog.open();
@@ -428,12 +435,12 @@ sap.ui.define([
 			this.pWhitespaceDialog.then(function (oWhitespaceDialog) {
 				var oFilterBar = oWhitespaceDialog.getFilterBar();
 				this.oWhitespaceDialog = oWhitespaceDialog;
-				if (this._bWhitespaceDialogInitialized) {
-					oWhitespaceDialog.setTokens([]);
-					oWhitespaceDialog.update();
+				// if (this._bWhitespaceDialogInitialized) {
+				// 	oWhitespaceDialog.setTokens([]);
+				// 	oWhitespaceDialog.update();
 
-					oWhitespaceDialog.open();
-				}
+				// 	oWhitespaceDialog.open();
+				// }
 				this.getView().addDependent(oWhitespaceDialog);
 
 				// if(!this.oWhitespaceDialog._getTokenizer().getTokenes().length){
@@ -468,6 +475,9 @@ sap.ui.define([
 
 					oWhitespaceDialog.update();
 				}.bind(this));
+				var multiinput_tokens =this.byId("BpNation").getTokens()
+				oWhitespaceDialog.setTokens(multiinput_tokens);
+				oWhitespaceDialog.update();
 
 				this._bWhitespaceDialogInitialized = true;
 				oWhitespaceDialog.open();
@@ -500,7 +510,6 @@ sap.ui.define([
             BpName.setTokens(arr);
             this.oWhitespaceDialog.close();
 
-			this.oWhitespaceDialog.close();
 
 		},
 		onCountrySelectOkPress: function(oEvent) {

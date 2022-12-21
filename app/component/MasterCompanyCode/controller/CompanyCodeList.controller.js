@@ -12,12 +12,14 @@ sap.ui.define([
 	"project3/model/formatter"
 ], function (Controller, Filter, FilterOperator, Sorter, JSONModel, Spreadsheet, exportLibrary,
     SearchField,UIColumn,Text,formatter) {
+
     "use strict";
 	const EdmType = exportLibrary.EdmType;
     let totalNumber;
     let selectedNum;
 
     return Controller.extend("project4.controller.CompanyCodeList",{
+
 		formatter : formatter,
 
         onInit: async function(){
@@ -26,8 +28,9 @@ sap.ui.define([
         },
 
         onMyRoutePatternMatched: async function(){
-
             this.onDataView();
+			this.onReset();
+
         },
         onDataView: async function(){
             const CompanyCodeList = await $.ajax({
@@ -140,12 +143,12 @@ sap.ui.define([
 			this.pWhitespaceDialog.then(function (oWhitespaceDialog) {
 				var oFilterBar = oWhitespaceDialog.getFilterBar();
 				this.oWhitespaceDialog = oWhitespaceDialog;
-				if (this._bWhitespaceDialogInitialized) {
-					oWhitespaceDialog.setTokens([]);
-					oWhitespaceDialog.update();
+				// if (this._bWhitespaceDialogInitialized) {
+				// 	oWhitespaceDialog.setTokens([]);
+				// 	oWhitespaceDialog.update();
 
-					oWhitespaceDialog.open();
-				}
+				// 	oWhitespaceDialog.open();
+				// }
 				this.getView().addDependent(oWhitespaceDialog);
 
 				// if(!this.oWhitespaceDialog._getTokenizer().getTokenes().length){
@@ -180,6 +183,10 @@ sap.ui.define([
 
 					oWhitespaceDialog.update();
 				}.bind(this));
+
+				var multiinput_tokens =this.byId("CompanyCountry").getTokens()
+				oWhitespaceDialog.setTokens(multiinput_tokens);
+				oWhitespaceDialog.update();
 
 				this._bWhitespaceDialogInitialized = true;
 				oWhitespaceDialog.open();
@@ -255,12 +262,12 @@ sap.ui.define([
 			this.pWhitespaceDialog.then(function (oWhitespaceDialog) {
 				var oFilterBar = oWhitespaceDialog.getFilterBar();
 				this.oWhitespaceDialog = oWhitespaceDialog;
-				if (this._bWhitespaceDialogInitialized) {
-					oWhitespaceDialog.setTokens([]);
-					oWhitespaceDialog.update();
+				// if (this._bWhitespaceDialogInitialized) {
+				// 	oWhitespaceDialog.setTokens([]);
+				// 	oWhitespaceDialog.update();
 
-					oWhitespaceDialog.open();
-				}
+				// 	oWhitespaceDialog.open();
+				// }
 				this.getView().addDependent(oWhitespaceDialog);
 
 				// if(!this.oWhitespaceDialog._getTokenizer().getTokenes().length){
@@ -295,6 +302,10 @@ sap.ui.define([
 
 					oWhitespaceDialog.update();
 				}.bind(this));
+
+				var multiinput_tokens =this.byId("CompanyCode").getTokens()
+				oWhitespaceDialog.setTokens(multiinput_tokens);
+				oWhitespaceDialog.update();
 
 				this._bWhitespaceDialogInitialized = true;
 				oWhitespaceDialog.open();
@@ -355,12 +366,12 @@ sap.ui.define([
 			this.pWhitespaceDialog.then(function (oWhitespaceDialog) {
 				var oFilterBar = oWhitespaceDialog.getFilterBar();
 				this.oWhitespaceDialog = oWhitespaceDialog;
-				if (this._bWhitespaceDialogInitialized) {
-					oWhitespaceDialog.setTokens([]);
-					oWhitespaceDialog.update();
+				// if (this._bWhitespaceDialogInitialized) {
+				// 	oWhitespaceDialog.setTokens([]);
+				// 	oWhitespaceDialog.update();
 
-					oWhitespaceDialog.open();
-				}
+				// 	oWhitespaceDialog.open();
+				// }
 				this.getView().addDependent(oWhitespaceDialog);
 
 				// if(!this.oWhitespaceDialog._getTokenizer().getTokenes().length){
@@ -396,6 +407,10 @@ sap.ui.define([
 					oWhitespaceDialog.update();
 				}.bind(this));
 
+				var multiinput_tokens =this.byId("CompanyCoa").getTokens()
+				oWhitespaceDialog.setTokens(multiinput_tokens);
+				oWhitespaceDialog.update();
+
 				this._bWhitespaceDialogInitialized = true;
 				oWhitespaceDialog.open();
 			}.bind(this));
@@ -405,7 +420,7 @@ sap.ui.define([
 		onCoASelectOkPress: function (oEvent) {
 			var aTokens = oEvent.getParameter("tokens");
 			var CompanyCoa = this.byId("CompanyCoa");
-
+			var arr=[];
 			aTokens.forEach(function (oToken) {
 				// console.log(oToken.getKey());
 				oToken.mProperties.text = oToken.getKey().toString()

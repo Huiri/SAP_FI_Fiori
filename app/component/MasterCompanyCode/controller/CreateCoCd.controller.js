@@ -55,6 +55,13 @@ sap.ui.define([
 
     },
     onCreate: async function () {
+    var check = await this.validateForVbox("generalData");
+    var check2 = await this.validateForVbox("generateData");
+    var check3 = await this.validateForVbox("fiData");
+    if(check===true || check2===true || check3 === true){
+      return;
+    } else {
+
       var temp = {
         com_code: this.byId("CoCdCod").getValue(),
         com_code_name: this.byId("CoCdName").getValue(),
@@ -70,19 +77,7 @@ sap.ui.define([
         com_cocd_constructor: this.byId("CoCdConstructor").getValue(),
         com_cocd_date: this.byId("CoCdDate").getValue()
       }
-      if (temp.com_code === "" ||
-        temp.com_code_name === "" ||
-        temp.com_country === "" ||
-        temp.com_language === "" ||
-        temp.com_coa === "" ||
-        temp.com_co_area === "" ||
-        temp.com_fiscal_year === "" ||
-        temp.com_currency === "" ||
-        temp.com_cocd_constructor === "" ||
-        temp.com_cocd_date === "" 
-      ) {
-        MessageBox.error("필수 항목을 입력해주세요")
-      } else {
+      
 
         await $.ajax({
           type: "POST",
@@ -167,6 +162,10 @@ sap.ui.define([
 
     onBack: function () {
       this.getOwnerComponent().getRouter().navTo("CompanyCodeList");
+      this.validateForVboxClear("generalData");
+			this.validateForVboxClear("generateData");
+			this.validateForVboxClear("fiData");
+
     },
 
 		onSelectFiscalYear: function(oEvent) {
@@ -311,6 +310,44 @@ sap.ui.define([
 			this.byId("CoCdCoArea").setValue(oEvent.getParameters().rowBindingContext.oModel.oData[rowIndex].com_co_area); 
 			this.onCloseCoCdCoAreaDialog();
 		},
+    validateForVbox:function(sParam){
+			var check=false;
+			var item =this.byId(sParam).mAggregations.items;
+			for(var i=0;i<item.length;i++){
+				console.log(item[i].mAggregations);
+				var vboxitem = item[i].mAggregations.items;
+				for(var j=0;j<vboxitem.length;j++){
+					var element_type = vboxitem[j].getMetadata().getName().split('.')[2];
+					if (element_type == 'Input'|| element_type=='DatePicker'||element_type == 'ComboBox') {
+                        vboxitem[j].setValueState("None");
+                        vboxitem[j].setValueStateText(null);
+                        if (vboxitem[j].mProperties.required == true) {
+                            var element_value = vboxitem[j].mProperties.value;
+                            if(element_value ==''||element_value==null||element_value==undefined){
+								check=true;
+                                vboxitem[j].setValueState("Error");
+                                vboxitem[j].setValueStateText("필수 값을 입력해주세요.");
+                            }
+                        }
+                    }
+				}
+			}
+		},
+		validateForVboxClear:function(sParam){
+			var item =this.byId(sParam).mAggregations.items;
+			for(var i=0;i<item.length;i++){
+				console.log(item[i].mAggregations);
+				var vboxitem = item[i].mAggregations.items;
+				for(var j=0;j<vboxitem.length;j++){
+					var element_type = vboxitem[j].getMetadata().getName().split('.')[2];
+					if (element_type == 'Input'|| element_type=='DatePicker'||element_type == 'ComboBox') {
+                        vboxitem[j].setValueState("None");
+                        vboxitem[j].setValueStateText(null);
+                    }
+				}
+			}
+		},
+
 
   });
 });

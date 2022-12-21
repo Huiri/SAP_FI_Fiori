@@ -5,7 +5,6 @@ controllerName="project3.controller.CreateCustomer"
 	xmlns:layout="sap.ui.layout"
 	xmlns="sap.m"
 	xmlns:core="sap.ui.core"
-    xmlns:t="sap.ui.table"
 	height="100%">
 	<uxap:ObjectPageLayout id="ObjectPageLayout"
 		showTitleInHeaderContent="true"
@@ -35,7 +34,7 @@ controllerName="project3.controller.CreateCustomer"
                     </HBox>
 				</uxap:snappedHeading>
 				<uxap:actions>
-					<Button text="저장" type="Emphasized" press=".onCreate" tooltip="저장"  ariaHasPopup="Dialog"/>               
+					<Button text="생성" type="Emphasized" press=".onCreate" tooltip="생성"  ariaHasPopup="Dialog"/>               
                 </uxap:actions>
 			</uxap:ObjectPageDynamicHeaderTitle>
 		</uxap:headerTitle>
@@ -55,89 +54,122 @@ controllerName="project3.controller.CreateCustomer"
 				<uxap:subSections >
 					<uxap:ObjectPageSubSection id="defaultSubSection"  title="기본정보" >
 						<uxap:blocks>
-                            <layout:VerticalLayout id="_IDGenVerticalLayout1" class="sapUiSmallMarginBeginEnd" >
-								<Title text="일반 데이터"/>
+                        <VBox>
+                            <layout:Grid containerQuery="true" >
+                            <VBox>
+								<Title class="sapUiSmallMarginBegin sapUiSmallMarginEnd"
+                                text="일반 데이터"/>
+                            <VBox id="generalData">
+                                <VBox class="sapUiSmallMargin">
+                                    <Label text="생성일 : " />
+                                    <Text id="BpCreatedDate"/>
+                                </VBox >
 
-                                <VBox class="sapUiMediumMarginBottom">
-                                    <Label text="생성일 " class="sapUiTinyMarginBottom" />
-                                    <Text id="BpCreatedDate" class="sapUiSmallMarginBottom"/>
-
-                                    <Label text="BP명 " class="sapUiTinyMarginBottom" required="true"/>
-                                    <Input id="BpName" class="sapUiSmallMarginBottom"/>
-                            
-                                    <Label text="BP번호  " class="sapUiTinyMarginBottom"/>
-                                    <Text id="BpNumber" class="sapUiSmallMarginBottom"/>
-
-                                    <Label text="BP범주 " class="sapUiTinyMarginBottom"/>
-                                    <Text id="BpCategory" class="sapUiSmallMarginBottom" text=""/>
-
-                                    <Label text="회사 코드 " class="sapUiTinyMarginBottom"/>
-                                    <Input id="BpCompanyCode" class="sapUiSmallMarginBottom" showValueHelp="true" valueHelpRequest=".onSelectCoCd"/>
+                                <VBox class="sapUiSmallMargin">
+                                    <Label text="BP명 : " labelFor="BpName"/>
+                                    <Input id="BpName"  required="true" />
                                 </VBox>
-                                <layout:layoutData>
+
+                                <VBox class="sapUiSmallMargin">
+                                    <Label text="BP번호 : " />
+                                    <Text id="BpNumber" />
+                                </VBox>
+
+                                <VBox class="sapUiSmallMargin">
+                                    <Label text="BP범주 : " />
+                                    <Text id="BpCategory" />
+                                </VBox>
+
+                                <VBox class="sapUiSmallMargin">
+                                    <Label text="회사 코드 : " />
+                                    <Input id="BpCompanyCode"
+                                    showValueHelp="true"
+                                    valueHelpOnly="true"
+                                    valueHelpRequest=".onSelectCoCd"/>
+                                </VBox>
+                                <layoutData>
                                     <layout:GridData span="XL4 L3 M6 S12"/>
-                                </layout:layoutData>
+                                </layoutData>
 
-                            </layout:VerticalLayout>
-                            <layout:VerticalLayout id="_IDGenVerticalLayout3" class="sapUiSmallMarginBeginEnd">   
-                                <Title text="개인 칭호 " visible="{=!${bpCategoryModel>/category}}"/>
+                            </VBox>
+                            </VBox>
+                            <VBox>
 
-                                <VBox class="sapUiMediumMarginBottom">
-                                    <Label text="조직 명칭 " visible="{=${bpCategoryModel>/category}}" class="sapUiTinyMarginBottom" required="true"/>
-                                    <Select id="BpPersonTitle" class="sapUiSmallMarginBottom" visible="{=!${bpCategoryModel>/category}}">
+                                <Title text="개인 칭호 " 
+                                 class="sapUiSmallMarginBegin sapUiSmallMarginEnd"
+                                visible="{=!${bpCategoryModel>/category}}"/>
+
+                                <VBox id="personalData">
+                                <VBox class="sapUiSmallMargin">
+                                    <Label text="조직 명칭 " visible="{=${bpCategoryModel>/category}}" labelFor="BpPersonTitle"/>
+                                    <Select id="BpPersonTitle" visible="{=!${bpCategoryModel>/category}}" 
+                                    required="true">
                                         <core:Item key="" text="선택" />
                                         <core:Item key="Mr" text="Mr" />
                                         <core:Item key="Mrs" text="Mrs" />
                                     </Select>
-                                    <Input id="BpOrganizationTitle" class="sapUiSmallMarginBottom" visible="{=${bpCategoryModel>/category}}"/>
-
-                                    <Label text="성 " visible="{=!${bpCategoryModel>/category}}" class="sapUiTinyMarginBottom" required="true"/>
-                                    <Label text="회사명1 " visible="{=${bpCategoryModel>/category}}" class="sapUiTinyMarginBottom" />
-                                    <Input id="BpFirstName" class="sapUiSmallMarginBottom" visible="{=!${bpCategoryModel>/category}}"/>   
-                                    <Input id="BpCorpName1" class="sapUiSmallMarginBottom" visible="{=${bpCategoryModel>/category}}"/>  
-
-                                    <Label text="이름 " visible="{=!${bpCategoryModel>/category}}" class="sapUiTinyMarginBottom" required="true"/>
-                                    <Label text="회사명2 " visible="{=${bpCategoryModel>/category}}" class="sapUiTinyMarginBottom"/>
-                                    <Input id="BpLastName" class="sapUiSmallMarginBottom" visible="{=!${bpCategoryModel>/category}}"/>  
-                                    <Input id="BpCorpName2" class="sapUiSmallMarginBottom" visible="{=${bpCategoryModel>/category}}"/>  
+                                    <Input id="BpOrganizationTitle" visible="{=${bpCategoryModel>/category}}"/>
                                 </VBox>
-                                <layout:layoutData>
+                                <VBox class="sapUiSmallMargin">
+
+                                    <Label text="성 " visible="{=!${bpCategoryModel>/category}}"  labelFor="BpFirstName"/>
+                                    <Label text="회사명1 " visible="{=${bpCategoryModel>/category}}"  />
+                                    <Input id="BpFirstName"  visible="{=!${bpCategoryModel>/category}}" required="true"/>   
+                                    <Input id="BpCorpName1" visible="{=${bpCategoryModel>/category}}"/>  
+                                </VBox>
+                                <VBox class="sapUiSmallMargin">
+                                    <Label text="이름 " visible="{=!${bpCategoryModel>/category}}" labelFor="BpLastName"/>
+                                    <Label text="회사명2 " visible="{=${bpCategoryModel>/category}}" />
+                                    <Input id="BpLastName" visible="{=!${bpCategoryModel>/category}}" required="true"/>  
+                                    <Input id="BpCorpName2" visible="{=${bpCategoryModel>/category}}"/>  
+                                </VBox>
+                                </VBox>
+                                <layoutData>
                                     <layout:GridData span="XL4 L3 M6 S12"/>
-                                </layout:layoutData>
-                            </layout:VerticalLayout>
+                                </layoutData>
+                            </VBox>
 
-                            <layout:VerticalLayout id="_IDGenVerticalLayout2" class="sapUiSmallMarginBeginEnd">
-								<Title text="표준 주소"/>
-							
-                                <VBox class="sapUiMediumMarginBottom">
-                                    <Label text="도로주소 " class="sapUiTinyMarginBottom"/>
-                                    <Input id="BpRoadAddress" class="sapUiSmallMarginBottom"/>  
-                                    
-                                    <Label text="번지 " class="sapUiTinyMarginBottom"/>
-                                    <Input id="BpStreetAddress" class="sapUiSmallMarginBottom"/>  
+                            <VBox>
+								<Title text="표준 주소"
+                                
+                                 class="sapUiSmallMarginBegin sapUiSmallMarginEnd"/>
+                                <VBox id="addressData">
+                                <VBox class="sapUiSmallMargin">
+                                    <Label text="도로주소 " />
+                                    <Input id="BpRoadAddress"/>  
+                                </VBox>
+                                <VBox class="sapUiSmallMargin">
+                                    <Label text="번지 "/>
+                                    <Input id="BpStreetAddress"/>  
+                                </VBox>
+                                <VBox class="sapUiSmallMargin">
+                                    <Label text="도시 "/>
+                                    <Input id="BpCity"/>                                  
+                                </VBox>
+                                <VBox class="sapUiSmallMargin">
+                                    <Label text="우편번호 "/>
+                                    <Input id="BpPostalCode"/>  
 
-                                    <Label text="도시 " class="sapUiTinyMarginBottom"/>
-                                    <Input id="BpCity" class="sapUiSmallMarginBottom"/>                                  
-
-                                    <Label text="우편번호 " class="sapUiTinyMarginBottom"/>
-                                    <Input id="BpPostalCode" class="sapUiSmallMarginBottom"/>  
-
-                                    <Label text="국가/지역 " class="sapUiTinyMarginBottom"/>
-                                    <Input id="BpNation" class="sapUiLargeMarginBottom" showValueHelp="true" valueHelpRequest=".onSelectCountry"/>
-                                    <Label text="서류 제출 여부 " class="sapUiTinyMarginBottom"/>
+                                </VBox>
+                                <VBox class="sapUiSmallMargin">
+                                    <Label text="국가/지역 "/>
+                                    <Input id="BpNation" 
+                                    showValueHelp="true" 
+                                    valueHelpRequest=".onSelectCountry"
+                                    valueHelpOnly="true"/>
+                                </VBox>
+                                <VBox class="sapUiSmallMargin">
+                                    <Label text="서류 제출 여부 " />
                                     <CheckBox id="BpReportSubmission" />
                                 </VBox>
-                                <layout:layoutData>
+                              
+                                </VBox>                               
+                                <layoutData>
                                     <layout:GridData span="XL4 L3 M6 S12"/>
-                                </layout:layoutData>
-
-                            </layout:VerticalLayout>
-                            <layout:VerticalLayout class="sapUiSmallMarginBeginEnd">
-                                <layout:layoutData>
-                                    <layout:GridData span="XL4 L3 M6 S12"/>
-                                </layout:layoutData>
-                            </layout:VerticalLayout>
-
+                                </layoutData>
+                                </VBox>
+                                </layout:Grid>
+                            </VBox>
 						</uxap:blocks>
 					</uxap:ObjectPageSubSection>
 				</uxap:subSections>
