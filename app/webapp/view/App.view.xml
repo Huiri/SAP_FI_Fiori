@@ -17,7 +17,7 @@
                      class="sapUiSmallMarginBegin"
                      src="view/img/logo.svg"
                      press="toHome"/>
-                <MenuButton id="_IDGenMenuButton1" enabled="true" text="메뉴" buttonMode="Split" width="auto">
+                <MenuButton id="menu" text="메뉴" buttonMode="Split" width="auto">
                     <menu>
                         <Menu id="_IDGenMenu1">
                             <MenuItem press="toGLAccount" id="_IDGenMenuItem1" text="총계정원장 마스터"/>

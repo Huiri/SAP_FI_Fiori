@@ -14,12 +14,29 @@ sap.ui.define([
 		},
      
         onCustomer: function(){
+			let oComponent = this.getOwnerComponent(),
+                oRootControl = oComponent.getRootControl(),
+                oControlMenu = oRootControl.byId('menu');
+
+            oControlMenu.setText('BP');
             this.getOwnerComponent().getRouter().navTo("Customer")
         },
 		onGLAccount: function(){
+			let oComponent = this.getOwnerComponent(),
+			oRootControl = oComponent.getRootControl(),
+			oControlMenu = oRootControl.byId('menu');
+
+			oControlMenu.setText('총계정원장');
+
             this.getOwnerComponent().getRouter().navTo("GLAccount")
         },
 		onCompanyCode: function(){
+			let oComponent = this.getOwnerComponent(),
+			oRootControl = oComponent.getRootControl(),
+			oControlMenu = oRootControl.byId('menu');
+
+			oControlMenu.setText('회사코드');
+
             this.getOwnerComponent().getRouter().navTo("CompanyCode")
         },
 		
