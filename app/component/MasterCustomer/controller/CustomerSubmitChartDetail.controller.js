@@ -15,7 +15,9 @@ sap.ui.define([
     let totalNumber;
     let selectedNum;
     let selectedSubmitState;
+    let state;
     const EdmType = exportLibrary.EdmType;
+    const SOURCE_CHART_STICK = "stick";
     return Controller.extend("project3.controller.CustomerSubmitChartDetail", {
         formatter : formatter,
 
@@ -35,11 +37,13 @@ sap.ui.define([
                 selectedSubmitState = true;
                 //console.log(selectedSubmitState);
                 this.byId("submitStateId").setText("제출 완료");
+                state = 1;
                 
             }else if(selectedSubmitState === "2"){
                 selectedSubmitState = false;
                 //console.log(selectedSubmitState);
                 this.byId("submitStateId").setText("미제출");
+                state =2;
             }
 
             const customerList = await $.ajax({
@@ -74,7 +78,11 @@ sap.ui.define([
                 oData = oModel.getProperty(sPath).bp_number;
             selectedNum = oData;
             // console.log(selectedNum);
-            this.getOwnerComponent().getRouter().navTo("CustomerDetail", { num: selectedNum });
+            let selectedtype = "3";
+            selectedtype =  selectedSubmitState;
+
+            console.log(selectedSubmitState)
+            this.getOwnerComponent().getRouter().navTo("CustomerDetail", { num: selectedNum, "?query": {source : SOURCE_CHART_STICK, stickType:state} });
         },
 
 
