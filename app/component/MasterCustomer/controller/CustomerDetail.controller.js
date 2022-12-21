@@ -4,12 +4,16 @@ sap.ui.define([
 	"sap/ui/core/URI",
 	"sap/ui/model/BindingMode",
 	"../model/formatter",
+	"sap/ui/model/Filter",
+    "sap/ui/model/FilterOperator",
 ], function(
 	Controller,
 	JSONModel,
 	URI,
 	BindingMode,
-	formatter
+	formatter,
+	Filter,
+	FilterOperator
 ) {
 	"use strict";
 	let selectedNum;
@@ -108,8 +112,8 @@ sap.ui.define([
 			let url="/bp/BP/"+selectedNum;
 			let now = new Date();
 			
-			console.log($.parseJSON(v.byId("bpBillingHold").getSelectedKey()));
 			console.log(v.byId("bpBillingHold"));
+			console.log($.parseJSON(v.byId("bpBillingHold").getSelectedKey()));
 			now =`${now.getFullYear()}-${now.getMonth()+1}-${String(now.getDate()).padStart(2,0)}`;
 			let temp = {
 				//개인
