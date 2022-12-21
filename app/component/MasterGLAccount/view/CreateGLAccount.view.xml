@@ -4,6 +4,7 @@
 	xmlns:uxap="sap.uxap"
 	xmlns:layout="sap.ui.layout"
 	xmlns="sap.m"
+	xmlns:f="sap.ui.layout.form"
 	xmlns:core="sap.ui.core"
 
     xmlns:t="sap.ui.table"
@@ -67,7 +68,7 @@
 						<uxap:blocks>
                             <layout:VerticalLayout id="_IDGenVerticalLayout1" class="sapUiSmallMarginBeginEnd" >
 								<Title text="관리"/>
-
+								<f:SimpleForm id="operating">
                                 <VBox id="_IDGenVBox3" class="sapUiSmallMarginBottom">
                                     <Label id="_IDGenLabel6" text="계정과목표" labelFor="CoA"/>
 									<Input 
@@ -135,13 +136,16 @@
                             		</Select>
 
                                 </VBox>
+								</f:SimpleForm >
                                 <layout:layoutData>
-                                    <layout:GridData id="_IDGenGridData1" span="XL3 L3 M6 S12"/>
+                                    <layout:GridData id="_IDGenGridData1" span="XL6 L6 M6 S12"/>
                                 </layout:layoutData>
                             </layout:VerticalLayout>
 
                             <layout:VerticalLayout id="_IDGenVerticalLayout2" class="sapUiSmallMarginBeginEnd">
 								<Title text="내역(유지보수 언어)"/>
+								<f:SimpleForm id="content">
+
                                 <VBox id="_IDGenVBox8" class="sapUiSmallMarginBottom">
                                     <Label id="_IDGenLabel13" text="내역" required="true"/>
                                     <Input 
@@ -158,9 +162,10 @@
 										value="{copyCoCdDataModel>/GLAccDesc}"/>  
 
                                 </VBox>
+								</f:SimpleForm>
 
                                 <layout:layoutData>
-                                    <layout:GridData id="_IDGenGridData2" span="XL3 L3 M6 S12"/>
+                                    <layout:GridData id="_IDGenGridData2" span="XL6 L6 M6 S12"/>
                                 </layout:layoutData>
                             </layout:VerticalLayout>
 

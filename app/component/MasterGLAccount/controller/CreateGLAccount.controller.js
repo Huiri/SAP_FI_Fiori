@@ -73,27 +73,50 @@ sap.ui.define([
 			this.onReset();
 			this.getOwnerComponent().getRouter().navTo("GLAccountList");
 		},
-		onErrorMessageBoxPress: function () {
-			let CoA = this.byId("CoA").getValue();
-			let GLAcctType = this.byId("GLAcctType").getSelectedKey();
-			let GLGroup = this.byId("GLGroup").getValue();
-			let GLAcctContent = this.byId("GLAcctContent").getValue();
-			let msg;
-			if(CoA === null || CoA === "") {
-				msg = "계정과목표를 선택해주세요.";
-			} else if(GLAcctType === null || GLAcctType === "") {
-				msg = "계정 유형을 선택해주세요.";
-			} else if(GLGroup === null || GLGroup === "") {
-				msg = "계정 그룹을 선택해주세요.";
-			} else if(GLAcctContent === null || GLAcctContent === "") {
-				msg = "계정 내역을 입력해주세요.";
-			} else{
+		
+		onCreate : async function(){
+			var check = await this.validate("operating");
+			var check2 = await this.validate("content");
+			if(check===true||check2===true){
 				return;
 			}
-			MessageBox.error(msg);
-			return false;
-		},
-		onCreate : async function(){
+			
+			else {
+				let temp = new JSONModel(this.temp).oData;
+				// temp.gl_acct = this.byId("GLAcct").getText();
+				temp.gl_coa = this.byId("CoA").getValue();
+				temp.gl_acct_type = this.byId("GLAcctType").getSelectedKey();
+				temp.gl_acct_group = this.byId("GLGroup").getValue();
+				temp.gl_ps_acct_type = this.byId("GLPLAcctType").getSelectedKey();
+				temp.gl_func_area = this.byId("FuncArea").getSelectedKey();
+				temp.gl_acct_content = this.byId("GLAcctContent").getValue();
+				temp.gl_acct_descript = this.byId("GLAccDesc").getValue();
+				temp.gl_created = Today;
+				
+				// 그룹별 +1 코드 시작 
+				const acctGroup = await $.ajax({
+					type:"GET",
+					url: "/gl/GL?$filter=gl_acct_group eq '" + temp.gl_acct_group + "'&$orderby=gl_acct desc&$top=1" 
+				}); 
+
+				let acctGrpModel = new JSONModel(acctGroup.value);
+				this.getView().setModel(acctGrpModel,"acctGrpModel");
+				let oModel = this.getView().getModel("acctGrpModel");
+				let oData = oModel.oData;
+				let oGlAcct = parseInt(oData[0].gl_acct);
+				// console.log(oData);
+				// console.log(oGlAcct);
+
+				temp.gl_acct = String(oGlAcct + 1); 
+				// console.log(temp.gl_acct);
+				
+				await $.ajax({
+					type:"POST",
+					url:"/gl/GL",
+					contentType:"application/json;IEEE754Compatible=true",
+					data:JSON.stringify(temp)
+				})
+			}
 
             let isError = this.onErrorMessageBoxPress();
             if(isError === false){
@@ -118,10 +141,38 @@ sap.ui.define([
                 })
             }
 
+		},
+		validate:function(formid){
+			var check=false;
+			var content = this.byId(formid).getContent()
+            for (var i = 0; i < content.length; i++) {
+                var item = content[i].mAggregations.items
+                for (var j = 0; j < item.length; j++) {
+                    var element_type = item[j].getMetadata().getName().split('.')[2];
+                    if (element_type == 'Input'|| element_type=='DatePicker'||element_type == 'ComboBox') {
+                        item[j].setValueState("None");
+                        item[j].setValueStateText(null);
+                        if (item[j].mProperties.required == true) {
+                            var element_value = item[j].mProperties.value;
+                            if(element_value ==''||element_value==null||element_value==undefined){
+								check=true;
+                                item[j].setValueState("Error");
+                                item[j].setValueStateText("필수 값을 입력해주세요.");
+                            }
+                        }
+                    }
+                }
+            }
+			if(check===true){
+				MessageBox.error("필수항목을 입력해주세요.");
+			}
+			return check;
+		},
             this.onReset();
             this.toBack();
 
         },
+
 		onReset : function(){
 			this.byId("CoA").setValue("");
 			this.byId("GLAcctType").setSelectedKey("");
