@@ -17,7 +17,8 @@
                      class="sapUiSmallMarginBegin"
                      src="view/img/logo.svg"
                      press="toHome"/>
-                <MenuButton id="menu" enabled="true" text="메뉴" buttonMode="Split" width="auto">
+                <MenuButton id="menu" text="메뉴" buttonMode="Split" width="auto">
+
                     <menu>
                         <Menu id="_IDGenMenu1">
 							<MenuItem press="toCustomer" id="_IDGenMenuItem3" text="고객 마스터"/>

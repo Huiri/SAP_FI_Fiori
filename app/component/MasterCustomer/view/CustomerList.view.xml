@@ -29,6 +29,7 @@
                                 id="BpName" 
                                 showSuggestion="true" 
                                 valueHelpRequest=".onValueHelpBpList"
+                                valueHelpOnly="true"
                             />
                             <layoutData>
                                 <layout:GridData span="XL2 L2 M6 S12"/>
@@ -38,6 +39,7 @@
                             <Label text="회사 코드 : "/>
                             <MultiInput 
                                 id="BpCompanyCode" 
+                                valueHelpOnly="true"
                                 valueHelpRequest=".onValueHelpCoCdList" 
                                 showValueHelp="true"/>
                             <layoutData>
@@ -69,7 +71,11 @@
                         </VBox>
                         <VBox height="3rem">
                             <Label text="국가/지역 : "/>
-                            <MultiInput id="BpNation" valueHelpRequest=".onValueHelpCountryList" showValueHelp="true"/>
+                            <MultiInput id="BpNation" 
+                            valueHelpOnly="true"
+
+                            valueHelpRequest=".onValueHelpCountryList" 
+                            showValueHelp="true"/>
                             <layoutData>
                                 <layout:GridData span="XL2 L2 M6 S12"/>
                             </layoutData>

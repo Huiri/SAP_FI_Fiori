@@ -1,5 +1,6 @@
 <mvc:View 
-controllerName="project3.controller.CreateCustomer"
+controllerName="project4.controller.CreateCoCd"
+
     xmlns:mvc="sap.ui.core.mvc"
 	xmlns:uxap="sap.uxap"
 	xmlns:layout="sap.ui.layout"
@@ -34,6 +35,7 @@ controllerName="project3.controller.CreateCustomer"
                         </HBox>
 
                     </HBox>
+
                 </uxap:snappedHeading>
 				<uxap:actions>
 					<Button text="생성" type="Emphasized" press=".onCreate" tooltip="저장"  ariaHasPopup="Dialog"/>               
@@ -57,37 +59,58 @@ controllerName="project3.controller.CreateCustomer"
 						<uxap:blocks>
                             <layout:Grid>
                                     <VBox>
-                                        <Title id="_IDGenLabel1" text="일반 정보 " />
+                                        <Title id="_IDGenLabel1" text="일반 정보 " 
+                                         class="sapUiSmallMarginBegin sapUiSmallMarginEnd"/>
 
-                                        <VBox class="sapUiMediumMarginBottom">
 
-                                            <Label id="_IDGenLabel2" text="회사코드 : " class="sapUiTinyMarginBottom" labelFor="CoCdCod" />
-                                            <Input id="CoCdCod" class="sapUiSmallMarginBottom" required="true"/>
+                                        <VBox id="generalData">
+                                            <VBox class="sapUiSmallMargin">
+                                            <Label id="_IDGenLabel2" text="회사코드 : " labelFor="CoCdCod" />
+                                            <Input id="CoCdCod"  required="true"/>
+                                            </VBox>
 
-                                            <Label id="_IDGenLabel3" text="회사명 : " class="sapUiTinyMarginBottom" required="true" labelFor="CoCdName" />
-                                            <Input id="CoCdName" class="sapUiSmallMarginBottom" required="true"/>
+                                            <VBox class="sapUiSmallMargin">
+                                            <Label id="_IDGenLabel3" text="회사명 : "  labelFor="CoCdName" />
+                                            <Input id="CoCdName"  required="true"/>
+                                            </VBox>
 
-                                            <Label id="_IDGenLabel10" text="도시 : " class="sapUiTinyMarginBottom" required="true" />
-                                            <Input id="CoCdCity" class="sapUiSmallMarginBottom" />
-                                            
-                                            <Label id="_IDGenLabel8" text="회사 주소 : " class="sapUiTinyMarginBottom" />
-                                            <Input id="CoCdAddress" class="sapUiSmallMarginBottom" />
-                                        
-                                            <Label id="_IDGenLabel12" text="국가/지역 : " class="sapUiTinyMarginBottom" required="true" />
-                                            <Input id="CoCdCountry" class="sapUiSmallMarginBottom" valueHelpRequest=".onSelectCountry" showValueHelp="true"/>
+                                            <VBox class="sapUiSmallMargin">
+                                            <Label id="_IDGenLabel10" text="도시 : " labelFor="CoCdCity"  />
+                                            <Input id="CoCdCity"  required="true" />
+                                            </VBox>
 
-                                            <Label id="_IDGenLabel5" text="회사 통화 : " class="sapUiTinyMarginBottom" labelFor="CoCdCurrency" />
-                                            <Select width="100rem" id="CoCdCurrency" class="sapUiSmallMarginBottom" required="true">
-                                                <core:Item id="_IDGenItem2" key="" text="선택" />
+                                            <VBox class="sapUiSmallMargin">
+                                            <Label id="_IDGenLabel8" text="회사 주소 : " />
+                                            <Input id="CoCdAddress"/>
+                                            </VBox>
+
+                                            <VBox class="sapUiSmallMargin">
+                                            <Label id="_IDGenLabel12" text="국가/지역 : "  labelFor="CoCdCountry"/>
+                                            <Input id="CoCdCountry" 
+                                            required="true"
+                                            valueHelpRequest=".onSelectCountry"
+                                            valueHelpOnly="true"
+                                            showValueHelp="true"/>
+                                            </VBox>
+
+                                            <VBox class="sapUiSmallMargin">
+                                            <Label id="_IDGenLabel5" text="회사 통화 : " labelFor="CoCdCurrency" />
+                                            <Select width="100%" id="CoCdCurrency"  required="true" forceSelection="true">
+                                                <core:Item key="" text="" />
+
                                                 <core:Item id="_IDGenItem3" key="KRW" text="KRW" />
                                                 <core:Item id="_IDGenItem4" key="USD" text="USD" />
                                             </Select>
-                                            <Label id="_IDGenLabel6" text="회사 언어 : " class="sapUiTinyMarginBottom" labelFor="CoCdLanguage" />
-                                            <Select width="100rem" id="CoCdLanguage" class="sapUiSmallMarginBottom" required="true">
-                                                <core:Item id="_IDGenItem5" key="" text="선택" />
+                                            </VBox>
+
+                                            <VBox class="sapUiSmallMargin">
+                                            <Label id="_IDGenLabel6" text="회사 언어 : "  labelFor="CoCdLanguage" />
+                                            <Select  width="100%" id="CoCdLanguage"  required="true">
+                                                <core:Item key="" text="" />
                                                 <core:Item id="_IDGenItem6" key="KR" text="한국어" />
                                                 <core:Item id="_IDGenItem7" key="EN" text="영어" />
                                             </Select>
+                                            </VBox>
 
                                         </VBox>
                                         <layoutData>
@@ -96,22 +119,29 @@ controllerName="project3.controller.CreateCustomer"
                                     </VBox>
                                     
                                     <VBox>
-                                        <Title text="개인 칭호 " visible="{=!${bpCategoryModel>/category}}"/>
+                                        <Title text="생성 정보" 
+                                        visible="{=!${bpCategoryModel>/category}}"
+                                         class="sapUiSmallMarginBegin sapUiSmallMarginEnd"/>
+										<VBox id="generateData">
 
-                                        <VBox id="_IDGenVBox3">
-                                            <Label id="_IDGenLabel17" text="생성자 : " class="sapUiTinyMarginBottom" required="true"  />
-                                            <Input id="CoCdConstructor" class="sapUiSmallMarginBottom" />
+                                        <VBox class="sapUiSmallMargin">
+                                            <Label id="_IDGenLabel17" text="생성자 : " labelFor="CoCdConstructor"  />
+                                            <Input id="CoCdConstructor" required="true" />
             
-                                            <Label id="_IDGenLabel18" text="생성일 : " class="sapUiTinyMarginBottom" required="true"  />
+                                        </VBox>
+                                        <VBox class="sapUiSmallMargin">
+                                            <Label id="_IDGenLabel18" text="생성일 : "  labelFor="CoCdDate" />
                                             <DatePicker
+                                                required="true"
+
                                                 id="CoCdDate"
                                                 displayFormat="yyyy-MM-dd"
                                                 valueFormat="yy.MM.dd"
                                             >                                  
                                             </DatePicker>
-                                            <layoutData>
-                                                <layout:GridData id="_IDGenGridData3" span="XL3 L2 M3 S12" />
-                                            </layoutData>
+
+                                        </VBox>
+
                                         </VBox>
                                         <layoutData>
                                             <layout:GridData  span="XL4 L4 M4 S12" />
@@ -121,25 +151,47 @@ controllerName="project3.controller.CreateCustomer"
                                     
                                     <VBox>
 
-                                        <Title text="표준 주소"/>
+                                        <Title text="회계 데이터"
+                                         class="sapUiSmallMarginBegin sapUiSmallMarginEnd"/>
                                     
-                                        <VBox class="sapUiMediumMarginBottom">
-                                            <Label text="도로주소 : " class="sapUiTinyMarginBottom"/>
-                                            <Input id="BpRoadAddress" class="sapUiSmallMarginBottom"/>  
-                                            
-                                            <Label text="번지 : " class="sapUiTinyMarginBottom"/>
-                                            <Input id="BpStreetAddress" class="sapUiSmallMarginBottom"/>  
+                                        <VBox id="fiData">                                                                   
+                                            <VBox class="sapUiSmallMargin">
+                                                <Label id="_IDGenLabel14" text="회계연도 오브젝트 : "  labelFor="CoCdFiscalYear"/>
+                                                <Input id="CoCdFiscalYear" 
+                                                 required="true" 
+                                                valueHelpOnly="true" 
+                                                showValueHelp="true" 
+                                                valueHelpRequest=".onSelectFiscalYear"/>
+  
+                                            </VBox>
 
-                                            <Label text="도시 : " class="sapUiTinyMarginBottom"/>
-                                            <Input id="BpCity" class="sapUiSmallMarginBottom"/>                                  
+                                            <VBox class="sapUiSmallMargin">
+                                            <Label id="_IDGenLabel15" text="계정과목표 : " labelFor="CoCdCoa" />
+                                            <Input id="CoCdCoa" 
+                                            valueHelpOnly="true" 
+                                            valueHelpRequest=".onSelectCoA" 
+                                            showValueHelp="true" 
+                                            required="true"/>
+                                            </VBox>
 
-                                            <Label text="우편번호 : " class="sapUiTinyMarginBottom"/>
-                                            <Input id="BpPostalCode" class="sapUiSmallMarginBottom"/>  
+                                            <VBox class="sapUiSmallMargin">
+                                            <Label id="_IDGenLabel16" text="세금 코드 : "  />
+                                            <Select id="CoCdTaxCode" width="100rem"  >
+                                                <core:Item id="_IDGenItem1" key="" text="선택" />
+                                                <core:Item id="_IDGenItem8" key="K01" text="K01" />
+                                                <core:Item id="_IDGenItem9" key="K02" text="K02" />
+                                                <core:Item id="_IDGenItem10" key="K03" text="K03" />
+                                            </Select>
+                                            </VBox>
 
-                                            <Label text="국가/지역 : " class="sapUiTinyMarginBottom"/>
-                                            <Input id="BpNation" class="sapUiLargeMarginBottom" showValueHelp="true" valueHelpRequest=".onSelectCountry"/>
-                                            <Label text="서류 제출 여부 : " class="sapUiTinyMarginBottom"/>
-                                            <CheckBox id="BpReportSubmission" />
+                                            <VBox class="sapUiSmallMargin">
+                                            <Label id="_IDGenLabel4" text="관리회계영역 : " labelFor="CoCdCoArea" />
+                                            <Input id="CoCdCoArea" 
+                                            valueHelpOnly="true"
+                                            valueHelpRequest=".onSelectCoArea" 
+                                            showValueHelp="true" 
+                                            required="true"/>
+                                            </VBox>
                                         </VBox>
                                         <layoutData>
                                             <layout:GridData  span="XL4 L4 M4 S12" />

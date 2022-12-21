@@ -37,8 +37,8 @@
                         <m:VBox>
                             <m:Label text="재무제표 유형 : " required="true"/>
                             <m:Select width="90%" id="fsVersionType" class="sapUiTinyMarginTop">
-                                <core:Item key="손익계산서" text="손익계산서" />
-                                <core:Item key="재무상태표" text="재무상태표" />
+                                <core:Item id="pl"  key="손익계산서" text="손익계산서" />
+                                <core:Item id="bs" key="재무상태표" text="재무상태표" />
                             </m:Select>
                             <m:layoutData>
                                 <layout:GridData span="XL2 L2 M6 S12"/>

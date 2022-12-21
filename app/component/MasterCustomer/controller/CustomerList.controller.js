@@ -50,6 +50,7 @@ sap.ui.define([
         onMyRoutePatternMatched: async function () {
 
             this.onDataView();
+			this.onClearField();
         },
         onDataView: async function () {
             const customerList = await $.ajax({
@@ -67,7 +68,7 @@ sap.ui.define([
 
             let BpNationModel = new JSONModel(nationList.value);
             this.getView().setModel(BpNationModel, "BpNationModel");
-
+			
             
             // console.log(this.getView().getModel("BpCustomerModel"));
             totalNumber = this.getView().getModel("BpCustomerModel").getData().length;
@@ -170,6 +171,43 @@ sap.ui.define([
 
             aCols = this.createColumnConfig();
 
+			for(let i = 0; i < oList.length; i++){
+				if(oList[i].bp_nation === 'KR'){
+					oList[i].bp_nation2 = "한국";
+				}
+				if(oList[i].bp_nation === 'CN'){
+					oList[i].bp_nation2 = "중국";
+				}
+				if(oList[i].bp_nation === 'DE'){
+					oList[i].bp_nation2 = "독일";
+				}
+				if(oList[i].bp_nation === 'DK'){
+					oList[i].bp_nation2 = "덴마크";
+				}
+				if(oList[i].bp_nation === 'HK'){
+					oList[i].bp_nation2 = "홍콩 특별 행정구";
+				}
+				if(oList[i].bp_nation === 'JP'){
+					oList[i].bp_nation2 = "일본";
+				}
+				if(oList[i].bp_nation === 'NL'){
+					oList[i].bp_nation2 = "네덜란드";
+				}
+				if(oList[i].bp_nation === 'SG'){
+					oList[i].bp_nation2 = "싱가포르";
+				}
+				if(oList[i].bp_nation === 'TW'){
+					oList[i].bp_nation2 = "대만";
+				}
+				if(oList[i].bp_nation === 'US'){
+					oList[i].bp_nation2 = "미국";
+				}
+				if(oList[i].bp_nation === 'BG'){
+					oList[i].bp_nation2 = "벨기에";
+				}
+
+			}
+
             oSettings = {
                 workbook: {
                     columns: aCols,
@@ -208,8 +246,9 @@ sap.ui.define([
             });
             aCols.push({
                 label: '국가/지역',
-                property: 'bp_nation',
-                type: EdmType.String
+                property: 'bp_nation2',
+                type: EdmType.String,
+				
             });
             aCols.push({
                 label: '도시',
@@ -253,12 +292,12 @@ sap.ui.define([
 			this.pWhitespaceDialog.then(function (oWhitespaceDialog) {
 				var oFilterBar = oWhitespaceDialog.getFilterBar();
 				this.oWhitespaceDialog = oWhitespaceDialog;
-				if (this._bWhitespaceDialogInitialized) {
-					oWhitespaceDialog.setTokens([]);
-					oWhitespaceDialog.update();
+				// if (this._bWhitespaceDialogInitialized) {
+				// 	oWhitespaceDialog.setTokens([]);
+				// 	oWhitespaceDialog.update();
 
-					oWhitespaceDialog.open();
-				}
+				// 	oWhitespaceDialog.open();
+				// }
 				this.getView().addDependent(oWhitespaceDialog);
 
 				// if(!this.oWhitespaceDialog._getTokenizer().getTokenes().length){
@@ -294,6 +333,9 @@ sap.ui.define([
 
 					oWhitespaceDialog.update();
 				}.bind(this));
+				var multiinput_tokens =this.byId("BpName").getTokens()
+				oWhitespaceDialog.setTokens(multiinput_tokens);
+				oWhitespaceDialog.update();
 
 				this._bWhitespaceDialogInitialized = true;
 				oWhitespaceDialog.open();
@@ -322,12 +364,12 @@ sap.ui.define([
 			this.pWhitespaceDialog.then(function (oWhitespaceDialog) {
 				var oFilterBar = oWhitespaceDialog.getFilterBar();
 				this.oWhitespaceDialog = oWhitespaceDialog;
-				if (this._bWhitespaceDialogInitialized) {
-					oWhitespaceDialog.setTokens([]);
-					oWhitespaceDialog.update();
+				// if (this._bWhitespaceDialogInitialized) {
+				// 	oWhitespaceDialog.setTokens([]);
+				// 	oWhitespaceDialog.update();
 
-					oWhitespaceDialog.open();
-				}
+				// 	oWhitespaceDialog.open();
+				// }
 				this.getView().addDependent(oWhitespaceDialog);
 
 				// if(!this.oWhitespaceDialog._getTokenizer().getTokenes().length){
@@ -362,6 +404,9 @@ sap.ui.define([
 
 					oWhitespaceDialog.update();
 				}.bind(this));
+				var multiinput_tokens =this.byId("BpCompanyCode").getTokens()
+				oWhitespaceDialog.setTokens(multiinput_tokens);
+				oWhitespaceDialog.update();
 
 				this._bWhitespaceDialogInitialized = true;
 				oWhitespaceDialog.open();
@@ -390,12 +435,12 @@ sap.ui.define([
 			this.pWhitespaceDialog.then(function (oWhitespaceDialog) {
 				var oFilterBar = oWhitespaceDialog.getFilterBar();
 				this.oWhitespaceDialog = oWhitespaceDialog;
-				if (this._bWhitespaceDialogInitialized) {
-					oWhitespaceDialog.setTokens([]);
-					oWhitespaceDialog.update();
+				// if (this._bWhitespaceDialogInitialized) {
+				// 	oWhitespaceDialog.setTokens([]);
+				// 	oWhitespaceDialog.update();
 
-					oWhitespaceDialog.open();
-				}
+				// 	oWhitespaceDialog.open();
+				// }
 				this.getView().addDependent(oWhitespaceDialog);
 
 				// if(!this.oWhitespaceDialog._getTokenizer().getTokenes().length){
@@ -430,6 +475,9 @@ sap.ui.define([
 
 					oWhitespaceDialog.update();
 				}.bind(this));
+				var multiinput_tokens =this.byId("BpNation").getTokens()
+				oWhitespaceDialog.setTokens(multiinput_tokens);
+				oWhitespaceDialog.update();
 
 				this._bWhitespaceDialogInitialized = true;
 				oWhitespaceDialog.open();
@@ -462,7 +510,6 @@ sap.ui.define([
             BpName.setTokens(arr);
             this.oWhitespaceDialog.close();
 
-			this.oWhitespaceDialog.close();
 
 		},
 		onCountrySelectOkPress: function(oEvent) {

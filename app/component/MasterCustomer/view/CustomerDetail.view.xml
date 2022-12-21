@@ -71,7 +71,7 @@
                             id="bpReportSubmission" 
                             visible="{=!${visibleMode>/visible}}"
                             forceSelection="false">
-                                <c:Item key="true" text="제출" />
+                                <c:Item key="true" text="제출 완료" />
                                 <c:Item key="false" text="미제출" />
                         </m:Select>
                     </m:VBox>
@@ -562,7 +562,11 @@
 											formatter:'.formatter.IsNull'
                                         }" 
                                     visible="{=${visibleMode>/visible}}" />
-                                <m:Input id="bpNation" value="{bpModel>/bp_nation}" valueHelpRequest=".EditInputCountry" visible="{=!${visibleMode>/visible}}" showValueHelp="true"/>
+                                <m:Input id="bpNation" 
+                                valueHelpOnly="true"
+                                value="{bpModel>/bp_nation}" 
+                                valueHelpRequest=".EditInputCountry" 
+                                visible="{=!${visibleMode>/visible}}" showValueHelp="true"/>
                             </m:VBox>
                            
                             <m:VBox class="sapUiSmallMarginTopBottom">
