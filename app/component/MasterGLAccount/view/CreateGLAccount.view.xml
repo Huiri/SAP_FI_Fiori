@@ -75,11 +75,12 @@
 											class="sapUiSmallMarginBegin sapUiSmallMarginEnd"
 											text="관리"
 										/>
-									
+										<VBox id="generalData">
 										<VBox class="sapUiSmallMargin">
 											<Label text="계정과목표" labelFor="CoA"/>
 											<Input 
 												id="CoA" 
+												valueHelpOnly="true"
 												showValueHelp="true" 
 												valueHelpRequest=".onSelectCoA" 
 												required="true"
@@ -108,6 +109,7 @@
 										<VBox id="_IDGenVBox5" class="sapUiSmallMargin">
 											<Label id="_IDGenLabel8" text="계정 그룹" labelFor="GLGroup" />
 											<Input 
+												valueHelpOnly="true"
 												id="GLGroup" 
 												showValueHelp="true" 
 												valueHelpRequest=".onSelectGLGrp" 
@@ -143,7 +145,7 @@
 											</Select>
 											
 										</VBox>
-
+										</VBox>
 										<layoutData>
 											<l:GridData span="XL3 L3 M3 S12"/>
 										</layoutData>
@@ -154,21 +156,23 @@
 											class="sapUiSmallMarginBegin sapUiSmallMarginEnd"
 											text="내역(유지보수 언어)"
 										/>
+										<VBox id="contentData">
 
-										<VBox id="_IDGenVBox8" class="sapUiSmallMargin">
-											<Label id="_IDGenLabel13" text="내역" required="true"/>
-											<Input 
-												id="GLAcctContent"
-												value="{copyCoCdDataModel>/GLAcctContent}" />  
+											<VBox id="_IDGenVBox8" class="sapUiSmallMargin">
+												<Label id="_IDGenLabel13" text="내역" labelFor="GLAcctContent"/>
+												<Input 
+													id="GLAcctContent"
+													required="true"
+													value="{copyCoCdDataModel>/GLAcctContent}" />  
+											</VBox>
+
+											<VBox id="_IDGenVBox9" class="sapUiSmallMargin">
+												<Label id="_IDGenLabel12" text="G/L 계정 설명" />
+												<Input 
+													id="GLAccDesc" 
+													value="{copyCoCdDataModel>/GLAccDesc}"/> 
+											</VBox>
 										</VBox>
-
-										<VBox id="_IDGenVBox9" class="sapUiSmallMargin">
-											<Label id="_IDGenLabel12" text="G/L 계정 설명" />
-											<Input 
-												id="GLAccDesc" 
-												value="{copyCoCdDataModel>/GLAccDesc}"/> 
-										</VBox>
-
 										<layoutData>
 											<l:GridData span="XL3 L3 M3 S12"/>
 										</layoutData>

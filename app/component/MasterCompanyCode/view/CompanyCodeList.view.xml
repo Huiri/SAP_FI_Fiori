@@ -115,7 +115,11 @@
                 <t:Column hAlign="Center">
                     <Label text="국가/지역"/>
                     <t:template>
-                        <Text text="{CompanyCodeListModel>com_country}"/>
+                        <Text 
+                            text="{
+                                path:'CompanyCodeListModel>com_country',
+                                formatter:'.formatter.NationStatus'
+                            }"/>
                     </t:template>
                 </t:Column> 
                 <t:Column hAlign="Center">

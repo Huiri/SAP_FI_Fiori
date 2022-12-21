@@ -562,7 +562,11 @@
 											formatter:'.formatter.IsNull'
                                         }" 
                                     visible="{=${visibleMode>/visible}}" />
-                                <m:Input id="bpNation" value="{bpModel>/bp_nation}" valueHelpRequest=".EditInputCountry" visible="{=!${visibleMode>/visible}}" showValueHelp="true"/>
+                                <m:Input id="bpNation" 
+                                valueHelpOnly="true"
+                                value="{bpModel>/bp_nation}" 
+                                valueHelpRequest=".EditInputCountry" 
+                                visible="{=!${visibleMode>/visible}}" showValueHelp="true"/>
                             </m:VBox>
                            
                             <m:VBox class="sapUiSmallMarginTopBottom">

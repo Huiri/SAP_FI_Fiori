@@ -71,20 +71,19 @@ sap.ui.define([
 		},
 		toBack: function() {
 			this.onReset();
+
 			this.getOwnerComponent().getRouter().navTo("GLAccountList");
+			this.validateForVboxClear("generalData");
+			this.validateForVboxClear("contentData");
+
 		},
 		
 		onCreate : async function(){
-			// var check = await this.validate("test");
-			// var check2 = await this.validate("content");
-			// if(check===true||check2===true){
-			// 	return;
-			// }
-			
-			let isError = this.onErrorMessageBoxPress();
-            if(isError === false){
-                return;
-            } 
+			var check = await this.validateForVbox("generalData");
+			var check2 = await this.validateForVbox("contentData");
+			if(check===true||check2===true){
+				return;
+			} 
 			else {
 				let temp = new JSONModel(this.temp).oData;
 				// temp.gl_acct = this.byId("GLAcct").getText();
@@ -123,36 +122,43 @@ sap.ui.define([
 			}
 
 		},
-		validate:function(formid){
+		validateForVbox:function(sParam){
 			var check=false;
-			var content = this.byId(formid).getContent()
-            for (var i = 0; i < content.length; i++) {
-                var item = content[i].mAggregations.items
-                for (var j = 0; j < item.length; j++) {
-                    var element_type = item[j].getMetadata().getName().split('.')[2];
-                    if (element_type == 'Input'|| element_type=='DatePicker'||element_type == 'ComboBox') {
-                        item[j].setValueState("None");
-                        item[j].setValueStateText(null);
-                        if (item[j].mProperties.required == true) {
-                            var element_value = item[j].mProperties.value;
+			var item =this.byId(sParam).mAggregations.items;
+			for(var i=0;i<item.length;i++){
+				console.log(item[i].mAggregations);
+				var vboxitem = item[i].mAggregations.items;
+				for(var j=0;j<vboxitem.length;j++){
+					var element_type = vboxitem[j].getMetadata().getName().split('.')[2];
+					if (element_type == 'Input'|| element_type=='DatePicker'||element_type == 'ComboBox') {
+                        vboxitem[j].setValueState("None");
+                        vboxitem[j].setValueStateText(null);
+                        if (vboxitem[j].mProperties.required == true) {
+                            var element_value = vboxitem[j].mProperties.value;
                             if(element_value ==''||element_value==null||element_value==undefined){
 								check=true;
-                                item[j].setValueState("Error");
-                                item[j].setValueStateText("필수 값을 입력해주세요.");
+                                vboxitem[j].setValueState("Error");
+                                vboxitem[j].setValueStateText("필수 값을 입력해주세요.");
                             }
                         }
                     }
-                }
-            }
-			if(check===true){
-				MessageBox.error("필수항목을 입력해주세요.");
+				}
 			}
-			return check;
-		
-            this.onReset();
-            this.toBack();
-
-        },
+		},
+		validateForVboxClear:function(sParam){
+			var item =this.byId(sParam).mAggregations.items;
+			for(var i=0;i<item.length;i++){
+				console.log(item[i].mAggregations);
+				var vboxitem = item[i].mAggregations.items;
+				for(var j=0;j<vboxitem.length;j++){
+					var element_type = vboxitem[j].getMetadata().getName().split('.')[2];
+					if (element_type == 'Input'|| element_type=='DatePicker'||element_type == 'ComboBox') {
+                        vboxitem[j].setValueState("None");
+                        vboxitem[j].setValueStateText(null);
+                    }
+				}
+			}
+		},
 
 		onReset : function(){
 			this.byId("CoA").setValue("");

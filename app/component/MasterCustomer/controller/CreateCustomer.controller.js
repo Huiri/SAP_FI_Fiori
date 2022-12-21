@@ -55,8 +55,51 @@ sap.ui.define([
         },
         toCustomerList :function () {
 			this.getOwnerComponent().getRouter().navTo("CustomerList");
+            
+            this.validateForVboxClear("generalData");
+			this.validateForVboxClear("personalData");
+			this.validateForVboxClear("addressData");
+
             this.onClearField();
 		},
+        validateForVbox:function(sParam){
+			var check=false;
+			var item =this.byId(sParam).mAggregations.items;
+			for(var i=0;i<item.length;i++){
+				console.log(item[i].mAggregations);
+				var vboxitem = item[i].mAggregations.items;
+				for(var j=0;j<vboxitem.length;j++){
+					var element_type = vboxitem[j].getMetadata().getName().split('.')[2];
+					if (element_type == 'Input'|| element_type=='DatePicker'||element_type == 'ComboBox') {
+                        vboxitem[j].setValueState("None");
+                        vboxitem[j].setValueStateText(null);
+                        if (vboxitem[j].mProperties.required == true) {
+                            var element_value = vboxitem[j].mProperties.value;
+                            if(element_value ==''||element_value==null||element_value==undefined){
+								check=true;
+                                vboxitem[j].setValueState("Error");
+                                vboxitem[j].setValueStateText("필수 값을 입력해주세요.");
+                            }
+                        }
+                    }
+				}
+			}
+		},
+		validateForVboxClear:function(sParam){
+			var item =this.byId(sParam).mAggregations.items;
+			for(var i=0;i<item.length;i++){
+				console.log(item[i].mAggregations);
+				var vboxitem = item[i].mAggregations.items;
+				for(var j=0;j<vboxitem.length;j++){
+					var element_type = vboxitem[j].getMetadata().getName().split('.')[2];
+					if (element_type == 'Input'|| element_type=='DatePicker'||element_type == 'ComboBox') {
+                        vboxitem[j].setValueState("None");
+                        vboxitem[j].setValueStateText(null);
+                    }
+				}
+			}
+		},
+
         onDataView: async function() {
             const customerList = await $.ajax({
                 type:"GET",
@@ -103,6 +146,12 @@ sap.ui.define([
             this.onDataView();
         }, 
         onCreate:async function () {
+			var check = await this.validateForVbox("generalData");
+			var check2 = await this.validateForVbox("personalData");
+			var check2 = await this.validateForVbox("addressData");
+			if(check===true||check2===true){
+				return;
+			} 
            var temp={
                 bp_name : this.byId("BpName").getValue(),
                 bp_created_date : Today,

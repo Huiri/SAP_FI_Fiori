@@ -9,14 +9,17 @@ sap.ui.define([
     'sap/m/SearchField',
 	'sap/ui/table/Column',
 	'sap/m/Text',
+	"project3/model/formatter"
 ], function (Controller, Filter, FilterOperator, Sorter, JSONModel, Spreadsheet, exportLibrary,
-    SearchField,UIColumn,Text) {
+    SearchField,UIColumn,Text,
+	formatter) {
     "use strict";
 	const EdmType = exportLibrary.EdmType;
     let totalNumber;
     let selectedNum;
 
     return Controller.extend("project4.controller.CompanyCodeList",{
+		formatter:formatter,
         onInit: async function(){
             const myRoute = this.getOwnerComponent().getRouter().getRoute("CompanyCodeList");
             myRoute.attachPatternMatched(this.onMyRoutePatternMatched,this);
