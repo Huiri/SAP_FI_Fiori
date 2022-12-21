@@ -118,7 +118,7 @@ sap.ui.define([
             let type=e.getParameter("segment").sId;
             type= type.split('-').reverse()[0];
 
-            this.getOwnerComponent().getRouter().navTo('CustomerChartDetail',{type:type});
+            this.getOwnerComponent().getRouter().navTo('CustomerChartDetail', {type:type});
         },
         
         onNavToBpDetail: function (oEvent) {

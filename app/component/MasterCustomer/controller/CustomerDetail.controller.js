@@ -14,8 +14,15 @@ sap.ui.define([
 	"use strict";
 	let selectedNum;
 	let originModel;
+	let source=null;
+	let stickType=null;
+	let donut=null;
 	const BPCATEGORY_ORG="조직";
 	const BPCATEGORY_BP="개인";
+
+    const SOURCE_CHART ="chart"; 
+    const SOURCE_CHART_STICK ="stick"; 
+	
 	return Controller.extend("project3.controller.CustomerDetail", {
 		formatter : formatter,
 
@@ -36,6 +43,22 @@ sap.ui.define([
 		//initBpDdetailDataView : get한 bp모델 view set + 표준주소 설정 + 가시성 제어 
 		initView: async function(e){
 			selectedNum = e.getParameter("arguments").num;
+			let query = e.getParameter("arguments")["?query"]; 
+			if(query!=null){
+				console.log(query);
+				source = query.source;
+				if(query.stickType!=null) {
+					stickType = query.stickType;
+					console.log(stickType);
+				}
+				if(query.donut!=null){
+					donut=query.donut;
+					console.log(donut);
+				}
+			}else{
+				source=null;
+			}
+			
 			await( this.initBpDetailDataView( this.getBpModelData() ) );
 
 			const CountryList = await $.ajax({
@@ -210,10 +233,7 @@ sap.ui.define([
 		},
 
 		//-----------header----------//
-		//back
-		onCustomerList: function(){
-			this.getOwnerComponent().getRouter().navTo("CustomerList");
-		},
+
 		//편집 
         onEditBtnPress : async function(){
 			this.changeVisibleMode(false);
@@ -229,9 +249,12 @@ sap.ui.define([
 			console.log(originModel);
 			this.changeVisibleMode(true);
 		},
-
-		toBack: function() {
-			window.history.back();
+		//back
+		toBack: function() {	
+			if(source==SOURCE_CHART) this.getOwnerComponent().getRouter().navTo("CustomerChartDetail",{type:donut});
+			else if(source==SOURCE_CHART_STICK) this.getOwnerComponent().getRouter().navTo("CustomerSubmitChartDetail",{submitState:stickType});
+			else if(source==null) this.getOwnerComponent().getRouter().navTo("CustomerList");
+			
 		},
 		EditInputCountry : function(){
 			if(!this.pDialog){

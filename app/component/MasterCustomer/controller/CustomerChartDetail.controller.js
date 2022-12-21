@@ -14,7 +14,12 @@ sap.ui.define([
     let totalNumber;
     let selectedNum;
 	let type=null;
+	let sType=null;
+    let source=null;
+
     const EdmType = exportLibrary.EdmType;
+    const SOURCE_CHART ="chart";
+
     return Controller.extend("project3.controller.CustomerList", {
         onInit: async function () {
             this._initModel();
@@ -31,18 +36,20 @@ sap.ui.define([
         },
 
         onMyRoutePatternMatched: async function (e) {
-			type = e.getParameter("arguments").type;
+            type = e.getParameter("arguments").type;
+            source = e.getParameter("arguments").source;
+
 			this.onInitView();
         },
 		onInitView: async function(){
-			if(type=="trust") type="신뢰";
-			else if(type=="wait") type="보류";
-			else if(type=="caution") type="주의";
+			if(type=="trust") sType="신뢰";
+			else if(type=="wait") sType="보류";
+			else if(type=="caution") sType="주의";
 
-			this.getView().byId('titleState').setText(` ${type}`);
-			this.getView().byId('titleState').setState(`${type=='신뢰'?ValueState.Success:type=='보류'?ValueState.None:ValueState.Error}`);
+			this.getView().byId('titleState').setText(` ${sType}`);
+			this.getView().byId('titleState').setState(`${sType=='신뢰'?ValueState.Success:sType=='보류'?ValueState.None:ValueState.Error}`);
 		
-			let query="?$filter=bp_credit_status eq '"+type+"'";
+			let query="?$filter=bp_credit_status eq '"+sType+"'";
             const customerList = await $.ajax({
                 type: "GET",
                 url: "/bp/BP"+query
@@ -74,11 +81,11 @@ sap.ui.define([
                 oData = oModel.getProperty(sPath).bp_number;
             selectedNum = oData;
             // console.log(selectedNum);
-            this.getOwnerComponent().getRouter().navTo("CustomerDetail", { num: selectedNum });
+            this.getOwnerComponent().getRouter().navTo("CustomerDetail", { num: selectedNum , "?query": {source : SOURCE_CHART, donut:type}});
         },
 
 		onBack: function () {
-			window.history.back();
+            this.getOwnerComponent().getRouter().navTo(("CustomerChart"));
 			this.onClearField();
         }
     });
