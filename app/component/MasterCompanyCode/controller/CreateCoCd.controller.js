@@ -175,6 +175,7 @@ sap.ui.define([
     },
 
     onBack: function () {
+      this.clearField()
       this.getOwnerComponent().getRouter().navTo("CompanyCodeList");
     },
 
