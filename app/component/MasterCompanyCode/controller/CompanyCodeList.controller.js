@@ -9,14 +9,17 @@ sap.ui.define([
     'sap/m/SearchField',
 	'sap/ui/table/Column',
 	'sap/m/Text',
+	"project3/model/formatter"
 ], function (Controller, Filter, FilterOperator, Sorter, JSONModel, Spreadsheet, exportLibrary,
-    SearchField,UIColumn,Text) {
+    SearchField,UIColumn,Text,formatter) {
     "use strict";
 	const EdmType = exportLibrary.EdmType;
     let totalNumber;
     let selectedNum;
 
     return Controller.extend("project4.controller.CompanyCodeList",{
+		formatter : formatter,
+
         onInit: async function(){
             const myRoute = this.getOwnerComponent().getRouter().getRoute("CompanyCodeList");
             myRoute.attachPatternMatched(this.onMyRoutePatternMatched,this);
@@ -433,7 +436,7 @@ sap.ui.define([
 			this._filterTable(aFilter);
 		},
 		
-        onDataExport: function () {
+		onDataExport: function () {
             let aCols, oRowBinding, tableIndices, oSettings, oSheet, oTable;
 
             oTable = this.byId('CompanyCodeListTable');    // 테이블 
@@ -461,13 +464,48 @@ sap.ui.define([
 
             aCols = this.createColumnConfig();
 
+			for(let i = 0; i < oList.length; i++){
+				if(oList[i].com_country === 'KR'){
+					oList[i].com_country2 = "한국";
+				}
+				if(oList[i].com_country === 'CN'){
+					oList[i].com_country2 = "중국";
+				}
+				if(oList[i].com_country === 'DE'){
+					oList[i].com_country2 = "독일";
+				}
+				if(oList[i].com_country === 'DK'){
+					oList[i].com_country2 = "덴마크";
+				}
+				if(oList[i].com_country === 'HK'){
+					oList[i].com_country2 = "홍콩 특별 행정구";
+				}
+				if(oList[i].com_country === 'JP'){
+					oList[i].com_country2 = "일본";
+				}
+				if(oList[i].com_country === 'NL'){
+					oList[i].com_country2 = "네덜란드";
+				}
+				if(oList[i].com_country === 'SG'){
+					oList[i].com_country2 = "싱가포르";
+				}
+				if(oList[i].com_country === 'TW'){
+					oList[i].com_country2 = "대만";
+				}
+				if(oList[i].com_country === 'US'){
+					oList[i].com_country2 = "미국";
+				}
+				if(oList[i].com_country === 'BG'){
+					oList[i].com_country2 = "벨기에";
+				}
+			}
             oSettings = {
                 workbook: {
                     columns: aCols,
                     hierarchyLevel: 'Level'
                 },
                 dataSource: oList,
-                fileName: 'CompanyCodeListTable.xlsx',
+                fileName: 'CustomerListTable.xlsx',
                 worker: false
             };
             oSheet = new Spreadsheet(oSettings);
@@ -489,7 +527,7 @@ sap.ui.define([
             });
             aCols.push({
                 label: '국가/지역',
-                property: 'com_country',
+                property: 'com_country2',
                 type: EdmType.String
             });
             aCols.push({
