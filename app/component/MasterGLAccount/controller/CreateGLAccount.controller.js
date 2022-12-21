@@ -75,12 +75,16 @@ sap.ui.define([
 		},
 		
 		onCreate : async function(){
-			var check = await this.validate("operating");
-			var check2 = await this.validate("content");
-			if(check===true||check2===true){
-				return;
-			}
+			// var check = await this.validate("test");
+			// var check2 = await this.validate("content");
+			// if(check===true||check2===true){
+			// 	return;
+			// }
 			
+			let isError = this.onErrorMessageBoxPress();
+            if(isError === false){
+                return;
+            } 
 			else {
 				let temp = new JSONModel(this.temp).oData;
 				// temp.gl_acct = this.byId("GLAcct").getText();
@@ -117,29 +121,6 @@ sap.ui.define([
 					data:JSON.stringify(temp)
 				})
 			}
-
-            let isError = this.onErrorMessageBoxPress();
-            if(isError === false){
-                return;
-            } else {
-                temp = new JSONModel(this.temp).oData;
-                temp.gl_acct = this.byId("GLAcct").getText();
-                temp.gl_coa = this.byId("CoA").getValue();
-                temp.gl_acct_type = this.byId("GLAcctType").getSelectedKey();
-                temp.gl_acct_group = this.byId("GLGroup").getValue();
-                temp.gl_ps_acct_type = this.byId("GLPLAcctType").getSelectedKey();
-                temp.gl_func_area = this.byId("FuncArea").getSelectedKey();
-                temp.gl_acct_content = this.byId("GLAcctContent").getValue();
-                temp.gl_acct_descript = this.byId("GLAccDesc").getValue();
-                temp.gl_created = Today;
-
-                await $.ajax({
-                    type:"POST",
-                    url:"/gl/GL",
-                    contentType:"application/json;IEEE754Compatible=true",
-                    data:JSON.stringify(temp)
-                })
-            }
 
 		},
 		validate:function(formid){
@@ -365,6 +346,16 @@ sap.ui.define([
 				oWhitespaceDialog.open();
 			}.bind(this));
 
+		},
+
+		onErrorMessageBoxPress : function(){
+			let CoA = this.byId("CoA").getValue();
+			let GLGroup = this.byId("GLGroup").getSelectedKey();
+			let GLAcctType = this.byId("GLAcctType").getSelectedKey();
+			let GLAcctContent = this.byId("GLAcctContent").getValue();
+			if(!CoA || !GLGroup || !GLAcctType || !GLAcctContent ){
+				MessageBox.error("필수항목이 누락되었습니다.");
+			}
 		},
 		/**
          * valueHelpDialog 확인 버튼 클릭 이벤트
