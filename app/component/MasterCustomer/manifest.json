@@ -145,6 +145,10 @@
       "BpCreditStatus" :{
         "type" : "sap.ui.model.json.JSONModel",
         "uri" : "model/BpCreditStatus.json" 
+      },
+      "CorresText" : {
+        "type" : "sap.ui.model.json.JSONModel",
+        "uri" : "model/Correspondence.json"
       }
     },
     "resources": {
@@ -213,6 +217,14 @@
           }
         },
         {
+          "name": "EditCorres",
+          "pattern": "EditCorres",
+          "target": {
+            "name" : "EditCorres",
+            "prefix": "EditCorres"
+          }
+        },
+        {
           "name": "CustomerChartDetail",
           "pattern": "CustomerChartDetail/{type}",
           "target": {
@@ -264,6 +276,13 @@
           "clearControlAggregation": true,
           "viewId": "CustomerChart",
           "viewName": "CustomerChart"
+        },
+        "EditCorres" : {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": true,
+          "viewId": "EditCorres",
+          "viewName": "EditCorres"
         },
         "CustomerChartDetail" : {
           "viewType": "XML",
