@@ -167,6 +167,17 @@ sap.ui.define([
 			}
 		},
 
+		onValueInit : function(){
+			total = 100000, 
+			customer = "희리", 
+			cocdName = "일환전자",
+			author = "Sumin Lee",
+			now = new Date,
+			date = now.getFullYear() + "." +(now.getMonth()+1).toString().padStart(2,'0')+"."+now.getDate().toString().padStart(2, '0'),
+			dueDate = now.getFullYear() + "." +(now.getMonth()+1).toString().padStart(2,'0')+"."+(now.getDate()+3).toString().padStart(2, '0');
+			this.handleSelect();
+		
+		},
 		_getHTML: function(sKey) {
 			return sKey === 'ARBalanceConfirm' 
 			? 
@@ -175,7 +186,7 @@ sap.ui.define([
 			<p style="text-align: justify; background: white; font-size: 10pt; font-family: Calibri, sans-serif;"><strong><span style="font-size: 10.5pt; font-family: sans-serif; color: black;">${customer}</span></strong>
 			<span>회계담당 귀하 </span></p>
 			<span><p>귀사의 발전을 축언하오며 항상 각별하신 애호와 협조에 감사드립니다. </span></p> 
-			<span><p>당사는 정기회계감사를 받고 있는바 이와 관련하여 /잔액 기준일/일 현재의 귀사와의 거래잔액과 내용을 확인하고자 하오니 귀사의 장부와 대조, 확인하시고 그 상위 유뮤를 아래 확인 통지란에 기입 서명날인하여 1부를 당사의 감사인인 삼일회계법인 앞으로 직접 우송하여 주시기 바랍니다. </span></p>
+			<span><p>당사는 정기회계감사를 받고 있는바 이와 관련하여 <strong>${dueDate}</strong>일 현재의 귀사와의 거래잔액과 내용을 확인하고자 하오니 귀사의 장부와 대조, 확인하시고 그 상위 유뮤를 아래 확인 통지란에 기입 서명날인하여 1부를 당사의 감사인인 삼일회계법인 앞으로 직접 우송하여 주시기 바랍니다. </span></p>
 			<span><p>감사인: 삼일회계법인 서울 용산구 12길 7층 </span></p>
 			<span><p>담당회계사: 조일환 </span></p>
 			<span><p>담당자연락처: 010-1111-1111 </span></p> 
@@ -243,7 +254,7 @@ sap.ui.define([
 			<span><p>변제되어야할 채권 내역은 아래와 같습니다. </span></p> 
 			<br/>
 
-			<p><span style="font-size: 10.5pt; font-family: sans-serif; color: #0070c0;">당사가 받을 금액 <strong>${dueDate}</strong></span></p>
+			<p><span style="font-size: 10.5pt; font-family: sans-serif; color: #0070c0;">당사가 받을 금액 <strong>${total}</strong></span></p>
 			<table style="width:30rem"  border="1">
 				<tr align = "center" bgcolor="skybule">
 					<td>계정과목</td>
@@ -411,7 +422,7 @@ sap.ui.define([
             this.byId("createdDate").setValue("");
             this.byId("DueDate").setValue("");
 
-            this.onSetValue();
+            this.onValueInit();
         }, 
 
         toHome: function(){
