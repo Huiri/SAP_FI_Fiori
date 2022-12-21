@@ -19,7 +19,7 @@
             </GenericTile>
             <GenericTile id="_IDGenGenericTile2" class="sapUiTinyMarginBegin sapUiTinyMarginTop"
                 header="재무제표 버전 조회"
-                press=".toSelectFS">
+                press=".toFSVersionBS">
                 <TileContent id="_IDGenTileContent2" >
                     <ImageContent id="_IDGenImageContent2" src="sap-icon://expense-report"/>
                 </TileContent>

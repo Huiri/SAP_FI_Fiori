@@ -55,8 +55,8 @@
 					<uxap:ObjectPageSubSection id="_IDGenObjectPageSubSection0"  title="헤더">
 						<uxap:blocks>
 							<VBox class="sapUiSmallMarginBottom">
-								<Label id="_IDGenLabel0" text="G/L 계정"/>
-								<Text id="GLAcct" class="sapUiTinyMarginBegin"/>  
+								<Label id="_IDGenLabel0" text="G/L 계정" class="sapUiTinyMarginBegin"/>
+								<Text id="GLAcct" class="sapUiTinyMarginBegin sapUiTinyMarginTop"/>  
 							</VBox>
 						</uxap:blocks>
 					</uxap:ObjectPageSubSection>

@@ -180,7 +180,6 @@ sap.ui.define([
 		},
 
 		onSearch: function (oEvent) {
-			var selectedItems = oEvent.getParameter("selectedItems");
 
 			let GlCoa = this.byId("GLCoa").getTokens();
 			let GlAcct = this.byId("GLAcct").getTokens();

@@ -66,7 +66,7 @@
                 <layout:VerticalLayout class="sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom">
                     <m:VBox>
                         <m:Label text="서류 제출 여부" class="propertyColumn"/>
-                        <m:Text visible="{visibleMode>/visible}" text="{=${bpModel>/bp_report_submission}===true?'제출':'미제출'}"/>
+                        <m:Text visible="{visibleMode>/visible}" text="{=${bpModel>/bp_report_submission}===true?'제출 완료':'미제출'}"/>
                         <m:Select
                             id="bpReportSubmission" 
                             visible="{=!${visibleMode>/visible}}"
@@ -278,7 +278,7 @@
                                     displayFormat="yyyy.MM.dd" />
                             </m:VBox>
                             <m:VBox class="sapUiSmallMarginTopBottom">
-                                <m:Label text="정산일" class="propertyColumn" />
+                                <m:Label text="청산일" class="propertyColumn" />
                                 <m:Text text="{bpModel>/bp_cal_date}" visible="{=${visibleMode>/visible}}" />
                                 <m:DatePicker 
                                     id="bpCalDateOrg"

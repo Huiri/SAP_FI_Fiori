@@ -4,9 +4,23 @@ sap.ui.define([
 	"sap/ui/core/mvc/Controller",
 	"sap/ui/model/json/JSONModel",
 	"sap/ui/richtexteditor/RichTextEditor",
-	"sap/ui/richtexteditor/library"
+	"sap/ui/richtexteditor/library",
+	"sap/m/SearchField",
+	"sap/ui/table/Column",
+    "sap/m/MessageBox",
+	"sap/ui/model/Filter",
+    "sap/ui/model/FilterOperator",
+
 ], function(
-	Controller, JSONModel, RichTextEditor, library
+	Controller, 
+	JSONModel,
+	RichTextEditor, 
+	library,
+	SearchField,
+	UIColumn,
+	MessageBox,
+	Filter,
+	FilterOperator
 ) {
 	"use strict";
 
@@ -15,16 +29,43 @@ sap.ui.define([
 	cocdName = "일환전자",
 	author = "Sumin Lee",
 	date = "주미일",
-	balance = 10230000,
-	dueDate = "2022.12.31";
-	return Controller.extend("project3.controller.EditCorres", {
+	dueDate = "2022.12.31",
+	sHtmlUpdtaeValue;
+	return Controller.extend("project3.controller.EditCorres3", {
         onInit: function() {
 			// this.initARTextEditor('ARBalanceConfirm');
+			this.getOwnerComponent().getRouter().getRoute("EditCorres").attachPatternMatched(this.onDataView,this);
+
 		},
 
 		/**
 		 * @override
 		 */
+		 onSetValue: function(oEvent) {
+			let BpCompanyName = this.byId("BpCompanyName").getValue();
+			let constructor = this.byId("constructor").getValue();
+			let bpName = this.byId("bpName").getValue();
+			let createdDate = this.byId("createdDate").getValue();
+			let DueDate = this.byId("DueDate").getValue();
+
+			if(DueDate !== null || DueDate !== ""){
+				dueDate = DueDate;
+			}
+			if(BpCompanyName !== null || BpCompanyName !== ""){
+				cocdName = BpCompanyName;
+			}
+			if(constructor !== null || constructor !== ""){
+				author = constructor;
+			}
+			if(bpName !== null || bpName !== ""){
+				customer = bpName;
+			}
+			if(createdDate !== null || createdDate !== ""){
+				date = createdDate;
+			}
+			this.handleSelect();
+		},
+
 		onAfterRendering: function() {
 			let sHtmlValue = 			`<h3 style="text-align: center;">채권잔액조회서</h3>		
 			<p style="text-align: justify; background: white; font-size: 10pt; font-family: Calibri, sans-serif;"><strong><span style="font-size: 10.5pt; font-family: sans-serif; color: black;">${customer}</span></strong>
@@ -106,8 +147,8 @@ sap.ui.define([
 			this.getView().byId("RTEBox").addItem(this._rich);
 		},
 
-		handleSelect: function (oEvent) {
-			var sSelectedKey = oEvent.getParameters().selectedItem.getKey();
+		handleSelect: function () {
+			var sSelectedKey = this.byId("idSelect").getSelectedKey();
 
 			let sHtml = '';
 			switch (sSelectedKey) {
@@ -230,6 +271,147 @@ sap.ui.define([
 			<p style="text-align: end;"><strong>작성일자 : ${date}</strong></p>
 			<p style="text-align: end;">- <strong>${cocdName} </strong>-</p>`;
 
-		}
+		},
+		onDataView: async function(){
+
+            const CoCdList = await $.ajax({
+                type:"GET",
+                url:"/cocd/CoCd"
+            });
+            let BpCoCdModel = new JSONModel(CoCdList.value);
+            this.getView().setModel(BpCoCdModel,"BpCoCdModel");
+
+            let bpCustomerListData = await $.ajax({
+                type: "GET",
+                url: "/bp/BP"
+            });
+            let BpCustomerModel = new JSONModel(bpCustomerListData.value);
+            this.getView().setModel(BpCustomerModel, "BpCustomerModel");
+        },
+				/*
+		 * ---------------- BP 프래그먼트 동작--------------------
+		*/
+		onSelectBP : function(){
+            if(!this.pDialog){
+				this.pDialog = this.loadFragment({
+					name:"project3.view.fragment.CreateInputBP"
+				});
+			}
+			this.pDialog.then(function(oDialog){
+				oDialog.open();
+			});
+        },
+		onSearchBPDialog: function() {
+			var SearchInputBP = this.byId("SearchInputBP").getValue();
+			var aFilter = [];
+
+			if (SearchInputBP) {
+				aFilter = new Filter({
+					filters: [
+						new Filter("bp_number", FilterOperator.Contains, SearchInputBP),
+						new Filter("bp_company_code", FilterOperator.Contains, SearchInputBP),
+						new Filter("bp_name", FilterOperator.Contains, SearchInputBP),
+					],
+					and: false
+				});
+			}
+
+			let oTable = this.byId("BPSelectTable").getBinding("rows");
+            oTable.filter(aFilter);
+
+		},
+		// BP 선택용 다이어로그 검색창 clear용 함수
+		onSearchBPReset: function() {
+			this.byId("SearchInputBP").setValue("");
+			this.onSearchBPDialog();
+		},
+
+		// BP 선택용 다이어로그 특정 row 선택 시 생성 페이지 Input에 값 입력
+		getBPContext : function(oEvent){
+			let rowIndex = oEvent.getParameters().rowIndex;
+			
+			this.byId("bpName").setValue(oEvent.getParameters().rowBindingContext.oModel.oData[rowIndex].bp_name); 
+			this.onCloseBPDialog();
+		},
+		// BP 선택용 다이어로그 close 함수
+		onCloseBPDialog: function() {
+			this.byId("BPDialog").destroy();
+			this.pDialog = null;
+		},
+		
+		/*
+		 * ---------------- CoCd 프래그먼트 동작--------------------
+		*/
+		onSelectCoCd : function(){
+            if(!this.pDialog){
+				this.pDialog = this.loadFragment({
+					name:"project3.view.fragment.CreateInputCoCd"
+				});
+			}
+			this.pDialog.then(function(oDialog){
+				oDialog.open();
+			});
+        },
+		onSearchCoCdDialog: function() {
+			var SearchInputCoCd = this.byId("SearchInputCoCd").getValue();
+			var aFilter = [];
+
+			if (SearchInputCoCd) {
+				aFilter = new Filter({
+					filters: [
+						new Filter("com_code", FilterOperator.Contains, SearchInputCoCd),
+						new Filter("com_code_name", FilterOperator.Contains, SearchInputCoCd),
+					],
+					and: false
+				});
+			}
+
+			let oTable = this.byId("CoCdSelectTable").getBinding("rows");
+            oTable.filter(aFilter);
+
+		},
+
+        // 회사코드 선택용 다이어로그 close 함수
+		onCloseCoCdDialog: function() {
+			this.byId("CoCdDialog").destroy();
+			this.pDialog = null;
+		},
+		// 회사코드 선택용 다이어로그 검색창 clear용 함수
+		onSearchCoCdReset: function() {
+			this.byId("SearchInputCoCd").setValue("");
+			this.onSearchCoCdDialog();
+		},
+
+		// 회사코드 선택용 다이어로그 특정 row 선택 시 생성 페이지 Input에 값 입력
+		getCoCdContext : function(oEvent){
+			let rowIndex = oEvent.getParameters().rowIndex;
+			
+			this.byId("BpCompanyName").setValue(oEvent.getParameters().rowBindingContext.oModel.oData[rowIndex].com_code_name); 
+			this.onCloseCoCdDialog();
+		},
+	
+		
+		//초기화
+        onClearField: function() {
+            this.byId("BpCompanyName").setValue(""),
+            this.byId("constructor").setValue(""),        
+            this.byId("bpName").setValue(""),
+            this.byId("createdDate").setValue(""),
+            this.byId("DueDate").setValue(""),
+
+            this.onDataView();
+        }, 
+
+        toHome: function(){
+			this.onClearField();
+            this.getOwnerComponent().getRouter().navTo("Home");
+        },
+		toEditconfirm : function(){
+			MessageBox.confirm("전송되었습니다.");
+			this.toHome();
+		},
+
+
+
 	});
 });

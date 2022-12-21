@@ -15,7 +15,7 @@
                             <VBox id="_IDGenVBox1" class="sapUiMediumMarginBottom">
                                 <Label id="_IDGenLabel1" text="일반 정보 " design="Bold" class="sapUiMediumMarginBottom" />
 
-                                <Label id="_IDGenLabel2" text="회사 코드 : " class="sapUiTinyMarginBottom" labelFor="CoCdCod" />
+                                <Label id="_IDGenLabel2" text="회사코드 : " class="sapUiTinyMarginBottom" labelFor="CoCdCod" />
                                 <Input id="CoCdCod" class="sapUiSmallMarginBottom" required="true"/>
 
                                 <!-- labelfor 추가
@@ -32,7 +32,7 @@
                                 <Label id="_IDGenLabel12" text="국가/지역 : " class="sapUiTinyMarginBottom" required="true" />
                                 <Input id="CoCdCountry" class="sapUiSmallMarginBottom" valueHelpRequest=".onSelectCountry" showValueHelp="true"/>
 
-                                <Label id="_IDGenLabel5" text="통화 단위 : " class="sapUiTinyMarginBottom" labelFor="CoCdCurrency" />
+                                <Label id="_IDGenLabel5" text="회사 통화 : " class="sapUiTinyMarginBottom" labelFor="CoCdCurrency" />
                                 <Select width="100rem" id="CoCdCurrency" class="sapUiSmallMarginBottom" required="true">
                                     <core:Item id="_IDGenItem2" key="" text="선택" />
                                     <core:Item id="_IDGenItem3" key="KRW" text="KRW" />
@@ -87,7 +87,7 @@
                                 <Input id="CoCdFiscalYear" class="sapUiSmallMarginBottom" showValueHelp="true" valueHelpRequest=".onSelectFiscalYear"/>
 
 
-                                <Label id="_IDGenLabel15" text="회사 계정 과목표 : " class="sapUiTinyMarginBottom" labelFor="CoCdCoa" />
+                                <Label id="_IDGenLabel15" text="계정과목표 : " class="sapUiTinyMarginBottom" labelFor="CoCdCoa" />
                                 <Input id="CoCdCoa" class="sapUiSmallMarginBottom" valueHelpRequest=".onSelectCoA" showValueHelp="true" required="true"/>
 
                                 <!-- <Label id="_IDGenLabel15" text="회사 계정 과목표 : " class="sapUiTinyMarginBottom" required="true" />
@@ -104,7 +104,7 @@
                                     <core:Item id="_IDGenItem10" key="K03" text="K03" />
                                 </Select>
 
-                                <Label id="_IDGenLabel4" text="관리회계 영역 : " class="sapUiTinyMarginBottom" labelFor="CoCdCoArea" />
+                                <Label id="_IDGenLabel4" text="관리회계영역 : " class="sapUiTinyMarginBottom" labelFor="CoCdCoArea" />
                                 <Input id="CoCdCoArea" class="sapUiSmallMarginBottom" valueHelpRequest=".onSelectCoArea" showValueHelp="true" required="true"/>
                                 
                                 <layoutData>

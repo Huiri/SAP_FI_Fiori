@@ -219,9 +219,26 @@
         {
           "name": "EditCorres",
           "pattern": "EditCorres",
-          "target": [
-            "EditCorres"
-          ]
+          "target": {
+            "name" : "EditCorres",
+            "prefix": "EditCorres"
+          }
+        },
+        {
+          "name": "CustomerChartDetail",
+          "pattern": "CustomerChartDetail/{type}",
+          "target": {
+            "name" : "CustomerChartDetail",
+            "prefix": "CustomerChartDetail"
+          }
+         },
+         {
+          "name": "CustomerSubmitChartDetail",
+          "pattern": "CustomerSubmitChartDetail/{submitState}",
+          "target": {
+            "name" : "CustomerSubmitChartDetail",
+            "prefix": "CustomerSubmitChartDetail"
+          }
         }
       ],
       "targets": {
@@ -266,6 +283,20 @@
           "clearControlAggregation": true,
           "viewId": "EditCorres",
           "viewName": "EditCorres"
+        },
+        "CustomerChartDetail" : {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": true,
+          "viewId": "CustomerChartDetail",
+          "viewName": "CustomerChartDetail"
+        },
+        "CustomerSubmitChartDetail" : {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": true,
+          "viewId": "CustomerSubmitChartDetail",
+          "viewName": "CustomerSubmitChartDetail"
         }
       }
     },
