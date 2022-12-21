@@ -75,7 +75,7 @@
 											class="sapUiSmallMarginBegin sapUiSmallMarginEnd"
 											text="관리"
 										/>
-
+									
 										<VBox class="sapUiSmallMargin">
 											<Label text="계정과목표" labelFor="CoA"/>
 											<Input 
@@ -347,7 +347,7 @@
 						</uxap:blocks>
 					</uxap:ObjectPageSubSection>
 
-					<uxap:ObjectPageSubSection id="personalSectionSS2" title="Payment information" titleUppercase="false">
+					<uxap:ObjectPageSubSection id="personalSectionSS2" title="Payment information">
 						<uxap:blocks>
 						</uxap:blocks>
 						<uxap:moreBlocks>
