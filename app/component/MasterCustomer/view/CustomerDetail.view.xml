@@ -71,7 +71,7 @@
                             id="bpReportSubmission" 
                             visible="{=!${visibleMode>/visible}}"
                             forceSelection="false">
-                                <c:Item key="true" text="제출" />
+                                <c:Item key="true" text="제출 완료" />
                                 <c:Item key="false" text="미제출" />
                         </m:Select>
                     </m:VBox>

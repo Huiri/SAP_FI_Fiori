@@ -85,7 +85,6 @@ sap.ui.define([
 			let url="/bp/BP/"+selectedNum;
 			let now = new Date();
 			
-			console.log($.parseJSON(v.byId("bpBillingHold").getSelectedKey()));
 			console.log(v.byId("bpBillingHold"));
 			now =`${now.getFullYear()}-${now.getMonth()+1}-${String(now.getDate()).padStart(2,0)}`;
 			let temp = {
@@ -109,7 +108,7 @@ sap.ui.define([
 
 
 				//공통
-				"bp_report_submission": $.parseJSON(v.byId("bpReportSubmission").getSelectedKey()),
+				"bp_report_submission": Boolean(v.byId("bpReportSubmission").getSelectedKey()),
 				"bp_external_number": v.byId("bpExternalNumber").getValue(),
 				"bp_changed_date": now,
 				"bp_search1": v.byId("bpSearch1").getValue(),
@@ -117,9 +116,9 @@ sap.ui.define([
 				"bp_delivery_rule": v.byId("bpDeliveryRule").getValue(),
 				"bp_vendor": v.byId("bpVendor").getValue(),
 				"bp_provision_reason": v.byId("bpProvisionReason").getValue(),
-				"bp_billing_hold": $.parseJSON(v.byId("bpBillingHold").getSelectedKey()),
-				"bp_delivery_hold":$.parseJSON(v.byId("bpDeliveryHold").getSelectedKey()),
-				"bp_posting_hold":$.parseJSON(v.byId("bpPostingHold").getSelectedKey()),
+				"bp_billing_hold": Boolean(v.byId("bpBillingHold").getSelectedKey()),
+				"bp_delivery_hold":Boolean(v.byId("bpDeliveryHold").getSelectedKey()),
+				"bp_posting_hold":Boolean(v.byId("bpPostingHold").getSelectedKey()),
 				"bp_customer_classification":v.byId("bpCustomerClassification").getValue(),
 				"bp_nation":v.byId("bpNation").getValue(),
 				"bp_road_address":v.byId("bpRoadAddress").getValue(),
@@ -221,6 +220,7 @@ sap.ui.define([
 		//-----------footer----------//
 		//accept
 		onAccept: async function(){
+			console.log("A")
 			this.initBpDetailDataView(this.setBpModelData());
 		},
 		//cancel

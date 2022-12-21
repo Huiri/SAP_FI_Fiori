@@ -52,6 +52,9 @@ sap.ui.define([
       let SelectCoAreaModel = new JSONModel(CoCdSelectCoArea.value);
 			this.getView().setModel(SelectCoAreaModel, "SelectCoAreaModel");
 
+      this.validateForVboxClear("generalData");
+			this.validateForVboxClear("generateData");
+
 
     },
     onCreate: async function () {
@@ -86,7 +89,7 @@ sap.ui.define([
           data: JSON.stringify(temp)
         });
         this.onCancel();
-        this.getOwnerComponent().getRouter().navTo("GLAccountList")
+        
       }
     },
     clearField: function () {
@@ -314,7 +317,7 @@ sap.ui.define([
 			var check=false;
 			var item =this.byId(sParam).mAggregations.items;
 			for(var i=0;i<item.length;i++){
-				console.log(item[i].mAggregations);
+				// console.log(item[i].mAggregations);
 				var vboxitem = item[i].mAggregations.items;
 				for(var j=0;j<vboxitem.length;j++){
 					var element_type = vboxitem[j].getMetadata().getName().split('.')[2];
@@ -330,8 +333,23 @@ sap.ui.define([
                             }
                         }
                     }
+					else if (element_type == 'Select') {
+            console.log(element_value);
+
+                        vboxitem[j].setValueState("None");
+                        vboxitem[j].setValueStateText(null);
+                        if (vboxitem[j].mProperties.required == true) {
+                            var element_value = vboxitem[j].mProperties.selectedKey;
+                            if(element_value ==''||element_value==null||element_value==undefined){
+								                check=true;
+                                vboxitem[j].setValueState("Error");
+                                vboxitem[j].setValueStateText("필수 값을 입력해주세요.");
+                            }
+                        }
+                    }
 				}
 			}
+			return check;
 		},
 		validateForVboxClear:function(sParam){
 			var item =this.byId(sParam).mAggregations.items;
@@ -340,7 +358,8 @@ sap.ui.define([
 				var vboxitem = item[i].mAggregations.items;
 				for(var j=0;j<vboxitem.length;j++){
 					var element_type = vboxitem[j].getMetadata().getName().split('.')[2];
-					if (element_type == 'Input'|| element_type=='DatePicker'||element_type == 'ComboBox') {
+					if (element_type == 'Input'|| element_type=='DatePicker'||element_type == 'ComboBox'|| element_type == 'Select')
+          {
                         vboxitem[j].setValueState("None");
                         vboxitem[j].setValueStateText(null);
                     }

@@ -83,8 +83,9 @@ controllerName="project4.controller.CreateCoCd"
                                             </VBox>
 
                                             <VBox class="sapUiSmallMargin">
-                                            <Label id="_IDGenLabel12" text="국가/지역 : " required="true" />
+                                            <Label id="_IDGenLabel12" text="국가/지역 : "  labelFor="CoCdCountry"/>
                                             <Input id="CoCdCountry" 
+                                            required="true"
                                             valueHelpRequest=".onSelectCountry"
                                             valueHelpOnly="true"
                                             showValueHelp="true"/>
@@ -92,8 +93,9 @@ controllerName="project4.controller.CreateCoCd"
 
                                             <VBox class="sapUiSmallMargin">
                                             <Label id="_IDGenLabel5" text="회사 통화 : " labelFor="CoCdCurrency" />
-                                            <Select width="100%" id="CoCdCurrency"  required="true">
-                                                <core:Item id="_IDGenItem2" key="" text="선택" />
+                                            <Select width="100%" id="CoCdCurrency"  required="true" forceSelection="true">
+                                                <core:Item key="" text="" />
+
                                                 <core:Item id="_IDGenItem3" key="KRW" text="KRW" />
                                                 <core:Item id="_IDGenItem4" key="USD" text="USD" />
                                             </Select>
@@ -102,7 +104,7 @@ controllerName="project4.controller.CreateCoCd"
                                             <VBox class="sapUiSmallMargin">
                                             <Label id="_IDGenLabel6" text="회사 언어 : "  labelFor="CoCdLanguage" />
                                             <Select  width="100%" id="CoCdLanguage"  required="true">
-                                                <core:Item id="_IDGenItem5" key="" text="선택" />
+                                                <core:Item key="" text="" />
                                                 <core:Item id="_IDGenItem6" key="KR" text="한국어" />
                                                 <core:Item id="_IDGenItem7" key="EN" text="영어" />
                                             </Select>
@@ -150,8 +152,9 @@ controllerName="project4.controller.CreateCoCd"
                                     
                                         <VBox id="fiData">                                                                   
                                             <VBox class="sapUiSmallMargin">
-                                                <Label id="_IDGenLabel14" text="회계연도 오브젝트 : "  required="true" />
+                                                <Label id="_IDGenLabel14" text="회계연도 오브젝트 : "  labelFor="CoCdFiscalYear"/>
                                                 <Input id="CoCdFiscalYear" 
+                                                 required="true" 
                                                 valueHelpOnly="true" 
                                                 showValueHelp="true" 
                                                 valueHelpRequest=".onSelectFiscalYear"/>
