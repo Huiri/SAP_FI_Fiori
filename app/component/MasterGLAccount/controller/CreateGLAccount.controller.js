@@ -17,6 +17,7 @@ sap.ui.define([
 	"use strict";
 	let temp = [];
 	let Today;
+
 	return Controller.extend("project2.controller.CreateGLAccount", {
 		onInit: function () {
 
@@ -40,13 +41,9 @@ sap.ui.define([
 		onMyRoutePatternMatched : function(oEvent) {
 			this.onDataView();
 			this.onReset();
-			// CreateNum = parseInt(oEvent.getParameter("arguments").num) + 1;
 
 			let now = new Date();
 			Today = now.getFullYear() + "." +(now.getMonth()+1).toString().padStart(2,'0')+"."+now.getDate().toString().padStart(2, '0');
-
-			// this.getView().byId("GLAcct").setText(CreateNum);
-			// this.getView().byId("CreateDate").setText(Today);
 			
 		},
 		onDataView: async function () {
@@ -97,33 +94,34 @@ sap.ui.define([
 			return false;
 		},
 		onCreate : async function(){
-			let isError = this.onErrorMessageBoxPress();
-			if(isError === false){
-				return;
-			} else {
-				temp = new JSONModel(this.temp).oData;
-				temp.gl_acct = this.byId("GLAcct").getText();
-				temp.gl_coa = this.byId("CoA").getValue();
-				temp.gl_acct_type = this.byId("GLAcctType").getSelectedKey();
-				temp.gl_acct_group = this.byId("GLGroup").getValue();
-				temp.gl_ps_acct_type = this.byId("GLPLAcctType").getSelectedKey();
-				temp.gl_func_area = this.byId("FuncArea").getSelectedKey();
-				temp.gl_acct_content = this.byId("GLAcctContent").getValue();
-				temp.gl_acct_descript = this.byId("GLAccDesc").getValue();
-				temp.gl_created = Today;
-								
-				await $.ajax({
-					type:"POST",
-					url:"/gl/GL",
-					contentType:"application/json;IEEE754Compatible=true",
-					data:JSON.stringify(temp)
-				})
-			}
 
-			this.onReset();
-			this.toBack();
+            let isError = this.onErrorMessageBoxPress();
+            if(isError === false){
+                return;
+            } else {
+                temp = new JSONModel(this.temp).oData;
+                temp.gl_acct = this.byId("GLAcct").getText();
+                temp.gl_coa = this.byId("CoA").getValue();
+                temp.gl_acct_type = this.byId("GLAcctType").getSelectedKey();
+                temp.gl_acct_group = this.byId("GLGroup").getValue();
+                temp.gl_ps_acct_type = this.byId("GLPLAcctType").getSelectedKey();
+                temp.gl_func_area = this.byId("FuncArea").getSelectedKey();
+                temp.gl_acct_content = this.byId("GLAcctContent").getValue();
+                temp.gl_acct_descript = this.byId("GLAccDesc").getValue();
+                temp.gl_created = Today;
 
-		},
+                await $.ajax({
+                    type:"POST",
+                    url:"/gl/GL",
+                    contentType:"application/json;IEEE754Compatible=true",
+                    data:JSON.stringify(temp)
+                })
+            }
+
+            this.onReset();
+            this.toBack();
+
+        },
 		onReset : function(){
 			this.byId("CoA").setValue("");
 			this.byId("GLAcctType").setSelectedKey("");
@@ -217,30 +215,28 @@ sap.ui.define([
 		getGLGrpContext: async function(oEvent) {
 			let rowIndex = oEvent.getParameters().rowIndex;
 			this.byId("GLGroup").setValue(oEvent.getParameters().rowBindingContext.oModel.oData.GLAcctGroupList[rowIndex].GLAcctGrp); 
+			
 			temp.gl_acct = this.byId("GLGroup").setValue(oEvent.getParameters().rowBindingContext.oModel.oData.GLAcctGroupList[rowIndex].GLAcctGrp)._lastValue; 
 
-			// 그룹별 +1 코드 시작 
-			const acctGroup = await $.ajax({
-				type:"GET",
-				url: "/gl/GL?$filter=gl_acct_group eq '" + temp.gl_acct + "'&$orderby=gl_acct desc&$top=1" 
-			}); 
+            // 그룹별 +1 코드 시작 
+            const acctGroup = await $.ajax({
+                type:"GET",
+                url: "/gl/GL?$filter=gl_acct_group eq '" + temp.gl_acct + "'&$orderby=gl_acct desc&$top=1" 
+            }); 
 
-			let acctGrpModel = new JSONModel(acctGroup.value);
-			this.getView().setModel(acctGrpModel,"acctGrpModel");
-			let oModel = this.getView().getModel("acctGrpModel");
-			let oData = oModel.oData;
-			let oGlAcct = parseInt(oData[0].gl_acct);
-			//console.log(oData);
-			//console.log(oGlAcct);
+            let acctGrpModel = new JSONModel(acctGroup.value);
+            this.getView().setModel(acctGrpModel,"acctGrpModel");
+            let oModel = this.getView().getModel("acctGrpModel");
+            let oData = oModel.oData;
+            let oGlAcct = parseInt(oData[0].gl_acct);
+            //console.log(oData);
+            //console.log(oGlAcct);
 
-			temp.gl_acct = String(oGlAcct + 1); 
-			console.log(temp.gl_acct);
-		
-			this.byId("GLAcct").setText(temp.gl_acct);
+            temp.gl_acct = String(oGlAcct + 1); 
+            console.log(temp.gl_acct);
 
-
-
-
+            this.byId("GLAcct").setText(temp.gl_acct);
+			
 			this.onCloseGLGrpDialog();
 
 		},

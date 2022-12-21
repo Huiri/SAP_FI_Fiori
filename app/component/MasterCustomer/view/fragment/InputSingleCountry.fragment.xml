@@ -4,7 +4,7 @@
     xmlns:t = "sap.ui.table"
     xmlns:layout = "sap.ui.layout"
 >
-<Dialog id="CountryDialog" title ="국가코드" contentWidth="50%" >
+<Dialog id="CountryDialog" title ="국가/지역" contentWidth="50%" >
         <layout:VerticalLayout class="sapUiContentPadding" width="100%">
             <VBox>
                 <Label  text="검색 : "/>
