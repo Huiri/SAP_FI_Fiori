@@ -215,7 +215,7 @@ sap.ui.define([
 			this.getOwnerComponent().getRouter().navTo("Home");
 		},
 
-		onSearch: function (oEvent) {
+		onSearch: function () {
 
 			let GlCoa = this.byId("GLCoa").getTokens();
 			let GlAcct = this.byId("GLAcct").getTokens();
@@ -430,7 +430,23 @@ sap.ui.define([
 				aFilter = new Filter({
 					filters: [
 						new Filter("gl_coa", FilterOperator.Contains, CoASearchInput),
-						new Filter("gl_acct_content", FilterOperator.Contains, CoASearchInput)
+						new Filter("gl_coa_content", FilterOperator.Contains, CoASearchInput)
+					],
+					and: false
+				});
+			}
+			this._filterTable(aFilter);
+		},
+		onGLAcctContSelectSearch: function (oEvent) {
+			let GLAcctSearchInput = this._oBasicSearchField.getValue();
+			var aFilter = [];
+
+			if (GLAcctSearchInput) {
+				aFilter = new Filter({
+					filters: [
+						new Filter("gl_acct", FilterOperator.Contains, GLAcctSearchInput),
+						new Filter("gl_coa", FilterOperator.Contains, GLAcctSearchInput),
+						new Filter("gl_acct_content", FilterOperator.Contains, GLAcctSearchInput)
 					],
 					and: false
 				});

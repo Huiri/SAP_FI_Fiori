@@ -267,7 +267,12 @@ sap.ui.define([
 		},
 
 		getGLGrpContext: async function(oEvent) {
-			let rowIndex = oEvent.getParameters().rowIndex;
+			// let oTable = this.byId("GLGrpSelectTable").getBinding("rows"); 
+			// console.log(oTable);
+			// console.log(oEvent.getSource());
+			// console.log(oEvent.getParameters().rowBindingContext.sPath.split('/')[2]);
+			// let rowIndex = oEvent.getParameters().rowIndex;
+			let rowIndex = oEvent.getParameters().rowBindingContext.sPath.split('/')[2];
 			this.byId("GLGroup").setValue(oEvent.getParameters().rowBindingContext.oModel.oData.GLAcctGroupList[rowIndex].GLAcctGrp); 
 			
 			temp.gl_acct = this.byId("GLGroup").setValue(oEvent.getParameters().rowBindingContext.oModel.oData.GLAcctGroupList[rowIndex].GLAcctGrp)._lastValue; 
@@ -296,7 +301,11 @@ sap.ui.define([
 		},
 
 		getCoAContext: function(oEvent) {
-			let rowIndex = oEvent.getParameters().rowIndex;
+			// let rowIndex = oEvent.getParameters().rowIndex;
+			let rowIndex = oEvent.getParameters().rowBindingContext.sPath.split('/')[1];
+
+			console.log(rowIndex); 
+			console.log(oEvent.getParameters().rowBindingContext.oModel.oData); 
 			this.byId("CoA").setValue(oEvent.getParameters().rowBindingContext.oModel.oData[rowIndex].gl_coa); 
 			this.onCloseCoADialog();
 		},

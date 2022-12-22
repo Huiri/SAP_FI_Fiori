@@ -245,10 +245,10 @@ sap.ui.define([
 			this.pWhitespaceDialog = null;
 			this._oBasicSearchField = null;
 			this.oWhitespaceDialog = null;
-			var oModel = this.getView().getModel('BpCoCdModel');
+			var oModel = this.getView().getModel('CompanyCodeListModel');
 
-			var oCoCdTemplate = new Text({ text: { path: 'BpCustomerModel>bp_company_code' }, renderWhitespace: true });
-			var oBPNameTemplate = new Text({ text: { path: 'BpCustomerModel>bp_name' }, renderWhitespace: true });
+			var oCoCdTemplate = new Text({ text: { path: 'CompanyCodeListModel>com_code' }, renderWhitespace: true });
+			var oBPNameTemplate = new Text({ text: { path: 'CompanyCodeListModel>com_code_name' }, renderWhitespace: true });
 			this._oBasicSearchField = new SearchField({
 				search: function () {
 					this.oWhitespaceDialog.getFilterBar().search();
@@ -275,8 +275,8 @@ sap.ui.define([
 				// }
 				// Set key fields for filtering in the Define Conditions Tab
 				oWhitespaceDialog.setRangeKeyFields([{
-					label: "BP",
-					key: "BpCustomerModel>bp_company_code"
+					label: "CoCd",
+					key: "CompanyCodeListModel>com_code"
 				}]);
 
 				// Set Basic Search for FilterBar
@@ -291,7 +291,7 @@ sap.ui.define([
 						oTable.addColumn(new UIColumn({ label: "회사코드", template: oCoCdTemplate, width : "15%" }));
 						oTable.addColumn(new UIColumn({ label: "회사명", template: oBPNameTemplate }));
 						oTable.bindAggregation("rows", {
-							path: "BpCustomerModel>/",
+							path: "CompanyCodeListModel>/",
 							events: {
 								dataReceived: function () {
 									oWhitespaceDialog.update();

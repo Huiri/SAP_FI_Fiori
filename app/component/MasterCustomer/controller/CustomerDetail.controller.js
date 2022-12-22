@@ -398,9 +398,8 @@ sap.ui.define([
             this.onSearchCountryDialog();
 		},
         getCountryContext : function(oEvent){
-			console.log(oEvent.getParameters());
-			let rowIndex = oEvent.getParameters().rowIndex;
-			console.log(rowIndex);
+			// let rowIndex = oEvent.getParameters().rowIndex;
+			let rowIndex = oEvent.getParameters().rowBindingContext.sPath.split('/')[2];
 
             this.byId("bpNation").setValue(oEvent.getParameters().rowBindingContext.oModel.oData[rowIndex].bp_nation_code); 
             // console.log(oEvent.getParameters()); 

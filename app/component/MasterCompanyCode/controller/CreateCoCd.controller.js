@@ -151,7 +151,8 @@ sap.ui.define([
 
     // 국가 선택용 다이어로그 특정 row 선택 시 생성 페이지 Input에 값 입력
     getCountryContext: function (oEvent) {
-      let rowIndex = oEvent.getParameters().rowIndex;
+      // let rowIndex = oEvent.getParameters().rowIndex;
+			let rowIndex = oEvent.getParameters().rowBindingContext.sPath.split('/')[1];
 			this.byId("CoCdCountry").setValue(oEvent.getParameters().rowBindingContext.oModel.oData[rowIndex].bp_nation_code); 
       this.onCloseCountryDialog();
 
@@ -213,7 +214,8 @@ sap.ui.define([
 			this.pDialog = null;
 		},
     getCoAContext: function(oEvent) {
-			let rowIndex = oEvent.getParameters().rowIndex;
+			// let rowIndex = oEvent.getParameters().rowIndex;
+			let rowIndex = oEvent.getParameters().rowBindingContext.sPath.split('/')[1];
 			this.byId("CoCdCoa").setValue(oEvent.getParameters().rowBindingContext.oModel.oData[rowIndex].gl_coa); 
 			this.onCloseCoADialog();
 		},
@@ -233,14 +235,14 @@ sap.ui.define([
 
 
     onSearchCoCdFYDialog: function() {
-			var SearchInputCoCarea = this.byId("SearchInputCoCarea").getValue();
+			var SearchInputCoCdFY = this.byId("SearchInputCoCdFY").getValue();
 			var aFilter = [];
 
-			if (SearchInputCoCarea) {
+			if (SearchInputCoCdFY) {
 				aFilter = new Filter({
 					filters: [
-						new Filter("com_fiscal_year", FilterOperator.Contains, SearchInputCoCarea),
-						new Filter("com_fiscal_year_variant_name", FilterOperator.Contains, SearchInputCoCarea)
+						new Filter("com_fiscal_year", FilterOperator.Contains, SearchInputCoCdFY),
+						new Filter("com_fiscal_year_variant_name", FilterOperator.Contains, SearchInputCoCdFY)
 					],
 					and: false
 				});
@@ -251,8 +253,8 @@ sap.ui.define([
 		},
 
 		onSearchCoCdFYReset: function() {
-			this.byId("SearchInputCoCarea").setValue("");
-			this.onSearchCoADialog();
+			this.byId("SearchInputCoCdFY").setValue("");
+			this.onSearchCoCdFYDialog();
 		},
 
 		onCloseCoCdFYDialog: function() {
@@ -260,7 +262,9 @@ sap.ui.define([
 			this.pDialog = null;
 		},
     getCoCdFYContext: function(oEvent) {
-			let rowIndex = oEvent.getParameters().rowIndex;
+			// let rowIndex = oEvent.getParameters().rowIndex;
+      let rowIndex = oEvent.getParameters().rowBindingContext.sPath.split('/')[1];
+
 			this.byId("CoCdFiscalYear").setValue(oEvent.getParameters().rowBindingContext.oModel.oData[rowIndex].com_fiscal_year); 
 			this.onCloseCoCdFYDialog();
 		},
@@ -282,7 +286,10 @@ sap.ui.define([
 
     onSearchCoAreaDialog: function() {
 			var SearchInputCoCarea = this.byId("SearchInputCoCarea").getValue();
+      console.log(SearchInputCoCarea);
 			var aFilter = [];
+
+      console.log(SearchInputCoCarea);
 
 			if (SearchInputCoCarea) {
 				aFilter = new Filter({
@@ -293,14 +300,14 @@ sap.ui.define([
 					and: false
 				});
 			}
-
+      console.log(aFilter);
 			let oTable = this.byId("CoAreaSelectTable").getBinding("rows"); 
             oTable.filter(aFilter);
 		},
 
 		onSearchCoAreaReset: function() {
 			this.byId("SearchInputCoCarea").setValue("");
-			this.onSearchCoADialog();
+			this.onSearchCoAreaDialog();
 		},
 
 		onCloseCoCdCoAreaDialog: function() {
@@ -308,7 +315,9 @@ sap.ui.define([
 			this.pDialog = null;
 		},
     getCoAreaContext: function(oEvent) {
-			let rowIndex = oEvent.getParameters().rowIndex;
+			// let rowIndex = oEvent.getParameters().rowIndex;
+      let rowIndex = oEvent.getParameters().rowBindingContext.sPath.split('/')[1];
+
 			this.byId("CoCdCoArea").setValue(oEvent.getParameters().rowBindingContext.oModel.oData[rowIndex].com_co_area); 
 			this.onCloseCoCdCoAreaDialog();
 		},
@@ -353,7 +362,6 @@ sap.ui.define([
 		validateForVboxClear:function(sParam){
 			var item =this.byId(sParam).mAggregations.items;
 			for(var i=0;i<item.length;i++){
-				console.log(item[i].mAggregations);
 				var vboxitem = item[i].mAggregations.items;
 				for(var j=0;j<vboxitem.length;j++){
 					var element_type = vboxitem[j].getMetadata().getName().split('.')[2];
