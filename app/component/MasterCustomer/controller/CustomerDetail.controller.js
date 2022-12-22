@@ -21,11 +21,13 @@ sap.ui.define([
 	let source=null;
 	let stickType=null;
 	let donut=null;
+	let home=null;
 	const BPCATEGORY_ORG="조직";
 	const BPCATEGORY_BP="개인";
 
     const SOURCE_CHART ="chart"; 
     const SOURCE_CHART_STICK ="stick"; 
+	const SOURCE_HOME = "home";
 	
 	return Controller.extend("project3.controller.CustomerDetail", {
 		formatter : formatter,
@@ -54,10 +56,12 @@ sap.ui.define([
 				if(query.stickType!=null) {
 					stickType = query.stickType;
 					console.log(stickType);
-				}
-				if(query.donut!=null){
+				}else if(query.donut!=null){
 					donut=query.donut;
 					console.log(donut);
+				}else if(query.source=SOURCE_HOME){
+					home=query.home;
+					console.log(home);
 				}
 			}else{
 				source=null;
@@ -259,9 +263,10 @@ sap.ui.define([
 			// if(source==SOURCE_CHART) this.getOwnerComponent().getRouter().navTo("CustomerChart",{type:donut});
 			// else if(source==SOURCE_CHART_STICK) this.getOwnerComponent().getRouter().navTo("CustomerSubmitChartDetail",{submitState:stickType});
 			// else if(source==null) this.getOwnerComponent().getRouter().navTo("CustomerList");
-
+			console.log(source);
 			if(source==SOURCE_CHART) this.getOwnerComponent().getRouter().navTo("CustomerChart",{"?query":{type:donut}});
 			else if(source==SOURCE_CHART_STICK) this.getOwnerComponent().getRouter().navTo("CustomerChart",{"?query":{submitState:stickType}});
+			else if(source==SOURCE_HOME) this.getOwnerComponent().getRouter().navTo("CustomerChart");
 			else if(source==null) this.getOwnerComponent().getRouter().navTo("CustomerList");
 			
 		},
