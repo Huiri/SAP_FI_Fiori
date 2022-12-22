@@ -215,9 +215,6 @@
                                 </t:extension>
 
                                 <t:columns>
-                                    <t:Column id="_IDGenColumn0" width="4rem">
-                                        <CheckBox id="checkAll" select=".onCheckExecute" />
-                                    </t:Column>
 
                                     <t:Column id="_IDGenColumn1" hAlign="Center">
                                         <Label id="_IDGenLabel1" text="관리회계 영역"/>
