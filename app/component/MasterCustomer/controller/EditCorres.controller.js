@@ -254,7 +254,7 @@ sap.ui.define([
 			<span><p>변제되어야할 채권 내역은 아래와 같습니다. </span></p> 
 			<br/>
 
-			<p><span style="font-size: 10.5pt; font-family: sans-serif; color: #0070c0;">당사가 받을 금액 <strong>${total}</strong></span></p>
+			<p><span style="font-size: 10.5pt; font-family: sans-serif; color: #0070c0;">당사가 받을 금액 : <strong>${total}</strong></span></p>
 			<table style="width:30rem"  border="1">
 				<tr align = "center" bgcolor="skybule">
 					<td>계정과목</td>
