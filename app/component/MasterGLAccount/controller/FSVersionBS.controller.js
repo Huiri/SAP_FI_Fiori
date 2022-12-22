@@ -1,10 +1,9 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/ui/model/json/JSONModel",
-    "sap/ui/export/Spreadsheet",
-    "sap/ui/export/library"
-], function (Controller, JSONModel, Spreadsheet, exportLibrary) {
+], function (Controller, JSONModel) {
     "use strict";
+    let fsVersionType;
     return Controller.extend("project2.controller.FSVersionBS", {
         onInit: async function () {
 
@@ -13,22 +12,31 @@ sap.ui.define([
 
             // tree table
             var oModel = new JSONModel("/app/component/MasterGLAccount/model/FSData.json");
-            let oFSDataModel = this.getView().setModel(oModel, "FSDataModel");
+            this.getView().setModel(oModel, "FSDataModel");
+            
             //console.log(oFSDataModel)
         },
 
         onMyRoutePatternMatched: async function (oEvent) {
-            let fsVersionType = this.byId("fsVersionType").getSelectedKey();
-            //console.log(fsVersionType);
-        },
-
-        onRun: function () {
-            let fsVersionType = this.byId("fsVersionType").getSelectedKey();
+            fsVersionType = this.byId("fsVersionType").getSelectedKey();
             if (fsVersionType == "재무상태표") {
                 this.getOwnerComponent().getRouter().navTo("FSVersionBS");
                 this.byId("fsVersionType").setSelectedItemId("bs");
             }
-            else {
+            else if((fsVersionType == "손익계산서")) {
+                this.getOwnerComponent().getRouter().navTo("FSVersionPL")
+                this.byId("fsVersionType").setSelectedItemId("pl");
+            }    
+        },
+
+        onRun: function () {
+            fsVersionType = this.byId("fsVersionType").getSelectedKey();
+            
+            if (fsVersionType === "재무상태표") {
+                this.getOwnerComponent().getRouter().navTo("FSVersionBS");
+                this.byId("fsVersionType").setSelectedItemId("bs");
+            }
+            else if (fsVersionType === "손익계산서") {
                 this.getOwnerComponent().getRouter().navTo("FSVersionPL");
                 this.byId("fsVersionType").setSelectedItemId("pl");
             }
@@ -38,6 +46,7 @@ sap.ui.define([
 
         onBack: function () {
             this.getOwnerComponent().getRouter().navTo("Home");
+            this.byId("fsVersionType").setSelectedItemId("bs");
             this.onCollapseAll();
         },
 
