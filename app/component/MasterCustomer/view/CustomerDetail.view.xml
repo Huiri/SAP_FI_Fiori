@@ -370,10 +370,6 @@
                                 <m:Text id="bpCreatedDateOrg" text="{bpModel>/bp_created_date}"/>
                             </m:VBox>
                             <m:VBox class="sapUiSmallMarginTopBottom">
-                                <m:Label text="최종 변경자" class="propertyColumn"/>
-                                <m:Text id="bpChangerOrg" text="{bpModel>/bp_changer}"/>
-                            </m:VBox>
-                            <m:VBox class="sapUiSmallMarginTopBottom">
                                 <m:Label text="최종 변경일" class="propertyColumn"/>
                                 <m:Text id="bpChangedDateOrg" text="{bpModel>/bp_changed_date}"/>
                             </m:VBox>
