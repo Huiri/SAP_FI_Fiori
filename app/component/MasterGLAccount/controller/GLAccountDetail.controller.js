@@ -212,13 +212,14 @@ sap.ui.define([
                 oPLSelect.setEditable(true);
 
             } 
+            this.byId("InputGLAccType").setSelectedKey(TextGLAccType);
 
             
             let TextGLGroup = this.byId("TextGLGroup").getCustomData()[0].getProperty('value');
-            this.byId("InputGLGroup").setSelectedKey(`${TextGLGroup}`);
+            this.byId("InputGLGroup").setSelectedKey(TextGLGroup);
 
             let TextPLAccType = this.byId("TextPLAccType").getCustomData()[0].getProperty('value');
-            this.byId("InputPLAccType").setSelectedKey(`${TextPLAccType}`);           
+            this.byId("InputPLAccType").setSelectedKey(TextPLAccType);           
 
             let TextFuncArea = this.byId("TextFuncArea").getCustomData()[0].getProperty('value');
 
