@@ -327,7 +327,58 @@ sap.ui.define([
             let bp_region=this.byId("bpRegion");
             bp_region.setValue(sData.bp_region);
 		},
+		validateForVbox:function(sParam){
+			var check=false;
+			var item =this.byId(sParam).mAggregations.items;
+			for(var i=0;i<item.length;i++){
+				 console.log(item[i].mAggregations);
+				var vboxitem = item[i].mAggregations.items;
+				for(var j=0;j<vboxitem.length;j++){
+					var element_type = vboxitem[j].getMetadata().getName().split('.')[2];
+					if (element_type == 'Input'|| element_type=='DatePicker'||element_type == 'ComboBox') {
+                        vboxitem[j].setValueState("None");
+                        vboxitem[j].setValueStateText(null);
+                        if (vboxitem[j].mProperties.required == true) {
+                            var element_value = vboxitem[j].mProperties.value;
+                            if(element_value ==''||element_value==null||element_value==undefined){
+								check=true;
+                                vboxitem[j].setValueState("Error");
+                                vboxitem[j].setValueStateText("필수 값을 입력해주세요.");
+                            }
+                        }
+                    }
+					else if (element_type == 'Select') {
+            console.log(element_value);
 
+                        vboxitem[j].setValueState("None");
+                        vboxitem[j].setValueStateText(null);
+                        if (vboxitem[j].mProperties.required == true) {
+                            var element_value = vboxitem[j].mProperties.selectedKey;
+                            if(element_value ==''||element_value==null||element_value==undefined){
+								                check=true;
+                                vboxitem[j].setValueState("Error");
+                                vboxitem[j].setValueStateText("필수 값을 입력해주세요.");
+                            }
+                        }
+                    }
+				}
+			}
+			return check;
+		},
+		validateForVboxClear:function(sParam){
+			var item =this.byId(sParam).mAggregations.items;
+			for(var i=0;i<item.length;i++){
+				var vboxitem = item[i].mAggregations.items;
+				for(var j=0;j<vboxitem.length;j++){
+					var element_type = vboxitem[j].getMetadata().getName().split('.')[2];
+					if (element_type == 'Input'|| element_type=='DatePicker'||element_type == 'ComboBox'|| element_type == 'Select')
+          {
+                        vboxitem[j].setValueState("None");
+                        vboxitem[j].setValueStateText(null);
+                    }
+				}
+			}
+		},
 		//-----------header----------//
 
 		//편집 
@@ -337,13 +388,24 @@ sap.ui.define([
 		//-----------footer----------//
 		//accept
 		onAccept: async function(){
-			console.log("A")
-			this.initBpDetailDataView(this.setBpModelData());
+			let check;
+			if(this.getView().getModel("bpModel").getData().bp_category == BPCATEGORY_ORG){
+				check = this.validateForVbox("validateRequiredOrg");
+			}else if(this.getView().getModel("bpModel").getData().bp_category == BPCATEGORY_BP){
+				check = this.validateForVbox("validateRequired");
+			}
+			
+			if(check===false){
+				this.initBpDetailDataView(this.setBpModelData());
+			}else if(check===true){
+				return;
+			}
 		},
 		//cancel
 		onCancel:function(){
 			console.log("GET CANCEL");
 			console.log(originModel);
+			this.validateForVboxClear("validateRequired");
 			this.changeVisibleMode(true);
 			
 		},
