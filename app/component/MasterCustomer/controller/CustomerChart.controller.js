@@ -6,6 +6,7 @@ sap.ui.define([
 ) {
     "use strict";
     
+    const SOURCE_HOME ="home";
 
     return Controller.extend("project3.controller.CustomerChart", {
 
@@ -33,16 +34,16 @@ sap.ui.define([
         },
 
         matchedNavTo: function(e){
-            console.log( e.getParameter("arguments")["?query"]);
             let a= e.getParameter("arguments")["?query"];
+            //console.log(a);
             if(a!=null){
                 if(a.type!=null){
-                    console.log("도넛");
-                    console.log(a.type);
+                    // console.log("도넛");
+                    // console.log(a.type);
                     this.getOwnerComponent().getRouter().navTo('CustomerChartDetail', {type:a.type});
-                }else{
-                    console.log("스틱");
-                    console.log(a.submitState);
+                }else if(a.submitState!=null){
+                    // console.log("스틱");
+                    // console.log(a.submitState);
                     this.getOwnerComponent().getRouter().navTo('CustomerSubmitChartDetail', {submitState:a.submitState});
                 }
                 e.getParameter("arguments")["?query"] = null;
@@ -148,7 +149,7 @@ sap.ui.define([
             var sPath = oEvent.getSource().oBindingContexts.submitWaitModel.sPath;
             var SelectedNum = this.getView().getModel("submitWaitModel").getProperty(sPath).bp_number;
             
-            this.getOwnerComponent().getRouter().navTo("CustomerDetail", {num: SelectedNum});
+            this.getOwnerComponent().getRouter().navTo("CustomerDetail", {num: SelectedNum,"?query": {source : SOURCE_HOME}});
         },
         
         toCustomerHome: function () {

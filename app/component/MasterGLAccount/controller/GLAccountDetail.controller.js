@@ -32,6 +32,7 @@ sap.ui.define([
 ) {
 	"use strict";
     let SelectedItem;
+    let TextGLAccDesc=null;
 	return Controller.extend("project2.controller.GLAccountDetail", {
         formatter:formatter,
         onInit: function(){
@@ -201,7 +202,7 @@ sap.ui.define([
             let TextCoAContent = this.byId("TextCoAContent").getText();
             //this.byId("InputCoAContent").setSelectedKey(TextCoAContent);
             
-            let TextGLAccDesc = this.byId("TextGLAccDesc").getText();
+            TextGLAccDesc = this.byId("TextGLAccDesc").getText();
             if(TextGLAccDesc === "-"){
                 this.byId("InputGLAccDesc").setValue("");
             } else{
@@ -382,6 +383,8 @@ sap.ui.define([
         },
         onCancel: function(){
             const oView = this.getView();
+            oView.byId("TextGLAccDesc").setText(TextGLAccDesc);
+            console.log(oView.byId("TextGLAccDesc").getText());
             let vis =  oView.getModel("GLDataModel").getProperty("/gl_blocked");
             var state = JSON.parse(this.getView().byId("glBlocked").getCustomData()[0].getProperty('value'));
 
