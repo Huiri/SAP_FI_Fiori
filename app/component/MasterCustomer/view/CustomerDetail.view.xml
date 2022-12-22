@@ -108,8 +108,8 @@
                                     id="bpPersonTitle"
                                     visible="{=!${visibleMode>/visible}}"
                                     forceSelection="false">
-                                <c:Item key="mr" text="Mr."/>
-                                <c:Item key="ms" text="Ms."/>
+                                    <c:Item key="Mr." text="Mr."/>
+                                    <c:Item key="Ms." text="Ms."/>
                                 </m:Select>
                             </m:VBox>
                             <m:VBox class="sapUiSmallMarginTopBottom">
@@ -218,20 +218,8 @@
 
                         <layout:VerticalLayout class="sapUiSmallMarginBeginEnd">
                             <m:VBox class="sapUiSmallMarginTopBottom">
-                                <m:Label text="생성자" class="propertyColumn"/>
-                                <m:Text id="bpConstructor" text="{bpModel>/bp_constructor}"/>
-                            </m:VBox>
-                            <m:VBox class="sapUiSmallMarginTopBottom">
                                 <m:Label text="생성일" class="propertyColumn"/>
                                 <m:Text id="bpCreatedDate" text="{bpModel>/bp_created_date}"/>
-                            </m:VBox>
-                            <m:VBox class="sapUiSmallMarginTopBottom">
-                                <m:Label text="최종 변경자" class="propertyColumn"/>
-                                <m:Text id="bpChanger" 
-                                    text="{
-                                        path:'bpModel>/bp_changer',
-                                        formatter:'.formatter.IsNull'
-                                    }"/>
                             </m:VBox>
                             <m:VBox class="sapUiSmallMarginTopBottom">
                                 <m:Label text="최종 변경일" class="propertyColumn"/>
@@ -240,7 +228,8 @@
                                     text="{
                                         path:'bpModel>/bp_changed_date',
                                         formatter:'.formatter.IsNull'
-                                    }"/>
+                                    }"
+                                    />
                             </m:VBox>
                             <layout:layoutData>
                                 <layout:GridData span="XL4 L4 M6 S6"/>
