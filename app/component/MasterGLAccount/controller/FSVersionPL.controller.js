@@ -1,44 +1,37 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
-    "sap/ui/model/json/JSONModel",
-    "sap/ui/export/Spreadsheet",
-    "sap/ui/export/library"
+    "sap/ui/model/json/JSONModel"
 ], function(
 	Controller,
-	JSONModel,
-	Spreadsheet,
-	library
+	JSONModel
 ) {
 	"use strict";
-   
-
+    let fsVersionType;
 	return Controller.extend("project2.controller.FSVersionPL", {
         onInit: async function () {
-
+           
+            
             this.getOwnerComponent().getRouter().getRoute("FSVersionPL").attachPatternMatched(this.onMyRoutePatternMatched, this)
-
-
+            
             // tree table
-            var oModel = new JSONModel("/app/component/MasterGLAccount/model/FSData.json");
-			this.getView().setModel(oModel);
+
             
         },
 
         onMyRoutePatternMatched: async function (oEvent) {
-            let fsVersionType = this.byId("fsVersionType").getSelectedKey();
-            //console.log(fsVersionType);
+            var oModel = new JSONModel("/app/component/MasterGLAccount/model/FSData.json");
+			this.getView().setModel(oModel);
         },
 
         onRun: function () {
-            let fsVersionType = this.byId("fsVersionType").getSelectedKey();
+            fsVersionType = this.byId("fsVersionType").getSelectedKey();
             if (fsVersionType == "재무상태표") {
                 this.getOwnerComponent().getRouter().navTo("FSVersionBS");
                 this.byId("fsVersionType").setSelectedItemId("bs");
             }
-            else {
+            else if((fsVersionType == "손익계산서")) {
                 this.getOwnerComponent().getRouter().navTo("FSVersionPL")
                 this.byId("fsVersionType").setSelectedItemId("pl");
-
             }
             this.onCollapseAll();
         },

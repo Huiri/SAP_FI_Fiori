@@ -117,7 +117,7 @@ sap.ui.define([
 			let now = new Date();
 			
 
-			now =`${now.getFullYear()}-${now.getMonth()+1}-${String(now.getDate()).padStart(2,0)}`;
+			now =`${now.getFullYear()}.${now.getMonth()+1}.${String(now.getDate()).padStart(2,0)}`;
 			console.log(v.byId("bpExternalNumberOrg"))
 			let tempPerson = {
 				//개인
@@ -128,20 +128,20 @@ sap.ui.define([
 				"bp_degree": v.byId("bpDegree").getValue(),
 				"bp_birthday" : v.byId("bpBirthday").getValue(),
 				"bp_birthplace" : v.byId("bpBirthplace").getValue(),
-				"bp_changer": v.byId("bpChanger").getText(),
+				//"bp_changer": v.byId("bpChanger").getText(),
 				"bp_search1": v.byId("bpSearch1").getValue(),
 				"bp_search2": v.byId("bpSearch2").getValue(),
 				"bp_external_number": v.byId("bpExternalNumber").getValue(),
 				
 				//공통
-				"bp_report_submission": $.parseJSON(v.byId("bpReportSubmission").getSelectedKey()),
+				"bp_report_submission": Boolean(v.byId("bpReportSubmission").getSelectedKey()),
 				"bp_changed_date": now,
 				"bp_delivery_rule": v.byId("bpDeliveryRule").getValue(),
 				"bp_vendor": v.byId("bpVendor").getValue(),
 				"bp_provision_reason": v.byId("bpProvisionReason").getValue(),
-				"bp_billing_hold": $.parseJSON(v.byId("bpBillingHold").getSelectedKey()),
-				"bp_delivery_hold":$.parseJSON(v.byId("bpDeliveryHold").getSelectedKey()),
-				"bp_posting_hold":$.parseJSON(v.byId("bpPostingHold").getSelectedKey()),
+				"bp_billing_hold": Boolean(v.byId("bpBillingHold").getSelectedKey()),
+				"bp_delivery_hold":Boolean(v.byId("bpDeliveryHold").getSelectedKey()),
+				"bp_posting_hold":Boolean(v.byId("bpPostingHold").getSelectedKey()),
 				"bp_customer_classification":v.byId("bpCustomerClassification").getValue(),
 				"bp_nation":v.byId("bpNation").getValue(),
 				"bp_road_address":v.byId("bpRoadAddress").getValue(),
@@ -278,7 +278,7 @@ sap.ui.define([
 			v.byId("bpDegree").setValue(sData.bp_degree);
 			v.byId("bpBirthday").setValue(sData.bp_birthday);
 			v.byId("bpBirthplace").setValue(sData.bp_birthplace);
-			v.byId("bpChanger").setText(sData.bp_changer);
+			//v.byId("bpChanger").setText(sData.bp_changer);
 			v.byId("bpSearch1").setValue(sData.bp_search1);
 			v.byId("bpSearch2").setValue(sData.bp_search2);
 			let bp_external_number= this.byId("bpExternalNumber");

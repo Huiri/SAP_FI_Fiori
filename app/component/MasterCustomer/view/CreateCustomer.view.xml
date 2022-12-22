@@ -63,26 +63,26 @@ controllerName="project3.controller.CreateCustomer"
                             <VBox>
 								<Title class="sapUiSmallMarginBegin sapUiSmallMarginEnd"
                                 text="일반 데이터"/>
-                            <VBox id="generalData">
-                                <VBox class="sapUiSmallMargin">
-                                    <Label text="생성일 : " />
-                                    <Text id="BpCreatedDate"/>
-                                </VBox >
+                                <VBox id="generalData">
+                                    <VBox class="sapUiSmallMargin">
+                                        <Label text="생성일 : " />
+                                        <Text id="BpCreatedDate"/>
+                                    </VBox >
 
-                                <VBox class="sapUiSmallMargin">
-                                    <Label text="BP명 : " labelFor="BpName"/>
-                                    <Input id="BpName"  required="true" />
-                                </VBox>
+                                    <VBox class="sapUiSmallMargin">
+                                        <Label text="BP명 : " labelFor="BpName"/>
+                                        <Input id="BpName"  required="true" />
+                                    </VBox>
 
-                                <VBox class="sapUiSmallMargin">
-                                    <Label text="BP번호 : " />
-                                    <Text id="BpNumber" />
-                                </VBox>
+                                    <VBox class="sapUiSmallMargin">
+                                        <Label text="BP번호 : " />
+                                        <Text id="BpNumber" />
+                                    </VBox>
 
-                                <VBox class="sapUiSmallMargin">
-                                    <Label text="BP범주 : " />
-                                    <Text id="BpCategory" />
-                                </VBox>
+                                    <VBox class="sapUiSmallMargin">
+                                        <Label text="BP범주 : " />
+                                        <Text id="BpCategory" />
+                                    </VBox>
 
                                 <VBox class="sapUiSmallMargin">
                                     <Label text="회사 코드 : " labelFor="BpCompanyCode" />
@@ -95,27 +95,22 @@ controllerName="project3.controller.CreateCustomer"
                                 <layoutData>
                                     <layout:GridData span="XL4 L3 M6 S12"/>
                                 </layoutData>
-
-                            </VBox>
-                            </VBox>
-                            <VBox>
-
-                                <Title text="개인 칭호 " 
-                                 class="sapUiSmallMarginBegin sapUiSmallMarginEnd"
-                                visible="{=!${bpCategoryModel>/category}}"/>
-
-                                <VBox id="personalData">
-                                <VBox class="sapUiSmallMargin">
-                                    <Label text="조직 명칭 " visible="{=${bpCategoryModel>/category}}"/>
-                                    <Select id="BpPersonTitle" visible="{=!${bpCategoryModel>/category}}" width="100%"
-                                    >
-                                        <core:Item key="" text="선택" />
-                                        <core:Item key="Mr" text="Mr" />
-                                        <core:Item key="Mrs" text="Mrs" />
-                                    </Select>
-                                    <Input id="BpOrganizationTitle" visible="{=${bpCategoryModel>/category}}"/>
                                 </VBox>
-                                <VBox class="sapUiSmallMargin">
+                            </VBox>
+                            <VBox class="sapUiTinyMargin sapUiSmallMarginBeginEnd">
+                                <Title class="sapUiSmallMargin" />
+                                <VBox id="personalData" >
+                                    <VBox class="sapUiTinyMargin sapUiSmallMarginBeginEnd">
+                                        <Label text="조직 명칭 " visible="{=${bpCategoryModel>/category}}" />
+                                        <Label text="개인 칭호 " visible="{=!${bpCategoryModel>/category}}"/>
+                                        <Select id="BpPersonTitle" visible="{=!${bpCategoryModel>/category}}" width="100%" >
+                                            <core:Item key="" text="선택" />
+                                            <core:Item key="Mr." text="Mr." />
+                                            <core:Item key="Mrs." text="Mrs." />
+                                        </Select>
+                                        <Input id="BpOrganizationTitle" visible="{=${bpCategoryModel>/category}}"/>
+                                    </VBox>
+                                    <VBox class="sapUiSmallMargin">
 
                                     <Label text="성 " visible="{=!${bpCategoryModel>/category}}"  labelFor="BpFirstName"/>
                                     <Label text="회사명1 " visible="{=${bpCategoryModel>/category}}" labelFor="BpCorpName1" />
