@@ -169,6 +169,7 @@ sap.ui.define([
            var temp={
                 bp_name : this.byId("BpName").getValue(),
                 bp_created_date : Today,
+                bp_changed_date: Today,
                 bp_number : this.byId("BpNumber").getText(),
                 bp_category : this.byId("BpCategory").getText(),        
                 bp_company_code : this.byId("BpCompanyCode").getValue(),
@@ -183,7 +184,11 @@ sap.ui.define([
                 bp_street_address : this.byId("BpStreetAddress").getValue(),
                 bp_postal_code : this.byId("BpPostalCode").getValue(),
                 bp_nation : this.byId("BpNation").getValue(),
-                bp_report_submission : this.byId("BpReportSubmission").getSelected()
+                bp_report_submission : this.byId("BpReportSubmission").getSelected(),
+                bp_credit_status :"보류",
+                bp_billing_hold : false,
+                bp_delivery_hold : false,
+                bp_posting_hold : false
             }
 
             if( selectedBpCategory == 1) {
