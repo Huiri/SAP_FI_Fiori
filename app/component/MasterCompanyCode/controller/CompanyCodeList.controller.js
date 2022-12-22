@@ -9,22 +9,28 @@ sap.ui.define([
     'sap/m/SearchField',
 	'sap/ui/table/Column',
 	'sap/m/Text',
+	"project3/model/formatter"
 ], function (Controller, Filter, FilterOperator, Sorter, JSONModel, Spreadsheet, exportLibrary,
-    SearchField,UIColumn,Text) {
+    SearchField,UIColumn,Text,formatter) {
+
     "use strict";
 	const EdmType = exportLibrary.EdmType;
     let totalNumber;
     let selectedNum;
 
     return Controller.extend("project4.controller.CompanyCodeList",{
+
+		formatter : formatter,
+
         onInit: async function(){
             const myRoute = this.getOwnerComponent().getRouter().getRoute("CompanyCodeList");
             myRoute.attachPatternMatched(this.onMyRoutePatternMatched,this);
         },
 
         onMyRoutePatternMatched: async function(){
-
             this.onDataView();
+			this.onReset();
+
         },
         onDataView: async function(){
             const CompanyCodeList = await $.ajax({
@@ -137,12 +143,12 @@ sap.ui.define([
 			this.pWhitespaceDialog.then(function (oWhitespaceDialog) {
 				var oFilterBar = oWhitespaceDialog.getFilterBar();
 				this.oWhitespaceDialog = oWhitespaceDialog;
-				if (this._bWhitespaceDialogInitialized) {
-					oWhitespaceDialog.setTokens([]);
-					oWhitespaceDialog.update();
+				// if (this._bWhitespaceDialogInitialized) {
+				// 	oWhitespaceDialog.setTokens([]);
+				// 	oWhitespaceDialog.update();
 
-					oWhitespaceDialog.open();
-				}
+				// 	oWhitespaceDialog.open();
+				// }
 				this.getView().addDependent(oWhitespaceDialog);
 
 				// if(!this.oWhitespaceDialog._getTokenizer().getTokenes().length){
@@ -177,6 +183,10 @@ sap.ui.define([
 
 					oWhitespaceDialog.update();
 				}.bind(this));
+
+				var multiinput_tokens =this.byId("CompanyCountry").getTokens()
+				oWhitespaceDialog.setTokens(multiinput_tokens);
+				oWhitespaceDialog.update();
 
 				this._bWhitespaceDialogInitialized = true;
 				oWhitespaceDialog.open();
@@ -252,12 +262,12 @@ sap.ui.define([
 			this.pWhitespaceDialog.then(function (oWhitespaceDialog) {
 				var oFilterBar = oWhitespaceDialog.getFilterBar();
 				this.oWhitespaceDialog = oWhitespaceDialog;
-				if (this._bWhitespaceDialogInitialized) {
-					oWhitespaceDialog.setTokens([]);
-					oWhitespaceDialog.update();
+				// if (this._bWhitespaceDialogInitialized) {
+				// 	oWhitespaceDialog.setTokens([]);
+				// 	oWhitespaceDialog.update();
 
-					oWhitespaceDialog.open();
-				}
+				// 	oWhitespaceDialog.open();
+				// }
 				this.getView().addDependent(oWhitespaceDialog);
 
 				// if(!this.oWhitespaceDialog._getTokenizer().getTokenes().length){
@@ -292,6 +302,10 @@ sap.ui.define([
 
 					oWhitespaceDialog.update();
 				}.bind(this));
+
+				var multiinput_tokens =this.byId("CompanyCode").getTokens()
+				oWhitespaceDialog.setTokens(multiinput_tokens);
+				oWhitespaceDialog.update();
 
 				this._bWhitespaceDialogInitialized = true;
 				oWhitespaceDialog.open();
@@ -352,12 +366,12 @@ sap.ui.define([
 			this.pWhitespaceDialog.then(function (oWhitespaceDialog) {
 				var oFilterBar = oWhitespaceDialog.getFilterBar();
 				this.oWhitespaceDialog = oWhitespaceDialog;
-				if (this._bWhitespaceDialogInitialized) {
-					oWhitespaceDialog.setTokens([]);
-					oWhitespaceDialog.update();
+				// if (this._bWhitespaceDialogInitialized) {
+				// 	oWhitespaceDialog.setTokens([]);
+				// 	oWhitespaceDialog.update();
 
-					oWhitespaceDialog.open();
-				}
+				// 	oWhitespaceDialog.open();
+				// }
 				this.getView().addDependent(oWhitespaceDialog);
 
 				// if(!this.oWhitespaceDialog._getTokenizer().getTokenes().length){
@@ -393,6 +407,10 @@ sap.ui.define([
 					oWhitespaceDialog.update();
 				}.bind(this));
 
+				var multiinput_tokens =this.byId("CompanyCoa").getTokens()
+				oWhitespaceDialog.setTokens(multiinput_tokens);
+				oWhitespaceDialog.update();
+
 				this._bWhitespaceDialogInitialized = true;
 				oWhitespaceDialog.open();
 			}.bind(this));
@@ -402,7 +420,7 @@ sap.ui.define([
 		onCoASelectOkPress: function (oEvent) {
 			var aTokens = oEvent.getParameter("tokens");
 			var CompanyCoa = this.byId("CompanyCoa");
-
+			var arr=[];
 			aTokens.forEach(function (oToken) {
 				// console.log(oToken.getKey());
 				oToken.mProperties.text = oToken.getKey().toString()
@@ -433,7 +451,7 @@ sap.ui.define([
 			this._filterTable(aFilter);
 		},
 		
-        onDataExport: function () {
+		onDataExport: function () {
             let aCols, oRowBinding, tableIndices, oSettings, oSheet, oTable;
 
             oTable = this.byId('CompanyCodeListTable');    // 테이블 
@@ -461,13 +479,48 @@ sap.ui.define([
 
             aCols = this.createColumnConfig();
 
+			for(let i = 0; i < oList.length; i++){
+				if(oList[i].com_country === 'KR'){
+					oList[i].com_country2 = "한국";
+				}
+				if(oList[i].com_country === 'CN'){
+					oList[i].com_country2 = "중국";
+				}
+				if(oList[i].com_country === 'DE'){
+					oList[i].com_country2 = "독일";
+				}
+				if(oList[i].com_country === 'DK'){
+					oList[i].com_country2 = "덴마크";
+				}
+				if(oList[i].com_country === 'HK'){
+					oList[i].com_country2 = "홍콩 특별 행정구";
+				}
+				if(oList[i].com_country === 'JP'){
+					oList[i].com_country2 = "일본";
+				}
+				if(oList[i].com_country === 'NL'){
+					oList[i].com_country2 = "네덜란드";
+				}
+				if(oList[i].com_country === 'SG'){
+					oList[i].com_country2 = "싱가포르";
+				}
+				if(oList[i].com_country === 'TW'){
+					oList[i].com_country2 = "대만";
+				}
+				if(oList[i].com_country === 'US'){
+					oList[i].com_country2 = "미국";
+				}
+				if(oList[i].com_country === 'BG'){
+					oList[i].com_country2 = "벨기에";
+				}
+			}
             oSettings = {
                 workbook: {
                     columns: aCols,
                     hierarchyLevel: 'Level'
                 },
                 dataSource: oList,
-                fileName: 'CompanyCodeListTable.xlsx',
+                fileName: 'CustomerListTable.xlsx',
                 worker: false
             };
             oSheet = new Spreadsheet(oSettings);
@@ -489,7 +542,7 @@ sap.ui.define([
             });
             aCols.push({
                 label: '국가/지역',
-                property: 'com_country',
+                property: 'com_country2',
                 type: EdmType.String
             });
             aCols.push({

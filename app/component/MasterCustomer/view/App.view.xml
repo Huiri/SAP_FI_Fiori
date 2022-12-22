@@ -4,13 +4,20 @@
     xmlns:html="http://www.w3.org/1999/xhtml"
     xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
     xmlns:tnt="sap.tnt"
+    xmlns:f="sap.f"
     xmlns="sap.m"
     height = "100%">
     <!-- sap sdk : toolpage layout -->
         <!-- 실제로 들어올 content 불러오는 페이지 -->
-            <App id="app">
+        <App >
             <!-- id="app"은 manifest의 routing의 controlId값으로 연동 -->
-            </App>
+            <f:FlexibleColumnLayout id="app"
+                autoFocus="false"
+                backgroundDesign="Translucent"
+                restoreFocusOnBackNavigation="true"
+            >
+            </f:FlexibleColumnLayout>
+        </App>
 
     <!-- app이라는 공간 할당해서 load될 파일을 manifest의 routing에서 할당 -->
 </mvc:View>

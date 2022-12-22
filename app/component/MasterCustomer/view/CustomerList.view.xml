@@ -24,11 +24,12 @@
                 <form:SimpleForm layout="ResponsiveGridLayout">
                     <form:content class="sapUiLargeMarginBeginEnd">
                         <VBox height="3rem">
-                            <Label text="비즈니스 파트너 : "/>
+                            <Label text="BP명 : "/>
                             <MultiInput 
                                 id="BpName" 
                                 showSuggestion="true" 
                                 valueHelpRequest=".onValueHelpBpList"
+                                valueHelpOnly="true"
                             />
                             <layoutData>
                                 <layout:GridData span="XL2 L2 M6 S12"/>
@@ -38,6 +39,7 @@
                             <Label text="회사 코드 : "/>
                             <MultiInput 
                                 id="BpCompanyCode" 
+                                valueHelpOnly="true"
                                 valueHelpRequest=".onValueHelpCoCdList" 
                                 showValueHelp="true"/>
                             <layoutData>
@@ -45,7 +47,7 @@
                             </layoutData>
                         </VBox>
                         <VBox height="3rem">
-                            <Label text="비즈니스 파트너 범주 : "/>
+                            <Label text="BP범주 : "/>
                             <Select width="100rem" id="BpCategory">
                                 <core:Item key="" text="전체" />
                                 <core:Item key="개인" text="개인" />
@@ -69,7 +71,11 @@
                         </VBox>
                         <VBox height="3rem">
                             <Label text="국가/지역 : "/>
-                            <MultiInput id="BpNation" valueHelpRequest=".onValueHelpCountryList" showValueHelp="true"/>
+                            <MultiInput id="BpNation" 
+                            valueHelpOnly="true"
+
+                            valueHelpRequest=".onValueHelpCountryList" 
+                            showValueHelp="true"/>
                             <layoutData>
                                 <layout:GridData span="XL2 L2 M6 S12"/>
                             </layoutData>
@@ -133,7 +139,7 @@
                 </t:extension>
                 <t:columns>
                     <t:Column hAlign="Center">
-                        <Label text="비즈니스 파트너"/>
+                        <Label text="BP명"/>
                         <t:template>
                             <Text text="{BpCustomerModel>bp_name}"/>
                         </t:template>
@@ -145,7 +151,7 @@
                         </t:template>
                     </t:Column>
                     <t:Column hAlign="Center">
-                        <Label text="비즈니스 파트너 범주"/>
+                        <Label text="BP범주"/>
                         <t:template>
                             <Text text="{BpCustomerModel>bp_category}"/>
                         </t:template>

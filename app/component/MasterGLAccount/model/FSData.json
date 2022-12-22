@@ -76,8 +76,7 @@
                 {"gl_account_content" :"예수금", "gl_acct" :"20000011", "gl_created" :"2022-02-06", "gl_constructor" :"김경훈", "gl_acct_currency" :"CNY"},
                 {"gl_account_content" :"순확정급여부채", "gl_acct" :"20000012", "gl_created" :"2022-02-07", "gl_constructor" :"김경훈", "gl_acct_currency" :"HKD"}
             ]}
-        ]}  
-    ]},
+        ]},  
         {"gl_account_content":"비유동부채","categories":[
             {"gl_account_content":"장기차입금","categories":[
                 {"gl_account_content" :"장기차입금", "gl_acct" :"20000004", "gl_created" :"2022-01-30", "gl_constructor" :"김경훈", "gl_acct_currency" :"DKK"}
@@ -86,7 +85,7 @@
                 {"gl_account_content" :"임대보증금", "gl_acct" :"20000013", "gl_created" :"2022-02-08", "gl_constructor" :"김경훈", "gl_acct_currency" :"EUR"},
                 {"gl_account_content" :"장기미지급비용", "gl_acct" :"20000014", "gl_created" :"2022-02-09", "gl_constructor" :"김경훈", "gl_acct_currency" :"TWD"}
             ]}
-        
+        ]}
     ]},
 
     {"gl_account_content":"자본","categories":[

@@ -26,12 +26,30 @@ sap.ui.define([
             this.getOwnerComponent().getRouter().getRoute("CustomerChart").attachPatternMatched(this.columnChartDataView, this);
             this.getOwnerComponent().getRouter().getRoute("CustomerChart").attachPatternMatched(this.columnChartDataView, this);
             this.getOwnerComponent().getRouter().getRoute("CustomerChart").attachPatternMatched(this.reportSubmitDataView, this);
+            this.getOwnerComponent().getRouter().getRoute("CustomerChart").attachPatternMatched(this.matchedNavTo, this);
 
 
 
         },
 
-        donutChartDataView: async function () {
+        matchedNavTo: function(e){
+            console.log( e.getParameter("arguments")["?query"]);
+            let a= e.getParameter("arguments")["?query"];
+            if(a!=null){
+                if(a.type!=null){
+                    console.log("도넛");
+                    console.log(a.type);
+                    this.getOwnerComponent().getRouter().navTo('CustomerChartDetail', {type:a.type});
+                }else{
+                    console.log("스틱");
+                    console.log(a.submitState);
+                    this.getOwnerComponent().getRouter().navTo('CustomerSubmitChartDetail', {submitState:a.submitState});
+                }
+                e.getParameter("arguments")["?query"] = null;
+            }
+        },
+        donutChartDataView: async function (e) {
+
             const BpCreditstatus = await $.ajax({
                 type: "get",
                 url: "/bp/BP"
@@ -88,10 +106,15 @@ sap.ui.define([
 
             //console.log(this.getView().getModel("bpReportSubmitModel"));
 
-            this.getView().getModel("bpReportSubmitModel").setProperty("/submit", a / data.oData.length * 100);
-            this.getView().getModel("bpReportSubmitModel").setProperty("/notsubmit", b / data.oData.length * 100);
-            this.getView().getModel("bpReportSubmitModel").setProperty("/submitpercent", (a / data.oData.length * 100).toFixed(2) + '%');
-            this.getView().getModel("bpReportSubmitModel").setProperty("/notsubmitpercent", (b / data.oData.length * 100).toFixed(2) + '%');
+            this.getView().getModel("bpReportSubmitModel").setProperty("/submit", a);
+            this.getView().getModel("bpReportSubmitModel").setProperty("/notsubmit", b );
+            this.getView().getModel("bpReportSubmitModel").setProperty("/submitpercent", a +" 건");
+            this.getView().getModel("bpReportSubmitModel").setProperty("/notsubmitpercent", b +" 건");
+
+            // this.getView().getModel("bpReportSubmitModel").setProperty("/submit", a / data.oData.length * 100);
+            // this.getView().getModel("bpReportSubmitModel").setProperty("/notsubmit", b / data.oData.length * 100);
+            // this.getView().getModel("bpReportSubmitModel").setProperty("/submitpercent", (a / data.oData.length * 100).toFixed(2) + '%');
+            // this.getView().getModel("bpReportSubmitModel").setProperty("/notsubmitpercent", (b / data.oData.length * 100).toFixed(2) + '%');
 
             //console.log(this.getView().getModel("bpReportSubmitModel"));
 
@@ -118,7 +141,7 @@ sap.ui.define([
             let type=e.getParameter("segment").sId;
             type= type.split('-').reverse()[0];
 
-            this.getOwnerComponent().getRouter().navTo('CustomerChartDetail',{type:type});
+            this.getOwnerComponent().getRouter().navTo('CustomerChartDetail', {type:type});
         },
         
         onNavToBpDetail: function (oEvent) {

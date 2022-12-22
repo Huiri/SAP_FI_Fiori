@@ -8,7 +8,7 @@
 					id="_IDGenGenericTile2"
 					press="onCustomer"
 					class="sapUiTinyMarginBegin sapUiTinyMarginTop"
-					header="Business Partner"
+					header="고객 마스터"
 				>
 					<TileContent id="_IDGenTileContent5">
 						<ImageContent

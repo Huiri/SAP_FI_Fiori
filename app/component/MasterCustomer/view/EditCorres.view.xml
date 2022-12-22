@@ -38,8 +38,8 @@
                                     </layoutData>
                                 </VBox>
                                 <VBox>
-                                    <Label text="고객 :  " class="sapUiTinyMarginBottom" labelFor="bpName" />
-                                    <Input id="bpName" required="true" class="sapUiSmallMarginBottom" showValueHelp="true" valueHelpRequest="onSelectBP"/>
+                                    <Label text="고객 :  " class="sapUiTinyMarginBottom"/>
+                                    <Input id="bpName" class="sapUiSmallMarginBottom" showValueHelp="true" valueHelpRequest="onSelectBP"/>
                                     <layoutData>
                                         <layout:GridData span="XL4 L4 M6 S12"/>
                                     </layoutData>

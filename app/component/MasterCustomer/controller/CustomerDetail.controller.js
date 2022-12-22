@@ -4,18 +4,29 @@ sap.ui.define([
 	"sap/ui/core/URI",
 	"sap/ui/model/BindingMode",
 	"../model/formatter",
+	"sap/ui/model/Filter",
+    "sap/ui/model/FilterOperator",
 ], function(
 	Controller,
 	JSONModel,
 	URI,
 	BindingMode,
-	formatter
+	formatter,
+	Filter,
+	FilterOperator
 ) {
 	"use strict";
 	let selectedNum;
 	let originModel;
+	let source=null;
+	let stickType=null;
+	let donut=null;
 	const BPCATEGORY_ORG="조직";
 	const BPCATEGORY_BP="개인";
+
+    const SOURCE_CHART ="chart"; 
+    const SOURCE_CHART_STICK ="stick"; 
+	
 	return Controller.extend("project3.controller.CustomerDetail", {
 		formatter : formatter,
 
@@ -36,6 +47,22 @@ sap.ui.define([
 		//initBpDdetailDataView : get한 bp모델 view set + 표준주소 설정 + 가시성 제어 
 		initView: async function(e){
 			selectedNum = e.getParameter("arguments").num;
+			let query = e.getParameter("arguments")["?query"]; 
+			if(query!=null){
+				console.log(query);
+				source = query.source;
+				if(query.stickType!=null) {
+					stickType = query.stickType;
+					console.log(stickType);
+				}
+				if(query.donut!=null){
+					donut=query.donut;
+					console.log(donut);
+				}
+			}else{
+				source=null;
+			}
+			
 			await( this.initBpDetailDataView( this.getBpModelData() ) );
 
 			const CountryList = await $.ajax({
@@ -85,8 +112,7 @@ sap.ui.define([
 			let url="/bp/BP/"+selectedNum;
 			let now = new Date();
 			
-			// console.log($.parseJSON(v.byId("bpBillingHold").getSelectedKey()));
-			// console.log(v.byId("bpBillingHold"));
+
 			now =`${now.getFullYear()}-${now.getMonth()+1}-${String(now.getDate()).padStart(2,0)}`;
 			console.log(v.byId("bpExternalNumberOrg"))
 			let tempPerson = {
@@ -135,14 +161,15 @@ sap.ui.define([
 				"bp_external_number": v.byId("bpExternalNumberOrg").getValue(),
 
 				//공통
-				"bp_report_submission": $.parseJSON(v.byId("bpReportSubmission").getSelectedKey()),
+				"bp_report_submission": Boolean(v.byId("bpReportSubmission").getSelectedKey()),
+				"bp_external_number": v.byId("bpExternalNumber").getValue(),
 				"bp_changed_date": now,
 				"bp_delivery_rule": v.byId("bpDeliveryRule").getValue(),
 				"bp_vendor": v.byId("bpVendor").getValue(),
 				"bp_provision_reason": v.byId("bpProvisionReason").getValue(),
-				"bp_billing_hold": $.parseJSON(v.byId("bpBillingHold").getSelectedKey()),
-				"bp_delivery_hold":$.parseJSON(v.byId("bpDeliveryHold").getSelectedKey()),
-				"bp_posting_hold":$.parseJSON(v.byId("bpPostingHold").getSelectedKey()),
+				"bp_billing_hold": Boolean(v.byId("bpBillingHold").getSelectedKey()),
+				"bp_delivery_hold":Boolean(v.byId("bpDeliveryHold").getSelectedKey()),
+				"bp_posting_hold":Boolean(v.byId("bpPostingHold").getSelectedKey()),
 				"bp_customer_classification":v.byId("bpCustomerClassification").getValue(),
 				"bp_nation":v.byId("bpNation").getValue(),
 				"bp_road_address":v.byId("bpRoadAddress").getValue(),
@@ -298,10 +325,7 @@ sap.ui.define([
 		},
 
 		//-----------header----------//
-		//back
-		onCustomerList: function(){
-			this.getOwnerComponent().getRouter().navTo("CustomerList");
-		},
+
 		//편집 
         onEditBtnPress : async function(){
 			this.changeVisibleMode(false);
@@ -309,6 +333,7 @@ sap.ui.define([
 		//-----------footer----------//
 		//accept
 		onAccept: async function(){
+			console.log("A")
 			this.initBpDetailDataView(this.setBpModelData());
 		},
 		//cancel
@@ -318,9 +343,16 @@ sap.ui.define([
 			this.changeVisibleMode(true);
 			
 		},
+		//back
+		toBack: function() {	
+			// if(source==SOURCE_CHART) this.getOwnerComponent().getRouter().navTo("CustomerChart",{type:donut});
+			// else if(source==SOURCE_CHART_STICK) this.getOwnerComponent().getRouter().navTo("CustomerSubmitChartDetail",{submitState:stickType});
+			// else if(source==null) this.getOwnerComponent().getRouter().navTo("CustomerList");
 
-		toBack: function() {
-			window.history.back();
+			if(source==SOURCE_CHART) this.getOwnerComponent().getRouter().navTo("CustomerChart",{"?query":{type:donut}});
+			else if(source==SOURCE_CHART_STICK) this.getOwnerComponent().getRouter().navTo("CustomerChart",{"?query":{submitState:stickType}});
+			else if(source==null) this.getOwnerComponent().getRouter().navTo("CustomerList");
+			
 		},
 		EditInputCountry : function(){
 			if(!this.pDialog){

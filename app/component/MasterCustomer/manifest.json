@@ -160,7 +160,7 @@
     },
     "routing": {
       "config": {
-        "routerClass": "sap.m.routing.Router",
+        "routerClass": "sap.f.routing.Router",
         "viewType": "XML",
         "async": true,
         "viewPath": "project3.view",
@@ -174,7 +174,8 @@
           "pattern": "",
           "target": [
             "Home"
-          ]
+          ],
+          "layout":"OneColumn"
         },
         {
           "name": "Customer",
@@ -182,15 +183,17 @@
           "target": {
             "name" : "Customer",
             "prefix": "Customer"
-          }
+          },
+          "layout":"OneColumn"
         },
         {
           "name": "CustomerDetail",
-          "pattern": "CustomerDetail/{num}",
+          "pattern": "CustomerDetail/{num}/source:?query:",
           "target": {
             "name" : "CustomerDetail",
             "prefix": "CustomerDetail"
-          }
+          },
+          "layout":"OneColumn"
         },
         {
           "name": "CustomerList",
@@ -198,7 +201,8 @@
           "target": {
             "name" : "CustomerList",
             "prefix": "CustomerList"
-          }
+          },
+          "layout":"OneColumn"
         },
         {
           "name": "CreateCustomer",
@@ -206,15 +210,17 @@
           "target": {
             "name" : "CreateCustomer",
             "prefix": "CreateCustomer"
-          }
+          },
+          "layout":"OneColumn"
         },
         {
           "name": "CustomerChart",
-          "pattern": "CustomerChart",
+          "pattern": "CustomerChart/0/chart:?query:",
           "target": {
             "name" : "CustomerChart",
             "prefix": "CustomerChart"
-          }
+          },
+          "layout":"OneColumn"
         },
         {
           "name": "EditCorres",
@@ -222,7 +228,8 @@
           "target": {
             "name" : "EditCorres",
             "prefix": "EditCorres"
-          }
+          },
+          "layout":"OneColumn"
         },
         {
           "name": "CustomerChartDetail",
@@ -230,7 +237,8 @@
           "target": {
             "name" : "CustomerChartDetail",
             "prefix": "CustomerChartDetail"
-          }
+          },
+          "layout":"TwoColumnsBeginExpanded"
          },
          {
           "name": "CustomerSubmitChartDetail",
@@ -238,7 +246,8 @@
           "target": {
             "name" : "CustomerSubmitChartDetail",
             "prefix": "CustomerSubmitChartDetail"
-          }
+          },
+          "layout":"TwoColumnsBeginExpanded"
         }
       ],
       "targets": {
@@ -247,56 +256,64 @@
           "transition": "slide",
           "clearControlAggregation": true,
           "viewId": "Home",
-          "viewName": "Home"
+          "viewName": "Home",
+          "controlAggregation": "beginColumnPages"
         },
         "CustomerDetail": {
           "viewType": "XML",
           "transition": "slide",
           "clearControlAggregation": true,
           "viewId": "CustomerDetail",
-          "viewName": "CustomerDetail"
+          "viewName": "CustomerDetail",
+          "controlAggregation": "beginColumnPages"
         },
         "CustomerList" : {
           "viewType": "XML",
           "transition": "slide",
           "clearControlAggregation": true,
           "viewId": "CustomerList",
-          "viewName": "CustomerList"
+          "viewName": "CustomerList",
+          "controlAggregation": "beginColumnPages"
         },
         "CreateCustomer" : {
           "viewType": "XML",
           "transition": "slide",
           "clearControlAggregation": true,
           "viewId": "CreateCustomer",
-          "viewName": "CreateCustomer"
+          "viewName": "CreateCustomer",
+          "controlAggregation": "beginColumnPages"
         },
         "CustomerChart" : {
           "viewType": "XML",
           "transition": "slide",
           "clearControlAggregation": true,
           "viewId": "CustomerChart",
-          "viewName": "CustomerChart"
+          "viewName": "CustomerChart",
+          "controlAggregation": "beginColumnPages"
         },
         "EditCorres" : {
           "viewType": "XML",
           "transition": "slide",
           "clearControlAggregation": true,
           "viewId": "EditCorres",
-          "viewName": "EditCorres"
+          "viewName": "EditCorres",
+          "controlAggregation": "beginColumnPages"
         },
         "CustomerChartDetail" : {
           "viewType": "XML",
           "transition": "slide",
           "clearControlAggregation": true,
           "viewId": "CustomerChartDetail",
-          "viewName": "CustomerChartDetail"
+          "viewName": "CustomerChartDetail",
+          "controlAggregation": "midColumnPages"
         },
         "CustomerSubmitChartDetail" : {
           "viewType": "XML",
           "transition": "slide",
           "clearControlAggregation": true,
           "viewId": "CustomerSubmitChartDetail",
-          "viewName": "CustomerSubmitChartDetail"
+          "viewName": "CustomerSubmitChartDetail",
+          "controlAggregation": "midColumnPages"
         }
       }
     },

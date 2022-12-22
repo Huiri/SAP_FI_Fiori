@@ -17,11 +17,12 @@
                      class="sapUiSmallMarginBegin"
                      src="view/img/logo.svg"
                      press="toHome"/>
-                <MenuButton id="_IDGenMenuButton1" enabled="true" text="메뉴" buttonMode="Split" width="auto">
+                <MenuButton id="menu" text="메뉴" buttonMode="Split" width="auto">
+
                     <menu>
                         <Menu id="_IDGenMenu1">
-                            <MenuItem press="toGLAccount" id="_IDGenMenuItem1" text="총계정원장 마스터"/>
 							<MenuItem press="toCustomer" id="_IDGenMenuItem3" text="고객 마스터"/>
+                            <MenuItem press="toGLAccount" id="_IDGenMenuItem1" text="총계정원장 마스터"/>
 							<MenuItem press="toCompanyCode" id="_IDGenMenuItem4" text="회사코드 마스터"/>
                         </Menu>
                     </menu>
