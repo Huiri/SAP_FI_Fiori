@@ -113,17 +113,19 @@
                                     <c:Item key="Ms." text="Ms."/>
                                 </m:Select>
                             </m:VBox>
-                            <m:VBox class="sapUiSmallMarginTopBottom">
-                                <m:Label text="이름" class="propertyColumn" />
-                                <m:Text 
-                                    visible="{=${visibleMode>/visible}}" 
-                                    text="{bpModel>/bp_last_name}"/>
-                                <m:Input id="bpLastName" value="{bpModel>/bp_last_name}" visible="{=!${visibleMode>/visible}}"/>
-                            </m:VBox>
-                            <m:VBox class="sapUiSmallMarginTopBottom">
-                                <m:Label text="성" class="propertyColumn"/>
-                                <m:Text visible="{=${visibleMode>/visible}}" text="{bpModel>/bp_first_name}"/>
-                                <m:Input id="bpFirstName" value="{bpModel>/bp_first_name}" visible="{=!${visibleMode>/visible}}"/>
+                            <m:VBox id="validateRequired">
+                                <m:VBox class="sapUiSmallMarginTopBottom">
+                                    <m:Label text="이름" class="propertyColumn" labelFor="bpLastName"/>
+                                    <m:Text 
+                                        visible="{=${visibleMode>/visible}}" 
+                                        text="{bpModel>/bp_last_name}"/>
+                                    <m:Input id="bpLastName" required="true" value="{bpModel>/bp_last_name}" visible="{=!${visibleMode>/visible}}"/>
+                                </m:VBox>
+                                <m:VBox class="sapUiSmallMarginTopBottom"> 
+                                    <m:Label text="성" class="propertyColumn" labelFor="bpFirstName"/>
+                                    <m:Text visible="{=${visibleMode>/visible}}" text="{bpModel>/bp_first_name}"/>
+                                    <m:Input id="bpFirstName" required="true" value="{bpModel>/bp_first_name}" visible="{=!${visibleMode>/visible}}"/>
+                                </m:VBox>
                             </m:VBox>
                             <m:VBox class="sapUiSmallMarginTopBottom">
                                 <m:Label text="성별" class="propertyColumn"/>
@@ -256,15 +258,18 @@
                                     }"/>
                                 <m:Input id="bpOrganizationTitle" value="{bpModel>/bp_organization_title}" visible="{=!${visibleMode>/visible}}"/>
                             </m:VBox>
-                            <m:VBox class="sapUiSmallMarginTopBottom">
-                                <m:Label text="이름1" class="propertyColumn" />
-                                <m:Text 
-                                    visible="{=${visibleMode>/visible}}" 
-                                    text="{
-                                        path:'bpModel>/bp_corp_name1',
-                                        formatter:'.formatter.IsNull'
-                                    }"/>
-                                <m:Input id="bpName1Org" value="{bpModel>/bp_corp_name1}" visible="{=!${visibleMode>/visible}}"/>
+                            
+                            <m:VBox id="validateRequiredOrg">
+                                <m:VBox class="sapUiSmallMarginTopBottom">
+                                    <m:Label text="이름1" class="propertyColumn" labelFor="bpName1Org" />
+                                    <m:Text 
+                                        visible="{=${visibleMode>/visible}}" 
+                                        text="{
+                                            path:'bpModel>/bp_corp_name1',
+                                            formatter:'.formatter.IsNull'
+                                        }"/>
+                                    <m:Input id="bpName1Org" required="true" value="{bpModel>/bp_corp_name1}" visible="{=!${visibleMode>/visible}}"/>
+                                </m:VBox>
                             </m:VBox>
                             <m:VBox class="sapUiSmallMarginTopBottom">
                                 <m:Label text="이름2" class="propertyColumn"/>
