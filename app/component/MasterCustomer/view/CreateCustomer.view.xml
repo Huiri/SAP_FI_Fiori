@@ -45,7 +45,11 @@ controllerName="project3.controller.CreateCustomer"
 				<uxap:subSections>
 					<uxap:ObjectPageSubSection id="_IDGenObjectPageSubSection0"  title="헤더">
 						<uxap:blocks>
+                        <VBox>
                             <Label id="_IDGenLabel0" text="고객 마스터 "/>
+                            <Text id="BpNumbertoo" />
+                        </VBox>
+
 						</uxap:blocks>
 					</uxap:ObjectPageSubSection>
 				</uxap:subSections>
@@ -81,11 +85,12 @@ controllerName="project3.controller.CreateCustomer"
                                 </VBox>
 
                                 <VBox class="sapUiSmallMargin">
-                                    <Label text="회사 코드 : " />
+                                    <Label text="회사 코드 : " labelFor="BpCompanyCode" />
                                     <Input id="BpCompanyCode"
                                     showValueHelp="true"
                                     valueHelpOnly="true"
-                                    valueHelpRequest=".onSelectCoCd"/>
+                                    valueHelpRequest=".onSelectCoCd"
+                                    required="true"/>
                                 </VBox>
                                 <layoutData>
                                     <layout:GridData span="XL4 L3 M6 S12"/>
@@ -101,9 +106,9 @@ controllerName="project3.controller.CreateCustomer"
 
                                 <VBox id="personalData">
                                 <VBox class="sapUiSmallMargin">
-                                    <Label text="조직 명칭 " visible="{=${bpCategoryModel>/category}}" labelFor="BpPersonTitle"/>
-                                    <Select id="BpPersonTitle" visible="{=!${bpCategoryModel>/category}}" 
-                                    required="true">
+                                    <Label text="조직 명칭 " visible="{=${bpCategoryModel>/category}}"/>
+                                    <Select id="BpPersonTitle" visible="{=!${bpCategoryModel>/category}}" width="100%"
+                                    >
                                         <core:Item key="" text="선택" />
                                         <core:Item key="Mr" text="Mr" />
                                         <core:Item key="Mrs" text="Mrs" />
@@ -113,9 +118,9 @@ controllerName="project3.controller.CreateCustomer"
                                 <VBox class="sapUiSmallMargin">
 
                                     <Label text="성 " visible="{=!${bpCategoryModel>/category}}"  labelFor="BpFirstName"/>
-                                    <Label text="회사명1 " visible="{=${bpCategoryModel>/category}}"  />
+                                    <Label text="회사명1 " visible="{=${bpCategoryModel>/category}}" labelFor="BpCorpName1" />
                                     <Input id="BpFirstName"  visible="{=!${bpCategoryModel>/category}}" required="true"/>   
-                                    <Input id="BpCorpName1" visible="{=${bpCategoryModel>/category}}"/>  
+                                    <Input id="BpCorpName1" visible="{=${bpCategoryModel>/category}}" required="true"/>  
                                 </VBox>
                                 <VBox class="sapUiSmallMargin">
                                     <Label text="이름 " visible="{=!${bpCategoryModel>/category}}" labelFor="BpLastName"/>

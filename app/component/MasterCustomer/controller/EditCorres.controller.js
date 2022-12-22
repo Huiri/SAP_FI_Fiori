@@ -73,7 +73,7 @@ sap.ui.define([
 			<p style="text-align: justify; background: white; font-size: 10pt; font-family: Calibri, sans-serif;"><strong><span style="font-size: 10.5pt; font-family: sans-serif; color: black;">${customer}</span></strong>
 			<span>회계담당 귀하 </span></p>
 			<span><p>귀사의 발전을 축언하오며 항상 각별하신 애호와 협조에 감사드립니다. </span></p> 
-			<span><p>당사는 정기회계감사를 받고 있는바 이와 관련하여 <strong>${date}</strong>일 현재의 귀사와의 거래잔액과 내용을 확인하고자 하오니 귀사의 장부와 대조, 확인하시고 그 상위 유뮤를 아래 확인 통지란에 기입 서명날인하여 1부를 당사의 감사인인 삼일회계법인 앞으로 직접 우송하여 주시기 바랍니다. </span></p>
+			<span><p>당사는 정기회계감사를 받고 있는바 이와 관련하여 <strong>${dueDate}</strong>일 현재의 귀사와의 거래잔액과 내용을 확인하고자 하오니 귀사의 장부와 대조, 확인하시고 그 상위 유뮤를 아래 확인 통지란에 기입 서명날인하여 1부를 당사의 감사인인 삼일회계법인 앞으로 직접 우송하여 주시기 바랍니다. </span></p>
 			<span><p>감사인: 삼일회계법인 서울 용산구 12길 7층 </span></p>
 			<span><p>담당회계사: 조일환 </span></p>
 			<span><p>담당자연락처: 010-1111-1111 </span></p> 
@@ -352,9 +352,8 @@ sap.ui.define([
 		// BP 선택용 다이어로그 특정 row 선택 시 생성 페이지 Input에 값 입력
 		getBPContext : function(oEvent){
 			// let rowIndex = oEvent.getParameters().rowIndex;
-			let rowIndex = oEvent.getParameters().rowBindingContext.sPath.split('/')[2];
+			let rowIndex = oEvent.getParameters().rowBindingContext.sPath.split('/')[1];
 
-			
 			this.byId("bpName").setValue(oEvent.getParameters().rowBindingContext.oModel.oData[rowIndex].bp_name); 
 			this.onCloseBPDialog();
 		},
