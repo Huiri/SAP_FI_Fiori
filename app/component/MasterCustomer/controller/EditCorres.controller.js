@@ -351,7 +351,9 @@ sap.ui.define([
 
 		// BP 선택용 다이어로그 특정 row 선택 시 생성 페이지 Input에 값 입력
 		getBPContext : function(oEvent){
-			let rowIndex = oEvent.getParameters().rowIndex;
+			// let rowIndex = oEvent.getParameters().rowIndex;
+			let rowIndex = oEvent.getParameters().rowBindingContext.sPath.split('/')[2];
+
 			
 			this.byId("bpName").setValue(oEvent.getParameters().rowBindingContext.oModel.oData[rowIndex].bp_name); 
 			this.onCloseBPDialog();
@@ -407,7 +409,9 @@ sap.ui.define([
 
 		// 회사코드 선택용 다이어로그 특정 row 선택 시 생성 페이지 Input에 값 입력
 		getCoCdContext : function(oEvent){
-			let rowIndex = oEvent.getParameters().rowIndex;
+			// let rowIndex = oEvent.getParameters().rowIndex;
+			let rowIndex = oEvent.getParameters().rowBindingContext.sPath.split('/')[1];
+
 			
 			this.byId("BpCompanyName").setValue(oEvent.getParameters().rowBindingContext.oModel.oData[rowIndex].com_code_name); 
 			this.onCloseCoCdDialog();
@@ -419,7 +423,7 @@ sap.ui.define([
             this.byId("BpCompanyName").setValue("");
             this.byId("constructor").setValue("");  
             this.byId("bpName").setValue("");
-            this.byId("createdDate").setValue("");
+            this.byId("createdDate").setValue(date);
             this.byId("DueDate").setValue("");
 
             this.onValueInit();

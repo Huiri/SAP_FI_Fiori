@@ -25,7 +25,11 @@
                         <form:content>
                                 <VBox>
                                     <Label text="회사명: " class="sapUiTinyMarginBottom"/>
-                                    <Input id="BpCompanyName" class="sapUiSmallMarginBottom" showValueHelp="true" valueHelpRequest=".onSelectCoCd"/>
+                                    <Input id="BpCompanyName" 
+                                    class="sapUiSmallMarginBottom" 
+                                    showValueHelp="true" 
+                                    valueHelpRequest=".onSelectCoCd"
+                                    valueHelpOnly="true"/>
                                     <layoutData>
                                         <layout:GridData span="XL4 L4 M6 S12"/>
                                     </layoutData>
@@ -39,7 +43,11 @@
                                 </VBox>
                                 <VBox>
                                     <Label text="고객 :  " class="sapUiTinyMarginBottom"/>
-                                    <Input id="bpName" class="sapUiSmallMarginBottom" showValueHelp="true" valueHelpRequest="onSelectBP"/>
+                                    <Input id="bpName" 
+                                    class="sapUiSmallMarginBottom" 
+                                    showValueHelp="true" 
+                                    valueHelpRequest="onSelectBP"
+                                    valueHelpOnly="true"/>
                                     <layoutData>
                                         <layout:GridData span="XL4 L4 M6 S12"/>
                                     </layoutData>
