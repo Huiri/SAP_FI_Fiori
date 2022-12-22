@@ -213,7 +213,15 @@ sap.ui.define([
 			let bp_city = this.getView().getModel(modelName).getProperty(`/bp_city`);
 			let bp_road_address = this.getView().getModel(modelName).getProperty(`/bp_road_address`);
 			let bp_street_address = this.getView().getModel(modelName).getProperty(`/bp_street_address`);
+			
+			if(bp_postal_code==null)bp_postal_code="";
+			if(bp_region==null)bp_region="";
+			if(bp_city==null)bp_city="";
+			if(bp_road_address==null)bp_road_address="";
+			if(bp_street_address==null) bp_street_address="";
 			bpAddress = `${bp_postal_code} ${bp_region} ${bp_city} ${bp_road_address} ${bp_street_address}`;
+			console.log(bpAddress);
+			if(bpAddress=="    ")  bpAddress="-";
 
 			this.getView().byId('bpAddress').setText(bpAddress);
 		},
