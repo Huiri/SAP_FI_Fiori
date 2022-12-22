@@ -52,6 +52,7 @@ sap.ui.define([
 
             this.getView().byId("BpCreatedDate").setText(Today);
             this.getView().byId("BpNumber").setText(bpNumber);
+            this.getView().byId("BpNumbertoo").setText(bpNumber);
         },
         toCustomerList :function () {
 			this.getOwnerComponent().getRouter().navTo("CustomerList");

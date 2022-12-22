@@ -41,6 +41,7 @@ sap.ui.define([
 		onMyRoutePatternMatched : function(oEvent) {
 			this.onDataView();
 			this.onReset();
+			this._initModel();
 
 			let now = new Date();
 			Today = now.getFullYear() + "." +(now.getMonth()+1).toString().padStart(2,'0')+"."+now.getDate().toString().padStart(2, '0');
@@ -85,9 +86,18 @@ sap.ui.define([
 				return;
 			} 
 			else {
+				let selectedCoA = this.byId("CoA").getValue();
+				let url = `/gl/GL?$filter=gl_coa%20eq%20%27${selectedCoA}%27&$top=1`;
+			    let CoAContent = await $.ajax({
+					type: "get",
+					url: url
+				});
+				let coaContent = CoAContent.value[0].gl_coa_content;
+	
 				let temp = new JSONModel(this.temp).oData;
 				// temp.gl_acct = this.byId("GLAcct").getText();
-				temp.gl_coa = this.byId("CoA").getValue();
+				temp.gl_coa_content = coaContent;
+				temp.gl_coa = selectedCoA;
 				temp.gl_acct_type = this.byId("GLAcctType").getSelectedKey();
 				temp.gl_acct_group = this.byId("GLGroup").getValue();
 				temp.gl_ps_acct_type = this.byId("GLPLAcctType").getSelectedKey();
@@ -184,6 +194,9 @@ sap.ui.define([
 			this.byId("GLAcctContent").setValue("");
 			this.byId("GLAccDesc").setValue("");
 			this.byId("GLAcct").setText("");
+			let oPLSelect = this.byId("GLPLAcctType");
+			oPLSelect.setSelectedKey("");
+			oPLSelect.setEditable(true);
 
 		},
 

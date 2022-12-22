@@ -45,7 +45,11 @@ controllerName="project3.controller.CreateCustomer"
 				<uxap:subSections>
 					<uxap:ObjectPageSubSection id="_IDGenObjectPageSubSection0"  title="헤더">
 						<uxap:blocks>
+                        <VBox>
                             <Label id="_IDGenLabel0" text="고객 마스터 "/>
+                            <Text id="BpNumbertoo" />
+                        </VBox>
+
 						</uxap:blocks>
 					</uxap:ObjectPageSubSection>
 				</uxap:subSections>
@@ -80,22 +84,23 @@ controllerName="project3.controller.CreateCustomer"
                                         <Text id="BpCategory" />
                                     </VBox>
 
-                                    <VBox class="sapUiSmallMargin">
-                                        <Label text="회사 코드 : " />
-                                        <Input id="BpCompanyCode"
-                                        showValueHelp="true"
-                                        valueHelpOnly="true"
-                                        valueHelpRequest=".onSelectCoCd"/>
-                                    </VBox>
-                                    <layoutData>
-                                        <layout:GridData span="XL4 L3 M6 S12"/>
-                                    </layoutData>
+                                <VBox class="sapUiSmallMargin">
+                                    <Label text="회사 코드 : " labelFor="BpCompanyCode" />
+                                    <Input id="BpCompanyCode"
+                                    showValueHelp="true"
+                                    valueHelpOnly="true"
+                                    valueHelpRequest=".onSelectCoCd"
+                                    required="true"/>
+                                </VBox>
+                                <layoutData>
+                                    <layout:GridData span="XL4 L3 M6 S12"/>
+                                </layoutData>
                                 </VBox>
                             </VBox>
-                            <VBox>
-                                <Title text="" class="sapUiSmallMarginBegin sapUiSmallMarginEnd" />
+                            <VBox class="sapUiTinyMargin sapUiSmallMarginBeginEnd">
+                                <Title class="sapUiSmallMargin" />
                                 <VBox id="personalData" >
-                                    <VBox class="sapUiSmallMargin">
+                                    <VBox class="sapUiTinyMargin sapUiSmallMarginBeginEnd">
                                         <Label text="조직 명칭 " visible="{=${bpCategoryModel>/category}}" />
                                         <Label text="개인 칭호 " visible="{=!${bpCategoryModel>/category}}"/>
                                         <Select id="BpPersonTitle" visible="{=!${bpCategoryModel>/category}}" width="100%" >
@@ -107,17 +112,17 @@ controllerName="project3.controller.CreateCustomer"
                                     </VBox>
                                     <VBox class="sapUiSmallMargin">
 
-                                        <Label text="성 " visible="{=!${bpCategoryModel>/category}}"  labelFor="BpFirstName"/>
-                                        <Label text="회사명1 " visible="{=${bpCategoryModel>/category}}"  />
-                                        <Input id="BpFirstName"  visible="{=!${bpCategoryModel>/category}}" required="true"/>   
-                                        <Input id="BpCorpName1" visible="{=${bpCategoryModel>/category}}"/>  
-                                    </VBox>
-                                    <VBox class="sapUiSmallMargin">
-                                        <Label text="이름 " visible="{=!${bpCategoryModel>/category}}" labelFor="BpLastName"/>
-                                        <Label text="회사명2 " visible="{=${bpCategoryModel>/category}}" />
-                                        <Input id="BpLastName" visible="{=!${bpCategoryModel>/category}}" required="true"/>  
-                                        <Input id="BpCorpName2" visible="{=${bpCategoryModel>/category}}"/>  
-                                    </VBox>
+                                    <Label text="성 " visible="{=!${bpCategoryModel>/category}}"  labelFor="BpFirstName"/>
+                                    <Label text="회사명1 " visible="{=${bpCategoryModel>/category}}" labelFor="BpCorpName1" />
+                                    <Input id="BpFirstName"  visible="{=!${bpCategoryModel>/category}}" required="true"/>   
+                                    <Input id="BpCorpName1" visible="{=${bpCategoryModel>/category}}" required="true"/>  
+                                </VBox>
+                                <VBox class="sapUiSmallMargin">
+                                    <Label text="이름 " visible="{=!${bpCategoryModel>/category}}" labelFor="BpLastName"/>
+                                    <Label text="회사명2 " visible="{=${bpCategoryModel>/category}}" />
+                                    <Input id="BpLastName" visible="{=!${bpCategoryModel>/category}}" required="true"/>  
+                                    <Input id="BpCorpName2" visible="{=${bpCategoryModel>/category}}"/>  
+                                </VBox>
                                 </VBox>
                                 <layoutData>
                                     <layout:GridData span="XL4 L3 M6 S12"/>

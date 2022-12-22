@@ -7,7 +7,7 @@
 		ok=".onCountrySelectOkPress"
 		cancel=".onCountrySelectCancelPress"
 		supportRanges="true"
-		key="bp_nation_code"
+		key="bp_nation"
 		descriptionKey="GLGrpSelection">
 		<filterBar>
 			<fb:FilterBar advancedMode="true" search=".onCountrySelectSearch" isRunningInValueHelpDialog="true">

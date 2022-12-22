@@ -46,6 +46,12 @@ sap.ui.define([
             this.getView().setModel(blockModel, "blockModel");
 
             // 나중에 지울 데이터 
+            this.setCoCdExpandModel();
+
+            this.getOwnerComponent().getRouter().getRoute("GLAccountDetail").attachPatternMatched(this.onMyRoutePatternMatched, this);
+        },
+
+        setCoCdExpandModel : function (){
             this.getView().setModel(new JSONModel([
                 {
                     com_address: "중구",
@@ -88,11 +94,10 @@ sap.ui.define([
                 }
             ]), 'copyCoCdDataModel');
 
-            this.getOwnerComponent().getRouter().getRoute("GLAccountDetail").attachPatternMatched(this.onMyRoutePatternMatched, this);
         },
         onMyRoutePatternMatched : async function(oEvent){
-            console.log("onMyRoutePatternMatched");
             SelectedItem = oEvent.getParameter("arguments").num;
+            this.setCoCdExpandModel();
 
             let url = "/gl/GL/" + SelectedItem;
             const GLData = await $.ajax({
@@ -115,8 +120,19 @@ sap.ui.define([
             CoCdDataModel.setDefaultBindingMode(BindingMode.OneWay);
             this.getView().setModel(CoCdDataModel, "CoCdDataModel");
 
-
         },
+        changeSelectGLType: function() {
+			let oPLSelect = this.byId("GLPLAcctType");
+			let selectedGLType = this.byId("GLAcctType").getSelectedKey();
+			if(selectedGLType === 'X' || selectedGLType === 'C'){
+				oPLSelect.setSelectedKey("");
+				oPLSelect.setEditable(false);
+
+			} else {
+				oPLSelect.setEditable(true);
+
+			}
+		},
         /**
          * G/L 차단 제어
          * @param {JSONModel}
@@ -183,12 +199,21 @@ sap.ui.define([
         },
 
 		onEdit: function() {
+            let oPLSelect = this.byId("InputPLAccType");
+			oPLSelect.setEditable(true);
+
             this.getView().getModel("editModel").setProperty("/editable", true);
 
             let TextGLAccType = this.getView().getModel("GLDataModel").getProperty("/gl_acct_type");
-            this.getView().byId("InputGLAccType");
-            this.getView().byId("InputGLAccType").setSelectedKey(TextGLAccType);
+            if(TextGLAccType === 'X' || TextGLAccType === 'C'){
+                oPLSelect.setEditable(false);
+                oPLSelect.setSelectedKey("");
+            } else {
+                oPLSelect.setEditable(true);
 
+            } 
+
+            
             let TextGLGroup = this.byId("TextGLGroup").getCustomData()[0].getProperty('value');
             this.byId("InputGLGroup").setSelectedKey(`${TextGLGroup}`);
 
@@ -421,7 +446,6 @@ sap.ui.define([
                 "gl_func_area" : this.byId("InputFuncArea").getSelectedKey(),
                 "gl_acct_descript" : this.byId("InputGLAccDesc").getValue(),
                 "gl_ps_acct_type" : this.byId("InputPLAccType").getSelectedKey(),
-
                 "gl_co_area":this.byId("glCoArea").getText(),
                 "gl_company_code" :this.byId("glCompanyCode").getText(),
                 "gl_corp_name":this.byId("glCorpName").getText(),

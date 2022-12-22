@@ -95,18 +95,16 @@ controllerName="project4.controller.CreateCoCd"
 
                                             <VBox class="sapUiSmallMargin">
                                             <Label id="_IDGenLabel5" text="회사 통화 : " labelFor="CoCdCurrency" />
-                                            <Select width="100%" id="CoCdCurrency"  required="true" forceSelection="true">
-                                                <core:Item key="" text="" />
+                                            <Select width="100%" id="CoCdCurrency"  required="true" forceSelection="false">
 
-                                                <core:Item id="_IDGenItem3" key="KRW" text="KRW" />
-                                                <core:Item id="_IDGenItem4" key="USD" text="USD" />
+                                                <core:Item key="KRW" text="KRW" />
+                                                <core:Item key="USD" text="USD" />
                                             </Select>
                                             </VBox>
 
                                             <VBox class="sapUiSmallMargin">
                                             <Label id="_IDGenLabel6" text="회사 언어 : "  labelFor="CoCdLanguage" />
-                                            <Select  width="100%" id="CoCdLanguage"  required="true">
-                                                <core:Item key="" text="" />
+                                            <Select  width="100%" id="CoCdLanguage"  required="true" forceSelection="false">
                                                 <core:Item id="_IDGenItem6" key="KR" text="한국어" />
                                                 <core:Item id="_IDGenItem7" key="EN" text="영어" />
                                             </Select>
@@ -131,14 +129,7 @@ controllerName="project4.controller.CreateCoCd"
                                         </VBox>
                                         <VBox class="sapUiSmallMargin">
                                             <Label id="_IDGenLabel18" text="생성일 : "  labelFor="CoCdDate" />
-                                            <DatePicker
-                                                required="true"
-
-                                                id="CoCdDate"
-                                                displayFormat="yyyy-MM-dd"
-                                                valueFormat="yy.MM.dd"
-                                            >                                  
-                                            </DatePicker>
+                                            <Text id="CoCdDate"/> 
 
                                         </VBox>
 

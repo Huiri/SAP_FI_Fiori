@@ -157,7 +157,7 @@ sap.ui.define([
 				// Set key fields for filtering in the Define Conditions Tab
 				oWhitespaceDialog.setRangeKeyFields([{
 					label: "국가코드",
-					key: "CoCdCountryModel>bp_nation_code"
+					key: "CoCdCountryModel>bp_nation"
 				}]);
 
 				// Set Basic Search for FilterBar

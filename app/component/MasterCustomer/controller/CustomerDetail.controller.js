@@ -399,7 +399,7 @@ sap.ui.define([
 		},
         getCountryContext : function(oEvent){
 			// let rowIndex = oEvent.getParameters().rowIndex;
-			let rowIndex = oEvent.getParameters().rowBindingContext.sPath.split('/')[2];
+			let rowIndex = oEvent.getParameters().rowBindingContext.sPath.split('/')[1];
 
             this.byId("bpNation").setValue(oEvent.getParameters().rowBindingContext.oModel.oData[rowIndex].bp_nation_code); 
             // console.log(oEvent.getParameters()); 
