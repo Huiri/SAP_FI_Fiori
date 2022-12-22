@@ -58,7 +58,7 @@
 
                 <layout:VerticalLayout class="sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom">
                     <m:VBox>
-                        <m:Label text="도로 주소" class="propertyColumn"/>
+                        <m:Label text="표준 주소" class="propertyColumn"/>
                         <m:Text id="bpAddress"/>
                     </m:VBox>
                 </layout:VerticalLayout>

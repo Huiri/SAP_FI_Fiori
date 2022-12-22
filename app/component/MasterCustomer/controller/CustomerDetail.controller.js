@@ -80,7 +80,7 @@ sap.ui.define([
 			if(this.getView().getModel("bpModel").getData().bp_category == BPCATEGORY_ORG){
 				this.getView().byId("mAvatar").setSrc(new sap.ui.core.Icon({src:org}).getSrc());
 				this.setBpOrgVisibleModel(true);
-			}else{
+			}else if(this.getView().getModel("bpModel").getData().bp_category == BPCATEGORY_BP){
 				this.getView().byId("mAvatar").setSrc(new sap.ui.core.Icon({src:cus}).getSrc());
 				this.setBpOrgVisibleModel(true);
 				this.setBpOrgVisibleModel(false);
@@ -112,10 +112,10 @@ sap.ui.define([
 			let url="/bp/BP/"+selectedNum;
 			let now = new Date();
 			
-			console.log(v.byId("bpBillingHold"));
-			console.log($.parseJSON(v.byId("bpBillingHold").getSelectedKey()));
+
 			now =`${now.getFullYear()}-${now.getMonth()+1}-${String(now.getDate()).padStart(2,0)}`;
-			let temp = {
+			console.log(v.byId("bpExternalNumberOrg"))
+			let tempPerson = {
 				//개인
 				"bp_person_title": v.byId("bpPersonTitle").getSelectedKey(),
 				"bp_last_name": v.byId("bpLastName").getValue(),
@@ -125,7 +125,30 @@ sap.ui.define([
 				"bp_birthday" : v.byId("bpBirthday").getValue(),
 				"bp_birthplace" : v.byId("bpBirthplace").getValue(),
 				"bp_changer": v.byId("bpChanger").getText(),
+				"bp_search1": v.byId("bpSearch1").getValue(),
+				"bp_search2": v.byId("bpSearch2").getValue(),
+				"bp_external_number": v.byId("bpExternalNumber").getValue(),
 				
+				//공통
+				"bp_report_submission": $.parseJSON(v.byId("bpReportSubmission").getSelectedKey()),
+				"bp_changed_date": now,
+				"bp_delivery_rule": v.byId("bpDeliveryRule").getValue(),
+				"bp_vendor": v.byId("bpVendor").getValue(),
+				"bp_provision_reason": v.byId("bpProvisionReason").getValue(),
+				"bp_billing_hold": $.parseJSON(v.byId("bpBillingHold").getSelectedKey()),
+				"bp_delivery_hold":$.parseJSON(v.byId("bpDeliveryHold").getSelectedKey()),
+				"bp_posting_hold":$.parseJSON(v.byId("bpPostingHold").getSelectedKey()),
+				"bp_customer_classification":v.byId("bpCustomerClassification").getValue(),
+				"bp_nation":v.byId("bpNation").getValue(),
+				"bp_road_address":v.byId("bpRoadAddress").getValue(),
+				"bp_postal_code":v.byId("bpPostalCode").getValue(),
+				"bp_street_address":v.byId("bpStreetAddress").getValue(),
+				"bp_city":v.byId("bpCity").getValue(),
+				"bp_region":v.byId("bpRegion").getValue(),
+				"bp_credit_status":v.byId("bpCreditStatus").getSelectedKey()
+				}
+				
+			let tempOrg ={
 				//조직
 				"bp_organization_title" : v.byId("bpOrganizationTitle").getValue(),
 				"bp_corp_name1": v.byId("bpName1Org").getValue(),
@@ -133,14 +156,14 @@ sap.ui.define([
 				"bp_corp_type": v.byId("bpCorpTypeOrg").getSelectedKey(),
 				"bp_corp_est_date": v.byId("bpCorpEstDateOrg").getValue(),
 				"bp_cal_date": v.byId("bpCalDateOrg").getValue(),
-
+				"bp_search1": v.byId("bpSearch1Org").getValue(),
+				"bp_search2": v.byId("bpSearch2Org").getValue(),
+				"bp_external_number": v.byId("bpExternalNumberOrg").getValue(),
 
 				//공통
 				"bp_report_submission": Boolean(v.byId("bpReportSubmission").getSelectedKey()),
 				"bp_external_number": v.byId("bpExternalNumber").getValue(),
 				"bp_changed_date": now,
-				"bp_search1": v.byId("bpSearch1").getValue(),
-				"bp_search2": v.byId("bpSearch2").getValue(),
 				"bp_delivery_rule": v.byId("bpDeliveryRule").getValue(),
 				"bp_vendor": v.byId("bpVendor").getValue(),
 				"bp_provision_reason": v.byId("bpProvisionReason").getValue(),
@@ -154,8 +177,15 @@ sap.ui.define([
 				"bp_street_address":v.byId("bpStreetAddress").getValue(),
 				"bp_city":v.byId("bpCity").getValue(),
 				"bp_region":v.byId("bpRegion").getValue(),
-				"bp_credit_status":v.byId("bpCreditStatus").getSelectedKey()
+				"bp_credit_status":v.byId("bpCreditStatus").getSelectedKey()				
 			}
+			let temp;
+			if(this.getView().getModel("bpModel").getData().bp_category == BPCATEGORY_ORG){
+				temp = tempOrg;
+			}else if(this.getView().getModel("bpModel").getData().bp_category == BPCATEGORY_BP){
+				temp = tempPerson;
+			}			
+
 			let bpData= await $.ajax({
 				type:"patch",
 				url:url,
@@ -208,6 +238,8 @@ sap.ui.define([
 		},
 		//select요소의 item 기본값 설정
 		initSelectDefaultItem(){
+			var v = this.getView();
+
 			let sData = this.getView().getModel("bpModel").oData;
 			
 			let eleBpReportSubmission = this.getView().byId('bpReportSubmission');
@@ -234,6 +266,62 @@ sap.ui.define([
 			
 			let eleBpPostingHold = this.getView().byId('bpPostingHold');
 			eleBpPostingHold.setSelectedKey(sData.bp_posting_hold);
+
+			v.byId("bpPersonTitle").setSelectedKey(sData.bp_person_title);
+			v.byId("bpLastName").setValue(sData.bp_last_name);
+			v.byId("bpFirstName").setValue(sData.bp_first_name);
+			v.byId("bpGender").setSelectedKey(sData.bp_gender);
+			v.byId("bpDegree").setValue(sData.bp_degree);
+			v.byId("bpBirthday").setValue(sData.bp_birthday);
+			v.byId("bpBirthplace").setValue(sData.bp_birthplace);
+			v.byId("bpChanger").setText(sData.bp_changer);
+			v.byId("bpSearch1").setValue(sData.bp_search1);
+			v.byId("bpSearch2").setValue(sData.bp_search2);
+			let bp_external_number= this.byId("bpExternalNumber");
+            bp_external_number.setValue(sData.bp_external_number);
+			
+			//조직
+			v.byId("bpOrganizationTitle").setValue(sData.bp_organization_title);
+			v.byId("bpName1Org").setValue(sData.bp_corp_name1);
+			v.byId("bpName2Org").setValue(sData.bp_corp_name2);
+			v.byId("bpCorpTypeOrg").setSelectedKey(sData.bp_corp_type);
+			v.byId("bpCorpEstDateOrg").setValue(sData.bp_corp_est_date);
+			v.byId("bpCalDateOrg").setValue(sData.bp_cal_date);
+			v.byId("bpSearch1Org").setValue(sData.bp_search1);
+			v.byId("bpSearch2Org").setValue(sData.bp_search2);
+			let bp_external_number2= this.byId("bpExternalNumberOrg");
+            bp_external_number2.setValue(sData.bp_external_number);
+
+			//공통
+			let bp_report_submission = this.byId("bpReportSubmission");
+            bp_report_submission.setSelectedKey(sData.bp_report_submission);
+
+            let bp_search1= this.byId("bpSearch1");
+            bp_search1.setValue(sData.bp_search1);
+			console.log(sData);
+
+            let bp_search2= this.byId("bpSearch2");
+            bp_search2.setValue(sData.bp_search2);
+            let bp_delivery_rule= this.byId("bpDeliveryRule");
+            bp_delivery_rule.setValue(sData.bp_delivery_rule);
+            let bp_vendor= this.byId("bpVendor");
+            bp_vendor.setValue(sData.bp_vendor);
+            let bp_provision_reason= this.byId("bpProvisionReason");
+            bp_provision_reason.setValue(sData.bp_provision_reason);
+            let bp_customer_classification=this.byId("bpCustomerClassification");
+            bp_customer_classification.setValue(sData.bp_customer_classification);
+            let bp_nation=this.byId("bpNation");
+            bp_nation.setValue(sData.bp_nation);
+            let bp_postal_code=this.byId("bpPostalCode");
+            bp_postal_code.setValue(sData.bp_postal_code);
+            let bp_street_address=this.byId("bpStreetAddress");
+            bp_street_address.setValue(sData.bp_street_address);
+			let bp_road_address=this.byId("bpRoadAddress");
+            bp_road_address.setValue(sData.bp_road_address);
+            let bp_city=this.byId("bpCity");
+            bp_city.setValue(sData.bp_city);
+            let bp_region=this.byId("bpRegion");
+            bp_region.setValue(sData.bp_region);
 		},
 
 		//-----------header----------//
@@ -253,6 +341,7 @@ sap.ui.define([
 			console.log("GET CANCEL");
 			console.log(originModel);
 			this.changeVisibleMode(true);
+			
 		},
 		//back
 		toBack: function() {	
@@ -311,8 +400,7 @@ sap.ui.define([
             this.byId("bpNation").setValue(oEvent.getParameters().rowBindingContext.oModel.oData[rowIndex].bp_nation_code); 
             // console.log(oEvent.getParameters()); 
 			this.onCloseCountryDialog();
-
-        },
+        }
 		
 	});
 });
