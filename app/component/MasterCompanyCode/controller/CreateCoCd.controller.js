@@ -14,8 +14,11 @@ sap.ui.define([
 ) {
   "use strict";
 
+  let now = new Date(),
+  Today = now.getFullYear() + "." +(now.getMonth() + 1).toString().padStart(2,'0') + "." +now.getDate().toString().padStart(2,'0');
 
   return Controller.extend("project4.controller.CreateCoCd", {
+
     onInit: async function () {
       this.getOwnerComponent().getRouter().attachRoutePatternMatched(this.onMyRoutePatternMatched, this);
 
@@ -52,8 +55,7 @@ sap.ui.define([
       let SelectCoAreaModel = new JSONModel(CoCdSelectCoArea.value);
 			this.getView().setModel(SelectCoAreaModel, "SelectCoAreaModel");
 
-      this.validateForVboxClear("generalData");
-			this.validateForVboxClear("generateData");
+      this.byId("CoCdDate").setText(Today);
 
 
     },
@@ -78,7 +80,7 @@ sap.ui.define([
         com_fiscal_year: this.byId("CoCdFiscalYear").getValue(),
         com_cocd_tax_code: this.byId("CoCdTaxCode").getSelectedKey(),
         com_cocd_constructor: this.byId("CoCdConstructor").getValue(),
-        com_cocd_date: this.byId("CoCdDate").getValue()
+        com_cocd_date: this.byId("CoCdDate").getText()
       }
         await $.ajax({
           type: "POST",
@@ -102,8 +104,7 @@ sap.ui.define([
         this.byId("CoCdAddress").setValue(""),
         this.byId("CoCdFiscalYear").setValue(""),
         this.byId("CoCdTaxCode").setSelectedKey(""),
-        this.byId("CoCdConstructor").setValue(""),
-        this.byId("CoCdDate").setValue("")
+        this.byId("CoCdConstructor").setValue("")
     },
 
     //국가 선택용 다이어로그 열기
