@@ -60,7 +60,7 @@ sap.ui.define([
 
             totalNumber = this.getView().getModel("BpCustomerModel").getData().length;
             totalNumber = " (" + totalNumber + ")"
-			let titleState = `${type} ${totalNumber}`;
+			let titleState = `${sType} ${totalNumber}`;
 
             this.byId("titleState").setText(titleState);
         },
