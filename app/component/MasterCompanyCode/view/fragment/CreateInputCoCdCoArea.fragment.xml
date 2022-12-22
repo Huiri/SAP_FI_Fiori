@@ -38,13 +38,13 @@
 				ariaLabelledBy="title">
                 <t:columns>
 					<t:Column hAlign="Center">
-						<Label text="회사코드" textAlign="Center" width="10rem"/>
+						<Label text="관리회계영역" textAlign="Center" width="10rem"/>
 						<t:template>
 							<Text text="{SelectCoAreaModel>com_co_area}" wrapping="false" />
 						</t:template>
 					</t:Column>
 					<t:Column hAlign="Center">
-						<Label text="회사 이름" textAlign="Center"/>
+						<Label text="내역" textAlign="Center"/>
 						<t:template>
 							<Text text="{SelectCoAreaModel>com_co_area_content}" wrapping="false" />
 						</t:template>
