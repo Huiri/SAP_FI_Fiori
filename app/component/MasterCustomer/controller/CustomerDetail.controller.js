@@ -165,8 +165,7 @@ sap.ui.define([
 				"bp_external_number": v.byId("bpExternalNumberOrg").getValue(),
 
 				//공통
-				"bp_report_submission": $.parseJSON(v.byId("bpReportSubmission").getSelectedKey()),
-				"bp_external_number": v.byId("bpExternalNumber").getValue(),
+				"bp_report_submission": Boolean(v.byId("bpReportSubmission").getSelectedKey()),
 				"bp_changed_date": now,
 				"bp_delivery_rule": v.byId("bpDeliveryRule").getValue(),
 				"bp_vendor": v.byId("bpVendor").getValue(),
