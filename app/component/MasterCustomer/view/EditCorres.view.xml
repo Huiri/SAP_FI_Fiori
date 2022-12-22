@@ -88,7 +88,7 @@
                             <c:Item key="Dunning" text="독촉장"/>
                         </Select>
                     </HBox>
-                </VBox>
+                </VBox>     
                 <VBox id="RTEBox">
 
                 </VBox>

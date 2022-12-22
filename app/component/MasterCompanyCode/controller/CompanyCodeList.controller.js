@@ -336,8 +336,8 @@ sap.ui.define([
 			if (CoCdSearchInput) {
 				aFilter = new Filter({
 					filters: [
-						new Filter("bp_company_code", FilterOperator.Contains, CoCdSearchInput),
-						new Filter("bp_name", FilterOperator.Contains, CoCdSearchInput)
+						new Filter("com_code", FilterOperator.Contains, CoCdSearchInput),
+						new Filter("com_code_name", FilterOperator.Contains, CoCdSearchInput)
 					],
 					and: false
 				});
