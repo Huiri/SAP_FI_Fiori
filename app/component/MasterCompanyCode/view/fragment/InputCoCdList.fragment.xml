@@ -7,7 +7,7 @@
 		ok=".onCoCdSelectOkPress"
 		cancel=".onCoCdSelectCancelPress"
 		supportRanges="true"
-		key="bp_company_code">
+		key="com_code">
 		<filterBar>
 			<fb:FilterBar advancedMode="true" search=".onCoCdSelectSearch" isRunningInValueHelpDialog="true">
 				<fb:filterGroupItems>

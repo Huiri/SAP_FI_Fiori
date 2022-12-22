@@ -70,6 +70,14 @@ sap.ui.define([
             this.getView().setModel(BpNationModel, "BpNationModel");
 			
             
+			const cocdList = await $.ajax({
+                type: "GET",
+                url: "/cocd/CoCd"
+            });
+
+            let CoCdModel = new JSONModel(cocdList.value);
+            this.getView().setModel(CoCdModel, "CoCdModel");
+
             // console.log(this.getView().getModel("BpCustomerModel"));
             totalNumber = this.getView().getModel("BpCustomerModel").getData().length;
             //console.log(totalNumber);
@@ -347,10 +355,10 @@ sap.ui.define([
 			this.pWhitespaceDialog = null;
 			this._oBasicSearchField = null;
 			this.oWhitespaceDialog = null;
-			var oModel = this.getView().getModel('BpCoCdModel');
+			var oModel = this.getView().getModel('CoCdModel');
 
-			var oCoCdTemplate = new Text({ text: { path: 'BpCustomerModel>bp_company_code' }, renderWhitespace: true });
-			var oBPNameTemplate = new Text({ text: { path: 'BpCustomerModel>bp_name' }, renderWhitespace: true });
+			var oCoCdTemplate = new Text({ text: { path: 'CoCdModel>com_code' }, renderWhitespace: true });
+			var oCoCdNameTemplate = new Text({ text: { path: 'CoCdModel>com_code_name' }, renderWhitespace: true });
 			this._oBasicSearchField = new SearchField({
 				search: function () {
 					this.oWhitespaceDialog.getFilterBar().search();
@@ -377,8 +385,8 @@ sap.ui.define([
 				// }
 				// Set key fields for filtering in the Define Conditions Tab
 				oWhitespaceDialog.setRangeKeyFields([{
-					label: "BP",
-					key: "BpCustomerModel>bp_company_code"
+					label: "CoCd",
+					key: "CoCdModel>com_code"
 				}]);
 
 				// Set Basic Search for FilterBar
@@ -391,9 +399,9 @@ sap.ui.define([
 					// For Desktop and tabled the default table is sap.ui.table.Table
 					if (oTable.bindRows) {
 						oTable.addColumn(new UIColumn({ label: "회사코드", template: oCoCdTemplate, width : "15%" }));
-						oTable.addColumn(new UIColumn({ label: "회사명", template: oBPNameTemplate }));
+						oTable.addColumn(new UIColumn({ label: "회사명", template: oCoCdNameTemplate }));
 						oTable.bindAggregation("rows", {
-							path: "BpCustomerModel>/",
+							path: "CoCdModel>/",
 							events: {
 								dataReceived: function () {
 									oWhitespaceDialog.update();
@@ -581,8 +589,8 @@ sap.ui.define([
 			if (CoCdSearchInput) {
 				aFilter = new Filter({
 					filters: [
-						new Filter("bp_company_code", FilterOperator.Contains, CoCdSearchInput),
-						new Filter("bp_name", FilterOperator.Contains, CoCdSearchInput)
+						new Filter("com_code", FilterOperator.Contains, CoCdSearchInput),
+						new Filter("com_code_name", FilterOperator.Contains, CoCdSearchInput)
 					],
 					and: false
 				});
