@@ -309,6 +309,7 @@ sap.ui.define([
 			date = now.getFullYear() + "." +(now.getMonth()+1).toString().padStart(2,'0')+"."+now.getDate().toString().padStart(2, '0');
 			this.byId("createdDate").setValue(date);
 			this.byId("DueDate").setValue(dueDate);
+			this.byId("idSelect").setSelectedKey("ARBalanceConfirm");
 
         },
 				/*
